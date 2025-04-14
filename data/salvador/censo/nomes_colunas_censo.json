@@ -1,0 +1,1060 @@
+{
+  "objectIdFieldName": "FID",
+  "uniqueIdField": {
+    "name": "FID",
+    "isSystemMaintained": true
+  },
+  "globalIdFieldName": "",
+  "geometryProperties": {
+    "shapeAreaFieldName": "Shape__Area",
+    "shapeLengthFieldName": "Shape__Length",
+    "units": "esriMeters"
+  },
+  "geometryType": "esriGeometryPolygon",
+  "spatialReference": {
+    "wkid": 31984,
+    "latestWkid": 31984
+  },
+  "fields": [
+    {
+      "name": "FID",
+      "type": "esriFieldTypeOID",
+      "alias": "FID",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "NOME_BAIRR",
+      "type": "esriFieldTypeString",
+      "alias": "Bairro",
+      "sqlType": "sqlTypeOther",
+      "length": 254,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "AREA",
+      "type": "esriFieldTypeDouble",
+      "alias": "Área em m²",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "UNIDADE_AR",
+      "type": "esriFieldTypeString",
+      "alias": "UNIDADE_AR",
+      "sqlType": "sqlTypeOther",
+      "length": 254,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Áreas_em",
+      "type": "esriFieldTypeDouble",
+      "alias": "Área em hec",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "PREF_BAIRR",
+      "type": "esriFieldTypeString",
+      "alias": "Prefeitura Bairro",
+      "sqlType": "sqlTypeOther",
+      "length": 254,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B001",
+      "type": "esriFieldTypeInteger",
+      "alias": "População Total",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B002",
+      "type": "esriFieldTypeDouble",
+      "alias": "População Masculina",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B003",
+      "type": "esriFieldTypeDouble",
+      "alias": "População Feminina",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B004",
+      "type": "esriFieldTypeDouble",
+      "alias": "Densidade Demográfica",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B005",
+      "type": "esriFieldTypeDouble",
+      "alias": "População de 0 a 6 anos",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B006",
+      "type": "esriFieldTypeDouble",
+      "alias": "População de 7 a 14 anos",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B007",
+      "type": "esriFieldTypeDouble",
+      "alias": "População de 15 a 18 anos",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B008",
+      "type": "esriFieldTypeDouble",
+      "alias": "População de 19 a 24 anos",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B009",
+      "type": "esriFieldTypeDouble",
+      "alias": "População de 25 a 49 anos",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B010",
+      "type": "esriFieldTypeDouble",
+      "alias": "População de 50 a 64 anos",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B011",
+      "type": "esriFieldTypeDouble",
+      "alias": "População acima de 65 anos",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B012",
+      "type": "esriFieldTypeDouble",
+      "alias": "Grau de envelhecimento",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B013",
+      "type": "esriFieldTypeDouble",
+      "alias": "População Branca",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B014",
+      "type": "esriFieldTypeDouble",
+      "alias": "População Preta",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B015",
+      "type": "esriFieldTypeDouble",
+      "alias": "População Amarela",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B016",
+      "type": "esriFieldTypeDouble",
+      "alias": "População Parda",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B017",
+      "type": "esriFieldTypeDouble",
+      "alias": "População Indígena",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B018",
+      "type": "esriFieldTypeDouble",
+      "alias": "População - Não Alfabetizada",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B019",
+      "type": "esriFieldTypeDouble",
+      "alias": "População Masculina - Não Alfabetizada",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B020",
+      "type": "esriFieldTypeDouble",
+      "alias": "População Feminina - Não Alfabetizada",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B021",
+      "type": "esriFieldTypeDouble",
+      "alias": "População Branca - Não Alfabetizada",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B022",
+      "type": "esriFieldTypeDouble",
+      "alias": "População Preta - Não Alfabetizada",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B023",
+      "type": "esriFieldTypeDouble",
+      "alias": "População Amarela - Não Alfabetizada",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B024",
+      "type": "esriFieldTypeDouble",
+      "alias": "População Parda - Não Alfabetizada",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B025",
+      "type": "esriFieldTypeDouble",
+      "alias": "População Indígena - Não Alfabetizada",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B026",
+      "type": "esriFieldTypeInteger",
+      "alias": "Domicílios Particulares e Coletivos",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B027",
+      "type": "esriFieldTypeInteger",
+      "alias": "Domicílios Particulares Permanentes",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B028",
+      "type": "esriFieldTypeDouble",
+      "alias": "Domicílios - Tipo Casa",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B029",
+      "type": "esriFieldTypeDouble",
+      "alias": "Domicílios - Tipo Vila/Condomínio",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B030",
+      "type": "esriFieldTypeDouble",
+      "alias": "Domicílios - Apartamentos",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B031",
+      "type": "esriFieldTypeDouble",
+      "alias": "Domicílios - Outros Tipos",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B032",
+      "type": "esriFieldTypeDouble",
+      "alias": "Lixo Coletado",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B033",
+      "type": "esriFieldTypeDouble",
+      "alias": "Lixo Enterrado",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B034",
+      "type": "esriFieldTypeDouble",
+      "alias": "Lixo Queimado",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B035",
+      "type": "esriFieldTypeDouble",
+      "alias": "Lixo jogado em terreno, logradouro ou rio",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B036",
+      "type": "esriFieldTypeDouble",
+      "alias": "Lixo com outra destinação",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B037",
+      "type": "esriFieldTypeDouble",
+      "alias": "Esgotamento Sanitário Adequado",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B038",
+      "type": "esriFieldTypeDouble",
+      "alias": "Esgotamento Sanitário Inadequado",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B039",
+      "type": "esriFieldTypeDouble",
+      "alias": "Abastecimento de Água - Rede Geral",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B040",
+      "type": "esriFieldTypeDouble",
+      "alias": "Abastecimento de Água - Poço",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B041",
+      "type": "esriFieldTypeDouble",
+      "alias": "Abastecimento de Água - Água de Chuva",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B042",
+      "type": "esriFieldTypeDouble",
+      "alias": "Abastecimento de Água - Outros",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B043",
+      "type": "esriFieldTypeDouble",
+      "alias": "Energia Elétrica - Sim",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B044",
+      "type": "esriFieldTypeDouble",
+      "alias": "Energia Elétrica - Não",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B045",
+      "type": "esriFieldTypeDouble",
+      "alias": "1 Morador",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B046",
+      "type": "esriFieldTypeDouble",
+      "alias": "2 a 4 Moradores",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B047",
+      "type": "esriFieldTypeDouble",
+      "alias": "5 a 6 Moradores",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B048",
+      "type": "esriFieldTypeDouble",
+      "alias": "7 Moradores ou mais",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B049",
+      "type": "esriFieldTypeInteger",
+      "alias": "Responsáveis por Domicílio",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B050",
+      "type": "esriFieldTypeDouble",
+      "alias": "Mulheres Responsáveis por Domicílios",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B051",
+      "type": "esriFieldTypeDouble",
+      "alias": "Pessoas alfabetizadas responsáveis por domicílios",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B052",
+      "type": "esriFieldTypeDouble",
+      "alias": "Renda média dos responsáveis por domicílios",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B053",
+      "type": "esriFieldTypeDouble",
+      "alias": "Renda Média Masculina",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B054",
+      "type": "esriFieldTypeDouble",
+      "alias": "Renda Média Feminina",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B055",
+      "type": "esriFieldTypeDouble",
+      "alias": "0 e 2 Salários Mínimos",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B056",
+      "type": "esriFieldTypeDouble",
+      "alias": "2 e 5 Salários Mínimos",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B057",
+      "type": "esriFieldTypeDouble",
+      "alias": "5 e 10 Salários Mínimos",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B058",
+      "type": "esriFieldTypeDouble",
+      "alias": "10 e 20 Salários Mínimos",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B059",
+      "type": "esriFieldTypeDouble",
+      "alias": "Mais de 20 Salários Mínimos",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "B060",
+      "type": "esriFieldTypeDouble",
+      "alias": "Sem Rendimento",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C001",
+      "type": "esriFieldTypeInteger",
+      "alias": "População Total",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C002",
+      "type": "esriFieldTypeDouble",
+      "alias": "População Masculina",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C003",
+      "type": "esriFieldTypeDouble",
+      "alias": "População Feminina",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C004",
+      "type": "esriFieldTypeDouble",
+      "alias": "Densidade Demográfica",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C005",
+      "type": "esriFieldTypeDouble",
+      "alias": "População de 0 a 4 anos",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C006",
+      "type": "esriFieldTypeDouble",
+      "alias": "População de 5 a 14 anos",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C007",
+      "type": "esriFieldTypeDouble",
+      "alias": "População de 15 a 19 anos",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C008",
+      "type": "esriFieldTypeDouble",
+      "alias": "População de 20 a 24 anos",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C009",
+      "type": "esriFieldTypeDouble",
+      "alias": "População de 25 a 49 anos",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C010",
+      "type": "esriFieldTypeDouble",
+      "alias": "População de 50 a 69 anos",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C011",
+      "type": "esriFieldTypeDouble",
+      "alias": "População acima de 70 anos",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C012",
+      "type": "esriFieldTypeString",
+      "alias": "Grau de Envelhecimento",
+      "sqlType": "sqlTypeOther",
+      "length": 254,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C013",
+      "type": "esriFieldTypeDouble",
+      "alias": "População Branca",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C014",
+      "type": "esriFieldTypeDouble",
+      "alias": "População Preta",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C015",
+      "type": "esriFieldTypeDouble",
+      "alias": "População Amarela",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C016",
+      "type": "esriFieldTypeDouble",
+      "alias": "População Parda",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C017",
+      "type": "esriFieldTypeDouble",
+      "alias": "População Indígena",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C018",
+      "type": "esriFieldTypeDouble",
+      "alias": "População - Alfabetizada",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C019",
+      "type": "esriFieldTypeDouble",
+      "alias": "População Masculina - Alfabetizada",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C020",
+      "type": "esriFieldTypeDouble",
+      "alias": "População Feminina - Alfabetizada",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C021",
+      "type": "esriFieldTypeDouble",
+      "alias": "População Branca - Alfabetizada",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C022",
+      "type": "esriFieldTypeDouble",
+      "alias": "População Preta - Alfabetizada",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C023",
+      "type": "esriFieldTypeDouble",
+      "alias": "População Amarela - Alfabetizada",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C024",
+      "type": "esriFieldTypeDouble",
+      "alias": "População Parda - Alfabetizada",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C025",
+      "type": "esriFieldTypeDouble",
+      "alias": "População Indígena - Alfabetizada",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C026",
+      "type": "esriFieldTypeInteger",
+      "alias": "Domicílios Particulares e Coletivos",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C027",
+      "type": "esriFieldTypeInteger",
+      "alias": "Domicílios Particulares Permanentes",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C028",
+      "type": "esriFieldTypeDouble",
+      "alias": "Domicílios - Tipo Casa",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C029",
+      "type": "esriFieldTypeDouble",
+      "alias": "Domicílios - Tipo Vila/Condomínio",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C030",
+      "type": "esriFieldTypeDouble",
+      "alias": "Domicílios - Apartamento",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C031",
+      "type": "esriFieldTypeDouble",
+      "alias": "Domicílios - Outros Tipos",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C032",
+      "type": "esriFieldTypeDouble",
+      "alias": "Lixo Coletado",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C033",
+      "type": "esriFieldTypeDouble",
+      "alias": "Lixo Enterrado",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C034",
+      "type": "esriFieldTypeDouble",
+      "alias": "Lixo Queimado",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C035",
+      "type": "esriFieldTypeDouble",
+      "alias": "Lixo jogado em terreno, logradouro ou rio",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C036",
+      "type": "esriFieldTypeDouble",
+      "alias": "Lixo com outra destinação",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C037",
+      "type": "esriFieldTypeDouble",
+      "alias": "Esgotamento Sanitário Adequado",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C038",
+      "type": "esriFieldTypeDouble",
+      "alias": "Esgotamento Sanitário Inadequado",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C039",
+      "type": "esriFieldTypeDouble",
+      "alias": "Abastecimento de Água - Rede Geral",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C040",
+      "type": "esriFieldTypeDouble",
+      "alias": "Abastecimento de Água - Poço",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C041",
+      "type": "esriFieldTypeDouble",
+      "alias": "Abastecimento de Água - Água da Chuva",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C042",
+      "type": "esriFieldTypeDouble",
+      "alias": "Abastecimento de Água - Outros",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C043",
+      "type": "esriFieldTypeString",
+      "alias": "Energia Elétrica - Sim",
+      "sqlType": "sqlTypeOther",
+      "length": 254,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C044",
+      "type": "esriFieldTypeString",
+      "alias": "Energia Elétrica - Não",
+      "sqlType": "sqlTypeOther",
+      "length": 254,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C045",
+      "type": "esriFieldTypeDouble",
+      "alias": "1 Morador",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C046",
+      "type": "esriFieldTypeDouble",
+      "alias": "2 a 4 Moradores",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C047",
+      "type": "esriFieldTypeDouble",
+      "alias": "5 a 6 Moradores",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C048",
+      "type": "esriFieldTypeDouble",
+      "alias": "7 Moradores ou mais",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C049",
+      "type": "esriFieldTypeInteger",
+      "alias": "Responsáveis por Domicílio",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C050",
+      "type": "esriFieldTypeDouble",
+      "alias": "Mulheres Responsáveis por Domicílios",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C051",
+      "type": "esriFieldTypeDouble",
+      "alias": "Pessoas alfatetizadas responsáveis por domicílios",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C052",
+      "type": "esriFieldTypeString",
+      "alias": "Renda Média dps Responsáveis por Domicílios",
+      "sqlType": "sqlTypeOther",
+      "length": 254,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C053",
+      "type": "esriFieldTypeString",
+      "alias": "Renda Média Masculina",
+      "sqlType": "sqlTypeOther",
+      "length": 254,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C054",
+      "type": "esriFieldTypeString",
+      "alias": "Renda Média Feminina",
+      "sqlType": "sqlTypeOther",
+      "length": 254,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C055",
+      "type": "esriFieldTypeString",
+      "alias": "0 e 2 Salários Mínimos",
+      "sqlType": "sqlTypeOther",
+      "length": 254,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C056",
+      "type": "esriFieldTypeString",
+      "alias": "2 e 5 Salários Mínimos",
+      "sqlType": "sqlTypeOther",
+      "length": 254,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C057",
+      "type": "esriFieldTypeString",
+      "alias": "5 e 10 Salários Mínimos",
+      "sqlType": "sqlTypeOther",
+      "length": 254,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C058",
+      "type": "esriFieldTypeString",
+      "alias": "10 e 20 Salários Mínimos",
+      "sqlType": "sqlTypeOther",
+      "length": 254,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C059",
+      "type": "esriFieldTypeString",
+      "alias": "Mais de 20 Salários Mínimos",
+      "sqlType": "sqlTypeOther",
+      "length": 254,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "C060",
+      "type": "esriFieldTypeString",
+      "alias": "Sem Rendimento",
+      "sqlType": "sqlTypeOther",
+      "length": 254,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Shape__Area",
+      "type": "esriFieldTypeDouble",
+      "alias": "Shape__Area",
+      "sqlType": "sqlTypeDouble",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Shape__Length",
+      "type": "esriFieldTypeDouble",
+      "alias": "Shape__Length",
+      "sqlType": "sqlTypeDouble",
+      "domain": null,
+      "defaultValue": null
+    }
+  ],
+  "exceededTransferLimit": true
+}

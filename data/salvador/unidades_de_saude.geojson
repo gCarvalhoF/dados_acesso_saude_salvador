@@ -1,0 +1,4924 @@
+{
+  "type": "FeatureCollection",
+  "name": "unidades_de_saude",
+  "crs": {
+    "type": "name",
+    "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 2,
+        "pref_bairr": "Prefeitura-bairro VI - Barra / Pituba",
+        "numero": "S/N",
+        "logradouro": "RUA NOSSA SENHORA DE FATIMA",
+        "cod_cep": "40226500",
+        "tipo_1": "USF",
+        "x": -13.00178,
+        "y": -38.51451,
+        "unidade": "USF DO ALTO DAS POMBAS",
+        "nome_bairr": "Alto das Pombas",
+        "complement": "ALTO DAS POMBAS",
+        "objectid": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.514480159748103, -13.001804043051012]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 3,
+        "pref_bairr": "Prefeitura-bairro VI - Barra / Pituba",
+        "numero": "S/N",
+        "logradouro": "RUA REINALDO DE MATOS",
+        "cod_cep": "40100000",
+        "tipo_1": "USF",
+        "x": -13.00935,
+        "y": -38.47194,
+        "unidade": "USF PROFESSOR SABINO SILVA",
+        "nome_bairr": "Nordeste de Amaralina",
+        "complement": " ",
+        "objectid": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.472149996596166, -13.009177203735289]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 4,
+        "pref_bairr": "Prefeitura-bairro VI - Barra / Pituba",
+        "numero": "S/N",
+        "logradouro": "RUA AVANY ARGOLO",
+        "cod_cep": "41905785",
+        "tipo_1": "USF",
+        "x": -13.009505,
+        "y": -38.472427,
+        "unidade": "USF MENINO JOEL",
+        "nome_bairr": "Nordeste de Amaralina",
+        "complement": " ",
+        "objectid": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.472426999835108, -13.009504999188907]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 5,
+        "pref_bairr": "Prefeitura-bairro VI - Barra / Pituba",
+        "numero": "02",
+        "logradouro": "RUA ITABUNA",
+        "cod_cep": "41940650",
+        "tipo_1": "CAPS",
+        "x": -13.00811,
+        "y": -38.49197,
+        "unidade": "CAPS II OSWALDO CAMARGO",
+        "nome_bairr": "Rio Vermelho",
+        "complement": " ",
+        "objectid": 4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.491882655465901, -13.007991920780869]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 6,
+        "pref_bairr": "Prefeitura-bairro VI - Barra / Pituba",
+        "numero": "1192",
+        "logradouro": "RUA VISCONDE DE ITAB0RAI",
+        "cod_cep": "41900000",
+        "tipo_1": "MULT",
+        "x": -13.01249,
+        "y": -38.46843,
+        "unidade": "MULTICENTRO DE SAUDE AMARALINA DR ADRIANO PONDE",
+        "nome_bairr": "Amaralina",
+        "complement": " ",
+        "objectid": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.468551289921258, -13.012214698891448]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 7,
+        "pref_bairr": "Prefeitura-bairro VI - Barra / Pituba",
+        "numero": "S/N",
+        "logradouro": "RUA DISNEYLANDIA",
+        "cod_cep": "41925300",
+        "tipo_1": "UBS",
+        "x": -13.00192,
+        "y": -38.47514,
+        "unidade": "UBS OSVALDO CALDAS CAMPOS - SANTA CRUZ",
+        "nome_bairr": "Santa Cruz",
+        "complement": " ",
+        "objectid": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.475106910551212, -13.001837355289153]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 8,
+        "pref_bairr": "Prefeitura-bairro VI - Barra / Pituba",
+        "numero": "S/N",
+        "logradouro": "RUA MARIA PINHO",
+        "cod_cep": "40140000",
+        "tipo_1": "USF",
+        "x": -13.00063,
+        "y": -38.51542,
+        "unidade": "USF IVONE SILVEIRA - CALABAR",
+        "nome_bairr": "Calabar",
+        "complement": " ",
+        "objectid": 7
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.515376892598418, -13.000607603213762]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 9,
+        "pref_bairr": "Prefeitura-bairro I - Centro / Brotas",
+        "numero": "08",
+        "logradouro": "RUA QUINTINO BOCAIUVA",
+        "cod_cep": "40100240",
+        "tipo_1": "USF",
+        "x": -12.99057,
+        "y": -38.50835,
+        "unidade": "USF URSULA CATHARINO - GARCIA",
+        "nome_bairr": "Garcia",
+        "complement": " ",
+        "objectid": 8
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.508471251864393, -12.990509462615675]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 10,
+        "pref_bairr": "Prefeitura-bairro VI - Barra / Pituba",
+        "numero": "S/N",
+        "logradouro": "AVENIDA CARDEAL DA SILVA",
+        "cod_cep": "40231250",
+        "tipo_1": "UBS",
+        "x": -13.00196,
+        "y": -38.50132,
+        "unidade": "UBS SAO GONCALO",
+        "nome_bairr": "Federação",
+        "complement": " ",
+        "objectid": 9
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.501588158080821, -13.001892087790102]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 11,
+        "pref_bairr": "Prefeitura-bairro VI - Barra / Pituba",
+        "numero": "172",
+        "logradouro": "RUA PEDRO GAMA",
+        "cod_cep": "40231000",
+        "tipo_1": "USF",
+        "x": -12.99549,
+        "y": -38.50193,
+        "unidade": "USF DA FEDERACAO",
+        "nome_bairr": "Federação",
+        "complement": " ",
+        "objectid": 10
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.502094715761167, -12.995286749711456]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 15,
+        "pref_bairr": "Prefeitura-bairro VI - Barra / Pituba",
+        "numero": "APOS A UNASUS",
+        "logradouro": "TRAVESSA BARAO DO TRIUNFO",
+        "cod_cep": "41950880",
+        "tipo_1": "CEO",
+        "x": -13.00739,
+        "y": -38.49711,
+        "unidade": "CEO FEDERACAO",
+        "nome_bairr": "Federação",
+        "complement": "54",
+        "objectid": 11
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.497032382862884, -13.007378486581848]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 19,
+        "pref_bairr": "Prefeitura-bairro VI - Barra / Pituba",
+        "numero": "201",
+        "logradouro": "RUA APOLINARIO SANTANA",
+        "cod_cep": "40750260",
+        "tipo_1": "UBS",
+        "x": -13.00016,
+        "y": -38.49717,
+        "unidade": "UBS ENGENHO VELHO DA FEDERACAO",
+        "nome_bairr": "Engenho Velho da Federação",
+        "complement": " ",
+        "objectid": 12
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.496860188011517, -13.000050506687391]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 20,
+        "pref_bairr": "Prefeitura-bairro VI - Barra / Pituba",
+        "numero": "S/N",
+        "logradouro": "AV IPIRANGA",
+        "cod_cep": "41926060",
+        "tipo_1": "MULT",
+        "x": -13.00617,
+        "y": -38.4834,
+        "unidade": "MULTICENTRO DE SAUDE VALE DAS PEDRINHAS",
+        "nome_bairr": "Chapada do Rio Vermelho",
+        "complement": "ALA A",
+        "objectid": 13
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.483198562230868, -13.00581449668398]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 21,
+        "pref_bairr": "Prefeitura-bairro I - Centro / Brotas",
+        "numero": "ROTULA AV. VALE DOS BARRIS",
+        "logradouro": "PRACA JOAO MANGABEIRA",
+        "cod_cep": "BARRIS",
+        "tipo_1": "UPA",
+        "x": -12.98971,
+        "y": -38.51168,
+        "unidade": "UPA 24H VALE DOS BARRIS",
+        "nome_bairr": "Barris",
+        "complement": "S/N",
+        "objectid": 14
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.511928477412241, -12.989721853722667]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 22,
+        "pref_bairr": "Prefeitura-bairro VI - Barra / Pituba",
+        "numero": "02",
+        "logradouro": "RUA ITABUNA",
+        "cod_cep": "41940650",
+        "tipo_1": "CSM",
+        "x": -13.00811,
+        "y": -38.49197,
+        "unidade": "CENTRO DE SAUDE MENTAL OSWALDO CAMARGO",
+        "nome_bairr": "Rio Vermelho",
+        "complement": " ",
+        "objectid": 15
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.491916471251336, -13.007868053786066]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 24,
+        "pref_bairr": "Prefeitura-bairro IV - Itapuã / Ipitanga",
+        "numero": "S/N",
+        "logradouro": "RUA JAIME SAPOLNIK",
+        "cod_cep": "41720075",
+        "tipo_1": "UBS",
+        "x": -12.97354,
+        "y": -38.43185,
+        "unidade": "UBS ALFREDO BUREAU",
+        "nome_bairr": "Imbuí",
+        "complement": "GUILHERME MARBACK",
+        "objectid": 16
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.431994750352445, -12.973398849345338]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 25,
+        "pref_bairr": "Prefeitura-bairro IV - Itapuã / Ipitanga",
+        "numero": "008",
+        "logradouro": "RUA MANOEL QUARESMA",
+        "cod_cep": "41710450",
+        "tipo_1": "UBS",
+        "x": -12.97865,
+        "y": -38.43239,
+        "unidade": "UBS DR CESAR DE ARAUJO",
+        "nome_bairr": "Boca do Rio",
+        "complement": " ",
+        "objectid": 17
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.432428064769347, -12.978555427710898]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 26,
+        "pref_bairr": "Prefeitura-bairro IV - Itapuã / Ipitanga",
+        "numero": "100",
+        "logradouro": "RUA ARAUJO BASTOS",
+        "cod_cep": "41740450",
+        "tipo_1": "USF",
+        "x": -12.970267,
+        "y": -38.416746,
+        "unidade": "USF PARQUE DE PITUACU",
+        "nome_bairr": "Pituaçu",
+        "complement": " ",
+        "objectid": 18
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.416612151201207, -12.970338147111198]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 27,
+        "pref_bairr": "Prefeitura-bairro IV - Itapuã / Ipitanga",
+        "numero": "S/N",
+        "logradouro": "RUA GONCALVES CESIMBRA",
+        "cod_cep": "41741155",
+        "tipo_1": "USF",
+        "x": -12.970778,
+        "y": -38.415401,
+        "unidade": "USF DE PITUACU",
+        "nome_bairr": "Pituaçu",
+        "complement": " ",
+        "objectid": 19
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.415480366005077, -12.970662975763942]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 28,
+        "pref_bairr": "Prefeitura-bairro VI - Barra / Pituba",
+        "numero": "254",
+        "logradouro": "RUA ELESBAO DO CARMO",
+        "cod_cep": "41750260",
+        "tipo_1": "CAPS",
+        "x": -12.981905,
+        "y": -38.438483,
+        "unidade": "CAPS ROSA GARCIA",
+        "nome_bairr": "Jardim Armação",
+        "complement": " ",
+        "objectid": 20
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.438443958416293, -12.981771308892613]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 29,
+        "pref_bairr": "Prefeitura-bairro IV - Itapuã / Ipitanga",
+        "numero": "S/N",
+        "logradouro": "RUA BRASILIA",
+        "cod_cep": "41710580",
+        "tipo_1": "DISTRITO",
+        "x": -12.97046,
+        "y": -38.43386,
+        "unidade": "DISTRITO SANITARIO BOCA DO RIO",
+        "nome_bairr": "Imbuí",
+        "complement": " ",
+        "objectid": 21
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.433812740952739, -12.970483109393603]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 30,
+        "pref_bairr": "Prefeitura-bairro VI - Barra / Pituba",
+        "numero": "S/N",
+        "logradouro": "RUA DESEMBARGADOR MANOEL PEREIRA",
+        "cod_cep": "41760150",
+        "tipo_1": "USF",
+        "x": -12.99192,
+        "y": -38.4446,
+        "unidade": "USF ZULMIRA BARROS - COSTA AZUL",
+        "nome_bairr": "Costa Azul",
+        "complement": " ",
+        "objectid": 22
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.444769993559326, -12.991963738737347]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 31,
+        "pref_bairr": "Prefeitura-bairro IV - Itapuã / Ipitanga",
+        "numero": "S/N",
+        "logradouro": "RUA JAIME SAPOLNIK",
+        "cod_cep": "41720075",
+        "tipo_1": "PA",
+        "x": -12.97354,
+        "y": -38.43185,
+        "unidade": "PA ALFREDO BUREAU",
+        "nome_bairr": "Imbuí",
+        "complement": "GUILHERME MARBACK",
+        "objectid": 23
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.431940807866091, -12.973391859425091]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 32,
+        "pref_bairr": "Prefeitura-bairro IV - Itapuã / Ipitanga",
+        "numero": "S/N",
+        "logradouro": "RUA JAIME SAPOLNIK",
+        "cod_cep": "41720-075",
+        "tipo_1": "SAMU",
+        "x": -12.97354,
+        "y": -38.43185,
+        "unidade": "Boca do Rio 12H - ALFREDO BUREAU",
+        "nome_bairr": "Imbuí",
+        "complement": "DENTRO DA UPA",
+        "objectid": 24
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.431999790516116, -12.97333975694486]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 36,
+        "pref_bairr": "Prefeitura-bairro VI - Barra / Pituba",
+        "numero": "S/N",
+        "logradouro": "RUA PEDRO SILVA RIBEIRO",
+        "cod_cep": "41750-130",
+        "tipo_1": "SESAB",
+        "x": -12.98847,
+        "y": -38.436758,
+        "unidade": "CAPS AD III - ARMAÇÃO",
+        "nome_bairr": "Jardim Armação",
+        "complement": "ATR�S DO WALMART DE ARMA��O",
+        "objectid": 25
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.436458202482243, -12.988439264871774]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 37,
+        "pref_bairr": "Prefeitura-bairro I - Centro / Brotas",
+        "numero": "S/N",
+        "logradouro": "RUA FORTUNATO BENJAMIN SABACK",
+        "cod_cep": "40300305",
+        "tipo_1": "UBS",
+        "x": -12.968886,
+        "y": -38.496939,
+        "unidade": "UBS PROF MARIO ANDREA",
+        "nome_bairr": "Macaúbas",
+        "complement": " ",
+        "objectid": 26
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.496910805005619, -12.968489524193464]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 40,
+        "pref_bairr": "Prefeitura-bairro I - Centro / Brotas",
+        "numero": "PROXIMO AO BRADESCO E FBDC",
+        "logradouro": "AV D JOAO VI",
+        "cod_cep": "BROTAS",
+        "tipo_1": "UBS",
+        "x": -12.988721,
+        "y": -38.481804,
+        "unidade": "UBS MANOEL VITORINO",
+        "nome_bairr": "Brotas",
+        "complement": "450",
+        "objectid": 27
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.481800000085443, -12.988719999886019]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 41,
+        "pref_bairr": "Prefeitura-bairro I - Centro / Brotas",
+        "numero": "224",
+        "logradouro": "AV VASCO DA GAMA",
+        "cod_cep": "40240090",
+        "tipo_1": "UAO",
+        "x": -12.984862,
+        "y": -38.503858,
+        "unidade": "UAO 2",
+        "nome_bairr": "Engenho Velho de Brotas",
+        "complement": "DIQUE DO TORORO",
+        "objectid": 28
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.503794656717695, -12.984861507251912]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 43,
+        "pref_bairr": "Prefeitura-bairro I - Centro / Brotas",
+        "numero": "S/N",
+        "logradouro": "RUA 18 DE AGOSTO",
+        "cod_cep": "40296340",
+        "tipo_1": "USF",
+        "x": -12.995435,
+        "y": -38.481212,
+        "unidade": "USF CANDEAL PEQUENO",
+        "nome_bairr": "Candeal",
+        "complement": " ",
+        "objectid": 29
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.481231185956283, -12.995547754561876]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 44,
+        "pref_bairr": "Prefeitura-bairro I - Centro / Brotas",
+        "numero": "01",
+        "logradouro": "AV LAURINDO REGIS",
+        "cod_cep": "40240550",
+        "tipo_1": "CAPS",
+        "x": -12.985911,
+        "y": -38.500197,
+        "unidade": "CAPS II ARISTIDES NOVIS",
+        "nome_bairr": "Boa Vista de Brotas",
+        "complement": " ",
+        "objectid": 30
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.499961125171801, -12.986088388698123]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 45,
+        "pref_bairr": "Prefeitura-bairro I - Centro / Brotas",
+        "numero": "112",
+        "logradouro": "RUA ALMIRANTE ALVES CAMARA",
+        "cod_cep": "40240430",
+        "tipo_1": "USF",
+        "x": -12.988467,
+        "y": -38.501266,
+        "unidade": "USF SANTA LUZIA",
+        "nome_bairr": "Engenho Velho de Brotas",
+        "complement": " ",
+        "objectid": 31
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.501235042558712, -12.988387484454602]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 46,
+        "pref_bairr": "Prefeitura-bairro I - Centro / Brotas",
+        "numero": "S/N",
+        "logradouro": "RUA FORTUNATO BENJAMIN SABACK",
+        "cod_cep": "40243005",
+        "tipo_1": "DISTRITO",
+        "x": -12.968886,
+        "y": -38.496939,
+        "unidade": "DISTRITO SANITARIO DE BROTAS",
+        "nome_bairr": "Macaúbas",
+        "complement": "DO ENG. V. DE BROTAS",
+        "objectid": 32
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.496723793412016, -12.968273725177422]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 47,
+        "pref_bairr": "Prefeitura-bairro I - Centro / Brotas",
+        "numero": "01",
+        "logradouro": "AV LAURINDO REGIS",
+        "cod_cep": "40240550",
+        "tipo_1": "CSM",
+        "x": -12.985911,
+        "y": -38.500197,
+        "unidade": "CENTRO DE SAUDE MENTAL ARISTIDES NOVIS",
+        "nome_bairr": "Boa Vista de Brotas",
+        "complement": " ",
+        "objectid": 33
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.500079403937072, -12.986238884813668]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 51,
+        "pref_bairr": "Prefeitura-bairro VIII - Cabula / Tancredo Neves",
+        "numero": "S/N",
+        "logradouro": "RUA DIRETA DA ENGOMADEIRA",
+        "cod_cep": "41200510",
+        "tipo_1": "UBS",
+        "x": -12.950119,
+        "y": -38.46031,
+        "unidade": "UBS DE ENGOMADEIRA",
+        "nome_bairr": "Engomadeira",
+        "complement": " ",
+        "objectid": 34
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.460263980298215, -12.950042030293488]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 52,
+        "pref_bairr": "Prefeitura-bairro VIII - Cabula / Tancredo Neves",
+        "numero": "S/N",
+        "logradouro": "RUA FERNANDO DE SAO PAULO",
+        "cod_cep": "41180400",
+        "tipo_1": "USF",
+        "x": -12.957783,
+        "y": -38.442514,
+        "unidade": "USF PROF. DR. CARLOS SANTANA - DORON",
+        "nome_bairr": "Doron",
+        "complement": " ",
+        "objectid": 35
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.442422751917817, -12.957639745941643]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 53,
+        "pref_bairr": "Prefeitura-bairro VIII - Cabula / Tancredo Neves",
+        "numero": "SN",
+        "logradouro": "ALAMEDA 56",
+        "cod_cep": "41231310",
+        "tipo_1": "UBS",
+        "x": -12.93214,
+        "y": -38.461969,
+        "unidade": "UBS SANTO INACIO",
+        "nome_bairr": "Jardim Santo Inácio",
+        "complement": " ",
+        "objectid": 36
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.462027400282444, -12.932101333385642]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 54,
+        "pref_bairr": "Prefeitura-bairro VIII - Cabula / Tancredo Neves",
+        "numero": "S/N",
+        "logradouro": "RUA PERNAMBUCO",
+        "cod_cep": "41205140",
+        "tipo_1": "UBS",
+        "x": -12.945682,
+        "y": -38.446364,
+        "unidade": "UBS RODRIGO ARGOLO",
+        "nome_bairr": "Beiru/Tancredo Neves",
+        "complement": " ",
+        "objectid": 37
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.446315833101245, -12.94539634365556]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 55,
+        "pref_bairr": "Prefeitura-bairro VIII - Cabula / Tancredo Neves",
+        "numero": "S/N",
+        "logradouro": "RUA JARDIM PAMPULHA",
+        "cod_cep": "41219063",
+        "tipo_1": "UBS",
+        "x": -12.937234,
+        "y": -38.46131,
+        "unidade": "UBS DE MATA ESCURA",
+        "nome_bairr": "Mata Escura",
+        "complement": "FINAL DE LINHA",
+        "objectid": 38
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.461278541770341, -12.937073029260343]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 56,
+        "pref_bairr": "Prefeitura-bairro VIII - Cabula / Tancredo Neves",
+        "numero": "150",
+        "logradouro": "RUA TOMAZ GONZAGA",
+        "cod_cep": "41130000",
+        "tipo_1": "UBS",
+        "x": -12.966395,
+        "y": -38.464756,
+        "unidade": "UBS DO CSU PERNAMBUES",
+        "nome_bairr": "Pernambués",
+        "complement": " ",
+        "objectid": 39
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.464661381151721, -12.966365934535395]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 57,
+        "pref_bairr": "Prefeitura-bairro VIII - Cabula / Tancredo Neves",
+        "numero": "SN",
+        "logradouro": "RUA TOMAS GONZAGA",
+        "cod_cep": "41130000",
+        "tipo_1": "USF",
+        "x": -12.975397,
+        "y": -38.454066,
+        "unidade": "USF PROF HUMBERTO CASTRO LIMA - PERNAMBUEZINHO",
+        "nome_bairr": "Pernambués",
+        "complement": " ",
+        "objectid": 40
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.454066000238051, -12.975396999451299]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 58,
+        "pref_bairr": "Prefeitura-bairro VIII - Cabula / Tancredo Neves",
+        "numero": "S/N",
+        "logradouro": "RUA JURUCUTUS",
+        "cod_cep": "41180780",
+        "tipo_1": "UBS",
+        "x": -12.960601,
+        "y": -38.448088,
+        "unidade": "UBS EUNISIO COELHO TEIXEIRA",
+        "nome_bairr": "Saboeiro",
+        "complement": " ",
+        "objectid": 41
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.447785220793733, -12.960532237838928]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 59,
+        "pref_bairr": "Prefeitura-bairro VIII - Cabula / Tancredo Neves",
+        "numero": "S/N",
+        "logradouro": "RUA DA HORTA",
+        "cod_cep": "41100360",
+        "tipo_1": "USF",
+        "x": -12.973519,
+        "y": -38.467837,
+        "unidade": "USF DEP CRISTOVAO FERREIRA - SARAMANDAIA",
+        "nome_bairr": "Saramandaia",
+        "complement": " ",
+        "objectid": 42
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.467709220606054, -12.973900995644668]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 60,
+        "pref_bairr": "Prefeitura-bairro VIII - Cabula / Tancredo Neves",
+        "numero": "100",
+        "logradouro": "RUA DO COMERCIO",
+        "cod_cep": "41211405",
+        "tipo_1": "UBS",
+        "x": -12.951263,
+        "y": -38.439561,
+        "unidade": "UBS ARENOSO",
+        "nome_bairr": "Arenoso",
+        "complement": " ",
+        "objectid": 43
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.439487127775145, -12.951294890159081]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 61,
+        "pref_bairr": "Prefeitura-bairro VIII - Cabula / Tancredo Neves",
+        "numero": "271",
+        "logradouro": "RUA CONDE PEREIRA CARNEIRO",
+        "cod_cep": "41100000",
+        "tipo_1": "CAPS",
+        "x": -12.968927,
+        "y": -38.464783,
+        "unidade": "CAPS AD PERNAMBUES",
+        "nome_bairr": "Pernambués",
+        "complement": "PX RADIO METROPOLE",
+        "objectid": 44
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.464662018814032, -12.968938573082122]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 62,
+        "pref_bairr": "Prefeitura-bairro VIII - Cabula / Tancredo Neves",
+        "numero": "S/N",
+        "logradouro": "ESTRADA DAS BARREIRAS",
+        "cod_cep": "41195240",
+        "tipo_1": "UBS",
+        "x": -12.943048,
+        "y": -38.45614,
+        "unidade": "UBS BARREIRAS",
+        "nome_bairr": "Barreiras",
+        "complement": " ",
+        "objectid": 45
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.456139999820515, -12.943048000008146]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 63,
+        "pref_bairr": "Prefeitura-bairro VIII - Cabula / Tancredo Neves",
+        "numero": "S/N",
+        "logradouro": "RUA SILVEIRA MARTINS",
+        "cod_cep": "41180-780",
+        "tipo_1": "SAMU",
+        "x": -12.956376,
+        "y": -38.451754,
+        "unidade": "HOSPITAL ROBERTO SANTOS",
+        "nome_bairr": "Cabula",
+        "complement": "DENTRO DO HOSPITAL",
+        "objectid": 46
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.450787624541199, -12.955929130350389]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 64,
+        "pref_bairr": "Prefeitura-bairro VIII - Cabula / Tancredo Neves",
+        "numero": "S/N",
+        "logradouro": "RUA BARAO DE MAUA",
+        "cod_cep": "41211340",
+        "tipo_1": "USF",
+        "x": -12.945308,
+        "y": -38.443527,
+        "unidade": "USF PROF GUILHERME RODRIGUES DA SILVA - ARENOSO",
+        "nome_bairr": "Arenoso",
+        "complement": " ",
+        "objectid": 47
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.443558152542131, -12.945168556465509]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 65,
+        "pref_bairr": "Prefeitura-bairro VIII - Cabula / Tancredo Neves",
+        "numero": "S/N",
+        "logradouro": "RUA JURUCUTUS",
+        "cod_cep": "40015010",
+        "tipo_1": "DISTRITO",
+        "x": -12.960601,
+        "y": -38.448088,
+        "unidade": "DISTRITO SANITARIO CABULA BEIRU",
+        "nome_bairr": "Saboeiro",
+        "complement": " ",
+        "objectid": 48
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.447976594898478, -12.960544307243326]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 66,
+        "pref_bairr": "Prefeitura-bairro VIII - Cabula / Tancredo Neves",
+        "numero": "139",
+        "logradouro": "RUA CONDE PEREIRA CARNEIRO",
+        "cod_cep": "41100010",
+        "tipo_1": "CAPS",
+        "x": -12.968927,
+        "y": -38.464783,
+        "unidade": "CAPS EDUARDO SABACK DIAS DE MORAES",
+        "nome_bairr": "Pernambués",
+        "complement": " ",
+        "objectid": 49
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.464726747487433, -12.968947134593705]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 67,
+        "pref_bairr": "Prefeitura-bairro VIII - Cabula / Tancredo Neves",
+        "numero": "S/N",
+        "logradouro": "RUA PERNAMBUCO",
+        "cod_cep": "41205140",
+        "tipo_1": "PA",
+        "x": -12.945682,
+        "y": -38.446364,
+        "unidade": "PA RODRIGO ARGOLO",
+        "nome_bairr": "Beiru/Tancredo Neves",
+        "complement": " ",
+        "objectid": 50
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.44621919290914, -12.945499172643874]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 68,
+        "pref_bairr": "Prefeitura-bairro VIII - Cabula / Tancredo Neves",
+        "numero": "S/N",
+        "logradouro": "RUA ALTO DA CACHOEIRINHA",
+        "cod_cep": "41180700",
+        "tipo_1": "CEO",
+        "x": -12.954298,
+        "y": -38.437507,
+        "unidade": "CEO ALTO DA CACHOEIRINHA",
+        "nome_bairr": "Cabula VI",
+        "complement": "CASA",
+        "objectid": 51
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.437790217663171, -12.954148252592093]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 69,
+        "pref_bairr": "Prefeitura-bairro VIII - Cabula / Tancredo Neves",
+        "numero": "SN",
+        "logradouro": "RUA ALTO DA CACHOEIRINHA",
+        "cod_cep": "41180700",
+        "tipo_1": "USF",
+        "x": -12.954298,
+        "y": -38.437507,
+        "unidade": "USF FERNANDO FILGUEIRAS - ALTO DA CACHOEIRINHA",
+        "nome_bairr": "Cabula VI",
+        "complement": " ",
+        "objectid": 52
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.437860832893591, -12.954103239276069]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 70,
+        "pref_bairr": "Prefeitura-bairro VIII - Cabula / Tancredo Neves",
+        "numero": "S/N",
+        "logradouro": "RUA TOMAZ GONZAGA",
+        "cod_cep": "41110200",
+        "tipo_1": "UBS",
+        "x": -12.970967,
+        "y": -38.460789,
+        "unidade": "UBS PERNAMBUES EDSON T BARBOSA",
+        "nome_bairr": "Pernambués",
+        "complement": " ",
+        "objectid": 53
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.461009786730664, -12.971141882873154]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 71,
+        "pref_bairr": "Prefeitura-bairro VIII - Cabula / Tancredo Neves",
+        "numero": "S/N",
+        "logradouro": "AV. ULISSES GUIMARAES",
+        "cod_cep": "41213000",
+        "tipo_1": "USF",
+        "x": -12.933184,
+        "y": -38.445129,
+        "unidade": "USF RAIMUNDO AGRIPINO - SUSSUARANA",
+        "nome_bairr": "Sussuarana",
+        "complement": " ",
+        "objectid": 54
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.445350631444505, -12.933180172082118]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 72,
+        "pref_bairr": "Prefeitura-bairro VIII - Cabula / Tancredo Neves",
+        "numero": "06",
+        "logradouro": "RUA ALIANCA",
+        "cod_cep": "41227170",
+        "tipo_1": "USF",
+        "x": -12.932012,
+        "y": -38.468405,
+        "unidade": "USF CALABETAO",
+        "nome_bairr": "Calabetão",
+        "complement": " ",
+        "objectid": 55
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.46847600033577, -12.932005999476054]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 73,
+        "pref_bairr": "Prefeitura-bairro VIII - Cabula / Tancredo Neves",
+        "numero": "S/N",
+        "logradouro": "AV. CARDEAL BRAND�O VILELA",
+        "cod_cep": "41219-600",
+        "tipo_1": "USF",
+        "x": -12.936456,
+        "y": -38.455283,
+        "unidade": "USF MATA ESCURA",
+        "nome_bairr": "Mata Escura",
+        "complement": "RESID. RECANTO VERDE",
+        "objectid": 56
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.455061059430868, -12.936521556219976]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 74,
+        "pref_bairr": "Prefeitura-bairro III - Cajazeiras",
+        "numero": "S/N",
+        "logradouro": "RUA ENDEL NASCIMENTO",
+        "cod_cep": "41310380",
+        "tipo_1": "UBS",
+        "x": -12.886224,
+        "y": -38.431182,
+        "unidade": "UBS NELSON PIAUHY DOURADO",
+        "nome_bairr": "Águas Claras",
+        "complement": "CAJAZEIRAS III",
+        "objectid": 57
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.431549470275058, -12.885953804707134]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 75,
+        "pref_bairr": "Prefeitura-bairro III - Cajazeiras",
+        "numero": "SN",
+        "logradouro": "ESTRADA DO MATADOURO ROTULA DE CAJAZEIRAS V",
+        "cod_cep": "41311262",
+        "tipo_1": "USF",
+        "x": -12.892816,
+        "y": -38.422322,
+        "unidade": "USF CAJAZEIRAS V",
+        "nome_bairr": "Cajazeiras V",
+        "complement": " ",
+        "objectid": 58
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.422284749525879, -12.892748169419891]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 76,
+        "pref_bairr": "Prefeitura-bairro III - Cajazeiras",
+        "numero": "S/N",
+        "logradouro": "RUA MINISTRO APOLONIO SALES RUA D QUADRA D SETOR 2",
+        "cod_cep": "41340095",
+        "tipo_1": "USF",
+        "x": -12.892526,
+        "y": -38.410583,
+        "unidade": "USF CAJAZEIRAS X",
+        "nome_bairr": "Cajazeiras X",
+        "complement": " ",
+        "objectid": 59
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.41068096974152, -12.892466940595568]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 77,
+        "pref_bairr": "Prefeitura-bairro III - Cajazeiras",
+        "numero": "CONJ CAJAZEIRAS IV",
+        "logradouro": "RUA ALVARO DA FRANCA ROCHA",
+        "cod_cep": "CAJAZEIRAS",
+        "tipo_1": "USF",
+        "x": -12.896856,
+        "y": -38.425378,
+        "unidade": "USF CAJAZEIRAS IV",
+        "nome_bairr": "Cajazeiras IV",
+        "complement": "S/N",
+        "objectid": 60
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.425377999948054, -12.896855999641684]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 78,
+        "pref_bairr": "Prefeitura-bairro III - Cajazeiras",
+        "numero": "S/N",
+        "logradouro": "FAZENDA GRANDE IV SETOR 7 CAMINHO 58",
+        "cod_cep": "41340120",
+        "tipo_1": "USF",
+        "x": -12.903245,
+        "y": -38.383279,
+        "unidade": "USF BOCA DA MATA",
+        "nome_bairr": "Boca da Mata",
+        "complement": "FINAL DE LINHA",
+        "objectid": 61
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.383279000057847, -12.903244999777455]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 79,
+        "pref_bairr": "Prefeitura-bairro III - Cajazeiras",
+        "numero": "S/N",
+        "logradouro": "RUA CORONEL AZEVEDO",
+        "cod_cep": "41310295",
+        "tipo_1": "CAPS",
+        "x": -12.889285,
+        "y": -38.421051,
+        "unidade": "CAPS AGUAS CLARAS",
+        "nome_bairr": "Cajazeiras II",
+        "complement": " ",
+        "objectid": 62
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.421050999914499, -12.889284999272457]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 80,
+        "pref_bairr": "Prefeitura-bairro III - Cajazeiras",
+        "numero": "S/N",
+        "logradouro": "RUA DIRETA DA FAZENDA GRANDE I",
+        "cod_cep": "41340100",
+        "tipo_1": "USF",
+        "x": -12.88932,
+        "y": -38.401403,
+        "unidade": "USF YOLANDA PIRES",
+        "nome_bairr": "Fazenda Grande I",
+        "complement": "QUADRA E",
+        "objectid": 63
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.401472782226222, -12.889344520341051]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 81,
+        "pref_bairr": "Prefeitura-bairro III - Cajazeiras",
+        "numero": "SN",
+        "logradouro": "RUA ENDEL NASCIMENTO",
+        "cod_cep": "41310380",
+        "tipo_1": "DISTRITO",
+        "x": -12.886224,
+        "y": -38.431182,
+        "unidade": "DISTRITO SANITARIO DE CAJAZEIRAS",
+        "nome_bairr": "Águas Claras",
+        "complement": " ",
+        "objectid": 64
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.431135618315643, -12.886213849547113]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 82,
+        "pref_bairr": "Prefeitura-bairro III - Cajazeiras",
+        "numero": "QD 07",
+        "logradouro": "CAJAZEIRAS V",
+        "cod_cep": "CASA",
+        "tipo_1": "CEO",
+        "x": -12.89464,
+        "y": -38.419415,
+        "unidade": "CEO CAJAZEIRAS",
+        "nome_bairr": "Cajazeiras V",
+        "complement": "RUA B - CAMINHO 50",
+        "objectid": 65
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.419414999721781, -12.894639999238816]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 83,
+        "pref_bairr": "Prefeitura-bairro III - Cajazeiras",
+        "numero": "1933",
+        "logradouro": "VIA COLETORA B",
+        "cod_cep": "41505-015",
+        "tipo_1": "HMS",
+        "x": -12.898336,
+        "y": -38.390053,
+        "unidade": "HOSPITAL MUNICIPAL DE SALVADOR",
+        "nome_bairr": "Boca da Mata",
+        "complement": "FAZ CASSANGE",
+        "objectid": 66
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.390010138853235, -12.897978174471243]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 84,
+        "pref_bairr": "Prefeitura-bairro III - Cajazeiras",
+        "numero": "1933",
+        "logradouro": "VIA COLETORA B",
+        "cod_cep": "41505-015",
+        "tipo_1": "SAMU",
+        "x": -12.898336,
+        "y": -38.390053,
+        "unidade": "HMS",
+        "nome_bairr": "Boca da Mata",
+        "complement": "DENTRO DO HSP MUNICIPAL",
+        "objectid": 67
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.390008607167353, -12.898271426994304]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 85,
+        "pref_bairr": "Prefeitura-bairro X - Valéria",
+        "numero": "S/N",
+        "logradouro": "RUA SARGENTO BONIFACIO",
+        "cod_cep": "41308280",
+        "tipo_1": "USF",
+        "x": -12.868308,
+        "y": -38.420502,
+        "unidade": "USF PALESTINA",
+        "nome_bairr": "Palestina",
+        "complement": "FIM DE LINHA",
+        "objectid": 68
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.420453909040141, -12.868369314102656]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 86,
+        "pref_bairr": "Prefeitura-bairro III - Cajazeiras",
+        "numero": "18",
+        "logradouro": "RUA JUCELINO KUBITSCHEK QD D",
+        "cod_cep": "41330400",
+        "tipo_1": "USF",
+        "x": -12.881708,
+        "y": -38.41109,
+        "unidade": "USF CAJAZEIRAS XI",
+        "nome_bairr": "Cajazeiras XI",
+        "complement": " ",
+        "objectid": 69
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.41102169958522, -12.881668443686399]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 87,
+        "pref_bairr": "Prefeitura-bairro III - Cajazeiras",
+        "numero": "15",
+        "logradouro": "RUA JERUSALEM",
+        "cod_cep": "41345539",
+        "tipo_1": "CAPS",
+        "x": -12.902789,
+        "y": -38.40655,
+        "unidade": "CAPS II - NISE DA SILVEIRA",
+        "nome_bairr": "Jaguaripe I",
+        "complement": "ENTRADA JAGUARIPEI",
+        "objectid": 70
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.406665136121958, -12.902848135741147]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 88,
+        "pref_bairr": "Prefeitura-bairro III - Cajazeiras",
+        "numero": "108",
+        "logradouro": "RUA DIRETA DA MANGABEIRA",
+        "cod_cep": "41338710",
+        "tipo_1": "USF",
+        "x": -12.904295,
+        "y": -38.412322,
+        "unidade": "USF JARDIM DAS MANGABEIRAS - CAJAZEIRAS VIII",
+        "nome_bairr": "Cajazeiras VIII",
+        "complement": " ",
+        "objectid": 71
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.412240163026333, -12.904285178773012]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 89,
+        "pref_bairr": "Prefeitura-bairro III - Cajazeiras",
+        "numero": "S/N",
+        "logradouro": "RUA DERMEVAL DE SOUZA GUSM�O",
+        "cod_cep": "41340-275",
+        "tipo_1": "USF",
+        "x": -12.901311,
+        "y": -38.396042,
+        "unidade": "USF FAZ GRANDE III",
+        "nome_bairr": "Fazenda Grande III",
+        "complement": " ",
+        "objectid": 72
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.396416503359916, -12.901817096118092]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 90,
+        "pref_bairr": "Prefeitura-bairro III - Cajazeiras",
+        "numero": "S/N",
+        "logradouro": "CAMINIO 09G JAGUARIPE L2-44",
+        "cod_cep": "41342-704",
+        "tipo_1": "USF",
+        "x": -12.909879,
+        "y": -38.407457,
+        "unidade": "USF JAGUARIBE",
+        "nome_bairr": "Jaguaripe I",
+        "complement": "ENTRADA AO LADO DA MATERNIDATE ALBERT SABIN",
+        "objectid": 73
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.405115977214976, -12.903648774025136]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 91,
+        "pref_bairr": "Prefeitura-bairro I - Centro / Brotas",
+        "numero": "08",
+        "logradouro": "PRACA D PEDRO II CAMPO DA POLVORA",
+        "cod_cep": "40040280",
+        "tipo_1": "UBS",
+        "x": -12.979092,
+        "y": -38.50841,
+        "unidade": "UBS RAMIRO DE AZEVEDO",
+        "nome_bairr": "Nazaré",
+        "complement": "CAMPO DA POLVORA",
+        "objectid": 74
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.508512972151188, -12.979097207433416]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 92,
+        "pref_bairr": "Prefeitura-bairro I - Centro / Brotas",
+        "numero": "270",
+        "logradouro": "RUA CARLOS GOMES",
+        "cod_cep": "40060330",
+        "tipo_1": "MULT",
+        "x": -12.979969,
+        "y": -38.51521,
+        "unidade": "MULTICENTRO DE SAUDE CARLOS GOMES",
+        "nome_bairr": "Dois de Julho",
+        "complement": " ",
+        "objectid": 75
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.515232825055655, -12.979913346508571]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 94,
+        "pref_bairr": "Prefeitura-bairro I - Centro / Brotas",
+        "numero": "SN",
+        "logradouro": "RUA DO CARRO",
+        "cod_cep": "40040240",
+        "tipo_1": "SAE",
+        "x": -12.976969,
+        "y": -38.508286,
+        "unidade": "SERVICO DE ATENCAO ESPECIALIZADA SAO FRANCISCO",
+        "nome_bairr": "Nazaré",
+        "complement": "TERREO",
+        "objectid": 76
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.508246812601868, -12.976944788574343]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 95,
+        "pref_bairr": "Prefeitura-bairro I - Centro / Brotas",
+        "numero": "04",
+        "logradouro": "RUA PROF ARTUR MENDES DE AGUIAR",
+        "cod_cep": "40301150",
+        "tipo_1": "UBS",
+        "x": -12.967628,
+        "y": -38.501066,
+        "unidade": "UBS DR PERICLES ESTEVES CARDOSO - BARBALHO",
+        "nome_bairr": "Barbalho",
+        "complement": " ",
+        "objectid": 77
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.500976486251808, -12.96780467251941]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 97,
+        "pref_bairr": "Prefeitura-bairro I - Centro / Brotas",
+        "numero": "58",
+        "logradouro": "RUA GABRIEL SOARES",
+        "cod_cep": "40060046",
+        "tipo_1": "USF",
+        "x": -12.983224,
+        "y": -38.519387,
+        "unidade": "USF DONA IRACI ISABEL DA SILVA - GAMBOA",
+        "nome_bairr": "Dois de Julho",
+        "complement": "LADEIRA DOS AFLITOS",
+        "objectid": 78
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.519336837079571, -12.983351610905057]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 98,
+        "pref_bairr": "Prefeitura-bairro I - Centro / Brotas",
+        "numero": "226",
+        "logradouro": "RUA ARQUIMEDES GONCALVES",
+        "cod_cep": "40050300",
+        "tipo_1": "CAPS",
+        "x": -12.980836,
+        "y": -38.506448,
+        "unidade": "CAPS II ANTONIO ROBERTO PELLEGRINO - JARDIM BAIANO",
+        "nome_bairr": "Nazaré",
+        "complement": "CASA",
+        "objectid": 79
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.506557059655442, -12.980864821049943]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 99,
+        "pref_bairr": "Prefeitura-bairro I - Centro / Brotas",
+        "numero": "S/N",
+        "logradouro": "RUA DO CARRO",
+        "cod_cep": "40040240",
+        "tipo_1": "DISTRITO",
+        "x": -12.976969,
+        "y": -38.508286,
+        "unidade": "DISTRITO SANITARIO CENTRO HISTORICO",
+        "nome_bairr": "Nazaré",
+        "complement": "3� ANDAR",
+        "objectid": 80
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.508200154250503, -12.976933673133017]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 100,
+        "pref_bairr": "Prefeitura-bairro I - Centro / Brotas",
+        "numero": "SN",
+        "logradouro": "PRACA TERREIRO DE JESUS",
+        "cod_cep": "40026010",
+        "tipo_1": "USF",
+        "x": -12.972483,
+        "y": -38.509348,
+        "unidade": "UNIDADE DE SAUDE DA FAMILIA TERREIRO DE JESUS",
+        "nome_bairr": "Centro Histórico",
+        "complement": "SUBSOLO",
+        "objectid": 81
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.509655223151206, -12.972182302620723]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 101,
+        "pref_bairr": "Prefeitura-bairro I - Centro / Brotas",
+        "numero": "03",
+        "logradouro": "RUA DA GRECIA",
+        "cod_cep": "40010010",
+        "tipo_1": "SEDE",
+        "x": -12.971936,
+        "y": -38.51357,
+        "unidade": "SECRETARIA MUNICIPAL DE SAUDE DE SALVADOR",
+        "nome_bairr": "Comércio",
+        "complement": "EDF CARAMURU",
+        "objectid": 82
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.513555443619758, -12.971761986713842]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 102,
+        "pref_bairr": "Prefeitura-bairro I - Centro / Brotas",
+        "numero": "03",
+        "logradouro": "RUA DA GRECIA",
+        "cod_cep": "40010010",
+        "tipo_1": "SEDE",
+        "x": -12.971936,
+        "y": -38.51357,
+        "unidade": "SECRETARIA MUNICIPAL DE SAUDE DE SALVADOR",
+        "nome_bairr": "Comércio",
+        "complement": "EDF CARAMURU",
+        "objectid": 83
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.513600393630995, -12.971735651423359]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 103,
+        "pref_bairr": "Prefeitura-bairro I - Centro / Brotas",
+        "numero": "270",
+        "logradouro": "RUA CARLOS GOMES",
+        "cod_cep": "40060330",
+        "tipo_1": "CEO",
+        "x": -12.979969,
+        "y": -38.51521,
+        "unidade": "CEO CARLOS GOMES",
+        "nome_bairr": "Dois de Julho",
+        "complement": "2� ANDAR",
+        "objectid": 84
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.515241405967537, -12.979843730303797]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 104,
+        "pref_bairr": "Prefeitura-bairro I - Centro / Brotas",
+        "numero": "270",
+        "logradouro": "RUA CARLOS GOMES",
+        "cod_cep": "40060330",
+        "tipo_1": "UBS",
+        "x": -12.979969,
+        "y": -38.51521,
+        "unidade": "UBS CARLOS GOMES",
+        "nome_bairr": "Dois de Julho",
+        "complement": "TERREO",
+        "objectid": 85
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.515209999651177, -12.979968999958871]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 106,
+        "pref_bairr": "Prefeitura-bairro V - Cidade Baixa",
+        "numero": "QUADRA 18",
+        "logradouro": "CONJ JOANES CENTRO OESTE",
+        "cod_cep": "HAMESA LOBATO",
+        "tipo_1": "USF",
+        "x": -12.926398,
+        "y": -38.4886,
+        "unidade": "USF JOANES CENTRO OESTE HAMESA",
+        "nome_bairr": "Lobato",
+        "complement": "LOTE 17",
+        "objectid": 86
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.488689476255324, -12.926394197673424]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 107,
+        "pref_bairr": "Prefeitura-bairro V - Cidade Baixa",
+        "numero": "S/N",
+        "logradouro": "RUA ARTHUR BERNARDES",
+        "cod_cep": "40415050",
+        "tipo_1": "SAE",
+        "x": -12.929363,
+        "y": -38.50806,
+        "unidade": "SERVICO DE ATENCAO ESPECIALIZADA MARYMAR NOVAES",
+        "nome_bairr": "Bonfim",
+        "complement": "DENDEZEIROS",
+        "objectid": 87
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.508122780746433, -12.929446693964076]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 108,
+        "pref_bairr": "Prefeitura-bairro V - Cidade Baixa",
+        "numero": "QUADRA 23",
+        "logradouro": "CONJUNTO JOANES LESTE",
+        "cod_cep": "LOBATO",
+        "tipo_1": "USF",
+        "x": -12.924532,
+        "y": -38.485542,
+        "unidade": "USF JOANES LESTE",
+        "nome_bairr": "Lobato",
+        "complement": "S/N",
+        "objectid": 88
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.485640887019549, -12.924515685643764]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 109,
+        "pref_bairr": "Prefeitura-bairro V - Cidade Baixa",
+        "numero": "S/N",
+        "logradouro": "RUA DUARTE DA COSTA",
+        "cod_cep": "40415060",
+        "tipo_1": "UBS",
+        "x": -12.928882,
+        "y": -38.506558,
+        "unidade": "UBS VIRGILIO DE CARVALHO",
+        "nome_bairr": "Bonfim",
+        "complement": " ",
+        "objectid": 89
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.506553376257919, -12.928726902729119]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 110,
+        "pref_bairr": "Prefeitura-bairro V - Cidade Baixa",
+        "numero": "S/N",
+        "logradouro": "RUA LOPES TROVAO",
+        "cod_cep": "40435000",
+        "tipo_1": "UBS",
+        "x": -12.928324,
+        "y": -38.498081,
+        "unidade": "UBS MINISTRO ALKIMIN",
+        "nome_bairr": "Massaranduba",
+        "complement": " ",
+        "objectid": 90
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.498091542283255, -12.928375898056375]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 111,
+        "pref_bairr": "Prefeitura-bairro V - Cidade Baixa",
+        "numero": "77",
+        "logradouro": "RUA DO CEU",
+        "cod_cep": "40415305",
+        "tipo_1": "CAPS",
+        "x": -12.927068,
+        "y": -38.505165,
+        "unidade": "CAPS PROFESSOR ADILSON PEIXOTO SAMPAIO",
+        "nome_bairr": "Caminho de Areia",
+        "complement": "CASA",
+        "objectid": 91
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.505262533459302, -12.927071838643688]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 112,
+        "pref_bairr": "Prefeitura-bairro V - Cidade Baixa",
+        "numero": "15",
+        "logradouro": "RUA AUGUSTO MENDONCA",
+        "cod_cep": "40415030",
+        "tipo_1": "CSM",
+        "x": -12.929656,
+        "y": -38.508762,
+        "unidade": "UBS M A RUBIM DE PINHO",
+        "nome_bairr": "Bonfim",
+        "complement": "DENDEZEIROS",
+        "objectid": 92
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.50829348197091, -12.929630313524244]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 113,
+        "pref_bairr": "Prefeitura-bairro V - Cidade Baixa",
+        "numero": "617",
+        "logradouro": "RUA VOLUTARIOS DA PATRIA",
+        "cod_cep": "41270545",
+        "tipo_1": "USF",
+        "x": -12.917774,
+        "y": -38.482635,
+        "unidade": "USF SAO JOSE DE BAIXO",
+        "nome_bairr": "Lobato",
+        "complement": "CASA AO LADO PETRO",
+        "objectid": 93
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.482628228852775, -12.917827565774243]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 114,
+        "pref_bairr": "Prefeitura-bairro V - Cidade Baixa",
+        "numero": "15",
+        "logradouro": "RUA AUGUSTO MENDONCA",
+        "cod_cep": "40415030",
+        "tipo_1": "SAMU",
+        "x": -12.929656,
+        "y": -38.508762,
+        "unidade": "DENDEZEIROS",
+        "nome_bairr": "Bonfim",
+        "complement": "DENTRO DA UNIDADE  VIRGILIO DE CARVALHO",
+        "objectid": 94
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.508388714298604, -12.92961444251066]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 116,
+        "pref_bairr": "Prefeitura-bairro IV - Itapuã / Ipitanga",
+        "numero": "S/N",
+        "logradouro": "SETOR E CAMINHO 16",
+        "cod_cep": "41490272",
+        "tipo_1": "USF",
+        "x": -12.91672,
+        "y": -38.367746,
+        "unidade": "USF PROF EDUARDO MAMEDE",
+        "nome_bairr": "Mussurunga",
+        "complement": "RUA 1",
+        "objectid": 95
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.368036752385336, -12.916529897538377]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 117,
+        "pref_bairr": "Prefeitura-bairro IV - Itapuã / Ipitanga",
+        "numero": "97",
+        "logradouro": "RUA DA CACIMBA",
+        "cod_cep": "41610655",
+        "tipo_1": "UPA",
+        "x": -12.948895,
+        "y": -38.366197,
+        "unidade": "UPA 24H DR HELIO MACHADO",
+        "nome_bairr": "Itapuã",
+        "complement": "CASA",
+        "objectid": 96
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.36642366927677, -12.94896335682815]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 118,
+        "pref_bairr": "Prefeitura-bairro IV - Itapuã / Ipitanga",
+        "numero": "97",
+        "logradouro": "RUA DA CACIMBA",
+        "cod_cep": "41610-655",
+        "tipo_1": "SAMU",
+        "x": -12.948895,
+        "y": -38.366197,
+        "unidade": "DR HELIO MACHADO",
+        "nome_bairr": "Itapuã",
+        "complement": "DENTRO DA UPA",
+        "objectid": 97
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.366459245938891, -12.949013050893832]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 119,
+        "pref_bairr": "Prefeitura-bairro IV - Itapuã / Ipitanga",
+        "numero": "S/N",
+        "logradouro": "RUA TANCREDO NEVES",
+        "cod_cep": "41515235",
+        "tipo_1": "UBS",
+        "x": -12.933982,
+        "y": -38.380411,
+        "unidade": "UBS DR ORLANDO IMBASSAHY",
+        "nome_bairr": "Bairro da Paz",
+        "complement": " ",
+        "objectid": 98
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.380480947050998, -12.93405488469654]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 120,
+        "pref_bairr": "Prefeitura-bairro IV - Itapuã / Ipitanga",
+        "numero": "S/N",
+        "logradouro": "AV DORIVAL CAYME",
+        "cod_cep": "41635152",
+        "tipo_1": "UBS",
+        "x": -12.948588,
+        "y": -38.367302,
+        "unidade": "UBS PROF JOSÉ MARIANE",
+        "nome_bairr": "Itapuã",
+        "complement": " ",
+        "objectid": 99
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.367249491557608, -12.948438263491925]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 121,
+        "pref_bairr": "Prefeitura-bairro IV - Itapuã / Ipitanga",
+        "numero": "S/N",
+        "logradouro": "PRACA SERGIO BRITO",
+        "cod_cep": "41615260",
+        "tipo_1": "USF",
+        "x": -12.938284,
+        "y": -38.373498,
+        "unidade": "USF ALTO DO COQUEIRINHO",
+        "nome_bairr": "Alto do Coqueirinho",
+        "complement": " ",
+        "objectid": 100
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.373400973776263, -12.938142890910175]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 122,
+        "pref_bairr": "Prefeitura-bairro IV - Itapuã / Ipitanga",
+        "numero": "53",
+        "logradouro": "RUA LAURO DE FREITAS",
+        "cod_cep": "41500190",
+        "tipo_1": "UBS",
+        "x": -12.910075,
+        "y": -38.353669,
+        "unidade": "UBS SAO CRISTOVAO",
+        "nome_bairr": "São Cristóvão",
+        "complement": " ",
+        "objectid": 101
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.363569415703033, -12.907586589893837]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 124,
+        "pref_bairr": "Prefeitura-bairro IV - Itapuã / Ipitanga",
+        "numero": "S/N",
+        "logradouro": "RUA ARQUITETO MARCOS M. SOLTER",
+        "cod_cep": "41510-808",
+        "tipo_1": "UPA",
+        "x": -12.907274,
+        "y": -38.364519,
+        "unidade": "UPA 24H SÃO CRISTOVÃO",
+        "nome_bairr": "São Cristóvão",
+        "complement": " ",
+        "objectid": 102
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.364382334815332, -12.907162658979313]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 125,
+        "pref_bairr": "Prefeitura-bairro IV - Itapuã / Ipitanga",
+        "numero": "S/N",
+        "logradouro": "RUA ARQUITETO MARCOS M. SOLTER",
+        "cod_cep": "41510-808",
+        "tipo_1": "SAMU",
+        "x": -12.907274,
+        "y": -38.364519,
+        "unidade": "UPA SÃO CRISTÓVÃO",
+        "nome_bairr": "São Cristóvão",
+        "complement": "DENTRO DA UPA",
+        "objectid": 103
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.36452421739331, -12.907028360728464]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 126,
+        "pref_bairr": "Prefeitura-bairro IV - Itapuã / Ipitanga",
+        "numero": "S/N",
+        "logradouro": "RUA 07 DE SETEMBRO",
+        "cod_cep": "41402320",
+        "tipo_1": "USF",
+        "x": -12.833591,
+        "y": -38.376244,
+        "unidade": "USF NOVA ESPERANCA",
+        "nome_bairr": "Nova Esperança",
+        "complement": "KM 4 PROXIMO A CEASA",
+        "objectid": 104
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.376004431326976, -12.833542066947784]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 127,
+        "pref_bairr": "Prefeitura-bairro IV - Itapuã / Ipitanga",
+        "numero": "32",
+        "logradouro": "RUA MANGALOEIRA TERREO",
+        "cod_cep": "41613066",
+        "tipo_1": "CAPS",
+        "x": -12.957476,
+        "y": -38.393362,
+        "unidade": "CENTRO DE ATENCAO PSICOSSOCIAL DR. LUIZ MEIRA LESSA - CAPS I",
+        "nome_bairr": "Piatã",
+        "complement": "1� PAVIMENTO",
+        "objectid": 105
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.393361999588763, -12.957476000025808]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 129,
+        "pref_bairr": "Prefeitura-bairro IV - Itapuã / Ipitanga",
+        "numero": "36",
+        "logradouro": "RUA ARISTOTELES COSTA LEAL",
+        "cod_cep": "41650400",
+        "tipo_1": "CAPS",
+        "x": -12.951545,
+        "y": -38.378703,
+        "unidade": "CAPS II - FRANCO BASAGLIA",
+        "nome_bairr": "Piatã",
+        "complement": "ATRAS DO HABIBS",
+        "objectid": 106
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.379869075352275, -12.951867769888052]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 130,
+        "pref_bairr": "Prefeitura-bairro IV - Itapuã / Ipitanga",
+        "numero": "SN",
+        "logradouro": "RUA LAURO DE FREITAS",
+        "cod_cep": "41500190",
+        "tipo_1": "USF",
+        "x": -12.91083,
+        "y": -38.350995,
+        "unidade": "USF ARISTIDES PEREIRA MALTEZ",
+        "nome_bairr": "São Cristóvão",
+        "complement": "CASA",
+        "objectid": 107
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.351303822098778, -12.910772524532913]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 131,
+        "pref_bairr": "Prefeitura-bairro IV - Itapuã / Ipitanga",
+        "numero": "1111",
+        "logradouro": "RUA SANTA RITA (DA CEASA)",
+        "cod_cep": "41510838",
+        "tipo_1": "USF",
+        "x": -12.904225,
+        "y": -38.366556,
+        "unidade": "USF PARQUE SAO CRISTOVAO",
+        "nome_bairr": "São Cristóvão",
+        "complement": "PARQUE SAO CRISTOVAO",
+        "objectid": 108
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.366549999867772, -12.904230000027558]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 132,
+        "pref_bairr": "Prefeitura-bairro IV - Itapuã / Ipitanga",
+        "numero": "S/N",
+        "logradouro": "SETOR E CAMINHO 16",
+        "cod_cep": "41490272",
+        "tipo_1": "USF",
+        "x": -12.91672,
+        "y": -38.36774,
+        "unidade": "USF MUSSURUNGA I",
+        "nome_bairr": "Mussurunga",
+        "complement": "RUA 1",
+        "objectid": 109
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.367965402456612, -12.916511151221174]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 133,
+        "pref_bairr": "Prefeitura-bairro IV - Itapuã / Ipitanga",
+        "numero": "RUA 1",
+        "logradouro": "SETOR E CAMINHO 16",
+        "cod_cep": " ",
+        "tipo_1": "CEO",
+        "x": -12.948588,
+        "y": -38.367302,
+        "unidade": "CEO MUSSURUNGA",
+        "nome_bairr": "Itapuã",
+        "complement": "S/N",
+        "objectid": 110
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.367157700836323, -12.948464610438204]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 137,
+        "pref_bairr": "Prefeitura-bairro IV - Itapuã / Ipitanga",
+        "numero": "S/N",
+        "logradouro": "Caminho 15 (Cj Eng A Franco)  (ERRADO)",
+        "cod_cep": "41301-110",
+        "tipo_1": "USF",
+        "x": -12.841103,
+        "y": -38.38004,
+        "unidade": "USF NOVA ESPERANCA II CEASA I E II",
+        "nome_bairr": "Nova Esperança",
+        "complement": "Prox ao Residencial Ceasa I e II",
+        "objectid": 111
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.380356558300512, -12.840924829275771]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 138,
+        "pref_bairr": "Prefeitura-bairro IV - Itapuã / Ipitanga",
+        "numero": "S/N",
+        "logradouro": "ESTRADA DA PEDREIRA CEASA",
+        "cod_cep": "41400-500",
+        "tipo_1": "USF",
+        "x": -12.851689,
+        "y": -38.383604,
+        "unidade": "USF CORAÇÃO DE MARIA",
+        "nome_bairr": "Nova Esperança",
+        "complement": "CONJ. RESID CORA��O DE MARIA",
+        "objectid": 112
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.38593383399602, -12.851605091911956]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 139,
+        "pref_bairr": "Prefeitura-bairro VII - Liberdade / São Caetano",
+        "numero": "39",
+        "logradouro": "RUA MARQUES DE MARICA",
+        "cod_cep": "40310000",
+        "tipo_1": "UBS",
+        "x": -12.95846,
+        "y": -38.48815,
+        "unidade": "UBS MARIA DA CONCEICÃO SANTIAGO IMBASSAY",
+        "nome_bairr": "Pau Miúdo",
+        "complement": " ",
+        "objectid": 113
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.487471258934278, -12.958898365605771]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 140,
+        "pref_bairr": "Prefeitura-bairro VII - Liberdade / São Caetano",
+        "numero": "217",
+        "logradouro": "Estrada da Liberdade",
+        "cod_cep": "40.375-016",
+        "tipo_1": "MULT",
+        "x": -12.949533,
+        "y": -38.496063,
+        "unidade": "MULTCENTRO PROF BEZERRA LOPES",
+        "nome_bairr": "Liberdade",
+        "complement": " ",
+        "objectid": 114
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.496144391434981, -12.949592064278276]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 141,
+        "pref_bairr": "Prefeitura-bairro VII - Liberdade / São Caetano",
+        "numero": "401",
+        "logradouro": "RUA LIMA E SILVA",
+        "cod_cep": "40375017",
+        "tipo_1": "UAO",
+        "x": -12.94759,
+        "y": -38.49091,
+        "unidade": "UAO 1",
+        "nome_bairr": "Liberdade",
+        "complement": " ",
+        "objectid": 115
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.491049831364265, -12.94776299052633]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 143,
+        "pref_bairr": "Prefeitura-bairro VII - Liberdade / São Caetano",
+        "numero": "S/N",
+        "logradouro": "RUA PROFESSOR SUEIRO",
+        "cod_cep": "40310300",
+        "tipo_1": "UBS",
+        "x": -12.959657,
+        "y": -38.483918,
+        "unidade": "UBS SÃO JUDAS TADEU",
+        "nome_bairr": "Pau Miúdo",
+        "complement": " ",
+        "objectid": 116
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.483993142321687, -12.959625591288717]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 144,
+        "pref_bairr": "Prefeitura-bairro VII - Liberdade / São Caetano",
+        "numero": "11",
+        "logradouro": "#NOME?",
+        "cod_cep": "40330201",
+        "tipo_1": "CAPS",
+        "x": -12.957529,
+        "y": -38.48817,
+        "unidade": "CAPSIA LIBERDADE",
+        "nome_bairr": "IAPI",
+        "complement": " ",
+        "objectid": 117
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.488078712253589, -12.957588779131312]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 145,
+        "pref_bairr": "Prefeitura-bairro VII - Liberdade / São Caetano",
+        "numero": "COMPLEXO CESAR ARAUJO",
+        "logradouro": "RUA MARQUES DE MARICA",
+        "cod_cep": "PAU MIUDO",
+        "tipo_1": "SEDE",
+        "x": -12.95846,
+        "y": -38.48815,
+        "unidade": "SAMU 192",
+        "nome_bairr": "Pau Miúdo",
+        "complement": "S/N",
+        "objectid": 118
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.488065317182809, -12.958436691196386]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 146,
+        "pref_bairr": "Prefeitura-bairro VII - Liberdade / São Caetano",
+        "numero": "COMPLEXO CESAR ARAUJO",
+        "logradouro": "RUA MARQUES DE MARICA",
+        "cod_cep": "PAU MIUDO",
+        "tipo_1": "SAMU",
+        "x": -12.95846,
+        "y": -38.48815,
+        "unidade": "SAMU 192",
+        "nome_bairr": "Pau Miúdo",
+        "complement": "S/N",
+        "objectid": 119
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.488015133581989, -12.95842351000252]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 148,
+        "pref_bairr": "Prefeitura-bairro VII - Liberdade / São Caetano",
+        "numero": "SN",
+        "logradouro": "PRACA CONSELHEIRO JOAO ALFREDO",
+        "cod_cep": "40320350",
+        "tipo_1": "DISTRITO",
+        "x": -12.95846,
+        "y": -38.48815,
+        "unidade": "DISTRITO SANITARIO LIBERDADE",
+        "nome_bairr": "Pau Miúdo",
+        "complement": "LIBERDADE",
+        "objectid": 120
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.488276742024873, -12.958501091650547]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 149,
+        "pref_bairr": "Prefeitura-bairro VII - Liberdade / São Caetano",
+        "numero": "197",
+        "logradouro": "R. JARDIM VERA CRUZ QD. 01 LOTE 06",
+        "cod_cep": "40340580",
+        "tipo_1": "CAPS",
+        "x": -12.950878,
+        "y": -38.480591,
+        "unidade": "CAPS II LIBERDADE",
+        "nome_bairr": "Santa Mônica",
+        "complement": " ",
+        "objectid": 121
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.483237475503813, -12.952207958920697]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 150,
+        "pref_bairr": "Prefeitura-bairro VII - Liberdade / São Caetano",
+        "numero": "S/N",
+        "logradouro": "RUA DOMINGOS REQUIAO - AO LADO DO 3� CENTRO",
+        "cod_cep": "40375017",
+        "tipo_1": "SAE",
+        "x": -12.949533,
+        "y": -38.496063,
+        "unidade": "SEMAE - SERVICO MUNICIPAL DE ASSISTENCIA ESPECIALIZADA",
+        "nome_bairr": "Liberdade",
+        "complement": "ESTRADA DA LIBERDADE",
+        "objectid": 122
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.496086249485479, -12.949608503162827]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 151,
+        "pref_bairr": "Prefeitura-bairro VII - Liberdade / São Caetano",
+        "numero": "39",
+        "logradouro": "RUA MARQUES DE MARICA",
+        "cod_cep": "40301000",
+        "tipo_1": "PA",
+        "x": -12.95846,
+        "y": -38.48815,
+        "unidade": "PA MARIA DA CONCEICAO SANTIAGO IMBASSAY",
+        "nome_bairr": "Pau Miúdo",
+        "complement": " ",
+        "objectid": 123
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.488149999615239, -12.958459999857785]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 152,
+        "pref_bairr": "Prefeitura-bairro VII - Liberdade / São Caetano",
+        "numero": "S/N",
+        "logradouro": "RUA MARQUES DE MARICA COMPLEX CESAR ARAUJO",
+        "cod_cep": "40320350",
+        "tipo_1": "SEDE",
+        "x": -12.95846,
+        "y": -38.48815,
+        "unidade": "CMR - CENTRAL DE REGULACAO MEDICA DAS URGENCIAS",
+        "nome_bairr": "Pau Miúdo",
+        "complement": "LARGO DO TAMARINEIRO",
+        "objectid": 124
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.488197120058032, -12.958476529745587]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 154,
+        "pref_bairr": "Prefeitura-bairro VII - Liberdade / São Caetano",
+        "numero": "217",
+        "logradouro": "RUA LIMA E SILVA",
+        "cod_cep": "40375017",
+        "tipo_1": "UBS",
+        "x": -12.949533,
+        "y": -38.496063,
+        "unidade": "UBS BEZERRA LOPES",
+        "nome_bairr": "Liberdade",
+        "complement": " ",
+        "objectid": 125
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.496176661577991, -12.949554227092303]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 156,
+        "pref_bairr": "Prefeitura-bairro IX -  Pau da Lima",
+        "numero": "S/N",
+        "logradouro": "ESTRADA VELHA DO AEROPORTO",
+        "cod_cep": "41385160",
+        "tipo_1": "UBS",
+        "x": -12.916214,
+        "y": -38.423977,
+        "unidade": "UBS NOVO MAROTINHO",
+        "nome_bairr": "Novo Marotinho",
+        "complement": "KM 05",
+        "objectid": 126
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.426321915973425, -12.915880597781115]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 157,
+        "pref_bairr": "Prefeitura-bairro IX -  Pau da Lima",
+        "numero": "S/N",
+        "logradouro": "ALAMEDA ACM",
+        "cod_cep": "41253670",
+        "tipo_1": "PA",
+        "x": -12.925657,
+        "y": -38.435842,
+        "unidade": "UNIDADE DE EMERGENCIA DE SAO MARCOS",
+        "nome_bairr": "São Marcos",
+        "complement": " ",
+        "objectid": 127
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.435778104377292, -12.925680345981103]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 158,
+        "pref_bairr": "Prefeitura-bairro IX -  Pau da Lima",
+        "numero": "S/N",
+        "logradouro": "RUA DA FELICIA",
+        "cod_cep": "41385740",
+        "tipo_1": "UBS",
+        "x": -12.909563,
+        "y": -38.425448,
+        "unidade": "UBS SETE DE ABRIL",
+        "nome_bairr": "Sete de Abril",
+        "complement": " ",
+        "objectid": 128
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.425525958059396, -12.909507443791272]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 159,
+        "pref_bairr": "Prefeitura-bairro III - Cajazeiras",
+        "numero": "S/N",
+        "logradouro": "RUA A 3 ETAPA",
+        "cod_cep": "41320010",
+        "tipo_1": "UBS",
+        "x": -12.902017,
+        "y": -38.427126,
+        "unidade": "UBS CASTELO BRANCO",
+        "nome_bairr": "Castelo Branco",
+        "complement": " ",
+        "objectid": 129
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.427068768100106, -12.901720531747864]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 160,
+        "pref_bairr": "Prefeitura-bairro IX -  Pau da Lima",
+        "numero": "S/N",
+        "logradouro": "RUA JAIME VIEIRA LIMA",
+        "cod_cep": "40080002",
+        "tipo_1": "UBS",
+        "x": -12.92003,
+        "y": -38.442944,
+        "unidade": "UBS PIRES DA VEIGA",
+        "nome_bairr": "São Marcos",
+        "complement": " ",
+        "objectid": 130
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.442810592852474, -12.919916200396226]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 161,
+        "pref_bairr": "Prefeitura-bairro IX -  Pau da Lima",
+        "numero": "S/N",
+        "logradouro": "RUA ARTEMIO CASTRO VALENTE",
+        "cod_cep": "41260300",
+        "tipo_1": "USF",
+        "x": -12.925457,
+        "y": -38.41724,
+        "unidade": "USF CANABRAVA",
+        "nome_bairr": "Canabrava",
+        "complement": " ",
+        "objectid": 131
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.416962851706522, -12.925452851713821]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 162,
+        "pref_bairr": "Prefeitura-bairro IX -  Pau da Lima",
+        "numero": "SN",
+        "logradouro": "RUA DO MOCAMBO",
+        "cod_cep": "41720010",
+        "tipo_1": "SEDE",
+        "x": -12.926651,
+        "y": -38.408861,
+        "unidade": "CENTRO DE CONTROLE DE ZOONOSES",
+        "nome_bairr": "Trobogy",
+        "complement": " ",
+        "objectid": 132
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.4092045878985, -12.926682979999606]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 163,
+        "pref_bairr": "Prefeitura-bairro IX -  Pau da Lima",
+        "numero": "S/N",
+        "logradouro": "AV LUIS VIANA FILHO",
+        "cod_cep": "41745-130",
+        "tipo_1": "SAMU",
+        "x": -12.938098,
+        "y": -38.410208,
+        "unidade": "UNIJORGE - PARALELA",
+        "nome_bairr": "Canabrava",
+        "complement": "DENTRO DA UNIJORGE",
+        "objectid": 133
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.411000675134311, -12.937331602222416]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 164,
+        "pref_bairr": "Prefeitura-bairro III - Cajazeiras",
+        "numero": "S/N",
+        "logradouro": "RUA GENARO DE CARVALHO",
+        "cod_cep": "41320100",
+        "tipo_1": "UBS",
+        "x": -12.904469,
+        "y": -38.441069,
+        "unidade": "UBS DRA CECY DE ANDRADE",
+        "nome_bairr": "Castelo Branco",
+        "complement": "1 ETAPA",
+        "objectid": 134
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.440848887025489, -12.904497563972269]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 165,
+        "pref_bairr": "Prefeitura-bairro III - Cajazeiras",
+        "numero": "S/N",
+        "logradouro": "RUA DAS PAULINAS",
+        "cod_cep": "41315150",
+        "tipo_1": "USF",
+        "x": -12.903795,
+        "y": -38.449656,
+        "unidade": "USF DOM AVELAR",
+        "nome_bairr": "Dom Avelar",
+        "complement": " ",
+        "objectid": 135
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.449655307699928, -12.903907940226265]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 166,
+        "pref_bairr": "Prefeitura-bairro IX -  Pau da Lima",
+        "numero": "SN",
+        "logradouro": "RUA BEM TE VI",
+        "cod_cep": "41260340",
+        "tipo_1": "UBS",
+        "x": -12.92525,
+        "y": -38.419768,
+        "unidade": "UBS CANABRAVA",
+        "nome_bairr": "Canabrava",
+        "complement": " ",
+        "objectid": 136
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.419808028858263, -12.925221230449896]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 167,
+        "pref_bairr": "Prefeitura-bairro IX -  Pau da Lima",
+        "numero": "09",
+        "logradouro": "RUA ANTONIO RIBEIRO",
+        "cod_cep": "41250455",
+        "tipo_1": "DISTRITO",
+        "x": -12.932374,
+        "y": -38.42369,
+        "unidade": "DISTRITO SANITARIO PAU DA LIMA",
+        "nome_bairr": "Vale dos Lagos",
+        "complement": "VILA MARISA",
+        "objectid": 137
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.423688197315528, -12.932247603795009]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 168,
+        "pref_bairr": "Prefeitura-bairro IX -  Pau da Lima",
+        "numero": "01",
+        "logradouro": "RUA DA MURICOCA",
+        "cod_cep": "41250420",
+        "tipo_1": "CAPS",
+        "x": -12.93484,
+        "y": -38.418055,
+        "unidade": "CAPS II PAU DA LIMA",
+        "nome_bairr": "Vale dos Lagos",
+        "complement": "COND DOM BOSCO",
+        "objectid": 138
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.418001910237052, -12.93487687742101]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 169,
+        "pref_bairr": "Prefeitura-bairro IX -  Pau da Lima",
+        "numero": "KM 7",
+        "logradouro": "AV ALIOMAR BALEEIRO",
+        "cod_cep": "EST VELHA AEROPORTO",
+        "tipo_1": "USF",
+        "x": -12.918664,
+        "y": -38.40844,
+        "unidade": "USF NOVA BRASILIA",
+        "nome_bairr": "Nova Brasília",
+        "complement": "5",
+        "objectid": 139
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.408412815716311, -12.918643046296163]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 170,
+        "pref_bairr": "Prefeitura-bairro IX -  Pau da Lima",
+        "numero": "KM",
+        "logradouro": "AV ALIOMAR BALEEIRO",
+        "cod_cep": "NOVA BRASILIA",
+        "tipo_1": "UBS",
+        "x": -12.917701,
+        "y": -38.408823,
+        "unidade": "ANEXO - UBS NOVA BRASILIA",
+        "nome_bairr": "Nova Brasília",
+        "complement": "S/N",
+        "objectid": 140
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.408852976382299, -12.917722105805085]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 171,
+        "pref_bairr": "Prefeitura-bairro IX -  Pau da Lima",
+        "numero": "S/N",
+        "logradouro": "VIA REGIONAL",
+        "cod_cep": "41387200",
+        "tipo_1": "USF",
+        "x": -12.909098,
+        "y": -38.421716,
+        "unidade": "USF VALE DO CAMBONAS",
+        "nome_bairr": "Sete de Abril",
+        "complement": "ACESSO A 7 DE ABRIL",
+        "objectid": 141
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.421837518233431, -12.909046210612077]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 174,
+        "pref_bairr": "Prefeitura-bairro IX -  Pau da Lima",
+        "numero": "S/N",
+        "logradouro": "RUA DJALMA SANCHES",
+        "cod_cep": "41253-330",
+        "tipo_1": "USF",
+        "x": -12.924936,
+        "y": -38.434484,
+        "unidade": "USF SÃO MARCOS",
+        "nome_bairr": "São Marcos",
+        "complement": "PROX. AO CMEI",
+        "objectid": 142
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.434484000053914, -12.924935999877327]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 175,
+        "pref_bairr": "Prefeitura-bairro IX -  Pau da Lima",
+        "numero": "S/N",
+        "logradouro": "RUA S�O JORGE DE VILA NOVA PITUA�U",
+        "cod_cep": "-",
+        "tipo_1": "USF",
+        "x": -12.94199,
+        "y": -38.42304,
+        "unidade": "USF VILA NOVA DE PITUAÇU",
+        "nome_bairr": "São Rafael",
+        "complement": "AV GAL COSTA",
+        "objectid": 143
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.422600018105001, -12.940706572091061]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 176,
+        "pref_bairr": "Prefeitura-bairro IX -  Pau da Lima",
+        "numero": "S/N",
+        "logradouro": "RUA CEL. NILTON  S�",
+        "cod_cep": "41390-045",
+        "tipo_1": "USF",
+        "x": -12.910113,
+        "y": -38.444016,
+        "unidade": "USF VILA CANARIA",
+        "nome_bairr": "Vila Canária",
+        "complement": "PROXIMO AO ATAKAREJO",
+        "objectid": 144
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.44393243767113, -12.910077057189262]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 177,
+        "pref_bairr": "Prefeitura-bairro V - Cidade Baixa",
+        "numero": "67",
+        "logradouro": "RUA VOLUNTARIOS DA PATRIA",
+        "cod_cep": "40470000",
+        "tipo_1": "USF",
+        "x": -12.935747,
+        "y": -38.490499,
+        "unidade": "USF FIAIS",
+        "nome_bairr": "Santa Luzia",
+        "complement": "FIAIS",
+        "objectid": 145
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.49046068913205, -12.935814918059034]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 178,
+        "pref_bairr": "Prefeitura-bairro X - Valéria",
+        "numero": "S/N",
+        "logradouro": "RUA DA MATRIZ",
+        "cod_cep": "41300600",
+        "tipo_1": "UBS",
+        "x": -12.865655,
+        "y": -38.432866,
+        "unidade": "UBS FREI BENJAMIM VALERIA",
+        "nome_bairr": "Valéria",
+        "complement": " ",
+        "objectid": 146
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.432847121528305, -12.865787714705238]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 179,
+        "pref_bairr": "Prefeitura-bairro VII - Liberdade / São Caetano",
+        "numero": "SN",
+        "logradouro": "RUA SANTA GERTRUDES",
+        "cod_cep": "40470500",
+        "tipo_1": "USF",
+        "x": -12.910408,
+        "y": -38.474487,
+        "unidade": "USF ALTO DO CABRITO",
+        "nome_bairr": "Alto do Cabrito",
+        "complement": " ",
+        "objectid": 147
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.474507415259666, -12.910323294668324]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 180,
+        "pref_bairr": "Prefeitura-bairro VII - Liberdade / São Caetano",
+        "numero": "SN",
+        "logradouro": "RUA JOAO RODRIGUES MENDES",
+        "cod_cep": "40480160",
+        "tipo_1": "USF",
+        "x": -12.925999,
+        "y": -38.47598,
+        "unidade": "USF BOA VISTA DO LOBATO",
+        "nome_bairr": "Boa Vista de São Caetano",
+        "complement": " ",
+        "objectid": 148
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.475905521705876, -12.925895481740392]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 181,
+        "pref_bairr": "Prefeitura-bairro VII - Liberdade / São Caetano",
+        "numero": "32",
+        "logradouro": "RUA DAS PITANGUEIRAS",
+        "cod_cep": "40353150",
+        "tipo_1": "UBS",
+        "x": -12.943147,
+        "y": -38.47496,
+        "unidade": "UBS DR PERICLES LARANJEIRAS",
+        "nome_bairr": "Fazenda Grande do Retiro",
+        "complement": "FINAL DE LINHA",
+        "objectid": 149
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.474895414486291, -12.943260476283923]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 182,
+        "pref_bairr": "Prefeitura-bairro VII - Liberdade / São Caetano",
+        "numero": "S/N",
+        "logradouro": "RUA DIRETA DA JAQUEIRA",
+        "cod_cep": "40353000",
+        "tipo_1": "USF",
+        "x": -12.949288,
+        "y": -38.474084,
+        "unidade": "USF JAQUEIRA DO CARNEIRO",
+        "nome_bairr": "Bom Juá",
+        "complement": " ",
+        "objectid": 150
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.473997196856139, -12.949302885421368]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 183,
+        "pref_bairr": "Prefeitura-bairro VII - Liberdade / São Caetano",
+        "numero": "S/N",
+        "logradouro": "PRACA MARECHAL RONDON",
+        "cod_cep": "41280119",
+        "tipo_1": "UBS",
+        "x": -12.915278,
+        "y": -38.470608,
+        "unidade": "UBS MARECHAL RONDON",
+        "nome_bairr": "Marechal Rondon",
+        "complement": " ",
+        "objectid": 151
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.470654160395327, -12.915254687841486]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 184,
+        "pref_bairr": "Prefeitura-bairro VII - Liberdade / São Caetano",
+        "numero": "S/N",
+        "logradouro": "2� TRAVESSA DO ORIENTE",
+        "cod_cep": "40357110",
+        "tipo_1": "USF",
+        "x": -12.938249,
+        "y": -38.485478,
+        "unidade": "USF NOSSA SENHORA DE GUADALUPE - ALTO DO PERU",
+        "nome_bairr": "Fazenda Grande do Retiro",
+        "complement": " ",
+        "objectid": 152
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.485411349037939, -12.938198333236338]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 185,
+        "pref_bairr": "Prefeitura-bairro X - Valéria",
+        "numero": "SN",
+        "logradouro": "RUA SALVADOR",
+        "cod_cep": "40731070",
+        "tipo_1": "USF",
+        "x": -12.847756,
+        "y": -38.452437,
+        "unidade": "USF RECANTO DA LAGOA",
+        "nome_bairr": "Moradas da Lagoa",
+        "complement": "PX COL DARCY RIBEIRO",
+        "objectid": 153
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.452606704165987, -12.847763852289965]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 187,
+        "pref_bairr": "Prefeitura-bairro II - Subúrbio / Ilhas",
+        "numero": "S/N",
+        "logradouro": "AV AFRANIO PEIXOTO",
+        "cod_cep": "40710970",
+        "tipo_1": "USF",
+        "x": -12.903658,
+        "y": -38.476886,
+        "unidade": "USF ANTONIO LAZZAROTTO",
+        "nome_bairr": "São João do Cabrito",
+        "complement": " ",
+        "objectid": 154
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.476754556020119, -12.903713928693586]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 188,
+        "pref_bairr": "Prefeitura-bairro VII - Liberdade / São Caetano",
+        "numero": "42",
+        "logradouro": "RUA PROFESSOR FRANCISCO GOES CALMON",
+        "cod_cep": "40390675",
+        "tipo_1": "CAPS",
+        "x": -12.93446,
+        "y": -38.479497,
+        "unidade": "CAPS SAO CAETANO VALERIA",
+        "nome_bairr": "São Caetano",
+        "complement": " ",
+        "objectid": 155
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.47962602833632, -12.934527683056476]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 189,
+        "pref_bairr": "Prefeitura-bairro VII - Liberdade / São Caetano",
+        "numero": "61",
+        "logradouro": "ESTRADA CAMPINAS DE PIRAJA",
+        "cod_cep": "40100000",
+        "tipo_1": "CAPS",
+        "x": -12.924997,
+        "y": -38.4702,
+        "unidade": "CAPS AD III - GEY ESPINHEIRA",
+        "nome_bairr": "Campinas de Pirajá",
+        "complement": "AO LADO DA SETEL",
+        "objectid": 156
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.470725482387145, -12.92483221283187]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 190,
+        "pref_bairr": "Prefeitura-bairro VII - Liberdade / São Caetano",
+        "numero": "S/N",
+        "logradouro": "PRACA EUNAPIO DE QUEIROZ",
+        "cod_cep": "40353160",
+        "tipo_1": "USF",
+        "x": -12.940376,
+        "y": -38.474942,
+        "unidade": "USF BOM JUA",
+        "nome_bairr": "Bom Juá",
+        "complement": " ",
+        "objectid": 157
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.474981062987631, -12.940508496198309]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 191,
+        "pref_bairr": "Prefeitura-bairro X - Valéria",
+        "numero": "S/N",
+        "logradouro": "RUA DO LAVRADOR",
+        "cod_cep": "41300470",
+        "tipo_1": "UPA",
+        "x": -12.864642,
+        "y": -38.43715,
+        "unidade": "UPA 24H VALERIA",
+        "nome_bairr": "Valéria",
+        "complement": "COLEGIO NOEMIA REGO",
+        "objectid": 158
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.43723566771996, -12.864493802352419]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 192,
+        "pref_bairr": "Prefeitura-bairro X - Valéria",
+        "numero": "S/N",
+        "logradouro": "RUA DO LAVRADOR",
+        "cod_cep": "41300470",
+        "tipo_1": "SAMU",
+        "x": -12.864642,
+        "y": -38.43715,
+        "unidade": "UPA 24H VALERIA",
+        "nome_bairr": "Valéria",
+        "complement": "DENTRO DA UPA",
+        "objectid": 159
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.437226949565321, -12.864556898797805]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 193,
+        "pref_bairr": "Prefeitura-bairro VII - Liberdade / São Caetano",
+        "numero": "S/N",
+        "logradouro": "RUA DO FORNO",
+        "cod_cep": "40301-110",
+        "tipo_1": "UPA",
+        "x": -12.947044,
+        "y": -38.481208,
+        "unidade": "UPA 24H SAN MARTIN",
+        "nome_bairr": "Fazenda Grande do Retiro",
+        "complement": "AV SAN MARTIN",
+        "objectid": 160
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.481084313075655, -12.946805541985283]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 194,
+        "pref_bairr": "Prefeitura-bairro VII - Liberdade / São Caetano",
+        "numero": "S/N",
+        "logradouro": "RUA DO FORNO",
+        "cod_cep": "40301-110",
+        "tipo_1": "SAMU",
+        "x": -12.947044,
+        "y": -38.481208,
+        "unidade": "UPA SAN MARTIN",
+        "nome_bairr": "Fazenda Grande do Retiro",
+        "complement": "DENTRO DA UPA",
+        "objectid": 161
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.481114431070267, -12.946848092248096]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 195,
+        "pref_bairr": "Prefeitura-bairro V - Cidade Baixa",
+        "numero": "S/N",
+        "logradouro": "RUA RODOVIA A",
+        "cod_cep": "40480120",
+        "tipo_1": "USF",
+        "x": -12.918942,
+        "y": -38.47632,
+        "unidade": "USF BOA VISTA DE SAO CAETANO",
+        "nome_bairr": "Lobato",
+        "complement": " ",
+        "objectid": 162
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.475979884013043, -12.919162708821302]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 199,
+        "pref_bairr": "Prefeitura-bairro II - Subúrbio / Ilhas",
+        "numero": "S/N",
+        "logradouro": "AV AFRANIO PEIXOTO",
+        "cod_cep": "40350000",
+        "tipo_1": "USF",
+        "x": -12.900516,
+        "y": -38.476105,
+        "unidade": "USF DE BEIRA MANGUE",
+        "nome_bairr": "São João do Cabrito",
+        "complement": "I.E.A. DE DEUS",
+        "objectid": 163
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.476362029609099, -12.90053715521325]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 201,
+        "pref_bairr": "Prefeitura-bairro II - Subúrbio / Ilhas",
+        "numero": "S/N",
+        "logradouro": "RUA CAMPO DA BOLA",
+        "cod_cep": "40725220",
+        "tipo_1": "USF",
+        "x": -12.874906,
+        "y": -38.47038,
+        "unidade": "USF ALTO DO CRUZEIRO",
+        "nome_bairr": "Rio Sena",
+        "complement": " ",
+        "objectid": 164
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.470378593552255, -12.874875706374775]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 202,
+        "pref_bairr": "Prefeitura-bairro II - Subúrbio / Ilhas",
+        "numero": "S/N",
+        "logradouro": "RUA SANTO INACIO",
+        "cod_cep": "40420000",
+        "tipo_1": "USF",
+        "x": -12.855803,
+        "y": -38.461684,
+        "unidade": "USF DO CONGO",
+        "nome_bairr": "Coutos",
+        "complement": " ",
+        "objectid": 165
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.461654093505267, -12.855975313481155]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 203,
+        "pref_bairr": "Prefeitura-bairro II - Subúrbio / Ilhas",
+        "numero": "SN",
+        "logradouro": "RUA PIPIRA",
+        "cod_cep": "40713210",
+        "tipo_1": "USF",
+        "x": -12.88507,
+        "y": -38.484228,
+        "unidade": "USF DE ITACARANHA",
+        "nome_bairr": "Itacaranha",
+        "complement": " ",
+        "objectid": 166
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.484351728444025, -12.884990161976415]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 204,
+        "pref_bairr": "Prefeitura-bairro II - Subúrbio / Ilhas",
+        "numero": "SN",
+        "logradouro": "RUA ALMIRANTE BARROSO",
+        "cod_cep": "40800460",
+        "tipo_1": "UBS",
+        "x": -12.841619,
+        "y": -38.46486,
+        "unidade": "UBS DE PARIPE",
+        "nome_bairr": "Paripe",
+        "complement": " ",
+        "objectid": 167
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.464918863644144, -12.841644484184798]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 205,
+        "pref_bairr": "Prefeitura-bairro II - Subúrbio / Ilhas",
+        "numero": "SN",
+        "logradouro": "PRACA DO BARIRI",
+        "cod_cep": "40715700",
+        "tipo_1": "UBS",
+        "x": -12.890702,
+        "y": -38.481137,
+        "unidade": "UBS DO BARIRI",
+        "nome_bairr": "Plataforma",
+        "complement": " ",
+        "objectid": 168
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.481329015251809, -12.890857311369384]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 206,
+        "pref_bairr": "Prefeitura-bairro II - Subúrbio / Ilhas",
+        "numero": "S/N",
+        "logradouro": "RUA SANTA FILOMENA",
+        "cod_cep": "41300000",
+        "tipo_1": "USF",
+        "x": -12.823327,
+        "y": -38.483331,
+        "unidade": "USF SAO TOME DE PARIPE",
+        "nome_bairr": "São Tomé",
+        "complement": " ",
+        "objectid": 169
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.483279973631717, -12.823356666351181]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 208,
+        "pref_bairr": "Prefeitura-bairro II - Subúrbio / Ilhas",
+        "numero": "S/N",
+        "logradouro": "RUA DAS PEDRINHAS",
+        "cod_cep": "41200020",
+        "tipo_1": "UPA",
+        "x": -12.868076,
+        "y": -38.472776,
+        "unidade": "UPA 24H PROF ADROALDO ALBERGARIA",
+        "nome_bairr": "Periperi",
+        "complement": " ",
+        "objectid": 170
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.472727223536744, -12.867945684709202]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 209,
+        "pref_bairr": "Prefeitura-bairro II - Subúrbio / Ilhas",
+        "numero": "S/N",
+        "logradouro": "RUA DAS PEDRINHAS",
+        "cod_cep": "41200-020",
+        "tipo_1": "SAMU",
+        "x": -12.868076,
+        "y": -38.472776,
+        "unidade": "ADROALDO ALBERGARIA",
+        "nome_bairr": "Periperi",
+        "complement": "DENTRO UPA",
+        "objectid": 171
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.472773505630506, -12.867946891803038]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 210,
+        "pref_bairr": "Prefeitura-bairro II - Subúrbio / Ilhas",
+        "numero": "S/N",
+        "logradouro": "TRAVESSA DOIS DE JULHO",
+        "cod_cep": "40750380",
+        "tipo_1": "USF",
+        "x": -12.85274,
+        "y": -38.469069,
+        "unidade": "USF DE ALTO DE COUTOS",
+        "nome_bairr": "Coutos",
+        "complement": " ",
+        "objectid": 172
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.469068999541882, -12.852739999949778]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 211,
+        "pref_bairr": "Prefeitura-bairro II - Subúrbio / Ilhas",
+        "numero": "S/N",
+        "logradouro": "RUA SABIA",
+        "cod_cep": "40230050",
+        "tipo_1": "USF",
+        "x": -12.851896,
+        "y": -38.461488,
+        "unidade": "USF VISTA ALEGRE",
+        "nome_bairr": "Vista Alegre",
+        "complement": "COUTOS",
+        "objectid": 173
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.461560691323562, -12.851819646908842]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 212,
+        "pref_bairr": "Prefeitura-bairro II - Subúrbio / Ilhas",
+        "numero": "S/N",
+        "logradouro": "ILHA DE BOM JESUS DOS PASSOS",
+        "cod_cep": "42510090",
+        "tipo_1": "USF",
+        "x": -12.759936,
+        "y": -38.644359,
+        "unidade": "USF BOM JESUS DOS PASSOS",
+        "nome_bairr": "Ilha de Bom Jesus dos Passos",
+        "complement": "AV BEIRA MAR",
+        "objectid": 174
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.644360521594237, -12.759993991153523]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 213,
+        "pref_bairr": "Prefeitura-bairro II - Subúrbio / Ilhas",
+        "numero": "S/N",
+        "logradouro": "RUA CRISTOVAO BARRETO DE ARAUJO",
+        "cod_cep": "40731165",
+        "tipo_1": "USF",
+        "x": -12.846495,
+        "y": -38.463173,
+        "unidade": "USF FAZENDA COUTOS II",
+        "nome_bairr": "Fazenda Coutos",
+        "complement": "QUADRA 32",
+        "objectid": 175
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.463119492631982, -12.846484911984804]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 214,
+        "pref_bairr": "Prefeitura-bairro II - Subúrbio / Ilhas",
+        "numero": "517",
+        "logradouro": "RUA NOVA CONSTITUINTE",
+        "cod_cep": "40720250",
+        "tipo_1": "USF",
+        "x": -12.862336,
+        "y": -38.463923,
+        "unidade": "USF NOVA CONSTITUINTE",
+        "nome_bairr": "Nova Constituinte",
+        "complement": " ",
+        "objectid": 176
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.464033180430143, -12.862482090820615]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 215,
+        "pref_bairr": "Prefeitura-bairro II - Subúrbio / Ilhas",
+        "numero": "001",
+        "logradouro": "AVENIDA CARIOCA DE PARIPE",
+        "cod_cep": "40800003",
+        "tipo_1": "UBS",
+        "x": -12.842365,
+        "y": -38.469283,
+        "unidade": "UBS SERGIO AROUCA - PARIPE",
+        "nome_bairr": "Paripe",
+        "complement": "CASA TERREA",
+        "objectid": 177
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.469945744306507, -12.842854601969156]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 218,
+        "pref_bairr": "Prefeitura-bairro II - Subúrbio / Ilhas",
+        "numero": "122",
+        "logradouro": "RUA DOS FERROVIARIO FIM DE LINHA",
+        "cod_cep": "40717430",
+        "tipo_1": "USF",
+        "x": -12.904927,
+        "y": -38.48732,
+        "unidade": "USF SAO JOAO DO CABRITO",
+        "nome_bairr": "São João do Cabrito",
+        "complement": " ",
+        "objectid": 178
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.487285712252088, -12.90504782093381]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 219,
+        "pref_bairr": "Prefeitura-bairro II - Subúrbio / Ilhas",
+        "numero": "SN",
+        "logradouro": "RUA DA CAEIRA",
+        "cod_cep": "42500710",
+        "tipo_1": "USF",
+        "x": -12.780379,
+        "y": -38.531809,
+        "unidade": "USF ILHA DE MARE",
+        "nome_bairr": "Ilha de Maré",
+        "complement": " ",
+        "objectid": 179
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.531677580342411, -12.780375361942266]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 220,
+        "pref_bairr": "Prefeitura-bairro II - Subúrbio / Ilhas",
+        "numero": "SN",
+        "logradouro": "LADEIRA DA TEREZINHA",
+        "cod_cep": "40711060",
+        "tipo_1": "USF",
+        "x": -12.883812,
+        "y": -38.477976,
+        "unidade": "USF ALTO DA TEREZINHA",
+        "nome_bairr": "Alto da Terezinha",
+        "complement": " ",
+        "objectid": 180
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.477913190606479, -12.883851753682139]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 221,
+        "pref_bairr": "Prefeitura-bairro II - Subúrbio / Ilhas",
+        "numero": "SN",
+        "logradouro": "TRAVESSA MONTES CLAROS",
+        "cod_cep": "40810620",
+        "tipo_1": "USF",
+        "x": -12.831369,
+        "y": -38.475842,
+        "unidade": "USF ESTRADA DA COCISA",
+        "nome_bairr": "Paripe",
+        "complement": "COCISA",
+        "objectid": 181
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.475805421544962, -12.831432041791588]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 222,
+        "pref_bairr": "Prefeitura-bairro II - Subúrbio / Ilhas",
+        "numero": "S/N",
+        "logradouro": "RUA JURACI MAGALHAES JUNIOR",
+        "cod_cep": "41750300",
+        "tipo_1": "USF",
+        "x": -12.843945,
+        "y": -38.463674,
+        "unidade": "USF BATE CORACAO",
+        "nome_bairr": "Paripe",
+        "complement": "BATE CORACAO",
+        "objectid": 182
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.463656672617667, -12.843892982568025]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 223,
+        "pref_bairr": "Prefeitura-bairro II - Subúrbio / Ilhas",
+        "numero": "S/N",
+        "logradouro": "RUA DEODORO DA FONSECA",
+        "cod_cep": "40730295",
+        "tipo_1": "USF",
+        "x": -12.848169,
+        "y": -38.457031,
+        "unidade": "USF FAZENDA COUTOS I",
+        "nome_bairr": "Fazenda Coutos",
+        "complement": " ",
+        "objectid": 183
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.457115802851256, -12.848395503810059]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 224,
+        "pref_bairr": "Prefeitura-bairro II - Subúrbio / Ilhas",
+        "numero": "S/N",
+        "logradouro": "RUA DAS PEDRINHAS",
+        "cod_cep": "41200020",
+        "tipo_1": "CEO",
+        "x": -12.868076,
+        "y": -38.472776,
+        "unidade": "CEO PERIPERI",
+        "nome_bairr": "Periperi",
+        "complement": " ",
+        "objectid": 184
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.472750919839825, -12.867893135979511]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 232,
+        "pref_bairr": "Prefeitura-bairro X - Valéria",
+        "numero": "S/N",
+        "logradouro": "ESTRADA CAMPINAS DE PIRAJA",
+        "cod_cep": "41290-001",
+        "tipo_1": "SEDE",
+        "x": -12.910193,
+        "y": -38.461085,
+        "unidade": "ALMOXARIFADO",
+        "nome_bairr": "Pirajá",
+        "complement": "CLM",
+        "objectid": 185
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.461736703093159, -12.910320571609205]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 234,
+        "pref_bairr": "Prefeitura-bairro IV - Itapuã / Ipitanga",
+        "numero": "S/N",
+        "logradouro": "RUA JOEL HAMILTON",
+        "cod_cep": "41620-750",
+        "tipo_1": "SESAB",
+        "x": -12.945498,
+        "y": -38.36841,
+        "unidade": "USF ITAPUA",
+        "nome_bairr": "Itapuã",
+        "complement": " ",
+        "objectid": 186
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.36883799807142, -12.946357478110322]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 34,
+        "pref_bairr": "Prefeitura-bairro IV - Itapuã / Ipitanga",
+        "numero": "88\n",
+        "logradouro": "RUA JOÃO CARLOS SACRAMENTO\n",
+        "cod_cep": "41710-330\n",
+        "tipo_1": "RT",
+        "x": 0.0,
+        "y": 0.0,
+        "unidade": "RT BOCA DO RIO FEMININA",
+        "nome_bairr": "Boca do Rio",
+        "complement": " ",
+        "objectid": 187
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.433874957772325, -12.978671717368357]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 35,
+        "pref_bairr": "Prefeitura-bairro IV - Itapuã / Ipitanga",
+        "numero": " ",
+        "logradouro": "RUA PITUAÇU\n",
+        "cod_cep": "41705-770\n",
+        "tipo_1": "RT",
+        "x": 0.0,
+        "y": 0.0,
+        "unidade": "RT BOCA DO RIO MASCULINA",
+        "nome_bairr": "Boca do Rio",
+        "complement": " ",
+        "objectid": 188
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.422309375789339, -12.97103056550395]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 50,
+        "pref_bairr": "Prefeitura-bairro VIII - Cabula / Tancredo Neves",
+        "numero": " ",
+        "logradouro": "Rua Cleriston Andrade",
+        "cod_cep": "41227050\n",
+        "tipo_1": "UBS",
+        "x": 0.0,
+        "y": 0.0,
+        "unidade": "UBS DE CALABETAO",
+        "nome_bairr": "Calabetão",
+        "complement": " ",
+        "objectid": 189
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.467931573217534, -12.931637272796111]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 105,
+        "pref_bairr": "Prefeitura-bairro I - Centro / Brotas",
+        "numero": "40\n",
+        "logradouro": "AV. JEQUITAIA \n",
+        "cod_cep": "40015035\n",
+        "tipo_1": "UDM",
+        "x": 0.0,
+        "y": 0.0,
+        "unidade": "UNIDADE DE D. DE MEDICAMENTOS",
+        "nome_bairr": "Comércio",
+        "complement": "EM FRENTE AO SIMM\n",
+        "objectid": 190
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.510674414407966, -12.969316010008878]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 135,
+        "pref_bairr": "Prefeitura-bairro IV - Itapuã / Ipitanga",
+        "numero": "S\\N",
+        "logradouro": "RUA S�O FRANCISCO \n",
+        "cod_cep": "41301-130\n",
+        "tipo_1": "USF",
+        "x": 0.0,
+        "y": 0.0,
+        "unidade": "USF SÃO CRISTOVÃO",
+        "nome_bairr": "São Cristóvão",
+        "complement": "CONJ H. Yolanda Pires\n",
+        "objectid": 191
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.348730941480845, -12.911503027727749]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 153,
+        "pref_bairr": "Prefeitura-bairro VII - Liberdade / São Caetano",
+        "numero": " ",
+        "logradouro": "RUA DALMIRO SÃO PEDRO\n",
+        "cod_cep": "40301-110\n",
+        "tipo_1": "USB",
+        "x": 0.0,
+        "y": 0.0,
+        "unidade": "UBS III IAPI",
+        "nome_bairr": "IAPI",
+        "complement": " ",
+        "objectid": 192
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.480994823979863, -12.958476347585874]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 155,
+        "pref_bairr": "Prefeitura-bairro VII - Liberdade / São Caetano",
+        "numero": " ",
+        "logradouro": "AV SAN MARTIN",
+        "cod_cep": " ",
+        "tipo_1": "SSF",
+        "x": 0.0,
+        "y": 0.0,
+        "unidade": "USF SAN MARTIN III",
+        "nome_bairr": "IAPI",
+        "complement": " ",
+        "objectid": 193
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.478868850958015, -12.949694108828638]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 197,
+        "pref_bairr": "Prefeitura-bairro X - Valéria",
+        "numero": "S/N\n",
+        "logradouro": "RUA SAMANBAIA DE PIRAJ� \n",
+        "cod_cep": "41297-320\n",
+        "tipo_1": "USF",
+        "x": 0.0,
+        "y": 0.0,
+        "unidade": "USF DEPUTADO LUIZ BRAGA (PIRAJÁ)",
+        "nome_bairr": "Pirajá",
+        "complement": " ",
+        "objectid": 194
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.467994326823288, -12.902127369577331]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 200,
+        "pref_bairr": "Prefeitura-bairro II - Subúrbio / Ilhas",
+        "numero": "S/N\n",
+        "logradouro": "RUA BOA ESPERANCA\n",
+        "cod_cep": "40350000\n",
+        "tipo_1": "USF",
+        "x": 0.0,
+        "y": 0.0,
+        "unidade": "USF ILHA AMARELA",
+        "nome_bairr": "Ilha Amarela",
+        "complement": " ",
+        "objectid": 195
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.468895936246149, -12.887795661748743]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 225,
+        "pref_bairr": "Prefeitura-bairro II - Subúrbio / Ilhas",
+        "numero": "S/N\n",
+        "logradouro": "RUA JOSE DO PATROCINIO \n",
+        "cod_cep": "40730-100\n",
+        "tipo_1": "USF",
+        "x": 0.0,
+        "y": 0.0,
+        "unidade": "USF VILA DA FRATERNIDADE",
+        "nome_bairr": "Coutos",
+        "complement": "PROXIMO A ESCOLA MUNICIPAL COLINA DO MAR\n",
+        "objectid": 196
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.470330583900299, -12.847876517072759]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 230,
+        "pref_bairr": "Prefeitura-bairro II - Subúrbio / Ilhas",
+        "numero": "S/N\n",
+        "logradouro": "RUA BEIRA MAR\n",
+        "cod_cep": "41603-030\n",
+        "tipo_1": "USF",
+        "x": 0.0,
+        "y": 0.0,
+        "unidade": "USF PARAMANA",
+        "nome_bairr": "Ilha dos Frades/Ilha de Santo Antônio",
+        "complement": " ",
+        "objectid": 197
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.620109455391102, -12.772560811887521]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 231,
+        "pref_bairr": "Prefeitura-bairro X - Valéria",
+        "numero": " ",
+        "logradouro": "RUA MORADA DA LAGOA\n",
+        "cod_cep": "41301-110\n",
+        "tipo_1": "USF",
+        "x": 0.0,
+        "y": 0.0,
+        "unidade": "USF LAGOA DA PAIXÃO",
+        "nome_bairr": "Valéria",
+        "complement": " ",
+        "objectid": 198
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.44949706911288, -12.854143176147739]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 233,
+        "pref_bairr": "Prefeitura-bairro IV - Itapuã / Ipitanga",
+        "numero": "S/N",
+        "logradouro": "RUA PROFESSOR JAIRO SIMOES \n",
+        "cod_cep": "41720375\n",
+        "tipo_1": "USF",
+        "x": 0.0,
+        "y": 0.0,
+        "unidade": "USF IMBUI",
+        "nome_bairr": "Imbuí",
+        "complement": "ATRAS DO EXTRA PARALELA\n",
+        "objectid": 199
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.429744818787754, -12.963260298690493]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 93,
+        "pref_bairr": "Prefeitura-bairro I - Centro / Brotas",
+        "numero": " ",
+        "logradouro": "Avenida JJ Seabra",
+        "cod_cep": "40026350\n",
+        "tipo_1": "UBS",
+        "x": 0.0,
+        "y": 0.0,
+        "unidade": "UBS 19H CENTRO DE SAUDE PELOURINHO",
+        "nome_bairr": "Nazaré",
+        "complement": " ",
+        "objectid": 200
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.507578971929924, -12.975282599882911]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 12,
+        "pref_bairr": "Prefeitura-bairro I - Centro / Brotas",
+        "numero": "S/N",
+        "logradouro": "AV CENTENARIO\n",
+        "cod_cep": "40100180\n",
+        "tipo_1": "DISTRITO",
+        "x": 0.0,
+        "y": 0.0,
+        "unidade": "DISTRITO SANITARIO BARRA RIO VERMELHO",
+        "nome_bairr": "Garcia",
+        "complement": "COMPLEXO MUNICIPAL\n",
+        "objectid": 201
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.511195391262717, -12.991087552564013]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 13,
+        "pref_bairr": "Prefeitura-bairro I - Centro / Brotas",
+        "numero": "S/N",
+        "logradouro": "AV. CENTENARIO, 1º ANDAR\n",
+        "cod_cep": "40100180\n",
+        "tipo_1": "CEREST",
+        "x": 0.0,
+        "y": 0.0,
+        "unidade": "CENTRO DE REF. EM SAUDE DO TRABALHADOR - CEREST",
+        "nome_bairr": "Garcia",
+        "complement": "COMPLEXO MUNICIPAL\n",
+        "objectid": 202
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.511102149625337, -12.991078803156666]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 14,
+        "pref_bairr": "Prefeitura-bairro I - Centro / Brotas",
+        "numero": "S/N",
+        "logradouro": "AV. CENTENARIO, 1º ANDAR\n",
+        "cod_cep": "40100180\n",
+        "tipo_1": "SAMU\n",
+        "x": 0.0,
+        "y": 0.0,
+        "unidade": "CLEMENTINO FRAGA",
+        "nome_bairr": "Garcia",
+        "complement": "COMPLEXO MUNICIPAL\n",
+        "objectid": 203
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.511242205513263, -12.99116182104498]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 16,
+        "pref_bairr": "Prefeitura-bairro I - Centro / Brotas",
+        "numero": "S/N\n",
+        "logradouro": "AV VASCO DA GAMA, COMPLEX VIG A SAUDE\n",
+        "cod_cep": "40230731\n",
+        "tipo_1": "SEDE",
+        "x": 0.0,
+        "y": 0.0,
+        "unidade": "LABORATORIO CENTRAL DE SALVADOR",
+        "nome_bairr": "Engenho Velho de Brotas",
+        "complement": "3º ANDAR\n",
+        "objectid": 204
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.504781569220647, -12.989834319872687]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 17,
+        "pref_bairr": "Prefeitura-bairro I - Centro / Brotas",
+        "numero": "S/N\n",
+        "logradouro": "AV CENTENARIO, TERREO\n",
+        "cod_cep": "40100180\n",
+        "tipo_1": "PA",
+        "x": 0.0,
+        "y": 0.0,
+        "unidade": "PRONTO ATENDIMENTO PSIQUIATRICO PAP",
+        "nome_bairr": "Garcia",
+        "complement": "COMPLEXO MUNIPAL\n",
+        "objectid": 205
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.511093495294396, -12.991126657475307]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 18,
+        "pref_bairr": "Prefeitura-bairro I - Centro / Brotas",
+        "numero": "S/N\n",
+        "logradouro": "AV CENTENARIO, 1º ANDAR\n",
+        "cod_cep": "40100180\n",
+        "tipo_1": "USF",
+        "x": 0.0,
+        "y": 0.0,
+        "unidade": "USF CLEMENTINO FRAGA",
+        "nome_bairr": "Garcia",
+        "complement": "COMPLEXO MUNICIPAL\n",
+        "objectid": 206
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.511047613237395, -12.991023685544395]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 23,
+        "pref_bairr": "Prefeitura-bairro I - Centro / Brotas",
+        "numero": " ",
+        "logradouro": "AV CENTENARIO\n",
+        "cod_cep": "40100180\n",
+        "tipo_1": "OUTRO\n",
+        "x": 0.0,
+        "y": 0.0,
+        "unidade": "AMBULATORIO INFANTIL DE ALERGIA ALIMENTAR",
+        "nome_bairr": "Garcia",
+        "complement": " ",
+        "objectid": 207
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.511125825071304, -12.991184051786298]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 33,
+        "pref_bairr": "Prefeitura-bairro IV - Itapuã / Ipitanga",
+        "numero": "S/N",
+        "logradouro": "EST. DO CURRALINHO \n",
+        "cod_cep": "41750-305\n",
+        "tipo_1": "USF",
+        "x": 0.0,
+        "y": 0.0,
+        "unidade": "USF CURRALINHO",
+        "nome_bairr": "Imbuí",
+        "complement": "ARMAÇÃO\n",
+        "objectid": 208
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.442127332497094, -12.97745274350981]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 38,
+        "pref_bairr": "Prefeitura-bairro I - Centro / Brotas",
+        "numero": "S/N\n",
+        "logradouro": "RUA JARDIM MADALENA\n",
+        "cod_cep": "40285-505\n",
+        "tipo_1": "UPA\n",
+        "x": 0.0,
+        "y": 0.0,
+        "unidade": "UPA DE BROTAS",
+        "nome_bairr": "Brotas",
+        "complement": " ",
+        "objectid": 209
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.48023459093568, -12.986490317411983]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 39,
+        "pref_bairr": "Prefeitura-bairro I - Centro / Brotas",
+        "numero": " ",
+        "logradouro": "RUA EDSON SALDANHA\n",
+        "cod_cep": "40250-770\n",
+        "tipo_1": "USF\n",
+        "x": 0.0,
+        "y": 0.0,
+        "unidade": "USF VALE DO MATATU (OLGA DE ALAKETU)",
+        "nome_bairr": "Luiz Anselmo",
+        "complement": "PRIMEIRA RUA A DIREIRA DEPOIS DA REVISA\n",
+        "objectid": 210
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.483206250348537, -12.979592476293082]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 42,
+        "pref_bairr": "Prefeitura-bairro I - Centro / Brotas",
+        "numero": " ",
+        "logradouro": "RUA DIRETA DE COSME DE FARIAS\n",
+        "cod_cep": " ",
+        "tipo_1": "UBS",
+        "x": 0.0,
+        "y": 0.0,
+        "unidade": "UBS MAJOR COSME DE FARIAS",
+        "nome_bairr": "Cosme de Farias",
+        "complement": "FINAL DE LINHA\n",
+        "objectid": 211
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.48879569273506, -12.980848090810332]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 48,
+        "pref_bairr": "Prefeitura-bairro VIII - Cabula / Tancredo Neves",
+        "numero": "2\n",
+        "logradouro": "AV HILDA\n",
+        "cod_cep": "41110200\n",
+        "tipo_1": "PA",
+        "x": 0.0,
+        "y": 0.0,
+        "unidade": "PA PERNAMBUES EDSON T BARBOSA",
+        "nome_bairr": "Pernambués",
+        "complement": " ",
+        "objectid": 212
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.460945078541023, -12.97111634340637]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 49,
+        "pref_bairr": "Prefeitura-bairro VIII - Cabula / Tancredo Neves",
+        "numero": "240\n",
+        "logradouro": "RUA FERNANDO PEDREIRA\n",
+        "cod_cep": " ",
+        "tipo_1": "USF",
+        "x": 0.0,
+        "y": 0.0,
+        "unidade": "USF DE BARREIRAS",
+        "nome_bairr": "Barreiras",
+        "complement": " ",
+        "objectid": 213
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.457083823778262, -12.943437333418265]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 96,
+        "pref_bairr": "Prefeitura-bairro I - Centro / Brotas",
+        "numero": "238\n",
+        "logradouro": "PRACA DOS 15 MISTERIOS\n",
+        "cod_cep": "40301460\n",
+        "tipo_1": "UBS",
+        "x": 0.0,
+        "y": 0.0,
+        "unidade": "UBS SANTO ANTONIO",
+        "nome_bairr": "Santo Antônio",
+        "complement": " ",
+        "objectid": 214
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.505161995707645, -12.967241341026766]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 115,
+        "pref_bairr": "Prefeitura-bairro V - Cidade Baixa",
+        "numero": "249\n",
+        "logradouro": "RUA HENRIQUE DIAS\n",
+        "cod_cep": "40415275\n",
+        "tipo_1": "DISTRITO",
+        "x": 0.0,
+        "y": 0.0,
+        "unidade": "DISTRITO SANITARIO ITAPAGIPE",
+        "nome_bairr": "Caminho de Areia",
+        "complement": " ",
+        "objectid": 215
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.505580576205865, -12.927919633883471]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 123,
+        "pref_bairr": "Prefeitura-bairro IV - Itapuã / Ipitanga",
+        "numero": "S/N",
+        "logradouro": "AV. CARYB�\n",
+        "cod_cep": "41301-110\n",
+        "tipo_1": "SAMU",
+        "x": 0.0,
+        "y": 0.0,
+        "unidade": "AEROPORTO HANGAR",
+        "nome_bairr": "Aeroporto",
+        "complement": "PRIMEIRA RUA DIREIRA AP�S O POSTO SHELL \n",
+        "objectid": 216
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.345555596043354, -12.911254498905308]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 128,
+        "pref_bairr": "Prefeitura-bairro IV - Itapuã / Ipitanga",
+        "numero": "SN\n",
+        "logradouro": "RUA A, CAMINHO 02 -SETOR B\n",
+        "cod_cep": "41301-110\n",
+        "tipo_1": "DISTRITO",
+        "x": 0.0,
+        "y": 0.0,
+        "unidade": "DISTRITO SANITARIO ITAPUA",
+        "nome_bairr": "Mussurunga",
+        "complement": " ",
+        "objectid": 217
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.362987909363156, -12.920731221766799]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 134,
+        "pref_bairr": "Prefeitura-bairro IV - Itapuã / Ipitanga",
+        "numero": "S/N",
+        "logradouro": "RUA JOAQUIM FERREIRA\n",
+        "cod_cep": "41502-200\n",
+        "tipo_1": "USF",
+        "x": 0.0,
+        "y": 0.0,
+        "unidade": "USF JD DAS MARGARIDAS",
+        "nome_bairr": "Jardim das Margaridas",
+        "complement": "DENTRO DO CONJ.RESIDENCIAL JD DAS MARGARIDAS\n",
+        "objectid": 218
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.359037737195223, -12.896134561019348]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 136,
+        "pref_bairr": "Prefeitura-bairro IV - Itapuã / Ipitanga",
+        "numero": " ",
+        "logradouro": "RUA FLOR DO BOSQUE\n",
+        "cod_cep": " ",
+        "tipo_1": "RT",
+        "x": 0.0,
+        "y": 0.0,
+        "unidade": "RT ITAPUÃ",
+        "nome_bairr": "Itapuã",
+        "complement": "PR�XIMO � PEDRA DA SEREIA\n",
+        "objectid": 219
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.369372846041081, -12.949685551501624]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 142,
+        "pref_bairr": "Prefeitura-bairro VII - Liberdade / São Caetano",
+        "numero": "3401\n",
+        "logradouro": "RUA ARISTIDES DE OLIVEIRA\n",
+        "cod_cep": "40130200\n",
+        "tipo_1": "USF",
+        "x": 0.0,
+        "y": 0.0,
+        "unidade": "USF SANTA MÔNICA",
+        "nome_bairr": "Santa Mônica",
+        "complement": " ",
+        "objectid": 220
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.486142272597526, -12.949627284007239]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 147,
+        "pref_bairr": "Prefeitura-bairro VII - Liberdade / São Caetano",
+        "numero": " ",
+        "logradouro": "AVENIDA SAN MARTIN",
+        "cod_cep": "40355000\n",
+        "tipo_1": "USF",
+        "x": 0.0,
+        "y": 0.0,
+        "unidade": "USF SAN MARTIN",
+        "nome_bairr": "Curuzu",
+        "complement": "CASA\n",
+        "objectid": 221
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.485046519596246, -12.942386019644816]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 172,
+        "pref_bairr": "Prefeitura-bairro IX -  Pau da Lima",
+        "numero": " ",
+        "logradouro": "EST. DA MURIÇOCA \n",
+        "cod_cep": "41250-420\n",
+        "tipo_1": "USF",
+        "x": 0.0,
+        "y": 0.0,
+        "unidade": "USF VALE DOS LAGOS",
+        "nome_bairr": "Vale dos Lagos",
+        "complement": "PROXIMO AO CONJ V DOS LAGOS\n",
+        "objectid": 222
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.419452226776905, -12.934233254201624]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 173,
+        "pref_bairr": "Prefeitura-bairro IX -  Pau da Lima",
+        "numero": " ",
+        "logradouro": "AVN ALIOMAR BALEIERO\n",
+        "cod_cep": "41370-110\n",
+        "tipo_1": "USF",
+        "x": 0.0,
+        "y": 0.0,
+        "unidade": "USF JOAO INACIO R ROMA FILHO - NOVO MAROTINHO",
+        "nome_bairr": "Novo Marotinho",
+        "complement": "PROX. CASA DE MATERIAIS DE CONSTRUÇÃO - RENOVE\n",
+        "objectid": 223
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.424421605375677, -12.915894078602717]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 186,
+        "pref_bairr": "Prefeitura-bairro VII - Liberdade / São Caetano",
+        "numero": "SN\n",
+        "logradouro": "LOTEAMENTO JD. LOBATO, Q-134, L-8, 1º ANDAR\n",
+        "cod_cep": "40390355\n",
+        "tipo_1": "DISTRITO",
+        "x": 0.0,
+        "y": 0.0,
+        "unidade": "DISTRITO SANITARIO SAO CAETANO VALERIA",
+        "nome_bairr": "São Caetano",
+        "complement": " ",
+        "objectid": 224
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.477108368931049, -12.93168367441994]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 196,
+        "pref_bairr": "Prefeitura-bairro VII - Liberdade / São Caetano",
+        "numero": " ",
+        "logradouro": "RUA DA GLORIA \n",
+        "cod_cep": "40394-130\n",
+        "tipo_1": "USF",
+        "x": 0.0,
+        "y": 0.0,
+        "unidade": "USF CAPELINHA DO SÃO CAETANO",
+        "nome_bairr": "Capelinha",
+        "complement": "Em construção\n",
+        "objectid": 225
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.484185163099674, -12.930205510170561]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 198,
+        "pref_bairr": "Prefeitura-bairro VII - Liberdade / São Caetano",
+        "numero": " ",
+        "logradouro": "RUA DO CALAFATE",
+        "cod_cep": "40354-100",
+        "tipo_1": "USF",
+        "x": 0.0,
+        "y": 0.0,
+        "unidade": "USF SAN MARTIN II (CALAFATE)",
+        "nome_bairr": "Fazenda Grande do Retiro",
+        "complement": "CENTRO MUNICIPAL DE EDUCA��O INFANTIL LINDAURA ANDRADE MENDON�A",
+        "objectid": 226
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.479188798601527, -12.946059285238277]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 216,
+        "pref_bairr": "Prefeitura-bairro II - Subúrbio / Ilhas",
+        "numero": "30\n",
+        "logradouro": "RUA JOSE PIRES CASTELO BRANCO\n",
+        "cod_cep": "40720720\n",
+        "tipo_1": "DISTRITO",
+        "x": 0.0,
+        "y": 0.0,
+        "unidade": "DISTRITO SANITARIO SUBURBIO FERROVIARIO",
+        "nome_bairr": "Praia Grande",
+        "complement": "1º E 2º ANDAR\n",
+        "objectid": 227
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.476666762939658, -12.872105911108969]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 217,
+        "pref_bairr": "Prefeitura-bairro II - Subúrbio / Ilhas",
+        "numero": " ",
+        "logradouro": "RUA JOSE PIRES CASTELO BRANCO\n",
+        "cod_cep": "40720720\n",
+        "tipo_1": "CAPS",
+        "x": 0.0,
+        "y": 0.0,
+        "unidade": "CAPS - MARIA CELIA DA ROCHA",
+        "nome_bairr": "Praia Grande",
+        "complement": " ",
+        "objectid": 228
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.47674942787777, -12.872097885467674]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 226,
+        "pref_bairr": "Prefeitura-bairro X - Valéria",
+        "numero": "S/N\n",
+        "logradouro": "RUA MUNIZ FERREIRA ETAPA 1 SETOR A\n",
+        "cod_cep": "41307-565\n",
+        "tipo_1": "USF",
+        "x": 0.0,
+        "y": 0.0,
+        "unidade": "USF RECANTO DA LAGOA II",
+        "nome_bairr": "Moradas da Lagoa",
+        "complement": " ",
+        "objectid": 229
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.45418331788354, -12.850154022327393]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 227,
+        "pref_bairr": "Prefeitura-bairro II - Subúrbio / Ilhas",
+        "numero": " ",
+        "logradouro": "RUA D. EDUARO DOTTO\n",
+        "cod_cep": "40800-010\n",
+        "tipo_1": "USF",
+        "x": 0.0,
+        "y": 0.0,
+        "unidade": "USF TUBARÃO",
+        "nome_bairr": "Paripe",
+        "complement": "TUBARÃO\n",
+        "objectid": 230
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.480667120596216, -12.83251560690714]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 228,
+        "pref_bairr": "Prefeitura-bairro II - Subúrbio / Ilhas",
+        "numero": "S/N\n",
+        "logradouro": "2º TRAVESSA ANTONIO BALBINO \n",
+        "cod_cep": "40490212\n",
+        "tipo_1": "USF",
+        "x": 0.0,
+        "y": 0.0,
+        "unidade": "USF PLATAFORMA",
+        "nome_bairr": "Plataforma",
+        "complement": " ",
+        "objectid": 231
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.486671289723674, -12.900782889106315]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 229,
+        "pref_bairr": "Prefeitura-bairro II - Subúrbio / Ilhas",
+        "numero": "S/N\n",
+        "logradouro": "RUA DO IPÊ\n",
+        "cod_cep": "40726-075\n",
+        "tipo_1": "USF",
+        "x": 0.0,
+        "y": 0.0,
+        "unidade": "USF COLINA DE PERIPERI",
+        "nome_bairr": "Colinas de Periperi",
+        "complement": " ",
+        "objectid": 232
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.461885844008464, -12.871205961095875]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 207,
+        "pref_bairr": "Prefeitura-bairro II - Subúrbio / Ilhas",
+        "numero": "S/N",
+        "logradouro": "RUA CARDEAL JEAN",
+        "cod_cep": "40715366",
+        "tipo_1": "USF",
+        "x": 0.0,
+        "y": 0.0,
+        "unidade": "USF RIO SENA",
+        "nome_bairr": "Rio Sena",
+        "complement": "CASA",
+        "objectid": 233
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.472144949981818, -12.878600276884463]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tipo": 1,
+        "pref_bairr": "Prefeitura-bairro VI - Barra / Pituba",
+        "numero": "S/N",
+        "logradouro": " ",
+        "cod_cep": "41926060",
+        "tipo_1": "USB",
+        "x": 0.0,
+        "y": 0.0,
+        "unidade": "UBS PROF EDUARDO ARAUJO (MULTICENTRO VALE)",
+        "nome_bairr": "Chapada do Rio Vermelho",
+        "complement": "ALA B",
+        "objectid": 234
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-38.483352677623081, -13.005794406517385]
+      }
+    }
+  ]
+}
