@@ -1,12 +1,8 @@
 # Mapa interativo
 
 # Design de dados
-- Bairro
-  - nome
-  - geometria
-  - area
-  - unidade_area
-  - area_em_hec
+- [Modelagem de dados](https://dbdiagram.io/d/dados_acesso_saude_salvador-67ff0b469cea640381de5f95)
+- Tradução das colunas úteis
   - populacao_total (B001)
   - populacao_masculina (B002)
   - populacao_feminina (B003)
@@ -28,14 +24,6 @@
   - renda_5_10_salarios (B057)
   - renda_10_20_salarios (B057)
   - renda_acima_de_20_salarios (B057)
-  - renda_sem_rendimento
-- Unidade de saúde
-  - nome (unidade)
-  - bairro
-  - logradouro
-  - cep
-  - tipo (tipo_1)
-  - geometria
 
 # Pontos de melhoria em aberto
 
