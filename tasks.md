@@ -25,6 +25,15 @@
   - renda_10_20_salarios (B057)
   - renda_acima_de_20_salarios (B057)
 
+# Notes
+- Tentar contato com um epidemiologista para entender os dados
+- Retomar como foi feito o mapeamento dos dados
+- Adicionar dados de sinistro de trânsito
+- Dados de equipamentos (ponto de acesso) odontológicos
+- Verificar possíveis hospitais federais
+- Explorar site da secretaria de saúde pra verificar os dados lá presentes, pra criar uma justicativa do trabalho
+- 
+
 # Pontos de melhoria em aberto
 
 - Dados do município
