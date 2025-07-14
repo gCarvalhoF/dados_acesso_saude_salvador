@@ -44,3 +44,7 @@
     - Dengue
     - Aids
     - Tuberculose
+
+# Material de leitura importante
+
+[How to design dashboards](https://code.likeagirl.io/dashboard-design-lessons-i-gained-from-exploring-100-impressive-dashboard-examples-25f31ee43ca3)
