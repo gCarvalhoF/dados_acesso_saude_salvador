@@ -1,6 +1,7 @@
 # Mapa interativo
 
 # Design de dados
+
 - [Modelagem de dados](https://dbdiagram.io/d/dados_acesso_saude_salvador-67ff0b469cea640381de5f95)
 - Tradução das colunas úteis
   - populacao_total (B001)
@@ -26,13 +27,29 @@
   - renda_acima_de_20_salarios (B057)
 
 # Notes
+
 - Tentar contato com um epidemiologista para entender os dados
 - Retomar como foi feito o mapeamento dos dados
 - Adicionar dados de sinistro de trânsito
-- Dados de equipamentos (ponto de acesso) odontológicos
-- Verificar possíveis hospitais federais
 - Explorar site da secretaria de saúde pra verificar os dados lá presentes, pra criar uma justicativa do trabalho
-- 
+- Dados de equipamentos (ponto de acesso) odontológicos
+
+- Focar no referencial bibliográfico
+- Buscar o CIDACS fiocruz
+- CIDACS PDD -> Possivel api de dados de saúde
+
+- Unidades federais e estaduais
+  - Possível detecção por meio da base de dados do CNES
+    - Ao comparar a natureza jurídica de unidades em salvador é possível achar as entidades públicas que regem estabelecimentos de saúde pública
+    - `tbNaturezaJuridica202508.csv` para checar as possíveis naturezas da base de dados
+    - `tbMunicipio202508.csv` para checar o código do município de Salvador
+    - `tbEstabelecimento202508.csv` usando os valores dos arquivos acima é possível filtrar a tabela para estabelecimentos operados pelo poder público em Salvador.
+
+# Action items importantes
+
+- Encontrar o Plano de Saúde Municipal de Salvador
+  - é possível achar (tanto municipal quanto estadual) em digisusgmp.saude.gov.br/v1.5/transparencia/downloads
+- Encontrar o Plano de Dados Abertos de Salvador
 
 # Pontos de melhoria em aberto
 

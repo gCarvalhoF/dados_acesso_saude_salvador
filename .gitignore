@@ -30,3 +30,6 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+/aux-data/cnes-database
+/aux-data/salvador/censo

@@ -8,4 +8,3 @@ exclude = .git,__init__.py,__pycache__,docs,venv,*/migrations/*
 
 # Ignore specific error codes
 ignore = E203, W503
-
