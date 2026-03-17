@@ -31,7 +31,7 @@
 - Tentar contato com um epidemiologista para entender os dados
 - Retomar como foi feito o mapeamento dos dados
 - Adicionar dados de sinistro de trânsito
-- Explorar site da secretaria de saúde pra verificar os dados lá presentes, pra criar uma justicativa do trabalho
+- Explorar site da secretaria de saúde pra verificar os dados lá presentes, pra criar uma justificativa do trabalho
 - Dados de equipamentos (ponto de acesso) odontológicos
 
 - Focar no referencial bibliográfico
@@ -61,6 +61,30 @@
     - Dengue
     - Aids
     - Tuberculose
+
+
+### Novo foco a partir da reunião com Prof Navarro.
+Mapear Números de equipamentos, como mamografos, tomografos, etc
+
+Adicionar no mapa tipos de atendimentos nos equipamentos da saúde
+  - Hospitais específicos e de referência
+  - Hospitais de infecção
+  - Hospitais de peçonha
+  - Diferenciar uma UBS e USF
+
+Bases para pesquisa:
+DataSUS
+	Tabwin
+
+IBGE
+	Dar uma olhada nos microdados que podem trazer dados de saúde
+
+### Ideia pra ou futuros trabalhos ou DIFERENCIAL
+
+Adicionar uma conexão MCP para que usuários possam explorar os dados do CNES por meio de seus LLM chat preferidos ou AI Agents
+
+Automatizar scraping e importing de dados do CNES para manter os dados atualizados (Pesquisar a frequência que os dados do CNES são atualizados e decidir o intervalo de tempo)
+
 
 # Material de leitura importante
 
