@@ -342,11 +342,11 @@ end
 ## 9. Fases de Implementacao
 
 ### Fase 1 - Fundacao (backend + importacao)
-- [ ] Criar migrations para todos os models
-- [ ] Implementar models com associacoes e scopes
-- [ ] Implementar rake tasks de importacao (CNES + GeoJSON + Censo)
+- [x] Criar migrations para todos os models
+- [x] Implementar models com associacoes e scopes
+- [x] Implementar rake tasks de importacao (CNES + GeoJSON + Censo)
 - [ ] Seed do banco com dados de Salvador
-- [ ] Endpoints da API retornando GeoJSON
+- [x] Endpoints da API retornando GeoJSON
 
 ### Fase 2 - Frontend base (mapa + filtros)
 - [ ] Configurar react_on_rails + Tailwind + Leaflet
