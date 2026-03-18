@@ -57,6 +57,16 @@ jobs:
           RAILS_ENV: test
         run: docker compose run --rm web bundle exec rspec
 
+  lint_frontend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Lint frontend code
+        run: docker compose run --rm --no-deps frontend sh -c "npm install && npm run lint"
+
   test_frontend:
     runs-on: ubuntu-latest
 

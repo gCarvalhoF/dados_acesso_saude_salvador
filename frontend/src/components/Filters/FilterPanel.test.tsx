@@ -3,7 +3,8 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import FilterPanel from "./FilterPanel";
 import { mockNeighborhoods } from "../../test/fixtures";
-import type { Filters } from "../../types";
+import { ESTABLISHMENT_TYPES, LEGAL_NATURES, MANAGEMENT_TYPES } from "../../types";
+import type { FilterOptions, Filters } from "../../types";
 
 const defaultFilters: Filters = {
   type: "",
@@ -13,10 +14,17 @@ const defaultFilters: Filters = {
   neighborhood_id: "",
 };
 
+const defaultFilterOptions: FilterOptions = {
+  establishment_types: Object.entries(ESTABLISHMENT_TYPES).map(([value, label]) => ({ value, label })),
+  legal_natures: Object.entries(LEGAL_NATURES).map(([value, label]) => ({ value, label })),
+  management_types: Object.entries(MANAGEMENT_TYPES).map(([value, label]) => ({ value, label })),
+};
+
 function renderPanel(overrides: Partial<Filters> = {}, onChange = vi.fn()) {
   return render(
     <FilterPanel
       filters={{ ...defaultFilters, ...overrides }}
+      filterOptions={defaultFilterOptions}
       onChange={onChange}
       neighborhoods={mockNeighborhoods}
       totalCount={42}
@@ -41,6 +49,7 @@ describe("FilterPanel", () => {
       render(
         <FilterPanel
           filters={defaultFilters}
+          filterOptions={defaultFilterOptions}
           onChange={vi.fn()}
           neighborhoods={null}
           totalCount={0}
@@ -58,9 +67,9 @@ describe("FilterPanel", () => {
     it("renderiza os radio buttons de natureza jurídica", () => {
       renderPanel();
       expect(screen.getByLabelText("Todas")).toBeInTheDocument();
-      expect(screen.getByLabelText("Federal")).toBeInTheDocument();
-      expect(screen.getByLabelText("Estadual")).toBeInTheDocument();
-      expect(screen.getByLabelText("Municipal")).toBeInTheDocument();
+      expect(screen.getByLabelText("Pública")).toBeInTheDocument();
+      expect(screen.getByLabelText("Privada")).toBeInTheDocument();
+      expect(screen.getByLabelText("Sem Fins Lucrativos")).toBeInTheDocument();
     });
 
     it("renderiza o checkbox 'Apenas SUS'", () => {
@@ -93,22 +102,22 @@ describe("FilterPanel", () => {
       expect(onChange).toHaveBeenCalledWith({ type: "01" });
     });
 
-    it("chama onChange com legal_nature ao selecionar radio 'Municipal'", async () => {
+    it("chama onChange com legal_nature ao selecionar radio 'Pública'", async () => {
       const onChange = vi.fn();
       renderPanel({}, onChange);
 
-      await userEvent.click(screen.getByLabelText("Municipal"));
+      await userEvent.click(screen.getByLabelText("Pública"));
 
-      expect(onChange).toHaveBeenCalledWith({ legal_nature: "municipal" });
+      expect(onChange).toHaveBeenCalledWith({ legal_nature: "publica" });
     });
 
-    it("chama onChange com legal_nature ao selecionar radio 'Federal'", async () => {
+    it("chama onChange com legal_nature ao selecionar radio 'Privada'", async () => {
       const onChange = vi.fn();
       renderPanel({}, onChange);
 
-      await userEvent.click(screen.getByLabelText("Federal"));
+      await userEvent.click(screen.getByLabelText("Privada"));
 
-      expect(onChange).toHaveBeenCalledWith({ legal_nature: "federal" });
+      expect(onChange).toHaveBeenCalledWith({ legal_nature: "privada" });
     });
 
     it("chama onChange com sus_only: true ao marcar o checkbox", async () => {
@@ -163,9 +172,9 @@ describe("FilterPanel", () => {
       expect(screen.getByLabelText(/apenas sus/i)).toBeChecked();
     });
 
-    it("o radio 'Estadual' fica marcado quando legal_nature='estadual'", () => {
-      renderPanel({ legal_nature: "estadual" });
-      expect(screen.getByLabelText("Estadual")).toBeChecked();
+    it("o radio 'Privada' fica marcado quando legal_nature='privada'", () => {
+      renderPanel({ legal_nature: "privada" });
+      expect(screen.getByLabelText("Privada")).toBeChecked();
     });
 
     it("o radio 'Todas' fica marcado com filtro vazio", () => {
@@ -175,8 +184,6 @@ describe("FilterPanel", () => {
 
     it("a lista de bairros é ordenada alfabeticamente", () => {
       renderPanel();
-      // Escopa para o select de bairro específico para não misturar com
-      // opções dos outros selects (tipo, gestão).
       const neighborhoodSelect = screen.getByLabelText(/bairro/i);
       const options = Array.from(neighborhoodSelect.querySelectorAll("option"))
         .map((o) => o.textContent)

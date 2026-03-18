@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import DashboardPage from "./DashboardPage";
-import { mockNeighborhoods, mockEstablishments } from "../test/fixtures";
+import { mockNeighborhoods, mockEstablishments, mockFilterOptions } from "../test/fixtures";
 
 vi.mock("react-leaflet", () => import("../test/mocks/react-leaflet"));
 vi.mock("leaflet", () => import("../test/mocks/leaflet"));
@@ -27,7 +27,7 @@ describe("DashboardPage", () => {
   });
 
   it("renderiza o título do dashboard", async () => {
-    mockFetchSequence([mockNeighborhoods, mockEstablishments]);
+    mockFetchSequence([mockNeighborhoods, mockEstablishments, mockFilterOptions]);
 
     render(<DashboardPage />);
 
@@ -35,7 +35,7 @@ describe("DashboardPage", () => {
   });
 
   it("renderiza o painel de filtros", async () => {
-    mockFetchSequence([mockNeighborhoods, mockEstablishments]);
+    mockFetchSequence([mockNeighborhoods, mockEstablishments, mockFilterOptions]);
 
     render(<DashboardPage />);
 
@@ -43,7 +43,7 @@ describe("DashboardPage", () => {
   });
 
   it("renderiza o container do mapa", async () => {
-    mockFetchSequence([mockNeighborhoods, mockEstablishments]);
+    mockFetchSequence([mockNeighborhoods, mockEstablishments, mockFilterOptions]);
 
     render(<DashboardPage />);
 
@@ -61,7 +61,7 @@ describe("DashboardPage", () => {
   });
 
   it("exibe a contagem de estabelecimentos no painel de filtros após carregar", async () => {
-    mockFetchSequence([mockNeighborhoods, mockEstablishments]);
+    mockFetchSequence([mockNeighborhoods, mockEstablishments, mockFilterOptions]);
 
     render(<DashboardPage />);
 
@@ -71,7 +71,7 @@ describe("DashboardPage", () => {
   });
 
   it("exibe os bairros no dropdown após carregar", async () => {
-    mockFetchSequence([mockNeighborhoods, mockEstablishments]);
+    mockFetchSequence([mockNeighborhoods, mockEstablishments, mockFilterOptions]);
 
     render(<DashboardPage />);
 
@@ -81,7 +81,7 @@ describe("DashboardPage", () => {
 
   describe("sincronização bidirecional de bairro", () => {
     it("exibe badge de bairro no header ao selecionar pelo dropdown", async () => {
-      mockFetchSequence([mockNeighborhoods, mockEstablishments, mockEstablishments]);
+      mockFetchSequence([mockNeighborhoods, mockEstablishments, mockFilterOptions, mockEstablishments]);
 
       render(<DashboardPage />);
 
@@ -98,6 +98,7 @@ describe("DashboardPage", () => {
       mockFetchSequence([
         mockNeighborhoods,
         mockEstablishments,
+        mockFilterOptions,
         mockEstablishments,
         mockEstablishments,
       ]);
@@ -118,7 +119,7 @@ describe("DashboardPage", () => {
     });
 
     it("refaz o fetch de estabelecimentos ao mudar o filtro de tipo", async () => {
-      mockFetchSequence([mockNeighborhoods, mockEstablishments, mockEstablishments]);
+      mockFetchSequence([mockNeighborhoods, mockEstablishments, mockFilterOptions, mockEstablishments]);
 
       render(<DashboardPage />);
 
