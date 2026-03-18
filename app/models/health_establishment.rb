@@ -56,11 +56,11 @@ class HealthEstablishment < ApplicationRecord
   scope :by_management, ->(type) { where(management_type: type) }
   scope :in_neighborhood, ->(neighborhood_id) { where(neighborhood_id: neighborhood_id) }
   scope :with_service, ->(service_code) do
-    joins(:establishment_services => :specialized_service)
+    joins(establishment_services: :specialized_service)
       .where(specialized_services: { code: service_code })
   end
   scope :with_equipment, ->(equipment_code) do
-    joins(:establishment_equipments => :equipment_item)
+    joins(establishment_equipments: :equipment_item)
       .where(equipment_items: { code: equipment_code })
   end
 

@@ -2,6 +2,7 @@ import { useState } from "react";
 import type { Filters } from "../types";
 import { useNeighborhoods } from "../hooks/useNeighborhoods";
 import { useEstablishments } from "../hooks/useEstablishments";
+import { useFilterOptions } from "../hooks/useFilterOptions";
 import InteractiveMap from "./Map/InteractiveMap";
 import FilterPanel from "./Filters/FilterPanel";
 
@@ -20,6 +21,7 @@ export default function DashboardPage() {
 
   const { data: neighborhoods, loading: loadingNeighborhoods } = useNeighborhoods();
   const { data: establishments, loading: loadingEstablishments } = useEstablishments(filters);
+  const filterOptions = useFilterOptions();
 
   function handleFilterChange(partial: Partial<Filters>) {
     setFilters((prev) => ({ ...prev, ...partial }));
@@ -81,6 +83,7 @@ export default function DashboardPage() {
       <div className="flex flex-1 overflow-hidden">
         <FilterPanel
           filters={filters}
+          filterOptions={filterOptions}
           onChange={handleFilterChange}
           neighborhoods={neighborhoods}
           totalCount={totalCount}

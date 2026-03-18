@@ -21,10 +21,10 @@ gem "solid_queue"
 gem "solid_cable"
 
 # Add postgis and geometry possibilities
-gem 'activerecord-postgis-adapter'
+gem "activerecord-postgis-adapter"
 
 # Decode GeoJSON
-gem 'rgeo-geojson'
+gem "rgeo-geojson"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
@@ -43,7 +43,7 @@ group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
 
   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
-  gem "brakeman", require: false
+  gem "brakeman", "~> 8.0", require: false
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false

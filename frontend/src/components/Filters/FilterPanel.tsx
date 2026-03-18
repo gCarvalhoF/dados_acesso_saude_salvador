@@ -1,22 +1,18 @@
-import { ESTABLISHMENT_TYPES, LEGAL_NATURES, MANAGEMENT_TYPES } from "../../types";
-import type { Filters, NeighborhoodCollection } from "../../types";
+import type { FilterOptions, Filters, NeighborhoodCollection } from "../../types";
 import FilterCheckbox from "../ui/FilterCheckbox";
 import FilterRadioGroup from "../ui/FilterRadioGroup";
 import FilterSelect from "../ui/FilterSelect";
 
-const ESTABLISHMENT_TYPE_OPTIONS = Object.entries(ESTABLISHMENT_TYPES).map(([value, label]) => ({ value, label }));
-const LEGAL_NATURE_OPTIONS = Object.entries(LEGAL_NATURES).map(([value, label]) => ({ value, label }));
-const MANAGEMENT_TYPE_OPTIONS = Object.entries(MANAGEMENT_TYPES).map(([value, label]) => ({ value, label }));
-
 interface Props {
   filters: Filters;
+  filterOptions: FilterOptions;
   onChange: (partial: Partial<Filters>) => void;
   neighborhoods: NeighborhoodCollection | null;
   totalCount: number;
   loading: boolean;
 }
 
-export default function FilterPanel({ filters, onChange, neighborhoods, totalCount, loading }: Props) {
+export default function FilterPanel({ filters, filterOptions, onChange, neighborhoods, totalCount, loading }: Props) {
   const neighborhoodOptions = [
     { value: "", label: "Todos os bairros" },
     ...(neighborhoods?.features
@@ -39,7 +35,7 @@ export default function FilterPanel({ filters, onChange, neighborhoods, totalCou
           id="type-select"
           label="Tipo de Estabelecimento"
           value={filters.type}
-          options={ESTABLISHMENT_TYPE_OPTIONS}
+          options={filterOptions.establishment_types}
           onChange={(type) => onChange({ type })}
         />
 
@@ -47,7 +43,7 @@ export default function FilterPanel({ filters, onChange, neighborhoods, totalCou
           name="legal_nature"
           label="Natureza Jurídica"
           value={filters.legal_nature}
-          options={LEGAL_NATURE_OPTIONS}
+          options={filterOptions.legal_natures}
           onChange={(legal_nature) => onChange({ legal_nature })}
         />
 
@@ -55,7 +51,7 @@ export default function FilterPanel({ filters, onChange, neighborhoods, totalCou
           id="management-select"
           label="Tipo de Gestão"
           value={filters.management}
-          options={MANAGEMENT_TYPE_OPTIONS}
+          options={filterOptions.management_types}
           onChange={(management) => onChange({ management })}
         />
 

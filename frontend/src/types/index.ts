@@ -79,6 +79,17 @@ export interface EstablishmentCollection {
   features: EstablishmentFeature[];
 }
 
+export interface FilterOption {
+  value: string;
+  label: string;
+}
+
+export interface FilterOptions {
+  establishment_types: FilterOption[];
+  legal_natures: FilterOption[];
+  management_types: FilterOption[];
+}
+
 export interface Filters {
   type: string;
   legal_nature: string;
