@@ -11,8 +11,6 @@ RSpec.describe "Api::V1::FilterOptions", type: :request do
     end
 
     it "each option has value and label" do
-      create(:health_establishment)
-
       get "/api/v1/filter_options"
 
       json = JSON.parse(response.body)
@@ -32,59 +30,31 @@ RSpec.describe "Api::V1::FilterOptions", type: :request do
       expect(json["management_types"].first).to eq("value" => "", "label" => "Todos")
     end
 
-    it "returns only establishment types present in active establishments" do
-      create(:health_establishment, establishment_type_code: "01")
-      create(:health_establishment, establishment_type_code: "22")
-      create(:health_establishment, establishment_type_code: "01", is_active: false)
-
+    it "returns all establishment types regardless of database contents" do
       get "/api/v1/filter_options"
 
       json = JSON.parse(response.body)
       values = json["establishment_types"].map { |o| o["value"] }
-      expect(values).to include("01", "22")
-      expect(values).not_to include("02")
+      expect(values).to include(*HealthEstablishment::ESTABLISHMENT_TYPE_MAP.keys)
     end
 
-    it "returns only management types present in active establishments" do
-      create(:health_establishment, management_type: "M")
-      create(:health_establishment, management_type: "E", is_active: false)
-
+    it "returns all management types regardless of database contents" do
       get "/api/v1/filter_options"
 
       json = JSON.parse(response.body)
       values = json["management_types"].map { |o| o["value"] }
-      expect(values).to include("M")
-      expect(values).not_to include("E")
+      expect(values).to include(*HealthEstablishment::MANAGEMENT_TYPE_MAP.keys)
     end
 
-    it "returns only legal natures present in active establishments" do
-      create(:health_establishment, legal_nature_code: "1244")  # pública (prefix "1")
-      create(:health_establishment, legal_nature_code: "2062", is_active: false)  # privada (prefix "2")
-
+    it "returns all legal natures regardless of database contents" do
       get "/api/v1/filter_options"
 
       json = JSON.parse(response.body)
       values = json["legal_natures"].map { |o| o["value"] }
-      expect(values).to include("publica")
-      expect(values).not_to include("privada")
-    end
-
-    it "maps legal nature codes to human-readable labels" do
-      create(:health_establishment, legal_nature_code: "1244")
-      create(:health_establishment, legal_nature_code: "2062")
-      create(:health_establishment, legal_nature_code: "3069")
-      create(:health_establishment, legal_nature_code: "4120")
-
-      get "/api/v1/filter_options"
-
-      json = JSON.parse(response.body)
-      labels = json["legal_natures"].map { |o| o["label"] }
-      expect(labels).to include("Pública", "Privada", "Sem Fins Lucrativos", "Pessoa Física")
+      expect(values).to include(*HealthEstablishment::LEGAL_NATURE_PREFIXES.keys)
     end
 
     it "maps establishment type codes to human-readable labels" do
-      create(:health_establishment, establishment_type_code: "01")
-
       get "/api/v1/filter_options"
 
       json = JSON.parse(response.body)
@@ -92,13 +62,20 @@ RSpec.describe "Api::V1::FilterOptions", type: :request do
       expect(hospital["label"]).to eq("Hospital Geral")
     end
 
-    it "returns empty lists (except catch-all) when there are no active establishments" do
+    it "maps legal nature keys to human-readable labels" do
       get "/api/v1/filter_options"
 
       json = JSON.parse(response.body)
-      expect(json["establishment_types"]).to eq([ { "value" => "", "label" => "Todos os tipos" } ])
-      expect(json["legal_natures"]).to eq([ { "value" => "", "label" => "Todas" } ])
-      expect(json["management_types"]).to eq([ { "value" => "", "label" => "Todos" } ])
+      labels = json["legal_natures"].map { |o| o["label"] }
+      expect(labels).to include("Pública", "Privada", "Sem Fins Lucrativos", "Pessoa Física")
+    end
+
+    it "sorts establishment types alphabetically" do
+      get "/api/v1/filter_options"
+
+      json = JSON.parse(response.body)
+      labels = json["establishment_types"].map { |o| o["label"] }.drop(1) # skip catch-all
+      expect(labels).to eq(labels.sort)
     end
   end
 end
