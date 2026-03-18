@@ -1,9 +1,15 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
+# Seeds - Importa dados de Salvador do CNES, GeoJSON de bairros e Censo
 #
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+# Para executar: rails db:seed
+# Ou individualmente:
+#   rails data:import:neighborhoods
+#   rails data:import:census
+#   rails data:import:cnes
+
+puts "Iniciando importacao dos dados de Salvador..."
+
+DataImport::NeighborhoodImporter.call
+DataImport::CensusImporter.call
+DataImport::CnesImporter.call
+
+puts "Importacao concluida!"

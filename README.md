@@ -6,38 +6,67 @@ Dashboard com mapa interativo para visualização e análise da distribuição d
 
 ## Stack
 
-- **Backend:** Ruby on Rails 8 (API-only)
-- **Banco de dados:** PostgreSQL 16 + PostGIS 3.5
-- **Frontend (planejado):** React + Leaflet.js + Recharts
-- **Infraestrutura:** Docker Compose
+| Camada | Tecnologia |
+|--------|-----------|
+| Backend | Ruby on Rails 8 (API-only) |
+| Banco de dados | PostgreSQL 16 + PostGIS 3.5 |
+| Frontend | React 18 + Vite + TypeScript |
+| Mapa | Leaflet 1.9 + react-leaflet 4 |
+| Estilização | Tailwind CSS 3 |
+| Infraestrutura | Docker Compose |
 
 ---
 
 ## Pré-requisitos
 
 - Docker e Docker Compose
-- Ruby 3.2.2 (caso queira rodar localmente sem Docker)
 
 ---
 
 ## Configuração e execução
 
 ```bash
-# Subir os containers (banco + servidor Rails)
+# Subir todos os serviços (banco + API + frontend)
 docker compose up
 
-# A API ficará disponível em http://localhost:3001
+# API:       http://localhost:3001
+# Dashboard: http://localhost:5173
 ```
 
-### Banco de dados
+### Primeira execução — importar dados
 
 ```bash
-# Criar e migrar o banco
+# Cria e migra o banco
 make create_db
 make migrate
 
-# Importar dados (CNES + GeoJSON de bairros + Censo)
-docker exec -it dados_acesso_saude_salvador-web-1 bundle exec rails data:import:all
+# Importa dados do CNES, bairros e censo
+docker compose exec web bundle exec rails data:import:all
+```
+
+### Rodar o frontend sem Docker
+
+```bash
+cd frontend
+npm install
+npm run dev
+# http://localhost:5173 (requer API rodando em :3001)
+```
+
+### Rodar os testes
+
+```bash
+# Backend (RSpec) — dentro do container
+docker compose exec web bundle exec rspec
+
+# Seeds spec isolado
+docker compose exec web bundle exec rspec spec/db/seeds_spec.rb
+
+# Frontend (Vitest)
+cd frontend && npm test
+
+# Frontend em modo watch
+cd frontend && npm run test:watch
 ```
 
 ---
@@ -45,12 +74,12 @@ docker exec -it dados_acesso_saude_salvador-web-1 bundle exec rails data:import:
 ## Comandos úteis (Makefile)
 
 ```bash
-make bash        # Abre shell no container da aplicação
+make bash        # Shell no container da aplicação
 make console     # Rails console
 make routes      # Lista todas as rotas
 make migrate     # Executa migrations pendentes
 make rollback    # Desfaz a última migration
-make seed        # Executa db/seeds.rb
+make seed        # Executa db/seeds.rb (importa todos os dados)
 make drop        # Dropa o banco
 make create_db   # Cria o banco
 ```
@@ -73,7 +102,7 @@ GET /api/v1/neighborhoods/:id
 GET /api/v1/health_establishments
   Retorna GeoJSON (FeatureCollection) com filtros opcionais:
     ?type=<código_tipo>
-    ?legal_nature=<código_natureza>
+    ?legal_nature=publica|privada|sem_fins_lucrativos|pessoa_fisica
     ?management=M|E|D|S
     ?sus_only=true
     ?neighborhood_id=<id>
@@ -120,6 +149,36 @@ SpecializedService      → serviços especializados (cardiologia, oncologia, et
 EstablishmentService    → vínculo serviço ↔ estabelecimento
 HospitalBed             → leitos hospitalares por estabelecimento
 ```
+
+---
+
+## Estrutura do Frontend
+
+```
+frontend/
+├── src/
+│   ├── types/index.ts              # Interfaces TypeScript + constantes de filtros
+│   ├── hooks/
+│   │   ├── useNeighborhoods.ts     # Busca bairros da API
+│   │   └── useEstablishments.ts    # Busca estabelecimentos com filtros
+│   └── components/
+│       ├── DashboardPage.tsx       # Layout principal + estado global
+│       ├── Map/
+│       │   ├── InteractiveMap.tsx       # MapContainer Leaflet
+│       │   ├── NeighborhoodLayer.tsx    # Camada coroplética por bairro
+│       │   ├── EstablishmentMarkers.tsx # Marcadores SVG por tipo
+│       │   ├── EstablishmentPopup.tsx   # Popup com detalhe (lazy)
+│       │   └── MapLegend.tsx            # Legenda sobreposta ao mapa
+│       └── Filters/
+│           └── FilterPanel.tsx          # Sidebar de filtros
+```
+
+---
+
+## Documentação Técnica
+
+- [docs/phase1-implementation.md](docs/phase1-implementation.md) — Backend: models, migrations, importadores, API, testes
+- [docs/phase2-implementation.md](docs/phase2-implementation.md) — Frontend: React/Vite, mapa, filtros, decisões de arquitetura
 
 ---
 
