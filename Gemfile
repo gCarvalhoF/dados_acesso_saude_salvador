@@ -29,6 +29,9 @@ gem "rgeo-geojson"
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 
+# csv is no longer a default gem in Ruby 3.4+
+gem "csv"
+
 # Add HTTP asset caching/compression and X-Sendfile acceleration to Puma [https://github.com/basecamp/thruster/]
 gem "thruster", require: false
 
