@@ -191,6 +191,12 @@ GET /api/v1/health_establishments
 GET /api/v1/health_establishments/:id
   Detalhes completos: equipamentos, servicos, leitos
 
+GET /api/v1/filter_options
+  Retorna as opcoes dinamicas para os filtros do painel:
+  { establishment_types, legal_natures, management_types }
+  Cada lista contem { value, label }. Sempre retorna todos os valores
+  independente de existirem registros no banco.
+
 GET /api/v1/equipments/summary
   ?group_by=neighborhood|establishment_type|equipment_type
   Contagens agregadas para graficos
@@ -217,6 +223,7 @@ frontend/src/
   hooks/
     useNeighborhoods.ts         # Busca bairros da API
     useEstablishments.ts        # Busca estabelecimentos com filtros
+    useFilterOptions.ts         # Busca opcoes de filtro da API (com fallback hardcoded)
   components/
     DashboardPage.tsx           # Layout principal + estado global
     Map/
@@ -227,6 +234,10 @@ frontend/src/
       MapLegend.tsx             # Legenda sobreposta ao mapa
     Filters/
       FilterPanel.tsx           # Sidebar com todos os filtros
+    ui/
+      FilterSelect.tsx          # Componente generico de select para filtros
+      FilterRadioGroup.tsx      # Componente generico de radio group para filtros
+      FilterCheckbox.tsx        # Componente generico de checkbox para filtros
 ```
 
 ---
@@ -350,6 +361,10 @@ end
 - [x] Painel de filtros basico (tipo, SUS, natureza juridica, gestao, bairro)
 - [x] Correcao do filtro de natureza juridica (valores mapeados para prefixos dos codigos CNES)
 - [x] Configuracao Docker: proxy Vite aponta para servico interno `web:3000`; `config.hosts` permite hostname Docker
+- [x] Componentes UI genericos para filtros (FilterSelect, FilterRadioGroup, FilterCheckbox)
+- [x] Endpoint GET /api/v1/filter_options retorna opcoes dinamicas com fallback hardcoded no frontend
+- [x] CI migrado para Docker Compose (scan, lint, test do backend + lint e test do frontend)
+- [x] Icone da aba configurado com a bandeira de Salvador (public/images/bandeira_de_salvador.png)
 
 ### Fase 3 - Dashboard completo
 - [ ] Cards de metricas resumo

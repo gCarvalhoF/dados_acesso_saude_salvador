@@ -1,0 +1,53 @@
+:root {
+  /* ─── Marcadores de estabelecimentos ─────────────────────────── */
+  --color-marker-usf:                    #16a34a;
+  --color-marker-ubs:                    #2563eb;
+  --color-marker-hospital-geral:         #dc2626;
+  --color-marker-hospital-especializado: #ea580c;
+  --color-marker-pronto-socorro:         #b91c1c;
+  --color-marker-pronto-atendimento:     #ca8a04;
+  --color-marker-policlinica:            #7c3aed;
+  --color-marker-caps:                   #0891b2;
+  --color-marker-default:                #6b7280;
+
+  /* ─── Escala coroplética de bairros (nº de estabelecimentos) ─── */
+  --color-choropleth-0:  #f0f0f0;
+  --color-choropleth-1:  #c6e9f5;
+  --color-choropleth-2:  #5ab4d6;
+  --color-choropleth-3:  #2378b5;
+  --color-choropleth-4:  #08306b;
+
+  /* ─── Bairro selecionado no mapa ─────────────────────────────── */
+  --color-neighborhood-selected: #f97316;
+  --color-neighborhood-border:   #555555;
+
+  /* ─── Superfícies e bordas ───────────────────────────────────── */
+  --color-surface:        #ffffff;
+  --color-surface-subtle: #f9fafb; /* gray-50  */
+  --color-surface-muted:  #f3f4f6; /* gray-100 */
+  --color-border:         #e5e7eb; /* gray-200 */
+  --color-border-strong:  #d1d5db; /* gray-300 */
+
+  /* ─── Texto ──────────────────────────────────────────────────── */
+  --color-text-primary:   #111827; /* gray-900 */
+  --color-text-secondary: #374151; /* gray-700 */
+  --color-text-muted:     #6b7280; /* gray-500 */
+  --color-text-subtle:    #9ca3af; /* gray-400 */
+  --color-text-label:     #4b5563; /* gray-600 */
+  --color-text-heading:   #1f2937; /* gray-800 */
+
+  /* ─── Destaque / ações ───────────────────────────────────────── */
+  --color-accent:         #3b82f6; /* blue-500  */
+  --color-accent-ring:    #60a5fa; /* blue-400  */
+  --color-selection-bg:   #ffedd5; /* orange-100 */
+  --color-selection-text: #c2410c; /* orange-700 */
+
+  /* ─── Badges de status (popup de estabelecimento) ────────────── */
+  --color-badge-sus-bg:      #dcfce7; /* green-100 */
+  --color-badge-sus-text:    #166534; /* green-800 */
+  --color-badge-nonsus-bg:   #dbeafe; /* blue-100  */
+  --color-badge-nonsus-text: #1e40af; /* blue-800  */
+  --color-badge-info-bg:     #f3f4f6; /* gray-100  */
+  --color-badge-info-text:   #374151; /* gray-700  */
+  --color-text-error:        #ef4444; /* red-500   */
+}

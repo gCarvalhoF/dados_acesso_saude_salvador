@@ -17,6 +17,7 @@ This document describes everything built in Phase 2 of the health access dashboa
 9. [Key Decisions and Gotchas](#key-decisions-and-gotchas)
 10. [Test Suite](#test-suite)
 11. [Running Locally](#running-locally)
+12. [CI/CD](#cicd)
 
 ---
 
@@ -28,10 +29,14 @@ Phase 2 delivers the interactive frontend dashboard. It covers:
 - Interactive Leaflet map centered on Salvador with two data layers: neighborhood choropleth and establishment markers
 - Popup detail view for each establishment (lazy-loaded from the API)
 - Filter panel with five filter dimensions: type, legal nature, management, SUS-only, and neighborhood
+- Generic UI filter components (`FilterSelect`, `FilterRadioGroup`, `FilterCheckbox`) used by the panel
+- Dynamic filter options fetched from `GET /api/v1/filter_options` with hardcoded fallback
 - Two-way synchronization between the map's neighborhood selection and the filter panel
-- Unit test suite: 62 Vitest tests (hooks + components) and 6 RSpec examples (seeds)
+- Unit test suite: Vitest tests (hooks + components) and RSpec examples (filter_options + seeds)
 - Docker Compose service for the frontend container
 - CORS enabled on the Rails API for local development
+- CI/CD fully migrated to Docker Compose — backend scan, lint, test + frontend lint and test jobs
+- Tab icon configured with the Salvador city flag (`public/images/bandeira_de_salvador.png`)
 
 ---
 
@@ -88,21 +93,23 @@ The `--host 0.0.0.0` flag is required so Vite's dev server binds to all interfac
 
 ```
 frontend/
-├── index.html                    # HTML entry point
+├── index.html                    # HTML entry point (tab icon: bandeira_de_salvador.png)
 ├── package.json                  # npm dependencies
 ├── vite.config.ts                # Vite config + API proxy
 ├── tsconfig.json                 # TypeScript config (strict)
 ├── tailwind.config.js            # Tailwind content paths
 ├── postcss.config.js             # PostCSS (required by Tailwind)
+├── eslint.config.js              # ESLint config for frontend linting
 └── src/
     ├── main.tsx                  # React root render
     ├── App.tsx                   # Root component (renders DashboardPage)
     ├── index.css                 # Tailwind directives + map container styles
     ├── types/
-    │   └── index.ts              # TypeScript interfaces + filter constants
+    │   └── index.ts              # TypeScript interfaces + filter constants + FilterOptions
     ├── hooks/
     │   ├── useNeighborhoods.ts   # Fetches /api/v1/neighborhoods
-    │   └── useEstablishments.ts  # Fetches /api/v1/health_establishments with filters
+    │   ├── useEstablishments.ts  # Fetches /api/v1/health_establishments with filters
+    │   └── useFilterOptions.ts   # Fetches /api/v1/filter_options (falls back to hardcoded)
     └── components/
         ├── DashboardPage.tsx     # Top-level layout + shared state
         ├── Map/
@@ -111,8 +118,20 @@ frontend/
         │   ├── EstablishmentMarkers.tsx # Custom SVG markers
         │   ├── EstablishmentPopup.tsx   # Popup content (lazy detail fetch)
         │   └── MapLegend.tsx            # Fixed-position legend overlay
-        └── Filters/
-            └── FilterPanel.tsx          # Sidebar with all filter controls
+        ├── Filters/
+        │   └── FilterPanel.tsx          # Sidebar with all filter controls
+        └── ui/
+            ├── FilterSelect.tsx         # Generic select for filter options
+            ├── FilterRadioGroup.tsx     # Generic radio group for filter options
+            └── FilterCheckbox.tsx       # Generic checkbox for boolean filters
+```
+
+### Public assets
+
+```
+frontend/public/
+└── images/
+    └── bandeira_de_salvador.png  # Tab icon (referenced in index.html)
 ```
 
 ---
@@ -187,17 +206,27 @@ Shows: fantasy name, canonical name, type badge, SUS badge, management type, add
 
 ### FilterPanel
 
-Left sidebar. Controls:
+Left sidebar. Receives `filterOptions` (from `useFilterOptions`) and renders each control using a generic UI component:
 
-| Filter | UI element | API param |
+| Filter | Component | API param |
 |---|---|---|
-| Establishment type | `<select>` | `?type=` |
-| Legal nature | Radio buttons (Todas / Pública / Privada / Sem Fins Lucrativos / Pessoa Física) | `?legal_nature=` |
-| Management type | `<select>` | `?management=` |
-| SUS only | Checkbox | `?sus_only=true` |
-| Neighborhood | `<select>` (sorted alphabetically) | `?neighborhood_id=` |
+| Establishment type | `FilterSelect` | `?type=` |
+| Legal nature | `FilterRadioGroup` | `?legal_nature=` |
+| Management type | `FilterSelect` | `?management=` |
+| SUS only | `FilterCheckbox` | `?sus_only=true` |
+| Neighborhood | `FilterSelect` (sorted alphabetically) | `?neighborhood_id=` |
 
 The neighborhood dropdown is populated from the `useNeighborhoods` hook — the same data that feeds the map layer. A "Limpar filtros" button resets all fields to their defaults.
+
+### Generic UI components (`ui/`)
+
+Three reusable components handle all filter rendering:
+
+- **`FilterSelect`** — labeled `<select>` that accepts an `options: { value, label }[]` array
+- **`FilterRadioGroup`** — labeled group of radio buttons from the same option array format
+- **`FilterCheckbox`** — single labeled checkbox for boolean filters
+
+All three delegate state upward via an `onChange` callback, keeping them fully controlled.
 
 ---
 
@@ -212,6 +241,8 @@ Two custom hooks handle data fetching:
 **`useEstablishments(filters)`**: Fetches `GET /api/v1/health_establishments` whenever `filters` changes. Builds a `URLSearchParams` object from non-empty filter values and appends it to the URL. Returns `{ data, loading, error }`.
 
 **`useEstablishmentDetail(id)`**: Fetches `GET /api/v1/health_establishments/:id` when `id` is non-null. Used inside `EstablishmentPopup` — only fires when a popup is opened.
+
+**`useFilterOptions()`**: Fetches `GET /api/v1/filter_options` once on mount. Returns a `FilterOptions` object (`{ establishment_types, legal_natures, management_types }`) immediately populated with hardcoded defaults, then updated with the backend response if the request succeeds. If the request fails, the defaults remain. This ensures the filter panel is always usable even without a backend connection.
 
 ### Vite Proxy
 
@@ -288,6 +319,16 @@ Selecting a neighborhood on the map and selecting one from the dropdown are equi
 ---
 
 ## CORS and Backend Changes
+
+### filter_options endpoint
+
+`GET /api/v1/filter_options` is served by `Api::V1::FilterOptionsController#index`. It always returns the full set of options for establishment types, legal natures, and management types — derived from constants on `HealthEstablishment` — regardless of which values are actually present in the database. Each list contains `{ value, label }` objects sorted for display, with a "Todos" blank option prepended.
+
+The route is a plain `get` (not a resourceful route since there is only one endpoint):
+
+```ruby
+get :filter_options, to: "filter_options#index"
+```
 
 ### rack-cors
 
@@ -382,15 +423,13 @@ Without this, selecting from the dropdown would filter the API but not show the 
 
 ## Test Suite
 
-**62 Vitest examples, 0 failures** | **6 RSpec examples (seeds), 0 failures**
-
 ### Frontend structure
 
 ```
 frontend/src/
   test/
     setup.ts                          # @testing-library/jest-dom import
-    fixtures.ts                       # mockNeighborhoods, mockEstablishments, mockEstablishmentDetail
+    fixtures.ts                       # mockNeighborhoods, mockEstablishments, mockEstablishmentDetail, mockFilterOptions
     mocks/
       react-leaflet.tsx               # Stub components (MapContainer, Marker, GeoJSON, etc.)
       leaflet.ts                      # Stub L.divIcon
@@ -406,6 +445,16 @@ frontend/src/
     DashboardPage.test.tsx            # 9 examples: layout, loading, bidirectional neighborhood sync
 ```
 
+`FilterPanel` tests pass `defaultFilterOptions` (built from the hardcoded constants) as a prop, keeping them independent of the backend. `DashboardPage` tests include `mockFilterOptions` in the `fetch` mock sequence since the component calls `useFilterOptions` on mount.
+
+### RSpec structure
+
+```
+spec/db/seeds_spec.rb                       # 6 examples: no error, each importer called once, order, idempotent
+spec/requests/api/v1/filter_options_spec.rb # Verifies the endpoint always returns all filter options
+spec/services/data_import/cnes_importer_spec.rb
+```
+
 ### Key testing decisions
 
 **Mock react-leaflet at module level** — Leaflet depends on browser APIs (`getBoundingClientRect`, canvas) unavailable in jsdom. All map components (`MapContainer`, `GeoJSON`, `Marker`) are replaced with plain `<div>` stubs via `vi.mock("react-leaflet", ...)`.
@@ -413,12 +462,6 @@ frontend/src/
 **Mock the hook, not fetch, in `EstablishmentPopup` tests** — The component's only job is to render data from `useEstablishmentDetail`. Mocking the hook (`vi.mock("../../hooks/useEstablishments", ...)`) is cleaner than mocking `fetch` at the global level, avoids timing issues with React's async rendering in jsdom, and keeps the test focused on what the component displays.
 
 **`before(:all)` for rake task loading in seeds spec** — `Rails.application.load_tasks` registers callbacks on rake tasks. Calling it in `before(:each)` would double the callbacks each time, causing each importer to be invoked N times. It is called once in `before(:all)` and then `allow(Rails.application).to receive(:load_tasks)` in `before(:each)` prevents seeds.rb from registering callbacks again on each `load`.
-
-### RSpec seeds structure
-
-```
-spec/db/seeds_spec.rb   # 6 examples: no error, each importer called once, order, idempotent
-```
 
 ---
 
@@ -466,3 +509,19 @@ After data import, open `http://localhost:5173`. You should see:
 3. Clicking a neighborhood highlights it and filters the establishments list
 4. Hovering over a marker opens a popup with establishment details (fetched on demand); clicking also works
 5. The filter sidebar updates the visible markers in real time
+
+---
+
+## CI/CD
+
+The GitHub Actions workflow (`.github/workflows/ci.yml`) has five jobs, all running via Docker Compose:
+
+| Job | Command | Notes |
+|---|---|---|
+| `scan` | `docker compose run --rm --no-deps web bin/brakeman --no-pager` | Rails security scan |
+| `lint` | `docker compose run --rm --no-deps web bin/rubocop -f github` | Ruby style |
+| `test` | `docker compose run --rm web bundle exec rspec` | RSpec (needs `db` service) |
+| `lint_frontend` | `docker compose run --rm --no-deps frontend sh -c "npm install && npm run lint"` | ESLint |
+| `test_frontend` | `docker compose run --rm --no-deps frontend sh -c "npm install && npm test"` | Vitest |
+
+Using Docker Compose for all jobs ensures the CI environment matches the local development environment exactly — same Ruby version, same PostGIS version, same Node version. The `--no-deps` flag skips starting the database for jobs that do not need it (scan, lint, lint_frontend, test_frontend), keeping those jobs fast.

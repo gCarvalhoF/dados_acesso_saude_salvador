@@ -1,21 +1,23 @@
+import { markerColors, choroplethColors } from "../../styles/theme";
+
 export default function MapLegend() {
   const markerTypes = [
-    { color: "#16a34a", label: "USF", shape: "circle" },
-    { color: "#2563eb", label: "UBS / Centro de Saúde", shape: "circle" },
-    { color: "#dc2626", label: "Hospital Geral", shape: "cross" },
-    { color: "#ea580c", label: "Hospital Especializado", shape: "cross" },
-    { color: "#b91c1c", label: "Pronto Socorro", shape: "triangle" },
-    { color: "#ca8a04", label: "Pronto Atendimento", shape: "triangle" },
-    { color: "#7c3aed", label: "Policlínica", shape: "circle" },
-    { color: "#6b7280", label: "Outros", shape: "circle" },
+    { color: markerColors.usf,                  label: "USF" },
+    { color: markerColors.ubs,                  label: "UBS / Centro de Saúde" },
+    { color: markerColors.hospitalGeral,         label: "Hospital Geral" },
+    { color: markerColors.hospitalEspecializado, label: "Hospital Especializado" },
+    { color: markerColors.prontoSocorro,         label: "Pronto Socorro" },
+    { color: markerColors.prontoAtendimento,     label: "Pronto Atendimento" },
+    { color: markerColors.policlinica,           label: "Policlínica" },
+    { color: markerColors.default,              label: "Outros" },
   ];
 
   const choropleth = [
-    { color: "#f0f0f0", label: "0 estab." },
-    { color: "#c6e9f5", label: "1–2" },
-    { color: "#5ab4d6", label: "3–7" },
-    { color: "#2378b5", label: "8–14" },
-    { color: "#08306b", label: "15+" },
+    { color: choroplethColors[0], label: "0 estab." },
+    { color: choroplethColors[1], label: "1–2" },
+    { color: choroplethColors[2], label: "3–7" },
+    { color: choroplethColors[3], label: "8–14" },
+    { color: choroplethColors[4], label: "15+" },
   ];
 
   return (

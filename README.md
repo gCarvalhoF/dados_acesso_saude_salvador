@@ -63,9 +63,9 @@ docker compose exec web bundle exec rspec
 docker compose exec web bundle exec rspec spec/db/seeds_spec.rb
 
 # Frontend (Vitest)
-cd frontend && npm test
+docker compose run --rm --no-deps frontend sh -c "npm install && npm test"
 
-# Frontend em modo watch
+# Frontend em modo watch (sem Docker)
 cd frontend && npm run test:watch
 ```
 
@@ -113,6 +113,14 @@ GET /api/v1/health_establishments/:id
   Detalhes completos: equipamentos, serviços especializados e leitos
 ```
 
+### Filtros
+```
+GET /api/v1/filter_options
+  Opções disponíveis para os filtros do painel:
+    { establishment_types, legal_natures, management_types }
+  Sempre retorna todos os valores independente do banco de dados.
+```
+
 ### Dashboard
 ```
 GET /api/v1/dashboard/overview
@@ -156,29 +164,51 @@ HospitalBed             → leitos hospitalares por estabelecimento
 
 ```
 frontend/
-├── src/
-│   ├── types/index.ts              # Interfaces TypeScript + constantes de filtros
-│   ├── hooks/
-│   │   ├── useNeighborhoods.ts     # Busca bairros da API
-│   │   └── useEstablishments.ts    # Busca estabelecimentos com filtros
-│   └── components/
-│       ├── DashboardPage.tsx       # Layout principal + estado global
-│       ├── Map/
-│       │   ├── InteractiveMap.tsx       # MapContainer Leaflet
-│       │   ├── NeighborhoodLayer.tsx    # Camada coroplética por bairro
-│       │   ├── EstablishmentMarkers.tsx # Marcadores SVG por tipo
-│       │   ├── EstablishmentPopup.tsx   # Popup com detalhe (lazy)
-│       │   └── MapLegend.tsx            # Legenda sobreposta ao mapa
-│       └── Filters/
-│           └── FilterPanel.tsx          # Sidebar de filtros
+├── public/
+│   └── images/
+│       └── bandeira_de_salvador.png  # Ícone da aba do navegador
+└── src/
+    ├── types/index.ts              # Interfaces TypeScript + constantes de filtros
+    ├── hooks/
+    │   ├── useNeighborhoods.ts     # Busca bairros da API
+    │   ├── useEstablishments.ts    # Busca estabelecimentos com filtros
+    │   └── useFilterOptions.ts     # Busca opções de filtro da API (com fallback hardcoded)
+    └── components/
+        ├── DashboardPage.tsx       # Layout principal + estado global
+        ├── Map/
+        │   ├── InteractiveMap.tsx       # MapContainer Leaflet
+        │   ├── NeighborhoodLayer.tsx    # Camada coroplética por bairro
+        │   ├── EstablishmentMarkers.tsx # Marcadores SVG por tipo
+        │   ├── EstablishmentPopup.tsx   # Popup com detalhe (lazy)
+        │   └── MapLegend.tsx            # Legenda sobreposta ao mapa
+        ├── Filters/
+        │   └── FilterPanel.tsx          # Sidebar de filtros
+        └── ui/
+            ├── FilterSelect.tsx         # Select genérico para filtros
+            ├── FilterRadioGroup.tsx     # Radio group genérico para filtros
+            └── FilterCheckbox.tsx       # Checkbox genérico para filtros booleanos
 ```
+
+---
+
+## CI/CD
+
+O workflow do GitHub Actions (`.github/workflows/ci.yml`) executa tudo via Docker Compose:
+
+| Job | O que faz |
+|-----|-----------|
+| `scan` | Brakeman — análise de segurança Rails |
+| `lint` | RuboCop — estilo Ruby |
+| `test` | RSpec — testes backend |
+| `lint_frontend` | ESLint — estilo TypeScript/React |
+| `test_frontend` | Vitest — testes frontend |
 
 ---
 
 ## Documentação Técnica
 
 - [docs/phase1-implementation.md](docs/phase1-implementation.md) — Backend: models, migrations, importadores, API, testes
-- [docs/phase2-implementation.md](docs/phase2-implementation.md) — Frontend: React/Vite, mapa, filtros, decisões de arquitetura
+- [docs/phase2-implementation.md](docs/phase2-implementation.md) — Frontend: React/Vite, mapa, filtros, componentes UI, CI, decisões de arquitetura
 
 ---
 

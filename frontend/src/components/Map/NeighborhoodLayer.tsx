@@ -1,6 +1,7 @@
 import { GeoJSON } from "react-leaflet";
 import type { Layer, PathOptions } from "leaflet";
 import type { NeighborhoodCollection, NeighborhoodProperties } from "../../types";
+import { choroplethColors, neighborhoodColors } from "../../styles/theme";
 
 interface Props {
   data: NeighborhoodCollection;
@@ -9,11 +10,11 @@ interface Props {
 }
 
 function getColor(count: number): string {
-  if (count === 0) return "#f0f0f0";
-  if (count < 3) return "#c6e9f5";
-  if (count < 8) return "#5ab4d6";
-  if (count < 15) return "#2378b5";
-  return "#08306b";
+  if (count === 0) return choroplethColors[0];
+  if (count < 3)  return choroplethColors[1];
+  if (count < 8)  return choroplethColors[2];
+  if (count < 15) return choroplethColors[3];
+  return choroplethColors[4];
 }
 
 export default function NeighborhoodLayer({ data, selectedId, onSelect }: Props) {
@@ -23,7 +24,7 @@ export default function NeighborhoodLayer({ data, selectedId, onSelect }: Props)
     return {
       fillColor: getColor(props?.establishments_count ?? 0),
       fillOpacity: isSelected ? 0.85 : 0.55,
-      color: isSelected ? "#f97316" : "#555",
+      color: isSelected ? neighborhoodColors.selected : neighborhoodColors.border,
       weight: isSelected ? 2.5 : 1,
     };
   };
