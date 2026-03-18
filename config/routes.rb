@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :neighborhoods, only: [ :index, :show ]
       resources :health_establishments, only: [ :index, :show ]
+      get :filter_options, to: "filter_options#index"
 
       namespace :dashboard do
         get :overview

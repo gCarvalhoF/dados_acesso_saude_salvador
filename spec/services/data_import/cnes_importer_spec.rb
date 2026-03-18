@@ -26,7 +26,7 @@ RSpec.describe DataImport::CnesImporter do
 
     it "all imported establishments have a cnes_code" do
       importer.call
-      expect(HealthEstablishment.where(cnes_code: [nil, ""]).count).to eq(0)
+      expect(HealthEstablishment.where(cnes_code: [ nil, "" ]).count).to eq(0)
     end
 
     it "is idempotent (does not duplicate on re-run)" do

@@ -1,0 +1,16 @@
+@import "./styles/theme.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Leaflet map container */
+.map-container {
+  height: 100%;
+  width: 100%;
+}
+
+/* Fix Leaflet z-index issues inside flex layouts */
+.leaflet-container {
+  z-index: 0;
+}

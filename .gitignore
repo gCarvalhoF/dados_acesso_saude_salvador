@@ -31,5 +31,18 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
+# Aux data — arquivos grandes e dados brutos do CNES (nao versionados)
 /aux-data/cnes-database
 /aux-data/salvador/censo
+
+# Docker — volume do PostgreSQL
+/tmp/db
+
+# Ruby LSP
+/.ruby-lsp
+
+# Byebug
+.byebug_history
+
+# RSpec — resultados e artifacts
+/coverage

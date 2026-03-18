@@ -209,13 +209,14 @@ module DataImport
         establishment = HealthEstablishment.find_by(cnes_code: cnes_code)
         next unless establishment
 
-        HospitalBed.create!(
+        HospitalBed.find_or_create_by!(
           health_establishment: establishment,
           bed_code: row["CO_LEITO"]&.strip,
-          bed_type_code: row["CO_TIPO_LEITO"]&.strip,
-          quantity_existing: row["QT_EXIST"].to_i,
-          quantity_sus: row["QT_SUS"].to_i
-        )
+          bed_type_code: row["CO_TIPO_LEITO"]&.strip
+        ) do |bed|
+          bed.quantity_existing = row["QT_EXIST"].to_i
+          bed.quantity_sus = row["QT_SUS"].to_i
+        end
         count += 1
       rescue => e
         Rails.logger.warn "Could not import bed: #{e.message}"

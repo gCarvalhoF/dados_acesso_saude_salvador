@@ -4,7 +4,7 @@
 
 Dashboard com mapa interativo para visualizacao e analise da distribuicao de equipamentos, estabelecimentos e servicos de saude publica em Salvador, Bahia. O sistema cruza dados do CNES (Cadastro Nacional de Estabelecimentos de Saude), Censo IBGE e GeoJSON de bairros para oferecer uma visao espacial do acesso a saude no municipio.
 
-**Stack:** Ruby on Rails 8 (API) + React via react_on_rails + PostgreSQL/PostGIS + Leaflet.js
+**Stack:** Ruby on Rails 8 (API) + React + Vite (frontend standalone) + PostgreSQL/PostGIS + Leaflet.js
 
 ---
 
@@ -14,7 +14,7 @@ Dashboard com mapa interativo para visualizacao e analise da distribuicao de equ
 2. Classificar e diferenciar tipos de estabelecimentos (UBS vs USF, Hospital Geral vs Especializado, Pronto Socorro, etc.)
 3. Identificar servicos especializados oferecidos por cada unidade (referencia em infeccao, peconha, cardiologia, etc.)
 4. Cruzar dados de equipamentos e servicos com dados sociodemograficos (populacao, renda, raca) por bairro
-5. Permitir filtragem por natureza juridica (federal, estadual, municipal) e disponibilidade SUS
+5. Permitir filtragem por natureza juridica (publica, privada, sem fins lucrativos, pessoa fisica) e disponibilidade SUS
 
 ---
 
@@ -179,17 +179,23 @@ GET /api/v1/neighborhoods
   Retorna GeoJSON dos bairros com dados opcionais
 
 GET /api/v1/health_establishments
-  ?type=UBS|USF|HOSPITAL_GERAL|HOSPITAL_ESPECIALIZADO|PRONTO_SOCORRO|...
-  ?legal_nature=federal|estadual|municipal
-  ?management=M|E|D
-  ?service=105|116|132|...  (codigo do servico especializado)
-  ?equipment=02|11|12|...   (codigo do equipamento)
+  ?type=<codigo_tipo>
+  ?legal_nature=publica|privada|sem_fins_lucrativos|pessoa_fisica
+  ?management=M|E|D|S
+  ?service=<codigo_servico>
+  ?equipment=<codigo_equipamento>
   ?sus_only=true
-  ?neighborhood_id=123
+  ?neighborhood_id=<id>
   Retorna GeoJSON dos estabelecimentos filtrados
 
 GET /api/v1/health_establishments/:id
   Detalhes completos: equipamentos, servicos, leitos
+
+GET /api/v1/filter_options
+  Retorna as opcoes dinamicas para os filtros do painel:
+  { establishment_types, legal_natures, management_types }
+  Cada lista contem { value, label }. Sempre retorna todos os valores
+  independente de existirem registros no banco.
 
 GET /api/v1/equipments/summary
   ?group_by=neighborhood|establishment_type|equipment_type
@@ -199,41 +205,39 @@ GET /api/v1/dashboard/overview
   Cards resumo: total estabelecimentos, equipamentos, leitos SUS, etc.
 ```
 
-### 5.3 Frontend (React via react_on_rails)
+### 5.3 Frontend (React + Vite standalone)
+
+O PRD original especificava `react_on_rails`. Como o backend e configurado como API-only (`config.api_only = true`), integrar `react_on_rails` exigiria remover esse modo e adicionar `shakapacker`. Um app Vite standalone em `frontend/` e mais simples, com HMR nativo e proxy de desenvolvimento embutido (`/api -> web:3000`). Para producao, o build em `frontend/dist/` pode ser servido por qualquer host estatico.
 
 **Dependencias principais:**
-- `react_on_rails` (gem + npm)
+- `vite` + `@vitejs/plugin-react` (build + dev server)
 - `leaflet` + `react-leaflet` (mapa interativo)
-- `recharts` (graficos)
 - `tailwindcss` (estilizacao)
+- `vitest` + `@testing-library/react` (testes)
 
 **Estrutura de componentes:**
 
 ```
-app/javascript/
-  bundles/
-    Dashboard/
-      components/
-        DashboardPage.tsx          # Layout principal
-        Map/
-          InteractiveMap.tsx        # Mapa Leaflet centralizado em Salvador
-          NeighborhoodLayer.tsx     # Camada coropletica dos bairros
-          EstablishmentMarkers.tsx  # Marcadores das unidades de saude
-          EstablishmentPopup.tsx    # Popup com detalhes ao clicar
-          MapLegend.tsx             # Legenda do mapa
-        Filters/
-          FilterPanel.tsx           # Painel lateral de filtros
-          EstablishmentTypeFilter.tsx
-          EquipmentFilter.tsx
-          ServiceFilter.tsx
-          LegalNatureFilter.tsx
-        Charts/
-          EquipmentDistributionChart.tsx  # Distribuicao de equipamentos
-          EstablishmentTypeChart.tsx      # Tipos de estabelecimento
-          NeighborhoodComparisonChart.tsx # Comparativo entre bairros
-        Summary/
-          OverviewCards.tsx         # Cards com metricas gerais
-          SelectedDetail.tsx        # Detalhe do item selecionado
+frontend/src/
+  types/index.ts                # Interfaces TypeScript + constantes de filtros
+  hooks/
+    useNeighborhoods.ts         # Busca bairros da API
+    useEstablishments.ts        # Busca estabelecimentos com filtros
+    useFilterOptions.ts         # Busca opcoes de filtro da API (com fallback hardcoded)
+  components/
+    DashboardPage.tsx           # Layout principal + estado global
+    Map/
+      InteractiveMap.tsx        # MapContainer Leaflet
+      NeighborhoodLayer.tsx     # Camada coropletica dos bairros
+      EstablishmentMarkers.tsx  # Marcadores SVG por tipo (hover abre popup)
+      EstablishmentPopup.tsx    # Popup com detalhe lazy-loaded
+      MapLegend.tsx             # Legenda sobreposta ao mapa
+    Filters/
+      FilterPanel.tsx           # Sidebar com todos os filtros
+    ui/
+      FilterSelect.tsx          # Componente generico de select para filtros
+      FilterRadioGroup.tsx      # Componente generico de radio group para filtros
+      FilterCheckbox.tsx        # Componente generico de checkbox para filtros
 ```
 
 ---
@@ -251,15 +255,15 @@ app/javascript/
   - Pronto Socorro (triangulo vermelho)
   - Pronto Atendimento (triangulo amarelo)
   - Outros (circulo cinza)
-- **Popup ao clicar:** nome, tipo, endereco, equipamentos disponiveis, servicos, leitos SUS
-- **Cluster de marcadores:** agrupamento automatico em zoom baixo
+- **Popup ao hover:** card com nome, tipo, endereco, equipamentos disponiveis, servicos, leitos SUS — aparece ao passar o mouse sobre o marcador (detail lazy-loaded sob demanda)
+- **Cluster de marcadores:** agrupamento automatico em zoom baixo (fase futura)
 
 ### 6.2 Painel de Filtros
 
 - Tipo de estabelecimento (multi-select)
 - Tipo de equipamento especifico (ex: "Mamografo", "Tomografo")
 - Servico especializado (ex: "Cardiologia", "Oncologia", "Urgencia")
-- Natureza juridica (federal/estadual/municipal)
+- Natureza juridica (publica / privada / sem fins lucrativos / pessoa fisica) — mapeado por prefixo do codigo CNES (1xxx/2xxx/3xxx/4xxx)
 - Disponibilidade SUS (sim/nao)
 - Bairro especifico
 
@@ -345,14 +349,22 @@ end
 - [x] Criar migrations para todos os models
 - [x] Implementar models com associacoes e scopes
 - [x] Implementar rake tasks de importacao (CNES + GeoJSON + Censo)
-- [ ] Seed do banco com dados de Salvador
+- [x] Seed do banco com dados de Salvador (seeds.rb chama importadores diretamente)
 - [x] Endpoints da API retornando GeoJSON
+- [x] CORS habilitado para frontend (rack-cors)
 
 ### Fase 2 - Frontend base (mapa + filtros)
-- [ ] Configurar react_on_rails + Tailwind + Leaflet
-- [ ] Mapa interativo com camada de bairros
-- [ ] Marcadores de estabelecimentos com popup
-- [ ] Painel de filtros basico (tipo, SUS, natureza juridica)
+- [x] Configurar React+Vite + Tailwind + Leaflet (frontend/ standalone, proxy para API)
+- [x] Mapa interativo com camada de bairros (coropletica por qtd. estabelecimentos)
+- [x] Marcadores de estabelecimentos com popup (icones diferenciados por tipo)
+- [x] Popup abre ao hover sobre o marcador (lazy-load do detalhe)
+- [x] Painel de filtros basico (tipo, SUS, natureza juridica, gestao, bairro)
+- [x] Correcao do filtro de natureza juridica (valores mapeados para prefixos dos codigos CNES)
+- [x] Configuracao Docker: proxy Vite aponta para servico interno `web:3000`; `config.hosts` permite hostname Docker
+- [x] Componentes UI genericos para filtros (FilterSelect, FilterRadioGroup, FilterCheckbox)
+- [x] Endpoint GET /api/v1/filter_options retorna opcoes dinamicas com fallback hardcoded no frontend
+- [x] CI migrado para Docker Compose (scan, lint, test do backend + lint e test do frontend)
+- [x] Icone da aba configurado com a bandeira de Salvador (public/images/bandeira_de_salvador.png)
 
 ### Fase 3 - Dashboard completo
 - [ ] Cards de metricas resumo
@@ -370,26 +382,40 @@ end
 
 ## 10. Configuracao Tecnica
 
-### Gems adicionais necessarias
+### Gems
 ```ruby
-gem 'react_on_rails', '~> 14.0'
-gem 'shakapacker', '~> 8.0'  # bundler JS para react_on_rails
+gem 'rgeo'          # Tipos geometricos
+gem 'rgeo-geojson'  # Encode/decode GeoJSON
+gem 'rack-cors'     # CORS para o frontend standalone
 ```
 
-### Pacotes npm
+### Pacotes npm (frontend/)
 ```json
 {
   "react": "^18",
   "react-dom": "^18",
-  "react_on_rails": "^14",
+  "vite": "^6",
+  "@vitejs/plugin-react": "^4",
   "leaflet": "^1.9",
   "react-leaflet": "^4",
-  "recharts": "^2",
   "tailwindcss": "^3",
+  "vitest": "^3",
+  "@testing-library/react": "^16",
   "@types/leaflet": "^1.9"
 }
 ```
 
-### Docker - servicos necessarios
-- PostgreSQL 16 + PostGIS 3.5 (ja configurado)
-- Node.js 20+ (adicionar ao docker-compose para build do frontend)
+### Docker Compose
+Tres servicos: `db` (PostgreSQL/PostGIS), `web` (Rails API na porta 3001), `frontend` (Node 20 Alpine na porta 5173).
+
+O frontend usa `VITE_API_URL=http://web:3000` para que o proxy Vite alcance o container Rails pelo hostname interno Docker, sem depender do mapeamento de porta do host (`localhost:3001`). O Rails permite o hostname `web` via `config.hosts << "web"` em `development.rb`.
+
+### Decisoes de infraestrutura tomadas durante implementacao
+
+| Decisao | Justificativa |
+|---------|--------------|
+| Frontend standalone (Vite) em vez de react_on_rails | Rails configurado como API-only; react_on_rails exigiria remover esse modo e adicionar shakapacker, aumentando a complexidade sem beneficio |
+| seeds.rb chama importadores diretamente | Usar `Rails.application.load_tasks` + `Rake::Task.invoke` dentro de um contexto rake ja ativo re-registrava callbacks e causava multiplas execucoes dos importadores |
+| HospitalBed usa find_or_create_by! | O importer original usava create!, gerando duplicatas ao re-executar seeds |
+| Filtro legal_nature por prefixo de codigo | Os codigos CNES sao numericos (ex: 1031, 2046); os valores anteriores (federal/estadual/municipal) nunca correspondiam a nenhum registro |
+| Popup abre no hover via eventHandlers | Melhora a descoberta de informacoes sem exigir clique; cada marcador tem sua propria ref para controlar o popup independentemente |

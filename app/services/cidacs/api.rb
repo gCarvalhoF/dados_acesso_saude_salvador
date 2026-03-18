@@ -15,7 +15,7 @@ class Services::Cidacs::Api
   end
 
   private
-  
+
   def handle_response(response)
     case response.code
     when 200
