@@ -8,16 +8,18 @@ import InteractiveMap from "./Map/InteractiveMap";
 import FilterPanel from "./Filters/FilterPanel";
 import MetricCards from "./Dashboard/MetricCards";
 import ChartsPanel from "./Dashboard/ChartsPanel";
+import NeighborhoodComparison from "./Comparison/NeighborhoodComparison";
 import { METRIC_LABELS } from "./Map/NeighborhoodLayer";
 
 const DEFAULT_FILTERS: Filters = {
-  type: "",
+  type: "01,02,04,05,32",
   legal_nature: "",
   management: "",
   sus_only: false,
   neighborhood_id: "",
   equipment: "",
   service: "",
+  reference_category: "",
 };
 
 const CHOROPLETH_OPTIONS: ChoroplethMetric[] = [
@@ -33,6 +35,7 @@ export default function DashboardPage() {
   const [selectedNeighborhood, setSelectedNeighborhood] = useState<number | null>(null);
   const [selectedNeighborhoodName, setSelectedNeighborhoodName] = useState<string>("");
   const [choroplethMetric, setChoroplethMetric] = useState<ChoroplethMetric>("establishments_count");
+  const [filterOpen, setFilterOpen] = useState(false);
 
   const { data: neighborhoods, loading: loadingNeighborhoods } = useNeighborhoods();
   const { data: establishments, loading: loadingEstablishments } = useEstablishments(filters);
@@ -47,13 +50,16 @@ export default function DashboardPage() {
   function handleFilterChange(partial: Partial<Filters>) {
     setFilters((prev) => ({ ...prev, ...partial }));
     if (partial.neighborhood_id !== undefined) {
-      const id = partial.neighborhood_id ? Number(partial.neighborhood_id) : null;
-      setSelectedNeighborhood(id);
-      if (!id) {
+      if (!partial.neighborhood_id) {
+        setSelectedNeighborhood(null);
         setSelectedNeighborhoodName("");
       } else {
-        const name = neighborhoods?.features.find((f) => f.properties.id === id)?.properties.name ?? "";
-        setSelectedNeighborhoodName(name);
+        const ids = partial.neighborhood_id.split(",").map(Number);
+        setSelectedNeighborhood(ids[0]);
+        const names = ids.map(
+          (nid) => neighborhoods?.features.find((f) => f.properties.id === nid)?.properties.name ?? ""
+        ).filter(Boolean);
+        setSelectedNeighborhoodName(names.join(", "));
       }
     }
   }
@@ -69,14 +75,25 @@ export default function DashboardPage() {
   return (
     <div className="flex flex-col h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200 px-5 py-3 flex items-center justify-between flex-shrink-0">
-        <div>
-          <h1 className="text-lg font-bold text-gray-900">
-            Saúde em Salvador
-          </h1>
-          <p className="text-xs text-gray-500">
-            Distribuição de equipamentos e estabelecimentos de saúde
-          </p>
+      <header className="bg-white border-b border-gray-200 px-4 md:px-5 py-3 flex items-center justify-between flex-shrink-0 gap-2 flex-wrap">
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => setFilterOpen(!filterOpen)}
+            className="md:hidden p-1.5 rounded-md border border-gray-300 text-gray-600 hover:bg-gray-50"
+            aria-label="Abrir filtros"
+          >
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+            </svg>
+          </button>
+          <div>
+            <h1 className="text-lg font-bold text-gray-900">
+              Saúde em Salvador
+            </h1>
+            <p className="text-xs text-gray-500">
+              Distribuição de equipamentos e estabelecimentos de saúde
+            </p>
+          </div>
         </div>
 
         {selectedNeighborhoodName && (
@@ -108,6 +125,8 @@ export default function DashboardPage() {
           neighborhoods={neighborhoods}
           totalCount={totalCount}
           loading={loadingEstablishments}
+          isOpen={filterOpen}
+          onClose={() => setFilterOpen(false)}
         />
 
         <main className="flex-1 overflow-y-auto">
@@ -115,9 +134,12 @@ export default function DashboardPage() {
             {/* Metric Cards */}
             <MetricCards overview={overview} loading={loadingDashboard} />
 
+            {/* Neighborhood Comparison */}
+            <NeighborhoodComparison neighborhoods={neighborhoods} />
+
             {/* Choropleth metric selector + Map */}
             <div className="bg-white rounded-lg shadow-sm border border-gray-100">
-              <div className="px-4 py-2 border-b border-gray-100 flex items-center gap-3">
+              <div className="px-4 py-2 border-b border-gray-100 flex items-center gap-3 flex-wrap">
                 <label htmlFor="choropleth-metric" className="text-xs font-medium text-gray-600">
                   Métrica do mapa:
                 </label>
@@ -134,7 +156,7 @@ export default function DashboardPage() {
                   ))}
                 </select>
               </div>
-              <div className="h-[500px]">
+              <div className="h-[300px] md:h-[500px]">
                 <InteractiveMap
                   neighborhoods={neighborhoods}
                   establishments={establishments}

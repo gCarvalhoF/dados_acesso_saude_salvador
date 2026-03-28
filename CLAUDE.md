@@ -6,8 +6,9 @@ NEVER JUMP STRAIGHT TO CODING! Always follow this sequence:
 
 1. **Research**: Explore the codebase, understand existing patterns
 2. **Plan**: Create a detailed implementation plan and verify it with me
-3. **Implement**: Execute the plan with validation checkpoints
-4. **Test**: Execute all unit tests and linters, both back and front end, to make sure nothing is broken
+3. **Implement**: Execute the plan with validation checkpoints, ALWAYS ADDING PROGRAMATIC TESTS WHENEVER POSSIBLE, AIM FOR 100% COVERAGE
+4. **Test**: Execute all unit tests and linters, both back and front end, to make sure nothing is broken. Do this after each iteration is complete
+5. **Update documentation**: Update all documentations (PRD, README, files under docs/) according to the changes made
 
 When asked to implement any feature, you'll first say: "Let me research the codebase and create a plan before implementing."
 
@@ -89,9 +90,10 @@ make seed        # run db/seeds.rb (data import)
 GET /api/v1/neighborhoods                        # GeoJSON FeatureCollection
 GET /api/v1/neighborhoods/:id                    # GeoJSON Feature + equipment stats
 GET /api/v1/health_establishments                # GeoJSON, supports filters:
-    ?type=&legal_nature=&management=&sus_only=true&neighborhood_id=&service=&equipment=
+    ?type=&legal_nature=&management=&sus_only=true&neighborhood_id=&service=&equipment=&reference_category=
 GET /api/v1/health_establishments/:id            # full detail (equipments, services, beds)
 GET /api/v1/filter_options                       # available filter values
+GET /api/v1/neighborhoods/compare?ids=1,2,3      # compare up to 5 neighborhoods side-by-side
 GET /api/v1/dashboard/overview                   # aggregate KPIs
 GET /api/v1/dashboard/equipment_by_neighborhood  # top neighborhoods by equipment count
 GET /api/v1/dashboard/service_summary            # top 20 services by establishment count
@@ -109,10 +111,11 @@ spec/
 frontend/src/
   components/
     Map/              # Leaflet map, choropleth layer, markers, popups
-    Filters/          # FilterPanel with type/nature/management/SUS filters
+    Filters/          # FilterPanel (responsive drawer on mobile) with all filters
     Dashboard/        # MetricCards + ChartsPanel (4 Recharts charts)
-    ui/               # FilterSelect, FilterRadioGroup, FilterCheckbox
-  hooks/              # useDashboard, useEstablishments, useNeighborhoods, useFilterOptions
+    Comparison/       # NeighborhoodComparison + ComparisonTable (side-by-side neighborhood metrics)
+    ui/               # FilterSelect, FilterRadioGroup, FilterCheckbox, MultiSelect
+  hooks/              # useDashboard, useEstablishments, useNeighborhoods, useFilterOptions, useNeighborhoodComparison
   types/index.ts      # All TypeScript interfaces + filter constants
   test/               # setup.ts, fixtures.ts, mocks/ (leaflet, react-leaflet)
 ```

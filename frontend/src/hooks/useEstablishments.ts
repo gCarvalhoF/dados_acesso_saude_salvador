@@ -15,6 +15,7 @@ export function useEstablishments(filters: Filters) {
     if (filters.neighborhood_id) params.set("neighborhood_id", filters.neighborhood_id);
     if (filters.equipment) params.set("equipment", filters.equipment);
     if (filters.service) params.set("service", filters.service);
+    if (filters.reference_category) params.set("reference_category", filters.reference_category);
 
     setLoading(true);
     fetch(`/api/v1/health_establishments?${params}`)
@@ -25,7 +26,7 @@ export function useEstablishments(filters: Filters) {
       .then(setData)
       .catch((e) => setError(e.message))
       .finally(() => setLoading(false));
-  }, [filters.type, filters.legal_nature, filters.management, filters.sus_only, filters.neighborhood_id, filters.equipment, filters.service]);
+  }, [filters.type, filters.legal_nature, filters.management, filters.sus_only, filters.neighborhood_id, filters.equipment, filters.service, filters.reference_category]);
 
   return { data, loading, error };
 }

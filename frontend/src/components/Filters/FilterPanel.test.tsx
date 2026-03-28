@@ -14,6 +14,7 @@ const defaultFilters: Filters = {
   neighborhood_id: "",
   equipment: "",
   service: "",
+  reference_category: "",
 };
 
 const defaultFilterOptions: FilterOptions = {
@@ -28,9 +29,13 @@ const defaultFilterOptions: FilterOptions = {
     { value: "", label: "Todos os serviços" },
     { value: "116", label: "Cardiologia" },
   ],
+  reference_categories: [
+    { value: "", label: "Todas as referências" },
+    { value: "referencia_cardiovascular", label: "Referência Cardiovascular" },
+  ],
 };
 
-function renderPanel(overrides: Partial<Filters> = {}, onChange = vi.fn()) {
+function renderPanel(overrides: Partial<Filters> = {}, onChange = vi.fn(), onClose = vi.fn()) {
   return render(
     <FilterPanel
       filters={{ ...defaultFilters, ...overrides }}
@@ -39,6 +44,8 @@ function renderPanel(overrides: Partial<Filters> = {}, onChange = vi.fn()) {
       neighborhoods={mockNeighborhoods}
       totalCount={42}
       loading={false}
+      isOpen={true}
+      onClose={onClose}
     />
   );
 }
@@ -64,12 +71,14 @@ describe("FilterPanel", () => {
           neighborhoods={null}
           totalCount={0}
           loading={true}
+          isOpen={true}
+          onClose={vi.fn()}
         />
       );
       expect(screen.getByText("Carregando...")).toBeInTheDocument();
     });
 
-    it("renderiza o select de tipo de estabelecimento", () => {
+    it("renderiza o multiselect de tipo de estabelecimento", () => {
       renderPanel();
       expect(screen.getByLabelText(/tipo de estabelecimento/i)).toBeInTheDocument();
     });
@@ -87,127 +96,171 @@ describe("FilterPanel", () => {
       expect(screen.getByLabelText(/apenas sus/i)).toBeInTheDocument();
     });
 
-    it("renderiza o select de bairro com opções carregadas", () => {
+    it("renderiza o multiselect de bairro", () => {
       renderPanel();
-      expect(screen.getByText("Pituba")).toBeInTheDocument();
-      expect(screen.getByText("Barra")).toBeInTheDocument();
+      expect(screen.getByLabelText(/bairro/i)).toBeInTheDocument();
     });
 
-    it("renderiza o select de equipamento", () => {
+    it("renderiza o multiselect de equipamento", () => {
       renderPanel();
       expect(screen.getByLabelText(/equipamento/i)).toBeInTheDocument();
     });
 
-    it("renderiza o select de serviço especializado", () => {
+    it("renderiza o multiselect de serviço especializado", () => {
       renderPanel();
       expect(screen.getByLabelText(/serviço especializado/i)).toBeInTheDocument();
     });
 
-    it("renderiza o botão 'Limpar filtros'", () => {
+    it("renderiza o multiselect de referência hospitalar", () => {
       renderPanel();
-      expect(screen.getByRole("button", { name: /limpar filtros/i })).toBeInTheDocument();
+      expect(screen.getByLabelText(/referência hospitalar/i)).toBeInTheDocument();
+    });
+
+    it("renderiza o botão 'Redefinir Filtros'", () => {
+      renderPanel();
+      expect(screen.getByRole("button", { name: /redefinir filtros/i })).toBeInTheDocument();
     });
   });
 
-  describe("interações", () => {
-    it("chama onChange com o tipo selecionado ao mudar o select de tipo", async () => {
+  describe("interações com multiselect", () => {
+    it("chama onChange com o tipo selecionado ao clicar na opção", async () => {
+      const user = userEvent.setup();
       const onChange = vi.fn();
       renderPanel({}, onChange);
 
-      await userEvent.selectOptions(
-        screen.getByLabelText(/tipo de estabelecimento/i),
-        "01"
-      );
+      // Open the type multiselect dropdown
+      await user.click(screen.getByLabelText(/tipo de estabelecimento/i));
+      // Click a checkbox option
+      await user.click(screen.getByRole("checkbox", { name: "Hospital Geral" }));
 
       expect(onChange).toHaveBeenCalledWith({ type: "01" });
     });
 
+    it("chama onChange com múltiplos tipos selecionados", async () => {
+      const user = userEvent.setup();
+      const onChange = vi.fn();
+      renderPanel({ type: "01" }, onChange);
+
+      await user.click(screen.getByLabelText(/tipo de estabelecimento/i));
+      // Select a second type
+      await user.click(screen.getByRole("checkbox", { name: "Policlinica" }));
+
+      expect(onChange).toHaveBeenCalledWith({ type: "01,04" });
+    });
+
     it("chama onChange com legal_nature ao selecionar radio 'Pública'", async () => {
+      const user = userEvent.setup();
       const onChange = vi.fn();
       renderPanel({}, onChange);
 
-      await userEvent.click(screen.getByLabelText("Pública"));
+      await user.click(screen.getByLabelText("Pública"));
 
       expect(onChange).toHaveBeenCalledWith({ legal_nature: "publica" });
     });
 
-    it("chama onChange com legal_nature ao selecionar radio 'Privada'", async () => {
+    it("chama onChange com management ao clicar na opção de gestão", async () => {
+      const user = userEvent.setup();
       const onChange = vi.fn();
       renderPanel({}, onChange);
 
-      await userEvent.click(screen.getByLabelText("Privada"));
+      await user.click(screen.getByLabelText(/tipo de gestão/i));
+      await user.click(screen.getByRole("checkbox", { name: "Municipal" }));
 
-      expect(onChange).toHaveBeenCalledWith({ legal_nature: "privada" });
+      expect(onChange).toHaveBeenCalledWith({ management: "M" });
     });
 
-    it("chama onChange com equipment ao selecionar equipamento", async () => {
+    it("chama onChange com equipment ao clicar na opção de equipamento", async () => {
+      const user = userEvent.setup();
       const onChange = vi.fn();
       renderPanel({}, onChange);
 
-      await userEvent.selectOptions(
-        screen.getByLabelText(/equipamento/i),
-        "02"
-      );
+      await user.click(screen.getByLabelText(/equipamento/i));
+      await user.click(screen.getByRole("checkbox", { name: "Mamografo" }));
 
       expect(onChange).toHaveBeenCalledWith({ equipment: "02" });
     });
 
-    it("chama onChange com service ao selecionar serviço especializado", async () => {
+    it("chama onChange com service ao clicar na opção de serviço", async () => {
+      const user = userEvent.setup();
       const onChange = vi.fn();
       renderPanel({}, onChange);
 
-      await userEvent.selectOptions(
-        screen.getByLabelText(/serviço especializado/i),
-        "116"
-      );
+      await user.click(screen.getByLabelText(/serviço especializado/i));
+      await user.click(screen.getByRole("checkbox", { name: "Cardiologia" }));
 
       expect(onChange).toHaveBeenCalledWith({ service: "116" });
     });
 
-    it("chama onChange com sus_only: true ao marcar o checkbox", async () => {
+    it("chama onChange com reference_category ao clicar na opção de referência", async () => {
+      const user = userEvent.setup();
       const onChange = vi.fn();
       renderPanel({}, onChange);
 
-      await userEvent.click(screen.getByLabelText(/apenas sus/i));
+      await user.click(screen.getByLabelText(/referência hospitalar/i));
+      await user.click(screen.getByRole("checkbox", { name: "Referência Cardiovascular" }));
+
+      expect(onChange).toHaveBeenCalledWith({ reference_category: "referencia_cardiovascular" });
+    });
+
+    it("chama onChange com neighborhood_id ao clicar na opção de bairro", async () => {
+      const user = userEvent.setup();
+      const onChange = vi.fn();
+      renderPanel({}, onChange);
+
+      await user.click(screen.getByLabelText(/bairro/i));
+      await user.click(screen.getByRole("checkbox", { name: "Pituba" }));
+
+      expect(onChange).toHaveBeenCalledWith({ neighborhood_id: "1" });
+    });
+
+    it("chama onChange com sus_only: true ao marcar o checkbox", async () => {
+      const user = userEvent.setup();
+      const onChange = vi.fn();
+      renderPanel({}, onChange);
+
+      await user.click(screen.getByLabelText(/apenas sus/i));
 
       expect(onChange).toHaveBeenCalledWith({ sus_only: true });
     });
 
     it("chama onChange com sus_only: false ao desmarcar o checkbox", async () => {
+      const user = userEvent.setup();
       const onChange = vi.fn();
       renderPanel({ sus_only: true }, onChange);
 
-      await userEvent.click(screen.getByLabelText(/apenas sus/i));
+      await user.click(screen.getByLabelText(/apenas sus/i));
 
       expect(onChange).toHaveBeenCalledWith({ sus_only: false });
     });
 
-    it("chama onChange com neighborhood_id ao selecionar bairro", async () => {
+    it("remove seleção ao clicar no botão remover da tag", async () => {
+      const user = userEvent.setup();
       const onChange = vi.fn();
-      renderPanel({}, onChange);
+      renderPanel({ type: "01,04" }, onChange);
 
-      await userEvent.selectOptions(
-        screen.getByLabelText(/bairro/i),
-        "1"
-      );
+      // Click the remove button on the "Hospital Geral" tag
+      const removeBtn = screen.getByRole("button", { name: /remover hospital geral/i });
+      await user.click(removeBtn);
 
-      expect(onChange).toHaveBeenCalledWith({ neighborhood_id: "1" });
+      expect(onChange).toHaveBeenCalledWith({ type: "04" });
     });
 
-    it("chama onChange com todos os campos resetados ao clicar em 'Limpar filtros'", async () => {
+    it("chama onChange com todos os campos resetados ao clicar em 'Redefinir Filtros'", async () => {
+      const user = userEvent.setup();
       const onChange = vi.fn();
       renderPanel({ type: "02", sus_only: true }, onChange);
 
-      await userEvent.click(screen.getByRole("button", { name: /limpar filtros/i }));
+      await user.click(screen.getByRole("button", { name: /Redefinir filtros/i }));
 
       expect(onChange).toHaveBeenCalledWith({
-        type: "",
+        type: "01,02,04,05,32",
         legal_nature: "",
         management: "",
         sus_only: false,
         neighborhood_id: "",
         equipment: "",
         service: "",
+        reference_category: "",
       });
     });
   });
@@ -228,13 +281,19 @@ describe("FilterPanel", () => {
       expect(screen.getByLabelText("Todas")).toBeChecked();
     });
 
-    it("a lista de bairros é ordenada alfabeticamente", () => {
-      renderPanel();
-      const neighborhoodSelect = screen.getByLabelText(/bairro/i);
-      const options = Array.from(neighborhoodSelect.querySelectorAll("option"))
-        .map((o) => o.textContent)
-        .filter((t) => t !== "Todos os bairros");
-      expect(options).toEqual(["Barra", "Pituba"]);
+    it("mostra tags para valores selecionados no multiselect de tipo", () => {
+      renderPanel({ type: "01" });
+      expect(screen.getByText("Hospital Geral")).toBeInTheDocument();
+    });
+
+    it("mostra placeholder quando nenhum tipo está selecionado", () => {
+      renderPanel({ type: "" });
+      expect(screen.getByText("Todos os tipos")).toBeInTheDocument();
+    });
+
+    it("mostra contagem de selecionados no botão do multiselect", () => {
+      renderPanel({ type: "01,02" });
+      expect(screen.getByText("2 selecionados")).toBeInTheDocument();
     });
   });
 });

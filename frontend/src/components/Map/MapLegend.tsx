@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { markerColors } from "../../styles/theme";
 import type { ChoroplethMetric, NeighborhoodCollection } from "../../types";
 import { METRIC_LABELS, formatBinLabels } from "./NeighborhoodLayer";
@@ -52,35 +52,55 @@ export default function MapLegend({ metric, neighborhoods }: Props) {
   );
   const choropleth = useMemo(() => formatBinLabels(bins, metric), [bins, metric]);
 
-  return (
-    <div className="absolute bottom-6 right-2 z-[400] bg-white rounded-lg shadow-md p-3 text-xs max-w-[200px]">
-      <p className="font-bold text-gray-700 mb-2">Marcadores</p>
-      <ul className="space-y-1 mb-3">
-        {markerTypes.map(({ color, label }) => (
-          <li key={label} className="flex items-center gap-1.5">
-            <span
-              className="inline-block w-3 h-3 rounded-full flex-shrink-0"
-              style={{ backgroundColor: color }}
-            />
-            <span className="text-gray-600">{label}</span>
-          </li>
-        ))}
-      </ul>
+  const [collapsed, setCollapsed] = useState(true);
 
-      <p className="font-bold text-gray-700 mb-2">
-        {METRIC_LABELS[metric]} por bairro
-      </p>
-      <ul className="space-y-1">
-        {choropleth.map(({ color, label }) => (
-          <li key={label} className="flex items-center gap-1.5">
-            <span
-              className="inline-block w-4 h-3 flex-shrink-0 border border-gray-300"
-              style={{ backgroundColor: color }}
-            />
-            <span className="text-gray-600">{label}</span>
-          </li>
-        ))}
-      </ul>
+  return (
+    <div className="absolute bottom-2 right-2 z-[400] bg-white rounded-lg shadow-md text-xs max-w-[200px]">
+      <button
+        type="button"
+        className="md:hidden w-full flex items-center justify-between p-2 font-bold text-gray-700"
+        onClick={() => setCollapsed((c) => !c)}
+        aria-expanded={!collapsed}
+        aria-label="Alternar legenda"
+      >
+        <span>Legenda</span>
+        <svg
+          className={`w-3.5 h-3.5 transition-transform ${collapsed ? "" : "rotate-180"}`}
+          fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+
+      <div className={`${collapsed ? "max-md:hidden" : "block"} p-3`}>
+        <p className="font-bold text-gray-700 mb-2">Marcadores</p>
+        <ul className="space-y-1 mb-3">
+          {markerTypes.map(({ color, label }) => (
+            <li key={label} className="flex items-center gap-1.5">
+              <span
+                className="inline-block w-3 h-3 rounded-full flex-shrink-0"
+                style={{ backgroundColor: color }}
+              />
+              <span className="text-gray-600">{label}</span>
+            </li>
+          ))}
+        </ul>
+
+        <p className="font-bold text-gray-700 mb-2">
+          {METRIC_LABELS[metric]} por bairro
+        </p>
+        <ul className="space-y-1">
+          {choropleth.map(({ color, label }) => (
+            <li key={label} className="flex items-center gap-1.5">
+              <span
+                className="inline-block w-4 h-3 flex-shrink-0 border border-gray-300"
+                style={{ backgroundColor: color }}
+              />
+              <span className="text-gray-600">{label}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }

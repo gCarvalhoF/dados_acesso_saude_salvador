@@ -22,6 +22,28 @@ module Api
         render json: { error: "Not found" }, status: :not_found
       end
 
+      def compare
+        ids = params[:ids].to_s.split(",").map(&:to_i).uniq.first(5)
+
+        if ids.length < 2
+          return render json: { error: "Selecione pelo menos 2 bairros" }, status: :unprocessable_entity
+        end
+
+        neighborhoods = Neighborhood.where(id: ids)
+
+        equip_counts = EstablishmentEquipment
+          .joins(health_establishment: :neighborhood)
+          .where(health_establishments: { neighborhood_id: ids })
+          .group("health_establishments.neighborhood_id")
+          .sum(:quantity_existing)
+
+        render json: {
+          neighborhoods: neighborhoods.map { |n|
+            neighborhood_properties(n, detailed: false, equipment_count: equip_counts[n.id] || 0)
+          }
+        }
+      end
+
       private
 
       def neighborhood_feature(neighborhood, detailed: false, equipment_count: nil)

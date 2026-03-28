@@ -22,4 +22,8 @@ export const Popup = ({ children }: { children?: ReactNode }) => (
   <div data-testid="popup">{children}</div>
 );
 
+export const Tooltip = ({ children }: { children?: ReactNode }) => (
+  <div data-testid="tooltip">{children}</div>
+);
+
 export const useMap = vi.fn();

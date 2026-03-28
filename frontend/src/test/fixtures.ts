@@ -23,6 +23,14 @@ export const mockFilterOptions: FilterOptions = {
     { value: "116", label: "Cardiologia" },
     { value: "132", label: "Oncologia" },
   ],
+  reference_categories: [
+    { value: "", label: "Todas as referências" },
+    { value: "hospital_infeccao", label: "Hospital de Infecção" },
+    { value: "referencia_cardiovascular", label: "Referência Cardiovascular" },
+    { value: "referencia_oncologica", label: "Referência Oncológica" },
+    { value: "referencia_trauma", label: "Referência Trauma/Ortopedia" },
+    { value: "hospital_ensino", label: "Hospital de Ensino" },
+  ],
 };
 
 export const mockNeighborhoods: NeighborhoodCollection = {
@@ -101,6 +109,7 @@ export const mockEstablishments: EstablishmentCollection = {
         is_sus: true,
         is_active: true,
         neighborhood_id: 1,
+        reference_categories: [],
       },
     },
     {
@@ -124,6 +133,7 @@ export const mockEstablishments: EstablishmentCollection = {
         is_sus: true,
         is_active: true,
         neighborhood_id: 2,
+        reference_categories: ["Referência Cardiovascular"],
       },
     },
   ],
@@ -131,6 +141,7 @@ export const mockEstablishments: EstablishmentCollection = {
 
 export const mockEstablishmentDetail: EstablishmentProperties = {
   ...mockEstablishments.features[0].properties,
+  reference_categories: ["Referência Cardiovascular"],
   equipments: [
     { code: "02", name: "Mamografo", quantity_existing: 2, quantity_in_use: 1, available_sus: true },
     { code: "11", name: "Tomografo", quantity_existing: 1, quantity_in_use: 1, available_sus: false },

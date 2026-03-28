@@ -122,6 +122,30 @@ describe("EstablishmentPopup", () => {
     expect(screen.getByText("+2 mais...")).toBeInTheDocument();
   });
 
+  it("exibe badges de referência hospitalar", () => {
+    mockHook({
+      data: { ...mockEstablishmentDetail, reference_categories: ["Referência Cardiovascular", "Hospital de Ensino"] },
+      loading: false,
+    });
+
+    render(<EstablishmentPopup id={10} />);
+
+    expect(screen.getByText("Referência Cardiovascular")).toBeInTheDocument();
+    expect(screen.getByText("Hospital de Ensino")).toBeInTheDocument();
+  });
+
+  it("não exibe badges de referência quando array vazio", () => {
+    mockHook({
+      data: { ...mockEstablishmentDetail, reference_categories: [] },
+      loading: false,
+    });
+
+    render(<EstablishmentPopup id={10} />);
+
+    expect(screen.queryByText("Referência Cardiovascular")).not.toBeInTheDocument();
+    expect(screen.queryByText("Hospital de Ensino")).not.toBeInTheDocument();
+  });
+
   it("passa o id correto para o hook", () => {
     mockHook({ data: null, loading: true });
 

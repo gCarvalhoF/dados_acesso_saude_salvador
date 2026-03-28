@@ -12,6 +12,7 @@ const defaultFilters: Filters = {
   neighborhood_id: "",
   equipment: "",
   service: "",
+  reference_category: "",
 };
 
 describe("useEstablishments", () => {
@@ -69,6 +70,7 @@ describe("useEstablishments", () => {
         neighborhood_id: "3",
         equipment: "02",
         service: "116",
+        reference_category: "referencia_cardiovascular",
       })
     );
 
@@ -82,6 +84,7 @@ describe("useEstablishments", () => {
     expect(params.get("neighborhood_id")).toBe("3");
     expect(params.get("equipment")).toBe("02");
     expect(params.get("service")).toBe("116");
+    expect(params.get("reference_category")).toBe("referencia_cardiovascular");
   });
 
   it("não inclui sus_only quando false", async () => {

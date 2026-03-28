@@ -82,4 +82,73 @@ RSpec.describe "Api::V1::Neighborhoods", type: :request do
       expect(response).to have_http_status(:not_found)
     end
   end
+
+  describe "GET /api/v1/neighborhoods/compare" do
+    it "returns 200 with neighborhood properties for valid ids" do
+      n1 = create(:neighborhood, name: "Pituba", population_total: 50_000)
+      n2 = create(:neighborhood, name: "Barra", population_total: 30_000)
+
+      get "/api/v1/neighborhoods/compare", params: { ids: "#{n1.id},#{n2.id}" }
+
+      expect(response).to have_http_status(:ok)
+      json = JSON.parse(response.body)
+      expect(json["neighborhoods"].length).to eq(2)
+      names = json["neighborhoods"].map { |n| n["name"] }
+      expect(names).to contain_exactly("Pituba", "Barra")
+    end
+
+    it "includes equipment_count for compared neighborhoods" do
+      n1 = create(:neighborhood, name: "Pituba")
+      n2 = create(:neighborhood, name: "Barra")
+      est = create(:health_establishment, neighborhood: n1)
+      eq_item = create(:equipment_item)
+      create(:establishment_equipment, health_establishment: est, equipment_item: eq_item, quantity_existing: 7)
+
+      get "/api/v1/neighborhoods/compare", params: { ids: "#{n1.id},#{n2.id}" }
+
+      json = JSON.parse(response.body)
+      pituba = json["neighborhoods"].find { |n| n["name"] == "Pituba" }
+      barra = json["neighborhoods"].find { |n| n["name"] == "Barra" }
+      expect(pituba["equipment_count"]).to eq(7)
+      expect(barra["equipment_count"]).to eq(0)
+    end
+
+    it "returns 422 when fewer than 2 ids are provided" do
+      n1 = create(:neighborhood, name: "Pituba")
+
+      get "/api/v1/neighborhoods/compare", params: { ids: n1.id.to_s }
+
+      expect(response).to have_http_status(:unprocessable_entity)
+      json = JSON.parse(response.body)
+      expect(json["error"]).to be_present
+    end
+
+    it "returns 422 when no ids are provided" do
+      get "/api/v1/neighborhoods/compare"
+
+      expect(response).to have_http_status(:unprocessable_entity)
+    end
+
+    it "caps at 5 neighborhoods" do
+      neighborhoods = create_list(:neighborhood, 7)
+      ids = neighborhoods.map(&:id).join(",")
+
+      get "/api/v1/neighborhoods/compare", params: { ids: ids }
+
+      expect(response).to have_http_status(:ok)
+      json = JSON.parse(response.body)
+      expect(json["neighborhoods"].length).to be <= 5
+    end
+
+    it "deduplicates repeated ids" do
+      n1 = create(:neighborhood, name: "Pituba")
+      n2 = create(:neighborhood, name: "Barra")
+
+      get "/api/v1/neighborhoods/compare", params: { ids: "#{n1.id},#{n1.id},#{n2.id}" }
+
+      expect(response).to have_http_status(:ok)
+      json = JSON.parse(response.body)
+      expect(json["neighborhoods"].length).to eq(2)
+    end
+  end
 end

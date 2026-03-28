@@ -85,6 +85,20 @@ Adicionar uma conexão MCP para que usuários possam explorar os dados do CNES p
 
 Automatizar scraping e importing de dados do CNES para manter os dados atualizados (Pesquisar a frequência que os dados do CNES são atualizados e decidir o intervalo de tempo)
 
+#### Feedbacks
+
+1. Aplicar os filtros de bairros no dashboard inteiro ao comparar bairros
+2. Colocar o botão de comparar bairros na sidebar
+3. Melhorar visualização dos tooltips internos do mapa
+4. Diminuir ou adicionar a habilidade de ligar/desligar os pontos no mapa
+5. Adicionar o comportamento de clicar na legenda ou nos gráficos e automaticamente filtrar o mapa
+6. Investigar performance
+7. Aplicar os filtros na página inteira (mapa, gráficos e cards no header)
+8. Mudar o gráfico de torta pra mostrar somente labels acima de 5%
+9. Revisitar estilo do loading (Talvez um spinner com mais contraste)
+10. Revisitar os textos de limpar os filtros, remover da barra de pesquisa e colocar do lado "de fora" do filtro
+11. Padronizar os símbolos e cores do mapa
+12. Esconder os bairros caso não tenha informação neles (????)
 
 # Material de leitura importante
 
