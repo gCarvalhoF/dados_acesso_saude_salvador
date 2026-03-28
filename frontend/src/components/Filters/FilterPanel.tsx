@@ -137,7 +137,7 @@ export default function FilterPanel({ filters, filterOptions, onChange, neighbor
               })
             }
           >
-            Limpar filtros
+            Redefinir Filtros
           </button>
         </div>
       </aside>
