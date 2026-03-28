@@ -15,7 +15,7 @@ export interface NeighborhoodProperties {
   income_above_20_wages: number | null;
   establishments_count: number;
   sus_beds_count: number;
-  equipment_count?: number;
+  equipment_count: number;
 }
 
 export interface NeighborhoodFeature {
@@ -88,6 +88,8 @@ export interface FilterOptions {
   establishment_types: FilterOption[];
   legal_natures: FilterOption[];
   management_types: FilterOption[];
+  equipment_items: FilterOption[];
+  specialized_services: FilterOption[];
 }
 
 export interface Filters {
@@ -96,7 +98,42 @@ export interface Filters {
   management: string;
   sus_only: boolean;
   neighborhood_id: string;
+  equipment: string;
+  service: string;
 }
+
+export interface DashboardOverview {
+  establishments: {
+    total: number;
+    sus: number;
+    by_type: { code: string; name: string; count: number }[];
+  };
+  equipments: {
+    total_equipments: number;
+    sus_equipments: number;
+    by_type: { type: string; total: number }[];
+  };
+  beds: { total_existing: number; total_sus: number };
+  neighborhoods: { total: number; with_data: number };
+}
+
+export interface EquipmentByNeighborhood {
+  neighborhood: string;
+  total_equipments: number;
+}
+
+export interface ServiceSummaryItem {
+  code: string;
+  name: string;
+  establishments_count: number;
+}
+
+export type ChoroplethMetric =
+  | "establishments_count"
+  | "equipment_count"
+  | "sus_beds_count"
+  | "population_total"
+  | "demographic_density";
 
 export const ESTABLISHMENT_TYPES: Record<string, string> = {
   "": "Todos os tipos",

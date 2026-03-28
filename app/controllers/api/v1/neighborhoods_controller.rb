@@ -4,9 +4,14 @@ module Api
       def index
         neighborhoods = Neighborhood.ordered_by_name
 
+        equip_counts = EstablishmentEquipment
+          .joins(health_establishment: :neighborhood)
+          .group("health_establishments.neighborhood_id")
+          .sum(:quantity_existing)
+
         render json: {
           type: "FeatureCollection",
-          features: neighborhoods.map { |n| neighborhood_feature(n) }
+          features: neighborhoods.map { |n| neighborhood_feature(n, equipment_count: equip_counts[n.id] || 0) }
         }
       end
 
@@ -19,16 +24,16 @@ module Api
 
       private
 
-      def neighborhood_feature(neighborhood, detailed: false)
+      def neighborhood_feature(neighborhood, detailed: false, equipment_count: nil)
         {
           type: "Feature",
           geometry: geometry_hash(neighborhood.geometry),
-          properties: neighborhood_properties(neighborhood, detailed: detailed)
+          properties: neighborhood_properties(neighborhood, detailed: detailed, equipment_count: equipment_count)
         }
       end
 
-      def neighborhood_properties(neighborhood, detailed: false)
-        props = {
+      def neighborhood_properties(neighborhood, detailed: false, equipment_count: nil)
+        {
           id: neighborhood.id,
           name: neighborhood.name,
           population_total: neighborhood.population_total,
@@ -44,14 +49,9 @@ module Api
           income_10_20_wages: neighborhood.income_10_20_wages,
           income_above_20_wages: neighborhood.income_above_20_wages,
           establishments_count: neighborhood.establishments_count,
-          sus_beds_count: neighborhood.sus_beds_count
+          sus_beds_count: neighborhood.sus_beds_count,
+          equipment_count: equipment_count || (detailed ? neighborhood.equipment_count : 0)
         }
-
-        if detailed
-          props[:equipment_count] = neighborhood.equipment_count
-        end
-
-        props
       end
 
       def geometry_hash(geometry)

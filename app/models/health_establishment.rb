@@ -21,15 +21,29 @@ class HealthEstablishment < ApplicationRecord
     "22" => "Pronto Atendimento",
     "32" => "Clinica/Centro de Especialidade",
     "36" => "Clinica de Reabilitacao",
+    "39" => "Unidade de Apoio Diagnose e Terapia",
+    "40" => "Unidade Movel Terrestre",
+    "42" => "Unidade Movel Pre-Hospitalar",
+    "43" => "Farmacia",
+    "50" => "Unidade de Vigilancia em Saude",
+    "60" => "Cooperativa de Trabalhadores na Saude",
     "62" => "Hospital Dia",
     "67" => "Laboratório de Saúde Pública",
+    "68" => "Secretaria de Saude",
+    "69" => "Unidade de Atencao Residencial",
     "70" => "Centro de Atencao Psicossocial",
     "72" => "Centro de Atencao Hemoterapia e Hematologica",
     "73" => "Centro de Atencao a Saúde Indígena",
+    "75" => "Telessaude",
     "76" => "Central de Regulacao de Servicos de Saude",
+    "77" => "Atencao Domiciliar (Home Care)",
     "79" => "Oficina Ortopedica",
+    "80" => "Laboratorio de Saude Publica",
     "81" => "Laboratorio de Saude Publica",
-    "84" => "Farmacia"
+    "82" => "Centro de Parto Normal",
+    "83" => "Polo Academia da Saude",
+    "84" => "Farmacia",
+    "85" => "Centro de Imunizacao"
   }.freeze
 
   MANAGEMENT_TYPE_MAP = {

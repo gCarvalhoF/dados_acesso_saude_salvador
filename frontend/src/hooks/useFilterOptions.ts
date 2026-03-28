@@ -6,6 +6,8 @@ const DEFAULT_FILTER_OPTIONS: FilterOptions = {
   establishment_types: Object.entries(ESTABLISHMENT_TYPES).map(([value, label]) => ({ value, label })),
   legal_natures: Object.entries(LEGAL_NATURES).map(([value, label]) => ({ value, label })),
   management_types: Object.entries(MANAGEMENT_TYPES).map(([value, label]) => ({ value, label })),
+  equipment_items: [],
+  specialized_services: [],
 };
 
 export function useFilterOptions() {

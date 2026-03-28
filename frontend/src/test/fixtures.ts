@@ -3,6 +3,9 @@ import type {
   EstablishmentCollection,
   EstablishmentProperties,
   FilterOptions,
+  DashboardOverview,
+  EquipmentByNeighborhood,
+  ServiceSummaryItem,
 } from "../../src/types";
 import { ESTABLISHMENT_TYPES, LEGAL_NATURES, MANAGEMENT_TYPES } from "../../src/types";
 
@@ -10,6 +13,16 @@ export const mockFilterOptions: FilterOptions = {
   establishment_types: Object.entries(ESTABLISHMENT_TYPES).map(([value, label]) => ({ value, label })),
   legal_natures: Object.entries(LEGAL_NATURES).map(([value, label]) => ({ value, label })),
   management_types: Object.entries(MANAGEMENT_TYPES).map(([value, label]) => ({ value, label })),
+  equipment_items: [
+    { value: "", label: "Todos os equipamentos" },
+    { value: "02", label: "Mamografo" },
+    { value: "11", label: "Tomografo" },
+  ],
+  specialized_services: [
+    { value: "", label: "Todos os serviços" },
+    { value: "116", label: "Cardiologia" },
+    { value: "132", label: "Oncologia" },
+  ],
 };
 
 export const mockNeighborhoods: NeighborhoodCollection = {
@@ -35,6 +48,7 @@ export const mockNeighborhoods: NeighborhoodCollection = {
         income_above_20_wages: 2000,
         establishments_count: 8,
         sus_beds_count: 120,
+        equipment_count: 15,
       },
     },
     {
@@ -57,6 +71,7 @@ export const mockNeighborhoods: NeighborhoodCollection = {
         income_above_20_wages: 1500,
         establishments_count: 3,
         sus_beds_count: 40,
+        equipment_count: 5,
       },
     },
   ],
@@ -125,3 +140,37 @@ export const mockEstablishmentDetail: EstablishmentProperties = {
   ],
   beds: { total_existing: 0, total_sus: 0 },
 };
+
+export const mockDashboardOverview: DashboardOverview = {
+  establishments: {
+    total: 150,
+    sus: 120,
+    by_type: [
+      { code: "02", name: "Centro de Saude/Unidade Basica", count: 60 },
+      { code: "01", name: "Hospital Geral", count: 25 },
+      { code: "05", name: "Hospital Especializado", count: 15 },
+    ],
+  },
+  equipments: {
+    total_equipments: 500,
+    sus_equipments: 350,
+    by_type: [
+      { type: "Mamografo", total: 30 },
+      { type: "Tomografo", total: 25 },
+    ],
+  },
+  beds: { total_existing: 2000, total_sus: 1500 },
+  neighborhoods: { total: 163, with_data: 160 },
+};
+
+export const mockEquipmentByNeighborhood: EquipmentByNeighborhood[] = [
+  { neighborhood: "Pituba", total_equipments: 45 },
+  { neighborhood: "Barra", total_equipments: 30 },
+  { neighborhood: "Brotas", total_equipments: 20 },
+];
+
+export const mockServiceSummary: ServiceSummaryItem[] = [
+  { code: "116", name: "Cardiologia", establishments_count: 40 },
+  { code: "132", name: "Oncologia", establishments_count: 25 },
+  { code: "101", name: "ESF", establishments_count: 60 },
+];
