@@ -116,9 +116,9 @@ describe("FilterPanel", () => {
       expect(screen.getByLabelText(/referência hospitalar/i)).toBeInTheDocument();
     });
 
-    it("renderiza o botão 'Limpar filtros'", () => {
+    it("renderiza o botão 'Redefinir Filtros'", () => {
       renderPanel();
-      expect(screen.getByRole("button", { name: /limpar filtros/i })).toBeInTheDocument();
+      expect(screen.getByRole("button", { name: /redefinir filtros/i })).toBeInTheDocument();
     });
   });
 
@@ -245,12 +245,12 @@ describe("FilterPanel", () => {
       expect(onChange).toHaveBeenCalledWith({ type: "04" });
     });
 
-    it("chama onChange com todos os campos resetados ao clicar em 'Limpar filtros'", async () => {
+    it("chama onChange com todos os campos resetados ao clicar em 'Redefinir Filtros'", async () => {
       const user = userEvent.setup();
       const onChange = vi.fn();
       renderPanel({ type: "02", sus_only: true }, onChange);
 
-      await user.click(screen.getByRole("button", { name: /limpar filtros/i }));
+      await user.click(screen.getByRole("button", { name: /Redefinir filtros/i }));
 
       expect(onChange).toHaveBeenCalledWith({
         type: "01,02,04,05,32",
