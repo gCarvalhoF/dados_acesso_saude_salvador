@@ -1,4 +1,4 @@
-import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from "recharts";
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 
 interface Props {
   data: { code: string; name: string; count: number }[];
@@ -40,7 +40,6 @@ export default function EstablishmentTypeChart({ data }: Props) {
           ))}
         </Pie>
         <Tooltip formatter={(value) => Number(value).toLocaleString("pt-BR")} />
-        {/* <Legend /> */}
       </PieChart>
     </ResponsiveContainer>
   );

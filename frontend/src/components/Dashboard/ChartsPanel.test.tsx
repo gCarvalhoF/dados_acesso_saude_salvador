@@ -69,20 +69,20 @@ describe("ChartsPanel", () => {
       expect(screen.getByText("Tipos de Estabelecimento")).toBeInTheDocument();
     });
 
-    it("renderiza o título 'Equipamentos por Bairro (Top 15)'", () => {
+    it("renderiza o título 'Equipamentos por Bairro (Top 10)'", () => {
       renderWithData();
-      expect(screen.getByText("Equipamentos por Bairro (Top 15)")).toBeInTheDocument();
+      expect(screen.getByText("Equipamentos por Bairro (Top 10)")).toBeInTheDocument();
     });
 
-    it("renderiza o título 'Equipamentos por 10 mil Habitantes (Top 15)'", () => {
+    it("renderiza o título 'Equipamentos por 10 mil Habitantes (Top 10)'", () => {
       renderWithData();
-      expect(screen.getByText("Equipamentos por 10 mil Habitantes (Top 15)")).toBeInTheDocument();
+      expect(screen.getByText("Equipamentos por 10 mil Habitantes (Top 10)")).toBeInTheDocument();
     });
 
-    it("renderiza o título 'Serviços Especializados Mais Oferecidos (Top 15)'", () => {
+    it("renderiza o título 'Serviços Especializados Mais Oferecidos (Top 10)'", () => {
       renderWithData();
       expect(
-        screen.getByText("Serviços Especializados Mais Oferecidos (Top 15)")
+        screen.getByText("Serviços Especializados Mais Oferecidos (Top 10)")
       ).toBeInTheDocument();
     });
 
