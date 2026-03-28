@@ -55,6 +55,22 @@ export default function FilterPanel({ filters, filterOptions, onChange, neighbor
           onChange={(management) => onChange({ management })}
         />
 
+        <FilterSelect
+          id="equipment-select"
+          label="Equipamento"
+          value={filters.equipment}
+          options={filterOptions.equipment_items}
+          onChange={(equipment) => onChange({ equipment })}
+        />
+
+        <FilterSelect
+          id="service-select"
+          label="Serviço Especializado"
+          value={filters.service}
+          options={filterOptions.specialized_services}
+          onChange={(service) => onChange({ service })}
+        />
+
         <FilterCheckbox
           label="Apenas SUS"
           checked={filters.sus_only}
@@ -78,6 +94,8 @@ export default function FilterPanel({ filters, filterOptions, onChange, neighbor
               management: "",
               sus_only: false,
               neighborhood_id: "",
+              equipment: "",
+              service: "",
             })
           }
         >

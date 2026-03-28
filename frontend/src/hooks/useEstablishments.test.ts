@@ -10,6 +10,8 @@ const defaultFilters: Filters = {
   management: "",
   sus_only: false,
   neighborhood_id: "",
+  equipment: "",
+  service: "",
 };
 
 describe("useEstablishments", () => {
@@ -65,6 +67,8 @@ describe("useEstablishments", () => {
         management: "M",
         sus_only: true,
         neighborhood_id: "3",
+        equipment: "02",
+        service: "116",
       })
     );
 
@@ -76,6 +80,8 @@ describe("useEstablishments", () => {
     expect(params.get("management")).toBe("M");
     expect(params.get("sus_only")).toBe("true");
     expect(params.get("neighborhood_id")).toBe("3");
+    expect(params.get("equipment")).toBe("02");
+    expect(params.get("service")).toBe("116");
   });
 
   it("não inclui sus_only quando false", async () => {

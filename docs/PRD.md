@@ -212,6 +212,7 @@ O PRD original especificava `react_on_rails`. Como o backend e configurado como 
 **Dependencias principais:**
 - `vite` + `@vitejs/plugin-react` (build + dev server)
 - `leaflet` + `react-leaflet` (mapa interativo)
+- `recharts` (graficos de distribuicao)
 - `tailwindcss` (estilizacao)
 - `vitest` + `@testing-library/react` (testes)
 
@@ -224,16 +225,25 @@ frontend/src/
     useNeighborhoods.ts         # Busca bairros da API
     useEstablishments.ts        # Busca estabelecimentos com filtros
     useFilterOptions.ts         # Busca opcoes de filtro da API (com fallback hardcoded)
+    useDashboard.ts             # Busca dados agregados (overview, equip. por bairro, servicos)
   components/
     DashboardPage.tsx           # Layout principal + estado global
     Map/
       InteractiveMap.tsx        # MapContainer Leaflet
-      NeighborhoodLayer.tsx     # Camada coropletica dos bairros
+      NeighborhoodLayer.tsx     # Camada coropletica dos bairros (metrica selecionavel)
       EstablishmentMarkers.tsx  # Marcadores SVG por tipo (hover abre popup)
       EstablishmentPopup.tsx    # Popup com detalhe lazy-loaded
-      MapLegend.tsx             # Legenda sobreposta ao mapa
+      MapLegend.tsx             # Legenda dinamica sobreposta ao mapa
+    Dashboard/
+      MetricCards.tsx           # Cards resumo (estabelecimentos, equipamentos, leitos)
+      ChartsPanel.tsx           # Container dos graficos em grid 2x2
+      Charts/
+        EstablishmentTypeChart.tsx       # Pie chart de tipos de estabelecimento
+        EquipmentByNeighborhoodChart.tsx # Bar chart horizontal por bairro
+        EquipmentPer10kChart.tsx         # Bar chart por 10 mil habitantes
+        ServiceSummaryChart.tsx          # Bar chart de servicos especializados
     Filters/
-      FilterPanel.tsx           # Sidebar com todos os filtros
+      FilterPanel.tsx           # Sidebar com todos os filtros (incl. equipamento e servico)
     ui/
       FilterSelect.tsx          # Componente generico de select para filtros
       FilterRadioGroup.tsx      # Componente generico de radio group para filtros
@@ -345,6 +355,8 @@ end
 
 ## 9. Fases de Implementacao
 
+SEMPRE USANDO TESTES PROGRAMÁTICOS
+
 ### Fase 1 - Fundacao (backend + importacao)
 - [x] Criar migrations para todos os models
 - [x] Implementar models com associacoes e scopes
@@ -367,10 +379,14 @@ end
 - [x] Icone da aba configurado com a bandeira de Salvador (public/images/bandeira_de_salvador.png)
 
 ### Fase 3 - Dashboard completo
-- [ ] Cards de metricas resumo
-- [ ] Graficos de distribuicao (recharts)
-- [ ] Filtros avancados (equipamento especifico, servico)
-- [ ] Camada coropletica por metrica selecionavel
+- [x] Cards de metricas resumo (6 cards: estabelecimentos, equipamentos, leitos — total e SUS)
+- [x] Graficos de distribuicao (recharts): tipo de estabelecimento (pie), equipamentos por bairro (bar), equipamentos por 10k hab. (bar), servicos especializados (bar)
+- [x] Filtros avancados (equipamento especifico, servico especializado) via endpoint filter_options expandido
+- [x] Camada coropletica por metrica selecionavel (estabelecimentos, equipamentos, leitos SUS, populacao, densidade demografica) com binning por quantis dinamico
+- [x] Hook useDashboard busca 3 endpoints do dashboard em paralelo (overview, equipment_by_neighborhood, service_summary)
+- [x] Layout reestruturado: area principal com scroll vertical (cards → mapa → graficos)
+- [x] equipment_count incluido no index de bairros (com fix de N+1 via query agregada)
+- [x] Testes unitarios: 91 exemplos frontend (9 arquivos) + 109 exemplos backend (0 falhas)
 
 ### Fase 4 - Refinamentos
 - [ ] Classificacao de hospitais de referencia
@@ -398,6 +414,7 @@ gem 'rack-cors'     # CORS para o frontend standalone
   "@vitejs/plugin-react": "^4",
   "leaflet": "^1.9",
   "react-leaflet": "^4",
+  "recharts": "^2",
   "tailwindcss": "^3",
   "vitest": "^3",
   "@testing-library/react": "^16",
@@ -419,3 +436,7 @@ O frontend usa `VITE_API_URL=http://web:3000` para que o proxy Vite alcance o co
 | HospitalBed usa find_or_create_by! | O importer original usava create!, gerando duplicatas ao re-executar seeds |
 | Filtro legal_nature por prefixo de codigo | Os codigos CNES sao numericos (ex: 1031, 2046); os valores anteriores (federal/estadual/municipal) nunca correspondiam a nenhum registro |
 | Popup abre no hover via eventHandlers | Melhora a descoberta de informacoes sem exigir clique; cada marcador tem sua propria ref para controlar o popup independentemente |
+| equipment_count no index de bairros com query agregada | O metodo `equipment_count` do model faz N+1 queries. O controller precomputa os totais com uma unica query `EstablishmentEquipment.joins(...).group(...).sum(...)` |
+| Binning por quantis na coropletica | Bins fixos (0, 1-2, 3-7...) so funcionam para contagem de estabelecimentos. Quantis dinamicos (P20/P40/P60/P80) adaptam-se a qualquer metrica automaticamente |
+| recharts com ResponsiveContainer | Graficos precisam de dimensoes explicitas; ResponsiveContainer preenche o container pai. Em testes, e substituido por um stub com dimensoes fixas |
+| filter_options expandido com equipamentos e servicos | Reutiliza o endpoint existente em vez de criar novos endpoints, mantendo a consistencia do padrao `{ value, label }` |

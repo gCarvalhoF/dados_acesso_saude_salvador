@@ -12,12 +12,22 @@ const defaultFilters: Filters = {
   management: "",
   sus_only: false,
   neighborhood_id: "",
+  equipment: "",
+  service: "",
 };
 
 const defaultFilterOptions: FilterOptions = {
   establishment_types: Object.entries(ESTABLISHMENT_TYPES).map(([value, label]) => ({ value, label })),
   legal_natures: Object.entries(LEGAL_NATURES).map(([value, label]) => ({ value, label })),
   management_types: Object.entries(MANAGEMENT_TYPES).map(([value, label]) => ({ value, label })),
+  equipment_items: [
+    { value: "", label: "Todos os equipamentos" },
+    { value: "02", label: "Mamografo" },
+  ],
+  specialized_services: [
+    { value: "", label: "Todos os serviços" },
+    { value: "116", label: "Cardiologia" },
+  ],
 };
 
 function renderPanel(overrides: Partial<Filters> = {}, onChange = vi.fn()) {
@@ -83,6 +93,16 @@ describe("FilterPanel", () => {
       expect(screen.getByText("Barra")).toBeInTheDocument();
     });
 
+    it("renderiza o select de equipamento", () => {
+      renderPanel();
+      expect(screen.getByLabelText(/equipamento/i)).toBeInTheDocument();
+    });
+
+    it("renderiza o select de serviço especializado", () => {
+      renderPanel();
+      expect(screen.getByLabelText(/serviço especializado/i)).toBeInTheDocument();
+    });
+
     it("renderiza o botão 'Limpar filtros'", () => {
       renderPanel();
       expect(screen.getByRole("button", { name: /limpar filtros/i })).toBeInTheDocument();
@@ -118,6 +138,30 @@ describe("FilterPanel", () => {
       await userEvent.click(screen.getByLabelText("Privada"));
 
       expect(onChange).toHaveBeenCalledWith({ legal_nature: "privada" });
+    });
+
+    it("chama onChange com equipment ao selecionar equipamento", async () => {
+      const onChange = vi.fn();
+      renderPanel({}, onChange);
+
+      await userEvent.selectOptions(
+        screen.getByLabelText(/equipamento/i),
+        "02"
+      );
+
+      expect(onChange).toHaveBeenCalledWith({ equipment: "02" });
+    });
+
+    it("chama onChange com service ao selecionar serviço especializado", async () => {
+      const onChange = vi.fn();
+      renderPanel({}, onChange);
+
+      await userEvent.selectOptions(
+        screen.getByLabelText(/serviço especializado/i),
+        "116"
+      );
+
+      expect(onChange).toHaveBeenCalledWith({ service: "116" });
     });
 
     it("chama onChange com sus_only: true ao marcar o checkbox", async () => {
@@ -162,6 +206,8 @@ describe("FilterPanel", () => {
         management: "",
         sus_only: false,
         neighborhood_id: "",
+        equipment: "",
+        service: "",
       });
     });
   });

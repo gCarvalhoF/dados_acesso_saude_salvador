@@ -5,7 +5,9 @@ module Api
         render json: {
           establishment_types: establishment_type_options,
           legal_natures: legal_nature_options,
-          management_types: management_type_options
+          management_types: management_type_options,
+          equipment_items: equipment_item_options,
+          specialized_services: specialized_service_options
         }
       end
 
@@ -31,6 +33,20 @@ module Api
           .map { |type, label| { value: type, label: label } }
 
         [ { value: "", label: "Todos" } ] + options
+      end
+
+      def equipment_item_options
+        options = EquipmentItem.ordered_by_name.pluck(:code, :name)
+          .map { |code, name| { value: code, label: name } }
+
+        [ { value: "", label: "Todos os equipamentos" } ] + options
+      end
+
+      def specialized_service_options
+        options = SpecializedService.ordered_by_name.pluck(:code, :name)
+          .map { |code, name| { value: code, label: name } }
+
+        [ { value: "", label: "Todos os serviços" } ] + options
       end
 
       def legal_nature_label(key)

@@ -25,6 +25,36 @@ RSpec.describe "Api::V1::Neighborhoods", type: :request do
       expect(feature["properties"]).to have_key("establishments_count")
     end
 
+    it "includes equipment_count in properties" do
+      n = create(:neighborhood, name: "Pituba")
+
+      get "/api/v1/neighborhoods"
+
+      feature = JSON.parse(response.body)["features"].find { |f| f["properties"]["name"] == "Pituba" }
+      expect(feature["properties"]).to have_key("equipment_count")
+    end
+
+    it "returns the correct equipment_count for a neighborhood" do
+      n = create(:neighborhood, name: "Pituba")
+      est = create(:health_establishment, neighborhood: n)
+      eq_item = create(:equipment_item)
+      create(:establishment_equipment, health_establishment: est, equipment_item: eq_item, quantity_existing: 5)
+
+      get "/api/v1/neighborhoods"
+
+      feature = JSON.parse(response.body)["features"].find { |f| f["properties"]["name"] == "Pituba" }
+      expect(feature["properties"]["equipment_count"]).to eq(5)
+    end
+
+    it "returns 0 equipment_count for a neighborhood without equipment" do
+      create(:neighborhood, name: "Vazia")
+
+      get "/api/v1/neighborhoods"
+
+      feature = JSON.parse(response.body)["features"].find { |f| f["properties"]["name"] == "Vazia" }
+      expect(feature["properties"]["equipment_count"]).to eq(0)
+    end
+
     it "returns an empty FeatureCollection when no neighborhoods exist" do
       get "/api/v1/neighborhoods"
 

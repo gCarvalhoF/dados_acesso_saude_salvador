@@ -1,20 +1,26 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 import MapLegend from "./MapLegend";
+import { mockNeighborhoods } from "../../test/fixtures";
 
 describe("MapLegend", () => {
   it("renderiza a seção 'Marcadores'", () => {
-    render(<MapLegend />);
+    render(<MapLegend metric="establishments_count" neighborhoods={mockNeighborhoods} />);
     expect(screen.getByText("Marcadores")).toBeInTheDocument();
   });
 
-  it("renderiza a seção de coroplético", () => {
-    render(<MapLegend />);
-    expect(screen.getByText("Estab. por bairro")).toBeInTheDocument();
+  it("renderiza a seção de coroplético com o nome da métrica", () => {
+    render(<MapLegend metric="establishments_count" neighborhoods={mockNeighborhoods} />);
+    expect(screen.getByText("Estabelecimentos por bairro")).toBeInTheDocument();
+  });
+
+  it("atualiza o título da legenda ao mudar a métrica", () => {
+    render(<MapLegend metric="equipment_count" neighborhoods={mockNeighborhoods} />);
+    expect(screen.getByText("Equipamentos por bairro")).toBeInTheDocument();
   });
 
   it("exibe todos os tipos de marcador esperados", () => {
-    render(<MapLegend />);
+    render(<MapLegend metric="establishments_count" neighborhoods={mockNeighborhoods} />);
 
     expect(screen.getByText("USF")).toBeInTheDocument();
     expect(screen.getByText("UBS / Centro de Saúde")).toBeInTheDocument();
@@ -26,13 +32,10 @@ describe("MapLegend", () => {
     expect(screen.getByText("Outros")).toBeInTheDocument();
   });
 
-  it("exibe todas as faixas do coroplético", () => {
-    render(<MapLegend />);
+  it("exibe faixas do coroplético", () => {
+    render(<MapLegend metric="establishments_count" neighborhoods={mockNeighborhoods} />);
 
-    expect(screen.getByText("0 estab.")).toBeInTheDocument();
-    expect(screen.getByText("1–2")).toBeInTheDocument();
-    expect(screen.getByText("3–7")).toBeInTheDocument();
-    expect(screen.getByText("8–14")).toBeInTheDocument();
-    expect(screen.getByText("15+")).toBeInTheDocument();
+    // Dynamic bins so we just check that "0" label is present
+    expect(screen.getByText("0")).toBeInTheDocument();
   });
 });

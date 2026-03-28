@@ -1,6 +1,11 @@
 import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer } from "react-leaflet";
-import type { EstablishmentCollection, Filters, NeighborhoodCollection } from "../../types";
+import type {
+  ChoroplethMetric,
+  EstablishmentCollection,
+  Filters,
+  NeighborhoodCollection,
+} from "../../types";
 import NeighborhoodLayer from "./NeighborhoodLayer";
 import EstablishmentMarkers from "./EstablishmentMarkers";
 import MapLegend from "./MapLegend";
@@ -16,6 +21,7 @@ interface Props {
   onNeighborhoodSelect: (id: number | null, name: string) => void;
   filters: Filters;
   onFilterChange: (filters: Partial<Filters>) => void;
+  choroplethMetric: ChoroplethMetric;
 }
 
 export default function InteractiveMap({
@@ -23,6 +29,7 @@ export default function InteractiveMap({
   establishments,
   selectedNeighborhood,
   onNeighborhoodSelect,
+  choroplethMetric,
 }: Props) {
   return (
     <div className="relative h-full w-full">
@@ -42,13 +49,14 @@ export default function InteractiveMap({
             data={neighborhoods}
             selectedId={selectedNeighborhood}
             onSelect={onNeighborhoodSelect}
+            metric={choroplethMetric}
           />
         )}
 
         {establishments && <EstablishmentMarkers data={establishments} />}
       </MapContainer>
 
-      <MapLegend />
+      <MapLegend metric={choroplethMetric} neighborhoods={neighborhoods} />
     </div>
   );
 }

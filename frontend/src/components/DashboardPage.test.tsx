@@ -2,11 +2,33 @@ import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import DashboardPage from "./DashboardPage";
-import { mockNeighborhoods, mockEstablishments, mockFilterOptions } from "../test/fixtures";
+import {
+  mockNeighborhoods,
+  mockEstablishments,
+  mockFilterOptions,
+  mockDashboardOverview,
+  mockEquipmentByNeighborhood,
+  mockServiceSummary,
+} from "../test/fixtures";
 
 vi.mock("react-leaflet", () => import("../test/mocks/react-leaflet"));
 vi.mock("leaflet", () => import("../test/mocks/leaflet"));
 vi.mock("leaflet/dist/leaflet.css", () => ({}));
+
+// recharts ResponsiveContainer needs dimensions; stub it out
+vi.mock("recharts", async () => {
+  const actual = await vi.importActual<typeof import("recharts")>("recharts");
+  return {
+    ...actual,
+    ResponsiveContainer: ({ children }: { children: React.ReactNode }) => (
+      <div style={{ width: 500, height: 300 }}>{children}</div>
+    ),
+  };
+});
+
+const dashboardOverviewResponse = mockDashboardOverview;
+const equipmentByNeighborhoodResponse = { data: mockEquipmentByNeighborhood };
+const serviceSummaryResponse = { data: mockServiceSummary };
 
 function mockFetchSequence(responses: object[]) {
   let callIndex = 0;
@@ -16,6 +38,16 @@ function mockFetchSequence(responses: object[]) {
     return Promise.resolve(new Response(JSON.stringify(data), { status: 200 }));
   });
 }
+
+// Standard responses: neighborhoods, establishments, filterOptions, overview, equipByNeighborhood, serviceSummary
+const standardResponses = [
+  mockNeighborhoods,
+  mockEstablishments,
+  mockFilterOptions,
+  dashboardOverviewResponse,
+  equipmentByNeighborhoodResponse,
+  serviceSummaryResponse,
+];
 
 describe("DashboardPage", () => {
   beforeEach(() => {
@@ -27,7 +59,7 @@ describe("DashboardPage", () => {
   });
 
   it("renderiza o título do dashboard", async () => {
-    mockFetchSequence([mockNeighborhoods, mockEstablishments, mockFilterOptions]);
+    mockFetchSequence(standardResponses);
 
     render(<DashboardPage />);
 
@@ -35,7 +67,7 @@ describe("DashboardPage", () => {
   });
 
   it("renderiza o painel de filtros", async () => {
-    mockFetchSequence([mockNeighborhoods, mockEstablishments, mockFilterOptions]);
+    mockFetchSequence(standardResponses);
 
     render(<DashboardPage />);
 
@@ -43,11 +75,19 @@ describe("DashboardPage", () => {
   });
 
   it("renderiza o container do mapa", async () => {
-    mockFetchSequence([mockNeighborhoods, mockEstablishments, mockFilterOptions]);
+    mockFetchSequence(standardResponses);
 
     render(<DashboardPage />);
 
     expect(screen.getByTestId("map-container")).toBeInTheDocument();
+  });
+
+  it("renderiza o seletor de métrica do coroplético", async () => {
+    mockFetchSequence(standardResponses);
+
+    render(<DashboardPage />);
+
+    expect(screen.getByLabelText(/métrica do mapa/i)).toBeInTheDocument();
   });
 
   it("exibe o spinner 'Carregando...' no header enquanto os dados chegam", () => {
@@ -55,13 +95,11 @@ describe("DashboardPage", () => {
 
     render(<DashboardPage />);
 
-    // O header tem um <span> específico com animate-pulse; o FilterPanel usa <p>.
-    // Usamos o selector para distinguir entre os dois.
     expect(screen.getByText("Carregando...", { selector: "span" })).toBeInTheDocument();
   });
 
   it("exibe a contagem de estabelecimentos no painel de filtros após carregar", async () => {
-    mockFetchSequence([mockNeighborhoods, mockEstablishments, mockFilterOptions]);
+    mockFetchSequence(standardResponses);
 
     render(<DashboardPage />);
 
@@ -70,8 +108,20 @@ describe("DashboardPage", () => {
     );
   });
 
+  it("renderiza os cards de métricas após carregar", async () => {
+    mockFetchSequence(standardResponses);
+
+    render(<DashboardPage />);
+
+    await waitFor(() =>
+      expect(screen.getByText("150")).toBeInTheDocument()
+    );
+    expect(screen.getByText("120")).toBeInTheDocument(); // SUS establishments
+    expect(screen.getByText("500")).toBeInTheDocument(); // total equipment
+  });
+
   it("exibe os bairros no dropdown após carregar", async () => {
-    mockFetchSequence([mockNeighborhoods, mockEstablishments, mockFilterOptions]);
+    mockFetchSequence(standardResponses);
 
     render(<DashboardPage />);
 
@@ -81,7 +131,7 @@ describe("DashboardPage", () => {
 
   describe("sincronização bidirecional de bairro", () => {
     it("exibe badge de bairro no header ao selecionar pelo dropdown", async () => {
-      mockFetchSequence([mockNeighborhoods, mockEstablishments, mockFilterOptions, mockEstablishments]);
+      mockFetchSequence([...standardResponses, mockEstablishments]);
 
       render(<DashboardPage />);
 
@@ -96,9 +146,7 @@ describe("DashboardPage", () => {
 
     it("remove o badge e limpa o filtro ao clicar no botão ×", async () => {
       mockFetchSequence([
-        mockNeighborhoods,
-        mockEstablishments,
-        mockFilterOptions,
+        ...standardResponses,
         mockEstablishments,
         mockEstablishments,
       ]);
@@ -119,7 +167,7 @@ describe("DashboardPage", () => {
     });
 
     it("refaz o fetch de estabelecimentos ao mudar o filtro de tipo", async () => {
-      mockFetchSequence([mockNeighborhoods, mockEstablishments, mockFilterOptions, mockEstablishments]);
+      mockFetchSequence([...standardResponses, mockEstablishments]);
 
       render(<DashboardPage />);
 
@@ -132,12 +180,10 @@ describe("DashboardPage", () => {
         "01"
       );
 
-      // Aguarda ao menos uma chamada adicional ao fetch após a mudança de filtro
       await waitFor(() =>
         expect(vi.mocked(fetch).mock.calls.length).toBeGreaterThan(callsBefore)
       );
 
-      // A última chamada deve conter o filtro de tipo
       const calls = vi.mocked(fetch).mock.calls;
       const lastCall = calls[calls.length - 1][0] as string;
       expect(lastCall).toContain("type=01");
