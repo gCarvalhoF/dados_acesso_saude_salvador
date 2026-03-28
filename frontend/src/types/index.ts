@@ -47,6 +47,7 @@ export interface EstablishmentProperties {
   is_sus: boolean;
   is_active: boolean;
   neighborhood_id: number | null;
+  reference_categories: string[];
   equipments?: EquipmentDetail[];
   services?: ServiceDetail[];
   beds?: { total_existing: number; total_sus: number };
@@ -90,6 +91,7 @@ export interface FilterOptions {
   management_types: FilterOption[];
   equipment_items: FilterOption[];
   specialized_services: FilterOption[];
+  reference_categories: FilterOption[];
 }
 
 export interface Filters {
@@ -100,6 +102,7 @@ export interface Filters {
   neighborhood_id: string;
   equipment: string;
   service: string;
+  reference_category: string;
 }
 
 export interface DashboardOverview {
@@ -137,6 +140,7 @@ export type ChoroplethMetric =
 
 export const ESTABLISHMENT_TYPES: Record<string, string> = {
   "": "Todos os tipos",
+  "01,02,04,05,32": "Hospitais, Clínicas e Policlínicas",
   "01": "Hospital Geral",
   "02": "Centro de Saude/Unidade Basica",
   "04": "Policlinica",

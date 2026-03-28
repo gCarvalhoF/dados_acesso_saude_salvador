@@ -14,3 +14,9 @@
 .leaflet-container {
   z-index: 0;
 }
+
+/* Popup for establishment markers — cap height so tall content scrolls */
+.establishment-popup .leaflet-popup-content {
+  max-height: 280px;
+  overflow-y: auto;
+}

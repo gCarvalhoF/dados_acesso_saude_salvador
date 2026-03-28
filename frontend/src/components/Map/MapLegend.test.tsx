@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import MapLegend from "./MapLegend";
 import { mockNeighborhoods } from "../../test/fixtures";
 
@@ -37,5 +38,18 @@ describe("MapLegend", () => {
 
     // Dynamic bins so we just check that "0" label is present
     expect(screen.getByText("0")).toBeInTheDocument();
+  });
+
+  it("renderiza botão de alternar legenda para mobile", () => {
+    render(<MapLegend metric="establishments_count" neighborhoods={mockNeighborhoods} />);
+    expect(screen.getByLabelText("Alternar legenda")).toBeInTheDocument();
+  });
+
+  it("alterna aria-expanded ao clicar no botão de legenda", async () => {
+    render(<MapLegend metric="establishments_count" neighborhoods={mockNeighborhoods} />);
+    const toggle = screen.getByLabelText("Alternar legenda");
+    expect(toggle).toHaveAttribute("aria-expanded", "false");
+    await userEvent.click(toggle);
+    expect(toggle).toHaveAttribute("aria-expanded", "true");
   });
 });

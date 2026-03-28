@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useCallback, useRef } from "react";
 import { Marker, Popup } from "react-leaflet";
 import type { EstablishmentCollection } from "../../types";
 import EstablishmentPopup from "./EstablishmentPopup";
@@ -21,14 +21,49 @@ const ICONS: Record<string, ReturnType<typeof makeIcon>> = {
   default:                           makeIcon(markerColors.default,               "circle"),
 };
 
+const CLOSE_DELAY = 150;
+
 function getIcon(displayType: string) {
   return ICONS[displayType] ?? ICONS.default;
 }
 
 function HoverMarker({ feature }: { feature: NonNullable<Props["data"]["features"][number]> }) {
-  const markerRef = useRef<import("leaflet").Marker>(null);
   const [lng, lat] = feature.geometry!.coordinates;
   const props = feature.properties;
+  const markerRef = useRef<import("leaflet").Marker>(null);
+  const closeTimer = useRef<ReturnType<typeof setTimeout>>(null);
+
+  const cancelClose = useCallback(() => {
+    if (closeTimer.current) {
+      clearTimeout(closeTimer.current);
+      closeTimer.current = null;
+    }
+  }, []);
+
+  const scheduleClose = useCallback(() => {
+    cancelClose();
+    closeTimer.current = setTimeout(() => {
+      markerRef.current?.closePopup();
+    }, CLOSE_DELAY);
+  }, [cancelClose]);
+
+  const handlePopupOpen = useCallback(() => {
+    const popup = markerRef.current?.getPopup();
+    const el = popup?.getElement();
+    if (el) {
+      el.addEventListener("mouseenter", cancelClose);
+      el.addEventListener("mouseleave", scheduleClose);
+    }
+  }, [cancelClose, scheduleClose]);
+
+  const handlePopupClose = useCallback(() => {
+    const popup = markerRef.current?.getPopup();
+    const el = popup?.getElement();
+    if (el) {
+      el.removeEventListener("mouseenter", cancelClose);
+      el.removeEventListener("mouseleave", scheduleClose);
+    }
+  }, [cancelClose, scheduleClose]);
 
   return (
     <Marker
@@ -36,11 +71,16 @@ function HoverMarker({ feature }: { feature: NonNullable<Props["data"]["features
       position={[lat, lng]}
       icon={getIcon(props.display_type)}
       eventHandlers={{
-        mouseover: () => markerRef.current?.openPopup(),
-        mouseout: () => markerRef.current?.closePopup(),
+        mouseover: () => {
+          cancelClose();
+          markerRef.current?.openPopup();
+        },
+        mouseout: scheduleClose,
+        popupopen: handlePopupOpen,
+        popupclose: handlePopupClose,
       }}
     >
-      <Popup maxWidth={320} minWidth={200}>
+      <Popup autoPan={false} maxWidth={320} minWidth={200} className="establishment-popup">
         <EstablishmentPopup id={props.id} />
       </Popup>
     </Marker>

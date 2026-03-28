@@ -14,6 +14,7 @@ module DataImport
       import_establishment_equipments
       import_establishment_services
       import_hospital_beds
+      import_teaching_hospitals
       associate_neighborhoods
 
       log "CNES import complete."
@@ -223,6 +224,37 @@ module DataImport
       end
 
       log "  #{count} hospital beds imported"
+    end
+
+    # -------------------------
+    # Teaching hospital flag
+    # -------------------------
+
+    TEACHING_HOSPITAL_CODE = "0506"
+
+    def import_teaching_hospitals
+      log "Importing teaching hospital flags..."
+      count = 0
+      salvador_cnes_codes = HealthEstablishment.pluck(:cnes_code).to_set
+
+      parse_csv(cnes_csv_path("rlEstabSipac202508.csv")) do |row|
+        unit_code = row["CO_UNIDADE"]&.strip
+        next unless unit_code&.start_with?(SALVADOR_MUNICIPALITY_CODE)
+
+        habilitacao = row["COD_SUB_GRUPO_HABILITACAO"]&.strip
+        next unless habilitacao == TEACHING_HOSPITAL_CODE
+
+        cnes_code = unit_code.slice(6..)
+        next unless salvador_cnes_codes.include?(cnes_code)
+
+        HealthEstablishment.where(cnes_code: cnes_code, is_teaching_hospital: false)
+                           .update_all(is_teaching_hospital: true)
+        count += 1
+      rescue => e
+        Rails.logger.warn "Could not import teaching hospital flag: #{e.message}"
+      end
+
+      log "  #{count} teaching hospital flags set"
     end
 
     # -------------------------

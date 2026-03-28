@@ -117,6 +117,121 @@ RSpec.describe HealthEstablishment, type: :model do
     end
   end
 
+  describe "#reference_categories" do
+    it "returns empty array when no matching services or flags" do
+      est = create(:health_establishment)
+      expect(est.reference_categories).to eq([])
+    end
+
+    it "returns Hospital de Infecção when both HIV/AIDS and Tuberculosis services present" do
+      est = create(:health_establishment, :with_infection_services)
+      categories = est.reference_categories
+      expect(categories.map { |c| c[:key] }).to include("hospital_infeccao")
+      expect(categories.find { |c| c[:key] == "hospital_infeccao" }[:label]).to eq("Hospital de Infecção")
+    end
+
+    it "does not return Hospital de Infecção when only one infection service present" do
+      hiv = create(:specialized_service, code: SpecializedService::HIV_AIDS_CODE, name: "DST/HIV/AIDS")
+      est = create(:health_establishment)
+      create(:establishment_service, health_establishment: est, specialized_service: hiv)
+      expect(est.reference_categories.map { |c| c[:key] }).not_to include("hospital_infeccao")
+    end
+
+    it "returns Referência Cardiovascular with cardiology service" do
+      est = create(:health_establishment, :with_cardiology)
+      expect(est.reference_categories.map { |c| c[:key] }).to include("referencia_cardiovascular")
+    end
+
+    it "returns Referência Oncológica with oncology service" do
+      est = create(:health_establishment, :with_oncology)
+      expect(est.reference_categories.map { |c| c[:key] }).to include("referencia_oncologica")
+    end
+
+    it "returns Referência Trauma/Ortopedia with trauma service" do
+      est = create(:health_establishment, :with_trauma)
+      expect(est.reference_categories.map { |c| c[:key] }).to include("referencia_trauma")
+    end
+
+    it "returns Hospital de Ensino when is_teaching_hospital is true" do
+      est = create(:health_establishment, :teaching_hospital)
+      expect(est.reference_categories.map { |c| c[:key] }).to include("hospital_ensino")
+    end
+
+    it "returns multiple categories when applicable" do
+      est = create(:health_establishment, :teaching_hospital, :with_cardiology)
+      keys = est.reference_categories.map { |c| c[:key] }
+      expect(keys).to include("hospital_ensino", "referencia_cardiovascular")
+    end
+  end
+
+  describe ".by_reference_category" do
+    it "filters by hospital_infeccao (requires both services)" do
+      est_with = create(:health_establishment, :with_infection_services)
+      est_without = create(:health_establishment)
+      results = HealthEstablishment.by_reference_category("hospital_infeccao")
+      expect(results).to include(est_with)
+      expect(results).not_to include(est_without)
+    end
+
+    it "filters by referencia_cardiovascular" do
+      est_with = create(:health_establishment, :with_cardiology)
+      est_without = create(:health_establishment)
+      results = HealthEstablishment.by_reference_category("referencia_cardiovascular")
+      expect(results).to include(est_with)
+      expect(results).not_to include(est_without)
+    end
+
+    it "filters by referencia_oncologica" do
+      est_with = create(:health_establishment, :with_oncology)
+      est_without = create(:health_establishment)
+      results = HealthEstablishment.by_reference_category("referencia_oncologica")
+      expect(results).to include(est_with)
+      expect(results).not_to include(est_without)
+    end
+
+    it "filters by referencia_trauma" do
+      est_with = create(:health_establishment, :with_trauma)
+      est_without = create(:health_establishment)
+      results = HealthEstablishment.by_reference_category("referencia_trauma")
+      expect(results).to include(est_with)
+      expect(results).not_to include(est_without)
+    end
+
+    it "filters by hospital_ensino" do
+      est_with = create(:health_establishment, :teaching_hospital)
+      est_without = create(:health_establishment)
+      results = HealthEstablishment.by_reference_category("hospital_ensino")
+      expect(results).to include(est_with)
+      expect(results).not_to include(est_without)
+    end
+
+    it "returns none for unknown category" do
+      create(:health_establishment)
+      expect(HealthEstablishment.by_reference_category("unknown")).to be_empty
+    end
+  end
+
+  describe ".by_reference_categories" do
+    it "returns union of multiple categories" do
+      est_cardio = create(:health_establishment, :with_cardiology)
+      est_ensino = create(:health_establishment, :teaching_hospital)
+      est_plain = create(:health_establishment)
+
+      results = HealthEstablishment.by_reference_categories(%w[referencia_cardiovascular hospital_ensino])
+      expect(results).to include(est_cardio, est_ensino)
+      expect(results).not_to include(est_plain)
+    end
+
+    it "delegates to by_reference_category for a single key" do
+      est_cardio = create(:health_establishment, :with_cardiology)
+      est_plain = create(:health_establishment)
+
+      results = HealthEstablishment.by_reference_categories(%w[referencia_cardiovascular])
+      expect(results).to include(est_cardio)
+      expect(results).not_to include(est_plain)
+    end
+  end
+
   describe "#total_sus_beds" do
     it "sums quantity_sus across all hospital beds" do
       est = create(:health_establishment)

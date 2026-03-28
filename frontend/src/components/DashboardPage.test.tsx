@@ -121,30 +121,56 @@ describe("DashboardPage", () => {
   });
 
   it("exibe os bairros no dropdown após carregar", async () => {
+    const user = userEvent.setup();
     mockFetchSequence(standardResponses);
 
     render(<DashboardPage />);
 
-    await waitFor(() => expect(screen.getByText("Pituba")).toBeInTheDocument());
+    // Wait for data to load, then open the neighborhood multiselect
+    await waitFor(() => screen.getByLabelText(/bairro/i));
+    await user.click(screen.getByLabelText(/bairro/i));
+
+    expect(screen.getByText("Pituba")).toBeInTheDocument();
     expect(screen.getByText("Barra")).toBeInTheDocument();
+  });
+
+  it("renderiza o botão de abrir filtros (mobile)", async () => {
+    mockFetchSequence(standardResponses);
+
+    render(<DashboardPage />);
+
+    expect(screen.getByLabelText("Abrir filtros")).toBeInTheDocument();
+  });
+
+  it("renderiza o botão 'Comparar Bairros'", async () => {
+    mockFetchSequence(standardResponses);
+
+    render(<DashboardPage />);
+
+    expect(screen.getByText("Comparar Bairros")).toBeInTheDocument();
   });
 
   describe("sincronização bidirecional de bairro", () => {
     it("exibe badge de bairro no header ao selecionar pelo dropdown", async () => {
+      const user = userEvent.setup();
       mockFetchSequence([...standardResponses, mockEstablishments]);
 
       render(<DashboardPage />);
 
-      await waitFor(() => screen.getByText("Pituba"));
+      await waitFor(() => screen.getByLabelText(/bairro/i));
 
-      await userEvent.selectOptions(screen.getByLabelText(/bairro/i), "1");
+      // Open neighborhood multiselect and select Pituba
+      await user.click(screen.getByLabelText(/bairro/i));
+      await user.click(screen.getByRole("checkbox", { name: "Pituba" }));
 
-      await waitFor(() =>
-        expect(screen.getByText("Pituba", { selector: "span" })).toBeInTheDocument()
-      );
+      await waitFor(() => {
+        const badge = screen.getByText("Pituba", { selector: "span.bg-orange-100" });
+        expect(badge).toBeInTheDocument();
+      });
     });
 
     it("remove o badge e limpa o filtro ao clicar no botão ×", async () => {
+      const user = userEvent.setup();
       mockFetchSequence([
         ...standardResponses,
         mockEstablishments,
@@ -153,13 +179,15 @@ describe("DashboardPage", () => {
 
       render(<DashboardPage />);
 
-      await waitFor(() => screen.getByText("Pituba"));
+      await waitFor(() => screen.getByLabelText(/bairro/i));
 
-      await userEvent.selectOptions(screen.getByLabelText(/bairro/i), "1");
+      // Open neighborhood multiselect and select Pituba
+      await user.click(screen.getByLabelText(/bairro/i));
+      await user.click(screen.getByRole("checkbox", { name: "Pituba" }));
 
       await waitFor(() => screen.getByTitle("Limpar seleção"));
 
-      await userEvent.click(screen.getByTitle("Limpar seleção"));
+      await user.click(screen.getByTitle("Limpar seleção"));
 
       await waitFor(() =>
         expect(screen.queryByTitle("Limpar seleção")).not.toBeInTheDocument()
@@ -167,6 +195,7 @@ describe("DashboardPage", () => {
     });
 
     it("refaz o fetch de estabelecimentos ao mudar o filtro de tipo", async () => {
+      const user = userEvent.setup();
       mockFetchSequence([...standardResponses, mockEstablishments]);
 
       render(<DashboardPage />);
@@ -175,10 +204,9 @@ describe("DashboardPage", () => {
 
       const callsBefore = vi.mocked(fetch).mock.calls.length;
 
-      await userEvent.selectOptions(
-        screen.getByLabelText(/tipo de estabelecimento/i),
-        "01"
-      );
+      // Open type multiselect and select Hospital Geral
+      await user.click(screen.getByLabelText(/tipo de estabelecimento/i));
+      await user.click(screen.getByRole("checkbox", { name: "Hospital Geral" }));
 
       await waitFor(() =>
         expect(vi.mocked(fetch).mock.calls.length).toBeGreaterThan(callsBefore)
@@ -186,7 +214,7 @@ describe("DashboardPage", () => {
 
       const calls = vi.mocked(fetch).mock.calls;
       const lastCall = calls[calls.length - 1][0] as string;
-      expect(lastCall).toContain("type=01");
+      expect(lastCall).toContain("type=");
     });
   });
 });

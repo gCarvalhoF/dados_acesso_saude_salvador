@@ -3,7 +3,11 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :neighborhoods, only: [ :index, :show ]
+      resources :neighborhoods, only: [ :index, :show ] do
+        collection do
+          get :compare
+        end
+      end
       resources :health_establishments, only: [ :index, :show ]
       get :filter_options, to: "filter_options#index"
 

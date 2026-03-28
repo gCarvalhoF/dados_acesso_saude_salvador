@@ -9,7 +9,7 @@ RSpec.describe "Api::V1::FilterOptions", type: :request do
       json = JSON.parse(response.body)
       expect(json.keys).to contain_exactly(
         "establishment_types", "legal_natures", "management_types",
-        "equipment_items", "specialized_services"
+        "equipment_items", "specialized_services", "reference_categories"
       )
     end
 
@@ -31,6 +31,7 @@ RSpec.describe "Api::V1::FilterOptions", type: :request do
       expect(json["establishment_types"].first).to eq("value" => "", "label" => "Todos os tipos")
       expect(json["legal_natures"].first).to eq("value" => "", "label" => "Todas")
       expect(json["management_types"].first).to eq("value" => "", "label" => "Todos")
+      expect(json["reference_categories"].first).to eq("value" => "", "label" => "Todas as referências")
     end
 
     it "returns all establishment types regardless of database contents" do
@@ -77,7 +78,7 @@ RSpec.describe "Api::V1::FilterOptions", type: :request do
       get "/api/v1/filter_options"
 
       json = JSON.parse(response.body)
-      labels = json["establishment_types"].map { |o| o["label"] }.drop(1) # skip catch-all
+      labels = json["establishment_types"].map { |o| o["label"] }.drop(2) # skip catch-all and preset
       expect(labels).to eq(labels.sort)
     end
 
@@ -160,6 +161,34 @@ RSpec.describe "Api::V1::FilterOptions", type: :request do
 
         json = JSON.parse(response.body)
         json["specialized_services"].each do |opt|
+          expect(opt).to include("value", "label")
+        end
+      end
+    end
+    describe "reference_categories" do
+      it "includes a catch-all option as the first element" do
+        get "/api/v1/filter_options"
+
+        json = JSON.parse(response.body)
+        expect(json["reference_categories"].first).to eq("value" => "", "label" => "Todas as referências")
+      end
+
+      it "returns all reference category options" do
+        get "/api/v1/filter_options"
+
+        json = JSON.parse(response.body)
+        values = json["reference_categories"].map { |o| o["value"] }
+        expect(values).to include(
+          "hospital_infeccao", "referencia_cardiovascular",
+          "referencia_oncologica", "referencia_trauma", "hospital_ensino"
+        )
+      end
+
+      it "each option has value and label" do
+        get "/api/v1/filter_options"
+
+        json = JSON.parse(response.body)
+        json["reference_categories"].each do |opt|
           expect(opt).to include("value", "label")
         end
       end

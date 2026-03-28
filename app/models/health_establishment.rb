@@ -53,6 +53,33 @@ class HealthEstablishment < ApplicationRecord
     "S" => "Sem Gestao"
   }.freeze
 
+  REFERENCE_CATEGORIES = {
+    "hospital_infeccao" => {
+      label: "Hospital de Infecção",
+      service_codes: [ SpecializedService::HIV_AIDS_CODE, SpecializedService::TUBERCULOSIS_CODE ],
+      match: :all
+    },
+    "referencia_cardiovascular" => {
+      label: "Referência Cardiovascular",
+      service_codes: [ SpecializedService::CARDIOLOGY_CODE ],
+      match: :any
+    },
+    "referencia_oncologica" => {
+      label: "Referência Oncológica",
+      service_codes: [ SpecializedService::ONCOLOGY_CODE ],
+      match: :any
+    },
+    "referencia_trauma" => {
+      label: "Referência Trauma/Ortopedia",
+      service_codes: [ SpecializedService::TRAUMA_CODE ],
+      match: :any
+    },
+    "hospital_ensino" => {
+      label: "Hospital de Ensino",
+      column: :is_teaching_hospital
+    }
+  }.freeze
+
   scope :active, -> { where(is_active: true) }
   scope :sus_only, -> { where(is_sus: true) }
   scope :by_type, ->(code) { where(establishment_type_code: code) }
@@ -76,6 +103,45 @@ class HealthEstablishment < ApplicationRecord
   scope :with_equipment, ->(equipment_code) do
     joins(establishment_equipments: :equipment_item)
       .where(equipment_items: { code: equipment_code })
+  end
+
+  scope :by_reference_category, ->(category_key) {
+    config = REFERENCE_CATEGORIES[category_key]
+    return none unless config
+
+    if config[:column]
+      where(config[:column] => true)
+    elsif config[:match] == :all
+      joins(establishment_services: :specialized_service)
+        .where(specialized_services: { code: config[:service_codes] })
+        .group(:id)
+        .having("COUNT(DISTINCT specialized_services.code) = ?", config[:service_codes].length)
+    else
+      joins(establishment_services: :specialized_service)
+        .where(specialized_services: { code: config[:service_codes] })
+    end
+  }
+
+  scope :by_reference_categories, ->(keys) {
+    keys = Array(keys)
+    return by_reference_category(keys.first) if keys.size == 1
+
+    ids = keys.flat_map { |k| by_reference_category(k).pluck(:id) }.uniq
+    where(id: ids)
+  }
+
+  def reference_categories
+    service_codes = specialized_services.pluck(:code)
+
+    REFERENCE_CATEGORIES.filter_map do |key, config|
+      if config[:column]
+        { key: key, label: config[:label] } if send(config[:column])
+      elsif config[:match] == :all
+        { key: key, label: config[:label] } if (config[:service_codes] - service_codes).empty?
+      else
+        { key: key, label: config[:label] } if (config[:service_codes] & service_codes).any?
+      end
+    end
   end
 
   def usf?

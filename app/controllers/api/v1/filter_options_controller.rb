@@ -7,7 +7,8 @@ module Api
           legal_natures: legal_nature_options,
           management_types: management_type_options,
           equipment_items: equipment_item_options,
-          specialized_services: specialized_service_options
+          specialized_services: specialized_service_options,
+          reference_categories: reference_category_options
         }
       end
 
@@ -18,7 +19,9 @@ module Api
           .map { |code, label| { value: code, label: label } }
           .sort_by { |opt| opt[:label] }
 
-        [ { value: "", label: "Todos os tipos" } ] + options
+        preset = { value: "01,02,04,05,32", label: "Hospitais, Clínicas e Policlínicas" }
+
+        [ { value: "", label: "Todos os tipos" }, preset ] + options
       end
 
       def legal_nature_options
@@ -47,6 +50,13 @@ module Api
           .map { |code, name| { value: code, label: name } }
 
         [ { value: "", label: "Todos os serviços" } ] + options
+      end
+
+      def reference_category_options
+        options = HealthEstablishment::REFERENCE_CATEGORIES
+          .map { |key, config| { value: key, label: config[:label] } }
+
+        [ { value: "", label: "Todas as referências" } ] + options
       end
 
       def legal_nature_label(key)

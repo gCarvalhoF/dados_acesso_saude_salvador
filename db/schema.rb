@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_01_01_000010) do
+ActiveRecord::Schema[8.0].define(version: 2026_03_28_000001) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "postgis"
@@ -77,7 +77,8 @@ ActiveRecord::Schema[8.0].define(version: 2026_01_01_000010) do
     t.bigint "neighborhood_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.geography "coordinates", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}
+    t.geography "coordinates", limit: {srid: 4326, type: "st_point", geographic: true}
+    t.boolean "is_teaching_hospital", default: false, null: false
     t.index ["cnes_code"], name: "index_health_establishments_on_cnes_code", unique: true
     t.index ["coordinates"], name: "index_health_establishments_on_coordinates", using: :gist
     t.index ["establishment_type_code"], name: "index_health_establishments_on_establishment_type_code"
@@ -101,7 +102,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_01_01_000010) do
 
   create_table "neighborhoods", force: :cascade do |t|
     t.string "name", null: false
-    t.geography "geometry", limit: {:srid=>4326, :type=>"multi_polygon", :geographic=>true}
+    t.geography "geometry", limit: {srid: 4326, type: "multi_polygon", geographic: true}
     t.integer "population_total"
     t.float "population_male"
     t.float "population_female"

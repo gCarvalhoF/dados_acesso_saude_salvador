@@ -101,6 +101,67 @@ RSpec.describe "Api::V1::HealthEstablishments", type: :request do
       expect(codes).to include(est_with.cnes_code)
       expect(codes).not_to include(est_without.cnes_code)
     end
+
+    it "filters by reference_category" do
+      est_cardio = create(:health_establishment, :with_cardiology)
+      est_plain = create(:health_establishment)
+
+      get "/api/v1/health_establishments", params: { reference_category: "referencia_cardiovascular" }
+
+      json = JSON.parse(response.body)
+      codes = json["features"].map { |f| f["properties"]["cnes_code"] }
+      expect(codes).to include(est_cardio.cnes_code)
+      expect(codes).not_to include(est_plain.cnes_code)
+    end
+
+    it "filters by comma-separated type codes" do
+      hospital = create(:health_establishment, establishment_type_code: "01")
+      ubs = create(:health_establishment, establishment_type_code: "02")
+      caps = create(:health_establishment, establishment_type_code: "70")
+
+      get "/api/v1/health_establishments", params: { type: "01,02" }
+
+      json = JSON.parse(response.body)
+      codes = json["features"].map { |f| f["properties"]["cnes_code"] }
+      expect(codes).to include(hospital.cnes_code, ubs.cnes_code)
+      expect(codes).not_to include(caps.cnes_code)
+    end
+
+    it "filters by comma-separated management types" do
+      municipal = create(:health_establishment, management_type: "M")
+      estadual = create(:health_establishment, management_type: "E")
+      dupla = create(:health_establishment, management_type: "D")
+
+      get "/api/v1/health_establishments", params: { management: "M,E" }
+
+      json = JSON.parse(response.body)
+      codes = json["features"].map { |f| f["properties"]["cnes_code"] }
+      expect(codes).to include(municipal.cnes_code, estadual.cnes_code)
+      expect(codes).not_to include(dupla.cnes_code)
+    end
+
+    it "filters by comma-separated reference categories" do
+      est_cardio = create(:health_establishment, :with_cardiology)
+      est_ensino = create(:health_establishment, :teaching_hospital)
+      est_plain = create(:health_establishment)
+
+      get "/api/v1/health_establishments", params: { reference_category: "referencia_cardiovascular,hospital_ensino" }
+
+      json = JSON.parse(response.body)
+      codes = json["features"].map { |f| f["properties"]["cnes_code"] }
+      expect(codes).to include(est_cardio.cnes_code, est_ensino.cnes_code)
+      expect(codes).not_to include(est_plain.cnes_code)
+    end
+
+    it "includes reference_categories in properties" do
+      create(:health_establishment, :with_cardiology)
+
+      get "/api/v1/health_establishments"
+
+      json = JSON.parse(response.body)
+      props = json["features"][0]["properties"]
+      expect(props["reference_categories"]).to include("Referência Cardiovascular")
+    end
   end
 
   describe "GET /api/v1/health_establishments/:id" do

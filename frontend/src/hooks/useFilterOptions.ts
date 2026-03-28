@@ -8,6 +8,7 @@ const DEFAULT_FILTER_OPTIONS: FilterOptions = {
   management_types: Object.entries(MANAGEMENT_TYPES).map(([value, label]) => ({ value, label })),
   equipment_items: [],
   specialized_services: [],
+  reference_categories: [],
 };
 
 export function useFilterOptions() {

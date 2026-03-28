@@ -389,10 +389,10 @@ SEMPRE USANDO TESTES PROGRAMÁTICOS
 - [x] Testes unitarios: 91 exemplos frontend (9 arquivos) + 109 exemplos backend (0 falhas)
 
 ### Fase 4 - Refinamentos
-- [ ] Classificacao de hospitais de referencia
-- [ ] Comparativo entre bairros
-- [ ] Exportacao de dados filtrados (CSV)
-- [ ] Responsividade mobile
+- [x] Classificacao de hospitais de referencia (5 categorias: infeccao, cardiovascular, oncologia, trauma, ensino)
+- [x] Comparativo entre bairros (selecao de ate 5 bairros, tabela lado a lado com metricas e indicadores derivados)
+- [ ] Exportacao de dados filtrados (CSV) — adiado
+- [x] Responsividade mobile (FilterPanel como drawer, layout adaptativo para telas < 768px)
 
 ---
 

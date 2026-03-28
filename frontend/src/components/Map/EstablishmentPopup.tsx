@@ -27,6 +27,11 @@ export default function EstablishmentPopup({ id }: Props) {
             {data.management_name}
           </span>
         )}
+        {data.reference_categories?.map((cat) => (
+          <span key={cat} className="bg-purple-100 text-purple-800 text-xs px-2 py-0.5 rounded">
+            {cat}
+          </span>
+        ))}
       </div>
 
       {data.address && <p className="text-gray-600 text-xs mb-1">{data.address}</p>}
