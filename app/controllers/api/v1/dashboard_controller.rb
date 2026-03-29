@@ -1,18 +1,19 @@
 module Api
   module V1
     class DashboardController < ApplicationController
+      include EstablishmentFiltering
+
       def overview
+        base = apply_establishment_filters(HealthEstablishment.active)
+
         render json: {
           establishments: {
-            total: HealthEstablishment.active.count,
-            sus: HealthEstablishment.active.sus_only.count,
-            by_type: establishments_by_type
+            total: base.count,
+            sus: base.sus_only.count,
+            by_type: establishments_by_type(base)
           },
-          equipments: equipment_summary,
-          beds: {
-            total_existing: HospitalBed.sum(:quantity_existing),
-            total_sus: HospitalBed.sum(:quantity_sus)
-          },
+          equipments: equipment_summary(base),
+          beds: beds_summary(base),
           neighborhoods: {
             total: Neighborhood.count,
             with_data: Neighborhood.with_population.count
@@ -21,8 +22,9 @@ module Api
       end
 
       def equipment_by_neighborhood
-        results = HealthEstablishment
-                    .active
+        base = apply_establishment_filters(HealthEstablishment.active)
+
+        results = base
                     .where.not(neighborhood_id: nil)
                     .joins(:establishment_equipments)
                     .joins(neighborhood: [])
@@ -35,12 +37,13 @@ module Api
       end
 
       def service_summary
+        base = apply_establishment_filters(HealthEstablishment.active)
+
         results = SpecializedService
                     .joins(:establishment_services)
-                    .joins("INNER JOIN health_establishments ON establishment_services.health_establishment_id = health_establishments.id")
-                    .where(health_establishments: { is_active: true })
+                    .where(establishment_services: { health_establishment_id: base.select(:id) })
                     .group("specialized_services.code", "specialized_services.name")
-                    .count("DISTINCT health_establishments.id")
+                    .count("DISTINCT establishment_services.health_establishment_id")
                     .map { |(code, name), count| { code: code, name: name, establishments_count: count } }
                     .sort_by { |r| -r[:establishments_count] }
                     .first(20)
@@ -50,11 +53,10 @@ module Api
 
       private
 
-      def establishments_by_type
-        HealthEstablishment.active
-                           .group(:establishment_type_code)
-                           .count
-                           .map do |code, count|
+      def establishments_by_type(base)
+        base.group(:establishment_type_code)
+            .count
+            .map do |code, count|
           {
             code: code,
             name: HealthEstablishment::ESTABLISHMENT_TYPE_MAP[code] || "Outro",
@@ -63,16 +65,26 @@ module Api
         end.sort_by { |r| -r[:count] }
       end
 
-      def equipment_summary
+      def equipment_summary(base)
+        establishment_equipments = EstablishmentEquipment.where(health_establishment: base)
         {
-          total_equipments: EstablishmentEquipment.sum(:quantity_existing),
-          sus_equipments: EstablishmentEquipment.available_sus.sum(:quantity_existing),
+          total_equipments: establishment_equipments.sum(:quantity_existing),
+          sus_equipments: establishment_equipments.available_sus.sum(:quantity_existing),
           by_type: EquipmentType.joins(equipment_items: :establishment_equipments)
+                                .where(establishment_equipments: { health_establishment: base })
                                 .group("equipment_types.name")
                                 .sum("establishment_equipments.quantity_existing")
                                 .map { |name, count| { type: name, total: count } }
                                 .sort_by { |r| -r[:total] }
                                 .first(10)
+        }
+      end
+
+      def beds_summary(base)
+        beds = HospitalBed.where(health_establishment: base)
+        {
+          total_existing: beds.sum(:quantity_existing),
+          total_sus: beds.sum(:quantity_sus)
         }
       end
     end

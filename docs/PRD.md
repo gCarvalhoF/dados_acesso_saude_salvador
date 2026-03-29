@@ -197,7 +197,16 @@ GET /api/v1/equipments/summary
   Contagens agregadas para graficos
 
 GET /api/v1/dashboard/overview
-  Cards resumo: total estabelecimentos, equipamentos, leitos SUS, etc.
+  ?type=&legal_nature=&management=&sus_only=&neighborhood_id=&equipment=&service=&reference_category=
+  Cards resumo: total estabelecimentos, equipamentos, leitos SUS, etc. (filtrados)
+
+GET /api/v1/dashboard/equipment_by_neighborhood
+  ?type=&legal_nature=&management=&sus_only=&neighborhood_id=&equipment=&service=&reference_category=
+  Equipamentos por bairro (top 10, filtrados)
+
+GET /api/v1/dashboard/service_summary
+  ?type=&legal_nature=&management=&sus_only=&neighborhood_id=&equipment=&service=&reference_category=
+  Servicos especializados mais oferecidos (top 20, filtrados)
 ```
 
 ### 5.3 Frontend (React + Vite standalone)
@@ -220,7 +229,7 @@ frontend/src/
     useNeighborhoods.ts         # Busca bairros da API
     useEstablishments.ts        # Busca estabelecimentos com filtros
     useFilterOptions.ts         # Busca opcoes de filtro da API (com fallback hardcoded)
-    useDashboard.ts             # Busca dados agregados (overview, equip. por bairro, servicos)
+    useDashboard.ts             # Busca dados agregados com filtros (overview, equip. por bairro, servicos)
   components/
     DashboardPage.tsx           # Layout principal + estado global
     Map/
@@ -388,6 +397,12 @@ SEMPRE USANDO TESTES PROGRAMÁTICOS
 - [x] Comparativo entre bairros (selecao de ate 5 bairros, tabela lado a lado com metricas e indicadores derivados)
 - [ ] Exportacao de dados filtrados (CSV) — adiado
 - [x] Responsividade mobile (FilterPanel como drawer, layout adaptativo para telas < 768px)
+
+### Fase 5 - Filtros Globais e Interatividade
+- [x] Filtros aplicados em toda a pagina: cards de metricas e graficos respondem aos filtros (backend + frontend)
+- [x] Concern `EstablishmentFiltering` extrai logica de filtros para reutilizacao entre controllers
+- [x] Comparacao de bairros sincronizada com filtro global `neighborhood_id` (selecionar bairros na comparacao filtra o dashboard inteiro)
+- [x] Click nos graficos para filtrar: tipo de estabelecimento (pie), bairros (barras de equipamentos), servico especializado (barras de servicos)
 
 ### Fase 6 - IBGE como fonte unica de bairros e censo
 - [x] Migracao do schema: removidas colunas de renda (income_*) e faixas etarias antigas; adicionados codigos IBGE (regiao/UF/municipio/distrito/subdistrito/bairro), area_km2, faixas etarias finas (0-4, 5-9, 10-14, ..., 70+) e cor/raca x sexo

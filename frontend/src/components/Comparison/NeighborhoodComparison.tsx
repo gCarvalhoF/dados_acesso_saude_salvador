@@ -6,11 +6,16 @@ import ComparisonTable from "./ComparisonTable";
 
 interface Props {
   neighborhoods: NeighborhoodCollection | null;
+  selectedIds: number[];
+  onSelectedIdsChange: (ids: number[]) => void;
 }
 
-export default function NeighborhoodComparison({ neighborhoods }: Props) {
+export default function NeighborhoodComparison({
+  neighborhoods,
+  selectedIds,
+  onSelectedIdsChange,
+}: Props) {
   const [open, setOpen] = useState(false);
-  const [selectedIds, setSelectedIds] = useState<number[]>([]);
   const { data, loading } = useNeighborhoodComparison(selectedIds);
 
   const options = (neighborhoods?.features ?? [])
@@ -28,7 +33,14 @@ export default function NeighborhoodComparison({ neighborhoods }: Props) {
         className="w-full px-4 py-2.5 flex items-center justify-between text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
         aria-expanded={open}
       >
-        <span>Comparar Bairros</span>
+        <span className="flex items-center gap-2">
+          Comparar Bairros
+          {selectedIds.length >= 2 && (
+            <span className="bg-blue-100 text-blue-700 text-xs px-2 py-0.5 rounded-full font-medium">
+              {selectedIds.length} selecionados
+            </span>
+          )}
+        </span>
         <svg
           className={`w-4 h-4 transition-transform ${open ? "rotate-180" : ""}`}
           fill="none"
@@ -47,9 +59,12 @@ export default function NeighborhoodComparison({ neighborhoods }: Props) {
               label="Selecione bairros para comparar"
               options={options}
               selected={selectedIds}
-              onChange={setSelectedIds}
+              onChange={onSelectedIdsChange}
               max={5}
             />
+            <p className="text-xs text-blue-600">
+              Ao selecionar bairros, o mapa, gráficos e cards são filtrados automaticamente.
+            </p>
           </div>
 
           {selectedIds.length < 2 && (

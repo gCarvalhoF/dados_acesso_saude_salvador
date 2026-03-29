@@ -36,6 +36,7 @@ export default function DashboardPage() {
   const [selectedNeighborhoodName, setSelectedNeighborhoodName] = useState<string>("");
   const [choroplethMetric, setChoroplethMetric] = useState<ChoroplethMetric>("establishments_count");
   const [filterOpen, setFilterOpen] = useState(false);
+  const [comparisonIds, setComparisonIds] = useState<number[]>([]);
 
   const { data: neighborhoods, loading: loadingNeighborhoods } = useNeighborhoods();
   const { data: establishments, loading: loadingEstablishments } = useEstablishments(filters);
@@ -45,7 +46,7 @@ export default function DashboardPage() {
     equipmentByNeighborhood,
     serviceSummary,
     loading: loadingDashboard,
-  } = useDashboard();
+  } = useDashboard(filters);
 
   function handleFilterChange(partial: Partial<Filters>) {
     setFilters((prev) => ({ ...prev, ...partial }));
@@ -68,6 +69,29 @@ export default function DashboardPage() {
     setSelectedNeighborhood(id);
     setSelectedNeighborhoodName(id ? name : "");
     setFilters((prev) => ({ ...prev, neighborhood_id: id ? String(id) : "" }));
+  }
+
+  function handleClearNeighborhood() {
+    setSelectedNeighborhood(null);
+    setSelectedNeighborhoodName("");
+    setComparisonIds([]);
+    setFilters((prev) => ({ ...prev, neighborhood_id: "" }));
+  }
+
+  function handleComparisonIdsChange(ids: number[]) {
+    setComparisonIds(ids);
+    if (ids.length === 0) {
+      setSelectedNeighborhood(null);
+      setSelectedNeighborhoodName("");
+      setFilters((prev) => ({ ...prev, neighborhood_id: "" }));
+    } else {
+      const names = ids.map(
+        (nid) => neighborhoods?.features.find((f) => f.properties.id === nid)?.properties.name ?? ""
+      ).filter(Boolean);
+      setSelectedNeighborhood(ids[0]);
+      setSelectedNeighborhoodName(names.join(", "));
+      setFilters((prev) => ({ ...prev, neighborhood_id: ids.join(",") }));
+    }
   }
 
   const totalCount = establishments?.features.length ?? 0;
@@ -102,7 +126,7 @@ export default function DashboardPage() {
               {selectedNeighborhoodName}
             </span>
             <button
-              onClick={() => handleNeighborhoodSelect(null, "")}
+              onClick={handleClearNeighborhood}
               className="text-gray-400 hover:text-gray-600 text-lg leading-none"
               title="Limpar seleção"
             >
@@ -135,7 +159,11 @@ export default function DashboardPage() {
             <MetricCards overview={overview} loading={loadingDashboard} />
 
             {/* Neighborhood Comparison */}
-            <NeighborhoodComparison neighborhoods={neighborhoods} />
+            <NeighborhoodComparison
+              neighborhoods={neighborhoods}
+              selectedIds={comparisonIds}
+              onSelectedIdsChange={handleComparisonIdsChange}
+            />
 
             {/* Choropleth metric selector + Map */}
             <div className="bg-white rounded-lg shadow-sm border border-gray-100">
@@ -176,6 +204,7 @@ export default function DashboardPage() {
               serviceSummary={serviceSummary}
               neighborhoods={neighborhoods}
               loading={loadingDashboard}
+              onFilterChange={handleFilterChange}
             />
           </div>
         </main>

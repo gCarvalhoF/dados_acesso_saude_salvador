@@ -15,6 +15,12 @@ function mockHook(state: { data: NeighborhoodProperties[] | null; loading: boole
   vi.mocked(useNeighborhoodComparison).mockReturnValue(state);
 }
 
+const defaultProps = {
+  neighborhoods: mockNeighborhoods,
+  selectedIds: [] as number[],
+  onSelectedIdsChange: vi.fn(),
+};
+
 describe("NeighborhoodComparison", () => {
   beforeEach(() => {
     vi.clearAllMocks();
@@ -22,25 +28,30 @@ describe("NeighborhoodComparison", () => {
   });
 
   it("renderiza o botão 'Comparar Bairros'", () => {
-    render(<NeighborhoodComparison neighborhoods={mockNeighborhoods} />);
+    render(<NeighborhoodComparison {...defaultProps} />);
     expect(screen.getByText("Comparar Bairros")).toBeInTheDocument();
   });
 
   it("inicialmente o conteúdo está colapsado", () => {
-    render(<NeighborhoodComparison neighborhoods={mockNeighborhoods} />);
+    render(<NeighborhoodComparison {...defaultProps} />);
     expect(screen.queryByText("Selecione bairros para comparar")).not.toBeInTheDocument();
   });
 
   it("expande ao clicar no botão", async () => {
-    render(<NeighborhoodComparison neighborhoods={mockNeighborhoods} />);
+    render(<NeighborhoodComparison {...defaultProps} />);
     await userEvent.click(screen.getByText("Comparar Bairros"));
     expect(screen.getByText("Selecione bairros para comparar")).toBeInTheDocument();
   });
 
   it("mostra mensagem quando menos de 2 bairros selecionados", async () => {
-    render(<NeighborhoodComparison neighborhoods={mockNeighborhoods} />);
+    render(<NeighborhoodComparison {...defaultProps} />);
     await userEvent.click(screen.getByText("Comparar Bairros"));
     expect(screen.getByText("Selecione pelo menos 2 bairros para comparar.")).toBeInTheDocument();
+  });
+
+  it("mostra badge com contagem quando bairros selecionados", () => {
+    render(<NeighborhoodComparison {...defaultProps} selectedIds={[1, 2]} />);
+    expect(screen.getByText("2 selecionados")).toBeInTheDocument();
   });
 
   it("exibe o nome da cidade ao lado do bairro nas opções de comparação", async () => {
@@ -55,7 +66,7 @@ describe("NeighborhoodComparison", () => {
 
   it("exibe loading quando dados estão sendo buscados", async () => {
     mockHook({ data: null, loading: true, error: null });
-    render(<NeighborhoodComparison neighborhoods={mockNeighborhoods} />);
+    render(<NeighborhoodComparison {...defaultProps} />);
     await userEvent.click(screen.getByText("Comparar Bairros"));
     expect(screen.getByText("Carregando comparativo...")).toBeInTheDocument();
   });
@@ -63,7 +74,7 @@ describe("NeighborhoodComparison", () => {
   it("exibe tabela de comparação quando dados estão disponíveis", async () => {
     const comparisonData = mockNeighborhoods.features.map((f) => f.properties);
     mockHook({ data: comparisonData, loading: false, error: null });
-    render(<NeighborhoodComparison neighborhoods={mockNeighborhoods} />);
+    render(<NeighborhoodComparison {...defaultProps} selectedIds={[1, 2]} />);
     await userEvent.click(screen.getByText("Comparar Bairros"));
     expect(screen.getByTestId("comparison-table")).toBeInTheDocument();
     expect(screen.getByText("População Total")).toBeInTheDocument();
@@ -72,22 +83,20 @@ describe("NeighborhoodComparison", () => {
   it("exibe nomes dos bairros como cabeçalhos da tabela", async () => {
     const comparisonData = mockNeighborhoods.features.map((f) => f.properties);
     mockHook({ data: comparisonData, loading: false, error: null });
-    render(<NeighborhoodComparison neighborhoods={mockNeighborhoods} />);
+    render(<NeighborhoodComparison {...defaultProps} selectedIds={[1, 2]} />);
     await userEvent.click(screen.getByText("Comparar Bairros"));
-    expect(screen.getByText("Pituba")).toBeInTheDocument();
-    expect(screen.getByText("Barra")).toBeInTheDocument();
+    const table = screen.getByTestId("comparison-table");
+    expect(table.innerHTML).toContain("Pituba");
+    expect(table.innerHTML).toContain("Barra");
   });
 
   it("calcula indicadores por 10k habitantes", async () => {
     const comparisonData = mockNeighborhoods.features.map((f) => f.properties);
     mockHook({ data: comparisonData, loading: false, error: null });
-    render(<NeighborhoodComparison neighborhoods={mockNeighborhoods} />);
+    render(<NeighborhoodComparison {...defaultProps} selectedIds={[1, 2]} />);
     await userEvent.click(screen.getByText("Comparar Bairros"));
-    // Pituba: 15 equip / 50000 pop * 10000 = 3.0
-    // Barra: 5 equip / 30000 pop * 10000 ≈ 1.7
     const table = screen.getByTestId("comparison-table");
     expect(table).toBeInTheDocument();
-    // Verify the derived metrics section exists
     expect(screen.getByText("Equipamentos / 10k hab.")).toBeInTheDocument();
     expect(screen.getByText("Leitos SUS / 10k hab.")).toBeInTheDocument();
   });

@@ -87,18 +87,25 @@ Automatizar scraping e importing de dados do CNES para manter os dados atualizad
 
 #### Feedbacks
 
-1. Aplicar os filtros de bairros no dashboard inteiro ao comparar bairros
-2. Colocar o botão de comparar bairros na sidebar
-3. Melhorar visualização dos tooltips internos do mapa
-4. Diminuir ou adicionar a habilidade de ligar/desligar os pontos no mapa
-5. Adicionar o comportamento de clicar na legenda ou nos gráficos e automaticamente filtrar o mapa
-6. Investigar performance
-7. Aplicar os filtros na página inteira (mapa, gráficos e cards no header)
-8. Mudar o gráfico de torta pra mostrar somente labels acima de 5%
-9. Revisitar estilo do loading (Talvez um spinner com mais contraste)
-10. Revisitar os textos de limpar os filtros, remover da barra de pesquisa e colocar do lado "de fora" do filtro
-11. Padronizar os símbolos e cores do mapa
-12. Esconder os bairros caso não tenha informação neles (????)
+1. Feedbacks sobre filtros ✅
+- [x] Aplicar os filtros de bairros no dashboard inteiro ao comparar bairros
+- [x] Aplicar os filtros na página inteira (mapa, gráficos e cards no header)
+- [x] Adicionar o comportamento de clicar na legenda ou nos gráficos e automaticamente filtrar o mapa
+
+2. Tasks referentes ao backend
+Investigar performance
+Investigar os pontos que estão nos lugares errado do mapa (uns aparecem na cidade errada, outros no meio do mar)
+
+3. Mudanças de UI/UX
+Colocar o botão de comparar bairros na sidebar
+Mudar o gráfico de torta pra mostrar somente labels acima de 5%
+Revisitar estilo do loading (Talvez um spinner com mais contraste)
+Revisitar os textos de limpar os filtros, remover da barra de pesquisa e colocar do lado "de fora" do filtro
+
+4. Feedbacks sobre coisas internas ao mapa
+Diminuir ou adicionar a habilidade de ligar/desligar os pontos no mapa
+Padronizar os símbolos e cores do mapa
+Melhorar visualização dos tooltips internos do mapa
 
 # Material de leitura importante
 

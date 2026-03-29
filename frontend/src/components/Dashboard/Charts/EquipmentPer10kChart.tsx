@@ -15,11 +15,13 @@ import type {
 interface Props {
   equipmentData: EquipmentByNeighborhood[];
   neighborhoods: NeighborhoodCollection | null;
+  onNeighborhoodClick?: (name: string) => void;
 }
 
 export default function EquipmentPer10kChart({
   equipmentData,
   neighborhoods,
+  onNeighborhoodClick,
 }: Props) {
   if (!equipmentData.length || !neighborhoods) return null;
 
@@ -44,28 +46,43 @@ export default function EquipmentPer10kChart({
   if (!computed.length) return null;
 
   return (
-    <ResponsiveContainer width="100%" height={400}>
-      <BarChart
-        data={computed}
-        layout="vertical"
-        margin={{ left: 20, right: 20 }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis type="number" />
-        <YAxis
-          type="category"
-          dataKey="neighborhood"
-          width={140}
-          tick={{ fontSize: 11 }}
-        />
-        <Tooltip
-          formatter={(value) => [
-            Number(value).toLocaleString("pt-BR"),
-            "por 10 mil hab.",
-          ]}
-        />
-        <Bar dataKey="per_10k" fill="#16a34a" radius={[0, 4, 4, 0]} />
-      </BarChart>
-    </ResponsiveContainer>
+    <div>
+      {onNeighborhoodClick && (
+        <p className="text-xs text-gray-400 mb-1 text-center">Clique em um bairro para filtrar</p>
+      )}
+      <ResponsiveContainer width="100%" height={400}>
+        <BarChart
+          data={computed}
+          layout="vertical"
+          margin={{ left: 20, right: 20 }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis type="number" />
+          <YAxis
+            type="category"
+            dataKey="neighborhood"
+            width={140}
+            tick={{ fontSize: 11 }}
+          />
+          <Tooltip
+            formatter={(value) => [
+              Number(value).toLocaleString("pt-BR"),
+              "por 10 mil hab.",
+            ]}
+          />
+          <Bar
+            dataKey="per_10k"
+            fill="#16a34a"
+            radius={[0, 4, 4, 0]}
+            style={{ cursor: onNeighborhoodClick ? "pointer" : "default" }}
+            onClick={
+              onNeighborhoodClick
+                ? (entry: { neighborhood: string }) => onNeighborhoodClick(entry.neighborhood)
+                : undefined
+            }
+          />
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
   );
 }
