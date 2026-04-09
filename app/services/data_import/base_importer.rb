@@ -21,6 +21,12 @@ module DataImport
       end
     end
 
+    def latest_cnes_version
+      return if @use_fixtures
+
+      Dir.entries(CNES_PATH).select { |f| f.to_i.positive? }.max
+    end
+
     def salvador_geojson_path(filename)
       AUX_DATA_PATH.join("salvador", filename)
     end

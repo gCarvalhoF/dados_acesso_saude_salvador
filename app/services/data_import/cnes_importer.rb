@@ -310,9 +310,5 @@ module DataImport
       # CO_CLIENTELA: 01 = SUS, 02 = Non-SUS, 03 = Both
       co_clientela&.strip&.in?(%w[01 03]) || false
     end
-
-    def latest_cnes_version
-      Dir.entries(CNES_PATH).select { |f| f.to_i.positive? }.max
-    end
   end
 end
