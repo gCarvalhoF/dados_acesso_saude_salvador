@@ -2,6 +2,7 @@ module DataImport
   class BaseImporter
     SALVADOR_MUNICIPALITY_CODE = "292740"
     AUX_DATA_PATH = Rails.root.join("aux-data")
+    CNES_PATH = Rails.root.join("aux-data", "cnes-database")
     FIXTURE_CNES_PATH = Rails.root.join("spec", "fixtures", "cnes_csv")
 
     def self.call(**kwargs)
@@ -10,7 +11,7 @@ module DataImport
 
     private
 
-    def cnes_csv_path(filename)
+    def cnes_csv_path(filename, version)
       if @use_fixtures
         # Remove date suffix like 202508 from filename to match fixture file
         fixture_name = filename.gsub(/\d{6}\.csv$/, ".csv")
@@ -18,6 +19,12 @@ module DataImport
       else
         AUX_DATA_PATH.join("cnes-database", filename)
       end
+    end
+
+    def latest_cnes_version
+      return if @use_fixtures
+
+      Dir.entries(CNES_PATH).select { |f| f.to_i.positive? }.max
     end
 
     def salvador_geojson_path(filename)
