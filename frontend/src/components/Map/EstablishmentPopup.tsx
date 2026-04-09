@@ -66,7 +66,7 @@ export default function EstablishmentPopup({ id }: Props) {
           <p className="font-semibold text-xs text-gray-700 mb-1">Serviços Especializados</p>
           <ul className="text-xs space-y-0.5">
             {data.services.slice(0, 4).map((svc) => (
-              <li key={svc.code}>{svc.name}</li>
+              <li key={`${svc.code}-${svc.classification_code}`}>{svc.name}</li>
             ))}
             {data.services.length > 4 && (
               <li className="text-gray-400">+{data.services.length - 4} mais...</li>

@@ -101,6 +101,7 @@ Colocar o botão de comparar bairros na sidebar
 Mudar o gráfico de torta pra mostrar somente labels acima de 5%
 Revisitar estilo do loading (Talvez um spinner com mais contraste)
 Revisitar os textos de limpar os filtros, remover da barra de pesquisa e colocar do lado "de fora" do filtro
+Implementar clustering de pontos do leaflet
 
 4. Feedbacks sobre coisas internas ao mapa
 Diminuir ou adicionar a habilidade de ligar/desligar os pontos no mapa
