@@ -17,7 +17,7 @@ module DataImport
         fixture_name = filename.gsub(/\d{6}\.csv$/, ".csv")
         FIXTURE_CNES_PATH.join(fixture_name)
       else
-        AUX_DATA_PATH.join("cnes-database", filename)
+        AUX_DATA_PATH.join("cnes-database", version, filename)
       end
     end
 
