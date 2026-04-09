@@ -11,7 +11,7 @@ module DataImport
 
     private
 
-    def cnes_csv_path(filename)
+    def cnes_csv_path(filename, version)
       if @use_fixtures
         # Remove date suffix like 202508 from filename to match fixture file
         fixture_name = filename.gsub(/\d{6}\.csv$/, ".csv")

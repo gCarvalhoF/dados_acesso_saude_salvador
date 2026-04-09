@@ -30,7 +30,7 @@ module DataImport
     def import_equipment_types
       log "Importing equipment types..."
       count = 0
-      parse_csv(versioned_cnes_csv_path("tbTipoEquipamento#{@version}.csv")) do |row|
+      parse_csv(cnes_csv_path("tbTipoEquipamento#{@version}.csv", @version)) do |row|
         code = row["CO_TIPO_EQUIPAMENTO"]&.strip
         name = row["DS_TIPO_EQUIPAMENTO"]&.strip
         next if code.blank? || name.blank?
@@ -44,7 +44,7 @@ module DataImport
     def import_equipment_items
       log "Importing equipment items..."
       count = 0
-      parse_csv(versioned_cnes_csv_path("tbEquipamento#{@version}.csv")) do |row|
+      parse_csv(cnes_csv_path("tbEquipamento#{@version}.csv", @version)) do |row|
         code = row["CO_EQUIPAMENTO"]&.strip
         name = row["DS_EQUIPAMENTO"]&.strip
         type_code = row["CO_TIPO_EQUIPAMENTO"]&.strip
@@ -65,7 +65,7 @@ module DataImport
     def import_specialized_services
       log "Importing specialized services..."
       count = 0
-      parse_csv(versioned_cnes_csv_path("tbServicoEspecializado#{@version}.csv")) do |row|
+      parse_csv(cnes_csv_path("tbServicoEspecializado#{@version}.csv", @version)) do |row|
         code = row["CO_SERVICO_ESPECIALIZADO"]&.strip
         name = row["DS_SERVICO_ESPECIALIZADO"]&.strip
         next if code.blank? || name.blank?
@@ -84,7 +84,7 @@ module DataImport
       log "Importing health establishments for Salvador..."
       count = 0
 
-      parse_csv(versioned_cnes_csv_path("tbEstabelecimento#{@version}.csv")) do |row|
+      parse_csv(cnes_csv_path("tbEstabelecimento#{@version}.csv", @version)) do |row|
         municipality = row["CO_MUNICIPIO_GESTOR"]&.strip
         next unless municipality == SALVADOR_MUNICIPALITY_CODE
 
@@ -130,7 +130,7 @@ module DataImport
       count = 0
       salvador_cnes_codes = HealthEstablishment.pluck(:cnes_code).to_set
 
-      parse_csv(versioned_cnes_csv_path("rlEstabEquipamento#{@version}.csv")) do |row|
+      parse_csv(cnes_csv_path("rlEstabEquipamento#{@version}.csv", @version)) do |row|
         unit_code = row["CO_UNIDADE"]&.strip
         cnes_code = unit_code&.slice(6..) # CO_CNES is CO_UNIDADE without municipality prefix
         next unless salvador_cnes_codes.include?(cnes_code)
@@ -165,7 +165,7 @@ module DataImport
                                                .map { |c| "#{SALVADOR_MUNICIPALITY_CODE}#{c}" }
                                                .to_set
 
-      parse_csv(versioned_cnes_csv_path("rlEstabServClass#{@version}.csv")) do |row|
+      parse_csv(cnes_csv_path("rlEstabServClass#{@version}.csv", @version)) do |row|
         unit_code = row["CO_UNIDADE"]&.strip
         next unless salvador_unit_codes.include?(unit_code)
 
@@ -203,7 +203,7 @@ module DataImport
                                                .map { |c| "#{SALVADOR_MUNICIPALITY_CODE}#{c}" }
                                                .to_set
 
-      parse_csv(versioned_cnes_csv_path("rlEstabComplementar#{@version}.csv")) do |row|
+      parse_csv(cnes_csv_path("rlEstabComplementar#{@version}.csv", @version)) do |row|
         unit_code = row["CO_UNIDADE"]&.strip
         next unless salvador_unit_codes.include?(unit_code)
 
@@ -238,7 +238,7 @@ module DataImport
       count = 0
       salvador_cnes_codes = HealthEstablishment.pluck(:cnes_code).to_set
 
-      parse_csv(versioned_cnes_csv_path("rlEstabSipac#{@version}.csv")) do |row|
+      parse_csv(cnes_csv_path("rlEstabSipac#{@version}.csv", @version)) do |row|
         unit_code = row["CO_UNIDADE"]&.strip
         next unless unit_code&.start_with?(SALVADOR_MUNICIPALITY_CODE)
 
@@ -313,10 +313,6 @@ module DataImport
 
     def latest_cnes_version
       Dir.entries(CNES_PATH).select { |f| f.to_i.positive? }.max
-    end
-
-    def versioned_cnes_csv_path(file_name)
-      "#{CNES_PATH}/#{@version}/#{file_name}"
     end
   end
 end
