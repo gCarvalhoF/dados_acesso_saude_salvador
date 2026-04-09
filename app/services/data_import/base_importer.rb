@@ -2,6 +2,7 @@ module DataImport
   class BaseImporter
     SALVADOR_MUNICIPALITY_CODE = "292740"
     AUX_DATA_PATH = Rails.root.join("aux-data")
+    CNES_PATH = Rails.root.join("aux-data", "cnes-database")
     FIXTURE_CNES_PATH = Rails.root.join("spec", "fixtures", "cnes_csv")
 
     def self.call(**kwargs)
