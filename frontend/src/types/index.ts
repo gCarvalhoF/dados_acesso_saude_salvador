@@ -1,6 +1,18 @@
 export interface NeighborhoodProperties {
   id: number;
   name: string;
+  region_ibge_code: string | null;
+  region_name: string | null;
+  state_ibge_code: string | null;
+  state_name: string | null;
+  city_ibge_code: string | null;
+  city_name: string | null;
+  district_ibge_code: string | null;
+  district_name: string | null;
+  subdistrict_ibge_code: string | null;
+  subdistrict_name: string | null;
+  neighborhood_ibge_code: string | null;
+  area_km2: number | null;
   population_total: number | null;
   population_male: number | null;
   population_female: number | null;
@@ -8,14 +20,33 @@ export interface NeighborhoodProperties {
   population_white: number | null;
   population_black: number | null;
   population_brown: number | null;
-  income_0_2_wages: number | null;
-  income_2_5_wages: number | null;
-  income_5_10_wages: number | null;
-  income_10_20_wages: number | null;
-  income_above_20_wages: number | null;
   establishments_count: number;
   sus_beds_count: number;
   equipment_count: number;
+  // Comparison-only fields — populated only by GET /api/v1/neighborhoods/compare
+  population_asian?: number | null;
+  population_indigenous?: number | null;
+  population_0_to_4?: number | null;
+  population_5_to_9?: number | null;
+  population_10_to_14?: number | null;
+  population_15_to_19?: number | null;
+  population_20_to_24?: number | null;
+  population_25_to_29?: number | null;
+  population_30_to_39?: number | null;
+  population_40_to_49?: number | null;
+  population_50_to_59?: number | null;
+  population_60_to_69?: number | null;
+  population_70_or_more?: number | null;
+  population_male_white?: number | null;
+  population_male_black?: number | null;
+  population_male_asian?: number | null;
+  population_male_brown?: number | null;
+  population_male_indigenous?: number | null;
+  population_female_white?: number | null;
+  population_female_black?: number | null;
+  population_female_asian?: number | null;
+  population_female_brown?: number | null;
+  population_female_indigenous?: number | null;
 }
 
 export interface NeighborhoodFeature {

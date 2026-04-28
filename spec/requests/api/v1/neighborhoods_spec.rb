@@ -25,6 +25,52 @@ RSpec.describe "Api::V1::Neighborhoods", type: :request do
       expect(feature["properties"]).to have_key("establishments_count")
     end
 
+    it "exposes IBGE administrative codes and area" do
+      create(
+        :neighborhood,
+        name: "Itaigara",
+        region_ibge_code: "2",
+        region_name: "Nordeste",
+        state_ibge_code: "29",
+        state_name: "Bahia",
+        city_ibge_code: "2927408",
+        city_name: "Salvador",
+        district_ibge_code: "292740805",
+        district_name: "Distrito Sede",
+        subdistrict_ibge_code: "29274080501",
+        subdistrict_name: "Itaigara",
+        neighborhood_ibge_code: "29274080501001",
+        area_km2: 1.42
+      )
+
+      get "/api/v1/neighborhoods"
+
+      props = JSON.parse(response.body)["features"].find { |f| f["properties"]["name"] == "Itaigara" }["properties"]
+      expect(props["region_ibge_code"]).to eq("2")
+      expect(props["region_name"]).to eq("Nordeste")
+      expect(props["state_ibge_code"]).to eq("29")
+      expect(props["state_name"]).to eq("Bahia")
+      expect(props["city_ibge_code"]).to eq("2927408")
+      expect(props["city_name"]).to eq("Salvador")
+      expect(props["district_ibge_code"]).to eq("292740805")
+      expect(props["district_name"]).to eq("Distrito Sede")
+      expect(props["subdistrict_ibge_code"]).to eq("29274080501")
+      expect(props["subdistrict_name"]).to eq("Itaigara")
+      expect(props["neighborhood_ibge_code"]).to eq("29274080501001")
+      expect(props["area_km2"]).to eq(1.42)
+    end
+
+    it "does not expose detailed comparison demographics in the index payload" do
+      create(:neighborhood, name: "Itaigara", population_25_to_29: 1234.5, population_male_white: 50.0)
+
+      get "/api/v1/neighborhoods"
+
+      props = JSON.parse(response.body)["features"].find { |f| f["properties"]["name"] == "Itaigara" }["properties"]
+      expect(props).not_to have_key("population_25_to_29")
+      expect(props).not_to have_key("population_male_white")
+      expect(props).not_to have_key("population_asian")
+    end
+
     it "includes equipment_count in properties" do
       n = create(:neighborhood, name: "Pituba")
 
@@ -149,6 +195,47 @@ RSpec.describe "Api::V1::Neighborhoods", type: :request do
       expect(response).to have_http_status(:ok)
       json = JSON.parse(response.body)
       expect(json["neighborhoods"].length).to eq(2)
+    end
+
+    it "exposes detailed demographic columns for the comparison view" do
+      n1 = create(
+        :neighborhood,
+        name: "Pituba",
+        population_asian: 12.0,
+        population_indigenous: 3.0,
+        population_0_to_4: 100.0,
+        population_5_to_9: 110.0,
+        population_10_to_14: 120.0,
+        population_15_to_19: 130.0,
+        population_20_to_24: 140.0,
+        population_25_to_29: 150.0,
+        population_30_to_39: 300.0,
+        population_40_to_49: 280.0,
+        population_50_to_59: 260.0,
+        population_60_to_69: 200.0,
+        population_70_or_more: 180.0,
+        population_male_white: 100.0,
+        population_male_black: 50.0,
+        population_male_asian: 5.0,
+        population_male_brown: 200.0,
+        population_male_indigenous: 1.0,
+        population_female_white: 110.0,
+        population_female_black: 55.0,
+        population_female_asian: 6.0,
+        population_female_brown: 210.0,
+        population_female_indigenous: 2.0
+      )
+      n2 = create(:neighborhood, name: "Barra")
+
+      get "/api/v1/neighborhoods/compare", params: { ids: "#{n1.id},#{n2.id}" }
+
+      pituba = JSON.parse(response.body)["neighborhoods"].find { |n| n["name"] == "Pituba" }
+      expect(pituba["population_asian"]).to eq(12.0)
+      expect(pituba["population_indigenous"]).to eq(3.0)
+      expect(pituba["population_25_to_29"]).to eq(150.0)
+      expect(pituba["population_70_or_more"]).to eq(180.0)
+      expect(pituba["population_male_white"]).to eq(100.0)
+      expect(pituba["population_female_indigenous"]).to eq(2.0)
     end
   end
 end

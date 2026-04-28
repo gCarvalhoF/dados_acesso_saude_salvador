@@ -24,9 +24,9 @@ Dashboard com mapa interativo para visualizacao e analise da distribuicao de equ
 
 | Fonte | Arquivo | Uso |
 |-------|---------|-----|
-| GeoJSON Bairros | `salvador/delimitacao_bairros.geojson` | Poligonos dos bairros no mapa |
-| GeoJSON Unidades | `salvador/unidades_de_saude.geojson` | Pontos de unidades de saude |
-| Censo IBGE | `salvador/censo/censo_2010_2022_por_bairro.geojson` | Dados demograficos por bairro |
+| IBGE Censo 2022 - Bairros | `ibge/data/geo-data/BA_bairros_CD2022.geojson` | Poligonos dos bairros + hierarquia administrativa (regiao/UF/municipio/distrito/subdistrito) + area_km2 + populacao total |
+| IBGE Censo 2022 - Cor/Raca | `ibge/data/agregados_por_bairros_cor_ou_raca_BR.csv` | Microdata V01317-V01331: populacao por cor/raca e por cor/raca x sexo |
+| IBGE Censo 2022 - Demografia | `ibge/data/agregados_por_bairros_demografia_BR.csv` | Microdata V01006-V01041: populacao total/por sexo/por faixa etaria |
 | CNES Estabelecimentos | `cnes-database/tbEstabelecimento202508.csv` | Cadastro de estabelecimentos |
 | CNES Equipamentos (relacao) | `cnes-database/rlEstabEquipamento202508.csv` | Vinculo equipamento-estabelecimento |
 | CNES Equipamentos (lookup) | `cnes-database/tbEquipamento202508.csv` | Nomes dos equipamentos |
@@ -52,29 +52,23 @@ Dashboard com mapa interativo para visualizacao e analise da distribuicao de equ
 
 ```
 Neighborhood (bairros)
-  - name: string
+  - name: string (NM_BAIRRO)
   - geometry: geometry (MultiPolygon, SRID 4326)
-  - population_total: integer
-  - population_male: integer
-  - population_female: integer
-  - population_white: integer
-  - population_black: integer
-  - population_brown: integer
-  - population_indigenous: integer
-  - population_asian: integer
-  - population_0_to_6: integer
-  - population_7_to_14: integer
-  - population_15_to_18: integer
-  - population_19_to_24: integer
-  - population_25_to_49: integer
-  - population_50_to_64: integer
-  - population_above_65: integer
+  - region_ibge_code / region_name: string (CD_REGIAO / NM_REGIAO)
+  - state_ibge_code / state_name: string (CD_UF / NM_UF)
+  - city_ibge_code / city_name: string (CD_MUN / NM_MUN)
+  - district_ibge_code / district_name: string (CD_DIST / NM_DIST)
+  - subdistrict_ibge_code / subdistrict_name: string (CD_SUBDIST / NM_SUBDIST)
+  - neighborhood_ibge_code: string (CD_BAIRRO)
+  - area_km2: float (AREA_KM2)
+  - population_total: integer (v0001)
+  - population_male: float
+  - population_female: float
+  - population_white / black / asian / brown / indigenous: float
+  - population_0_to_4 / 5_to_9 / 10_to_14 / 15_to_19 / 20_to_24 / 25_to_29 / 30_to_39 / 40_to_49 / 50_to_59 / 60_to_69 / 70_or_more: float
+  - population_male_white / male_black / male_asian / male_brown / male_indigenous: float
+  - population_female_white / female_black / female_asian / female_brown / female_indigenous: float
   - demographic_density: float
-  - income_0_2_wages: integer
-  - income_2_5_wages: integer
-  - income_5_10_wages: integer
-  - income_10_20_wages: integer
-  - income_above_20_wages: integer
 
 HealthEstablishment (estabelecimentos)
   - cnes_code: string (CO_UNIDADE, unique)
@@ -166,9 +160,10 @@ app/
     hospital_bed.rb
   services/
     data_import/
+      base_importer.rb          # Helpers compartilhados (paths IBGE/CNES, parser CSV)
       cnes_importer.rb          # Importa CSVs do CNES para o banco
-      census_importer.rb        # Importa GeoJSON do censo
-      neighborhood_importer.rb  # Importa delimitacao de bairros
+      ibge_census_importer.rb   # Importa microdata IBGE 2022 (cor/raca + demografia)
+      neighborhood_importer.rb  # Importa GeoJSON IBGE 2022 (poligonos + hierarquia administrativa)
 ```
 
 ### 5.2 API Endpoints
@@ -275,7 +270,7 @@ frontend/src/
 - Servico especializado (ex: "Cardiologia", "Oncologia", "Urgencia")
 - Natureza juridica (publica / privada / sem fins lucrativos / pessoa fisica) — mapeado por prefixo do codigo CNES (1xxx/2xxx/3xxx/4xxx)
 - Disponibilidade SUS (sim/nao)
-- Bairro especifico
+- Bairro especifico — cada opcao do dropdown exibe o nome do municipio como anotacao secundaria (texto menor e cinza claro), facilitando a identificacao quando ha bairros de cidades diferentes
 
 ### 6.3 Dashboard de Metricas
 
@@ -307,8 +302,8 @@ Logica de classificacao baseada nos servicos vinculados:
 ### 7.1 Rake Tasks
 
 ```
-rails data:import:neighborhoods    # Importa delimitacao_bairros.geojson
-rails data:import:census           # Importa censo_2010_2022_por_bairro.geojson
+rails data:import:neighborhoods    # Importa BA_bairros_CD2022.geojson (IBGE 2022)
+rails data:import:ibge_census      # Importa microdata IBGE 2022 (cor/raca + demografia)
 rails data:import:cnes             # Importa todos os CSVs do CNES filtrados por Salvador
 rails data:import:all              # Executa todos acima em sequencia
 ```
@@ -394,6 +389,17 @@ SEMPRE USANDO TESTES PROGRAMÁTICOS
 - [ ] Exportacao de dados filtrados (CSV) — adiado
 - [x] Responsividade mobile (FilterPanel como drawer, layout adaptativo para telas < 768px)
 
+### Fase 6 - IBGE como fonte unica de bairros e censo
+- [x] Migracao do schema: removidas colunas de renda (income_*) e faixas etarias antigas; adicionados codigos IBGE (regiao/UF/municipio/distrito/subdistrito/bairro), area_km2, faixas etarias finas (0-4, 5-9, 10-14, ..., 70+) e cor/raca x sexo
+- [x] NeighborhoodImporter le `ibge/data/geo-data/BA_bairros_CD2022.geojson` (455 bairros), upsert por `neighborhood_ibge_code`
+- [x] IbgeCensusImporter le os CSVs de cor/raca e demografia, joina por `CD_BAIRRO` (sem fuzzy matching por nome)
+- [x] CensusImporter legado e a rake `data:import:census` removidos; nova rake `data:import:ibge_census` no lugar
+- [x] CnesImporter passa a setar `is_active` a partir de `CO_MOTIVO_DESAB` (vazio = ativo) em vez de hardcoded true
+- [x] API: payload de `index` ganha codigos IBGE + area_km2; `compare` adiciona o detalhamento por faixa etaria, cor/raca e cor/raca x sexo
+- [x] Frontend: ComparisonTable substitui o grupo "Renda" por "Localizacao (IBGE)", "Cor/Raca", "Faixa Etaria", "Cor x Sexo"; tooltip do mapa mostra distrito e area_km2
+- [x] Selectors de bairro (filtro e comparacao) exibem o municipio como anotacao secundaria, util quando o dataset cobre mais de uma cidade
+- [x] Validacao de unicidade do nome do bairro removida do model — IBGE permite nomes repetidos em distritos/subdistritos diferentes; identidade passa a ser o `neighborhood_ibge_code`
+
 ---
 
 ## 10. Configuracao Tecnica
@@ -440,3 +446,8 @@ O frontend usa `VITE_API_URL=http://web:3000` para que o proxy Vite alcance o co
 | Binning por quantis na coropletica | Bins fixos (0, 1-2, 3-7...) so funcionam para contagem de estabelecimentos. Quantis dinamicos (P20/P40/P60/P80) adaptam-se a qualquer metrica automaticamente |
 | recharts com ResponsiveContainer | Graficos precisam de dimensoes explicitas; ResponsiveContainer preenche o container pai. Em testes, e substituido por um stub com dimensoes fixas |
 | filter_options expandido com equipamentos e servicos | Reutiliza o endpoint existente em vez de criar novos endpoints, mantendo a consistencia do padrao `{ value, label }` |
+| IBGE 2022 substitui Prefeitura + censo customizado como fonte unica | Join exato por `CD_BAIRRO` em vez de string match por nome; hierarquia administrativa completa; area_km2 e populacao total ja vem inline no GeoJSON |
+| Identidade do bairro passa a ser `neighborhood_ibge_code` (nao `name`) | IBGE permite nomes repetidos em distritos diferentes (ex: varios "Centro"); upsert por codigo evita colisoes e quebra de string match |
+| Detalhamento demografico so no payload do endpoint `compare` | 23 colunas extras (faixas etarias finas + cor/raca x sexo) sao caras no `index` (455 bairros); o `compare` carrega no maximo 5 bairros e e o unico consumidor desses campos |
+| `is_active` derivado de `CO_MOTIVO_DESAB` no CNES | O dataset CNES inclui estabelecimentos desativados; antes todos eram marcados como ativos, distorcendo metricas. Vazio = ativo, preenchido = motivo da desativacao |
+| Plataforma `linux/amd64` explicita no docker-compose | Em hosts ARM (Apple Silicon) o PostGIS-Alpine nao tem build nativo; forcar amd64 (com emulacao) garante paridade entre dev local e CI |

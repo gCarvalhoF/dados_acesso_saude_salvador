@@ -19,7 +19,7 @@ RSpec.describe "db/seeds.rb" do
     allow(Rails.application).to receive(:load_tasks)
 
     allow(DataImport::NeighborhoodImporter).to receive(:call)
-    allow(DataImport::CensusImporter).to receive(:call)
+    allow(DataImport::IbgeCensusImporter).to receive(:call)
     allow(DataImport::CnesImporter).to receive(:call)
   end
 
@@ -37,7 +37,7 @@ RSpec.describe "db/seeds.rb" do
   end
 
   it "invoca o importador do censo" do
-    expect(DataImport::CensusImporter).to receive(:call).once
+    expect(DataImport::IbgeCensusImporter).to receive(:call).once
     run_seeds
   end
 
@@ -49,7 +49,7 @@ RSpec.describe "db/seeds.rb" do
   it "executa os importadores na ordem correta (bairros -> censo -> CNES)" do
     order = []
     allow(DataImport::NeighborhoodImporter).to receive(:call) { order << :neighborhoods }
-    allow(DataImport::CensusImporter).to receive(:call)       { order << :census }
+    allow(DataImport::IbgeCensusImporter).to receive(:call)       { order << :census }
     allow(DataImport::CnesImporter).to receive(:call)         { order << :cnes }
 
     run_seeds

@@ -20,7 +20,11 @@ export default function FilterPanel({ filters, filterOptions, onChange, neighbor
     ...(neighborhoods?.features
       .map((f) => f.properties)
       .sort((a, b) => a.name.localeCompare(b.name, "pt-BR"))
-      .map((n) => ({ value: String(n.id), label: n.name })) ?? []),
+      .map((n) => ({
+        value: String(n.id),
+        label: n.name,
+        description: n.city_name ?? undefined,
+      })) ?? []),
   ];
 
   return (

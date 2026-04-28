@@ -109,7 +109,7 @@ module DataImport
           zip_code: row["CO_CEP"]&.strip,
           phone: row["NU_TELEFONE"]&.strip,
           is_sus: is_sus,
-          is_active: true,
+          is_active: row["CO_MOTIVO_DESAB"]&.blank?,
           coordinates: coordinates
         )
         establishment.save!

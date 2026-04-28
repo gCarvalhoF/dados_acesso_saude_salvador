@@ -213,6 +213,17 @@ describe("FilterPanel", () => {
       expect(onChange).toHaveBeenCalledWith({ neighborhood_id: "1" });
     });
 
+    it("exibe o nome da cidade ao lado do bairro nas opções", async () => {
+      const user = userEvent.setup();
+      renderPanel();
+
+      await user.click(screen.getByLabelText(/bairro/i));
+
+      const pitubaRow = screen.getByRole("checkbox", { name: "Pituba" }).closest("label");
+      expect(pitubaRow?.textContent).toContain("Pituba");
+      expect(pitubaRow?.textContent).toContain("Salvador");
+    });
+
     it("chama onChange com sus_only: true ao marcar o checkbox", async () => {
       const user = userEvent.setup();
       const onChange = vi.fn();

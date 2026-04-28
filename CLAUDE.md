@@ -8,7 +8,7 @@ NEVER JUMP STRAIGHT TO CODING! Always follow this sequence:
 2. **Plan**: Create a detailed implementation plan and verify it with me
 3. **Implement**: Execute the plan with validation checkpoints, ALWAYS ADDING PROGRAMATIC TESTS WHENEVER POSSIBLE, AIM FOR 100% COVERAGE
 4. **Test**: Execute all unit tests and linters, both back and front end, to make sure nothing is broken. Do this after each iteration is complete
-5. **Update documentation**: Update all documentations (PRD, README, files under docs/) according to the changes made
+5. **Update documentation**: Update all documentations (PRD, README, files under docs/) according to the changes made. PREVIOUS DOCS FILES AREN'T TO BE UPDATED, THEY SHOULD BE IMMUTABLE. IF THERE'S NOT A NEW PHASE, CREATE A NEW FILE ITERATING THE NUMBERS, CHECK WITH USER WHAT THIS PHASE IS ABOUT.
 
 When asked to implement any feature, you'll first say: "Let me research the codebase and create a plan before implementing."
 

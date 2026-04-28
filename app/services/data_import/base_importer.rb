@@ -3,6 +3,7 @@ module DataImport
     SALVADOR_MUNICIPALITY_CODE = "292740"
     AUX_DATA_PATH = Rails.root.join("aux-data")
     CNES_PATH = Rails.root.join("aux-data", "cnes-database")
+    IBGE_PATH = Rails.root.join("aux-data", "ibge")
     FIXTURE_CNES_PATH = Rails.root.join("spec", "fixtures", "cnes_csv")
 
     def self.call(**kwargs)
@@ -29,6 +30,14 @@ module DataImport
 
     def salvador_geojson_path(filename)
       AUX_DATA_PATH.join("salvador", filename)
+    end
+
+    def ibge_csv_path(filename)
+      IBGE_PATH.join("data", filename)
+    end
+
+    def ibge_geo_data_path(filename)
+      IBGE_PATH.join("data", "geo-data", filename)
     end
 
     def parse_csv(path, &block)
