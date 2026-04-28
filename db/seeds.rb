@@ -9,7 +9,7 @@
 puts "Iniciando importacao dos dados de Salvador..."
 
 DataImport::NeighborhoodImporter.call
-DataImport::CensusImporter.call
+DataImport::IbgeCensusImporter.call
 DataImport::CnesImporter.call
 
 puts "Importacao concluida!"

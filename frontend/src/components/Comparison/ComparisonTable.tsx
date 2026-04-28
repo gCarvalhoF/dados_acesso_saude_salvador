@@ -1,17 +1,28 @@
 import type { NeighborhoodProperties } from "../../types";
 
+type CellValue = number | string | null;
+
 interface MetricRow {
   label: string;
   key: string;
-  getValue: (n: NeighborhoodProperties) => number | null;
+  getValue: (n: NeighborhoodProperties) => CellValue;
   format?: (v: number) => string;
   higherIsBetter?: boolean;
 }
 
 const fmt = (v: number) => v.toLocaleString("pt-BR");
 const fmtDecimal = (v: number) => v.toLocaleString("pt-BR", { maximumFractionDigits: 1 });
+const fmtArea = (v: number) => v.toLocaleString("pt-BR", { maximumFractionDigits: 2 });
 
 const METRIC_GROUPS: { title: string; metrics: MetricRow[] }[] = [
+  {
+    title: "Localização (IBGE)",
+    metrics: [
+      { label: "Distrito", key: "district_name", getValue: (n) => n.district_name },
+      { label: "Subdistrito", key: "subdistrict_name", getValue: (n) => n.subdistrict_name },
+      { label: "Área (km²)", key: "area_km2", getValue: (n) => n.area_km2, format: fmtArea },
+    ],
+  },
   {
     title: "Demografia",
     metrics: [
@@ -22,13 +33,44 @@ const METRIC_GROUPS: { title: string; metrics: MetricRow[] }[] = [
     ],
   },
   {
-    title: "Renda (domicílios)",
+    title: "Cor / Raça",
     metrics: [
-      { label: "0-2 salários", key: "income_0_2", getValue: (n) => n.income_0_2_wages, format: fmt },
-      { label: "2-5 salários", key: "income_2_5", getValue: (n) => n.income_2_5_wages, format: fmt },
-      { label: "5-10 salários", key: "income_5_10", getValue: (n) => n.income_5_10_wages, format: fmt },
-      { label: "10-20 salários", key: "income_10_20", getValue: (n) => n.income_10_20_wages, format: fmt },
-      { label: ">20 salários", key: "income_above_20", getValue: (n) => n.income_above_20_wages, format: fmt },
+      { label: "Branca", key: "population_white", getValue: (n) => n.population_white, format: fmt },
+      { label: "Preta", key: "population_black", getValue: (n) => n.population_black, format: fmt },
+      { label: "Parda", key: "population_brown", getValue: (n) => n.population_brown, format: fmt },
+      { label: "Amarela", key: "population_asian", getValue: (n) => n.population_asian ?? null, format: fmt },
+      { label: "Indígena", key: "population_indigenous", getValue: (n) => n.population_indigenous ?? null, format: fmt },
+    ],
+  },
+  {
+    title: "Faixa Etária",
+    metrics: [
+      { label: "0–4 anos", key: "population_0_to_4", getValue: (n) => n.population_0_to_4 ?? null, format: fmt },
+      { label: "5–9 anos", key: "population_5_to_9", getValue: (n) => n.population_5_to_9 ?? null, format: fmt },
+      { label: "10–14 anos", key: "population_10_to_14", getValue: (n) => n.population_10_to_14 ?? null, format: fmt },
+      { label: "15–19 anos", key: "population_15_to_19", getValue: (n) => n.population_15_to_19 ?? null, format: fmt },
+      { label: "20–24 anos", key: "population_20_to_24", getValue: (n) => n.population_20_to_24 ?? null, format: fmt },
+      { label: "25–29 anos", key: "population_25_to_29", getValue: (n) => n.population_25_to_29 ?? null, format: fmt },
+      { label: "30–39 anos", key: "population_30_to_39", getValue: (n) => n.population_30_to_39 ?? null, format: fmt },
+      { label: "40–49 anos", key: "population_40_to_49", getValue: (n) => n.population_40_to_49 ?? null, format: fmt },
+      { label: "50–59 anos", key: "population_50_to_59", getValue: (n) => n.population_50_to_59 ?? null, format: fmt },
+      { label: "60–69 anos", key: "population_60_to_69", getValue: (n) => n.population_60_to_69 ?? null, format: fmt },
+      { label: "70+ anos", key: "population_70_or_more", getValue: (n) => n.population_70_or_more ?? null, format: fmt },
+    ],
+  },
+  {
+    title: "Cor × Sexo",
+    metrics: [
+      { label: "Masc. Branca", key: "population_male_white", getValue: (n) => n.population_male_white ?? null, format: fmt },
+      { label: "Masc. Preta", key: "population_male_black", getValue: (n) => n.population_male_black ?? null, format: fmt },
+      { label: "Masc. Parda", key: "population_male_brown", getValue: (n) => n.population_male_brown ?? null, format: fmt },
+      { label: "Masc. Amarela", key: "population_male_asian", getValue: (n) => n.population_male_asian ?? null, format: fmt },
+      { label: "Masc. Indígena", key: "population_male_indigenous", getValue: (n) => n.population_male_indigenous ?? null, format: fmt },
+      { label: "Fem. Branca", key: "population_female_white", getValue: (n) => n.population_female_white ?? null, format: fmt },
+      { label: "Fem. Preta", key: "population_female_black", getValue: (n) => n.population_female_black ?? null, format: fmt },
+      { label: "Fem. Parda", key: "population_female_brown", getValue: (n) => n.population_female_brown ?? null, format: fmt },
+      { label: "Fem. Amarela", key: "population_female_asian", getValue: (n) => n.population_female_asian ?? null, format: fmt },
+      { label: "Fem. Indígena", key: "population_female_indigenous", getValue: (n) => n.population_female_indigenous ?? null, format: fmt },
     ],
   },
   {
@@ -60,9 +102,9 @@ const METRIC_GROUPS: { title: string; metrics: MetricRow[] }[] = [
   },
 ];
 
-function getHighlightClass(value: number | null, allValues: (number | null)[], higherIsBetter?: boolean): string {
-  if (value === null) return "";
-  const numbers = allValues.filter((v): v is number => v !== null);
+function getHighlightClass(value: CellValue, allValues: CellValue[], higherIsBetter?: boolean): string {
+  if (typeof value !== "number") return "";
+  const numbers = allValues.filter((v): v is number => typeof v === "number");
   if (numbers.length < 2) return "";
 
   const max = Math.max(...numbers);
@@ -74,6 +116,12 @@ function getHighlightClass(value: number | null, allValues: (number | null)[], h
     if (value === min) return "bg-red-50 text-red-800";
   }
   return "";
+}
+
+function renderCell(value: CellValue, format?: (v: number) => string): string {
+  if (value === null || value === "") return "—";
+  if (typeof value === "number") return (format ?? fmt)(value);
+  return value;
 }
 
 interface Props {
@@ -125,7 +173,7 @@ function GroupRows({ group, neighborhoods }: { group: typeof METRIC_GROUPS[numbe
               const cls = getHighlightClass(val, values, metric.higherIsBetter);
               return (
                 <td key={n.id} className={`py-1.5 px-3 text-right tabular-nums ${cls}`}>
-                  {val !== null ? (metric.format ?? fmt)(val) : "—"}
+                  {renderCell(val, metric.format)}
                 </td>
               );
             })}

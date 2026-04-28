@@ -5,9 +5,9 @@ namespace :data do
       DataImport::NeighborhoodImporter.call
     end
 
-    desc "Import census data (2010/2022) from GeoJSON"
-    task census: :environment do
-      DataImport::CensusImporter.call
+    desc "Import IBGE Census demographic data for Salvador neighborhoods"
+    task ibge_census: :environment do
+      DataImport::IbgeCensusImporter.call
     end
 
     desc "Import all CNES data for Salvador from CSVs"
@@ -18,7 +18,7 @@ namespace :data do
     desc "Run all imports in order: neighborhoods -> census -> CNES"
     task all: :environment do
       Rake::Task["data:import:neighborhoods"].invoke
-      Rake::Task["data:import:census"].invoke
+      Rake::Task["data:import:ibge_census"].invoke
       Rake::Task["data:import:cnes"].invoke
     end
   end

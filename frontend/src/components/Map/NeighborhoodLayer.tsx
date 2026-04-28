@@ -104,6 +104,8 @@ export default function NeighborhoodLayer({ data, selectedId, onSelect, metric }
       <strong>${props.name}</strong><br/>
       ${METRIC_LABELS[metric]}: ${fmtValue}
       ${props.population_total ? `<br/>População: ${props.population_total.toLocaleString("pt-BR")}` : ""}
+      ${props.district_name ? `<br/>Distrito: ${props.district_name}` : ""}
+      ${props.area_km2 ? `<br/>Área: ${props.area_km2.toLocaleString("pt-BR", { maximumFractionDigits: 2 })} km²` : ""}
     `;
     (layer as L.Path).bindTooltip(tooltipContent);
     layer.on({

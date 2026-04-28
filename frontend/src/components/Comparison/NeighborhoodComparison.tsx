@@ -14,7 +14,11 @@ export default function NeighborhoodComparison({ neighborhoods }: Props) {
   const { data, loading } = useNeighborhoodComparison(selectedIds);
 
   const options = (neighborhoods?.features ?? [])
-    .map((f) => ({ value: f.properties.id, label: f.properties.name }))
+    .map((f) => ({
+      value: f.properties.id,
+      label: f.properties.name,
+      description: f.properties.city_name ?? undefined,
+    }))
     .sort((a, b) => a.label.localeCompare(b.label, "pt-BR"));
 
   return (

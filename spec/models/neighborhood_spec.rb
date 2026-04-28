@@ -10,9 +10,9 @@ RSpec.describe Neighborhood, type: :model do
       expect(build(:neighborhood, name: nil)).not_to be_valid
     end
 
-    it "is invalid with a duplicate name" do
-      create(:neighborhood, name: "Pituba")
-      expect(build(:neighborhood, name: "Pituba")).not_to be_valid
+    it "permits duplicate names across different IBGE codes (different districts)" do
+      create(:neighborhood, name: "Centro", neighborhood_ibge_code: "29274080500001")
+      expect(build(:neighborhood, name: "Centro", neighborhood_ibge_code: "29274080500002")).to be_valid
     end
   end
 

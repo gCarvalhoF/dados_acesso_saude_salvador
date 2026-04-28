@@ -1,7 +1,7 @@
 class Neighborhood < ApplicationRecord
   has_many :health_establishments, dependent: :nullify
 
-  validates :name, presence: true, uniqueness: true
+  validates :name, presence: true
 
   scope :with_population, -> { where.not(population_total: nil) }
   scope :ordered_by_name, -> { order(:name) }

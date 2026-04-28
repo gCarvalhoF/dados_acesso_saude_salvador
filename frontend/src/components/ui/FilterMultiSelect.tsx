@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from "react";
 interface Option {
   value: string;
   label: string;
+  description?: string;
 }
 
 interface Props {
@@ -34,9 +35,13 @@ export default function FilterMultiSelect({ id, label, value, options, onChange 
     return () => document.removeEventListener("mousedown", handleClick);
   }, []);
 
-  const filtered = selectableOptions.filter((o) =>
-    o.label.toLowerCase().includes(search.toLowerCase())
-  );
+  const filtered = selectableOptions.filter((o) => {
+    const term = search.toLowerCase();
+    return (
+      o.label.toLowerCase().includes(term) ||
+      (o.description?.toLowerCase().includes(term) ?? false)
+    );
+  });
 
   function toggle(val: string) {
     if (selected.includes(val)) {
@@ -135,8 +140,14 @@ export default function FilterMultiSelect({ id, label, value, options, onChange 
                   checked={isSelected}
                   onChange={() => toggle(option.value)}
                   className="accent-blue-600"
+                  aria-label={option.label}
                 />
-                {option.label}
+                <span>{option.label}</span>
+                {option.description && (
+                  <span className="text-xs text-gray-400 font-normal">
+                    {option.description}
+                  </span>
+                )}
               </label>
             );
           })}

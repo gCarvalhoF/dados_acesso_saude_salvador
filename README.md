@@ -139,17 +139,21 @@ GET /api/v1/dashboard/service_summary
 
 | Fonte | Dados |
 |-------|-------|
-| CNES (DataSUS) | Estabelecimentos, equipamentos, serviços, leitos (agosto/2025) |
-| IBGE Censo 2022 | Dados demográficos por bairro |
-| Prefeitura de Salvador | GeoJSON de delimitação de bairros e unidades de saúde |
+| CNES (DataSUS, agosto/2025) | Estabelecimentos, equipamentos, serviços e leitos. `is_active` é derivado de `CO_MOTIVO_DESAB` (estabelecimentos desativados são marcados como inativos) |
+| IBGE Censo 2022 — `BA_bairros_CD2022.geojson` | Polígonos dos bairros + hierarquia administrativa completa (região → UF → município → distrito → subdistrito) + `area_km2` + população total |
+| IBGE Censo 2022 — microdata (`agregados_por_bairros_*.csv`) | Demografia detalhada por bairro: faixas etárias finas (0–4, 5–9, …, 70+) e cor/raça × sexo. Joinada por `CD_BAIRRO` |
 
 ---
 
 ## Modelagem de Dados
 
 ```
-Neighborhood            → bairros com geometria (MultiPolygon) e dados do censo
+Neighborhood            → bairros com geometria (MultiPolygon, SRID 4326) + hierarquia
+                          administrativa IBGE (região/UF/município/distrito/subdistrito) +
+                          área_km² + demografia detalhada (faixas etárias, cor/raça × sexo)
+                          Identidade: neighborhood_ibge_code (CD_BAIRRO)
 HealthEstablishment     → estabelecimentos (UBS, USF, hospitais, etc.)
+                          is_active derivado de CO_MOTIVO_DESAB
 EquipmentType           → categorias de equipamentos médicos
 EquipmentItem           → equipamentos individuais (mamógrafo, tomógrafo, etc.)
 EstablishmentEquipment  → vínculo equipamento ↔ estabelecimento (quantidades)
@@ -207,8 +211,12 @@ O workflow do GitHub Actions (`.github/workflows/ci.yml`) executa tudo via Docke
 
 ## Documentação Técnica
 
+- [docs/PRD.md](docs/PRD.md) — Especificação do produto e modelagem de dados
 - [docs/phase1-implementation.md](docs/phase1-implementation.md) — Backend: models, migrations, importadores, API, testes
 - [docs/phase2-implementation.md](docs/phase2-implementation.md) — Frontend: React/Vite, mapa, filtros, componentes UI, CI, decisões de arquitetura
+- [docs/phase3-implementation.md](docs/phase3-implementation.md) — Dashboard completo: cards de métricas, gráficos (recharts), camada coroplética por métrica
+- [docs/phase4-implementation.md](docs/phase4-implementation.md) — Refinamentos: hospitais de referência, comparativo entre bairros, responsividade mobile
+- [docs/phase6-implementation.md](docs/phase6-implementation.md) — IBGE como fonte única: schema migration, NeighborhoodImporter rewrite, IbgeCensusImporter
 
 ---
 
