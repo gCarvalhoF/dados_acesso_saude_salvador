@@ -4,15 +4,15 @@
  */
 
 export const markerColors = {
-  usf:                    "#16a34a",
-  ubs:                    "#2563eb",
-  hospitalGeral:          "#dc2626",
-  hospitalEspecializado:  "#ea580c",
-  prontoSocorro:          "#b91c1c",
-  prontoAtendimento:      "#ca8a04",
-  policlinica:            "#7c3aed",
-  caps:                   "#0891b2",
-  default:                "#6b7280",
+  usf:                    "#16a34a", // green  — primary care circle
+  ubs:                    "#2563eb", // blue   — primary care circle
+  hospitalGeral:          "#dc2626", // red    — hospital cross
+  hospitalEspecializado:  "#9b2226", // dark red — hospital cross
+  prontoSocorro:          "#ea580c", // orange — emergency triangle
+  prontoAtendimento:      "#ca8a04", // amber  — emergency triangle
+  policlinica:            "#7c3aed", // purple — specialty circle
+  caps:                   "#0891b2", // cyan   — specialty circle
+  default:                "#6b7280", // gray
 } as const;
 
 export const choroplethColors = {

@@ -6,9 +6,10 @@ import { useFilterOptions } from "../hooks/useFilterOptions";
 import { useDashboard } from "../hooks/useDashboard";
 import InteractiveMap from "./Map/InteractiveMap";
 import FilterPanel from "./Filters/FilterPanel";
+import Spinner from "./ui/Spinner";
 import MetricCards from "./Dashboard/MetricCards";
 import ChartsPanel from "./Dashboard/ChartsPanel";
-import NeighborhoodComparison from "./Comparison/NeighborhoodComparison";
+import NeighborhoodComparisonResult from "./Comparison/NeighborhoodComparisonResult";
 import { METRIC_LABELS } from "./Map/NeighborhoodLayer";
 
 const DEFAULT_FILTERS: Filters = {
@@ -36,6 +37,19 @@ export default function DashboardPage() {
   const [selectedNeighborhoodName, setSelectedNeighborhoodName] = useState<string>("");
   const [choroplethMetric, setChoroplethMetric] = useState<ChoroplethMetric>("establishments_count");
   const [filterOpen, setFilterOpen] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(true);
+  const [filtersExpanded, setFiltersExpanded] = useState(false);
+  const [comparisonIds, setComparisonIds] = useState<number[]>([]);
+  const [comparisonOpen, setComparisonOpen] = useState(false);
+
+  function handleFiltersToggle() {
+    if (sidebarCollapsed) {
+      setSidebarCollapsed(false);
+      setFiltersExpanded(true);
+    } else {
+      setFiltersExpanded((e) => !e);
+    }
+  }
 
   const { data: neighborhoods, loading: loadingNeighborhoods } = useNeighborhoods();
   const { data: establishments, loading: loadingEstablishments } = useEstablishments(filters);
@@ -45,7 +59,7 @@ export default function DashboardPage() {
     equipmentByNeighborhood,
     serviceSummary,
     loading: loadingDashboard,
-  } = useDashboard();
+  } = useDashboard(filters);
 
   function handleFilterChange(partial: Partial<Filters>) {
     setFilters((prev) => ({ ...prev, ...partial }));
@@ -70,6 +84,29 @@ export default function DashboardPage() {
     setFilters((prev) => ({ ...prev, neighborhood_id: id ? String(id) : "" }));
   }
 
+  function handleClearNeighborhood() {
+    setSelectedNeighborhood(null);
+    setSelectedNeighborhoodName("");
+    setComparisonIds([]);
+    setFilters((prev) => ({ ...prev, neighborhood_id: "" }));
+  }
+
+  function handleComparisonIdsChange(ids: number[]) {
+    setComparisonIds(ids);
+    if (ids.length === 0) {
+      setSelectedNeighborhood(null);
+      setSelectedNeighborhoodName("");
+      setFilters((prev) => ({ ...prev, neighborhood_id: "" }));
+    } else {
+      const names = ids.map(
+        (nid) => neighborhoods?.features.find((f) => f.properties.id === nid)?.properties.name ?? ""
+      ).filter(Boolean);
+      setSelectedNeighborhood(ids[0]);
+      setSelectedNeighborhoodName(names.join(", "));
+      setFilters((prev) => ({ ...prev, neighborhood_id: ids.join(",") }));
+    }
+  }
+
   const totalCount = establishments?.features.length ?? 0;
 
   return (
@@ -86,6 +123,11 @@ export default function DashboardPage() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
             </svg>
           </button>
+          <img
+            src="/images/bandeira_de_salvador.png"
+            alt="Bandeira de Salvador"
+            className="w-8 h-8 object-contain flex-shrink-0"
+          />
           <div>
             <h1 className="text-lg font-bold text-gray-900">
               Saúde em Salvador
@@ -102,7 +144,7 @@ export default function DashboardPage() {
               {selectedNeighborhoodName}
             </span>
             <button
-              onClick={() => handleNeighborhoodSelect(null, "")}
+              onClick={handleClearNeighborhood}
               className="text-gray-400 hover:text-gray-600 text-lg leading-none"
               title="Limpar seleção"
             >
@@ -112,7 +154,10 @@ export default function DashboardPage() {
         )}
 
         {(loadingNeighborhoods || loadingEstablishments) && (
-          <span className="text-xs text-gray-400 animate-pulse">Carregando...</span>
+          <span className="text-xs text-gray-500 flex items-center gap-1.5">
+            <Spinner className="w-3 h-3" />
+            <span>Carregando...</span>
+          </span>
         )}
       </header>
 
@@ -127,6 +172,14 @@ export default function DashboardPage() {
           loading={loadingEstablishments}
           isOpen={filterOpen}
           onClose={() => setFilterOpen(false)}
+          collapsed={sidebarCollapsed}
+          onCollapseToggle={() => setSidebarCollapsed((c) => !c)}
+          filtersExpanded={filtersExpanded}
+          onFiltersToggle={handleFiltersToggle}
+          comparisonOpen={comparisonOpen}
+          comparisonIds={comparisonIds}
+          onComparisonIdsChange={handleComparisonIdsChange}
+          onComparisonToggle={() => setComparisonOpen((o) => !o)}
         />
 
         <main className="flex-1 overflow-y-auto">
@@ -134,8 +187,9 @@ export default function DashboardPage() {
             {/* Metric Cards */}
             <MetricCards overview={overview} loading={loadingDashboard} />
 
-            {/* Neighborhood Comparison */}
-            <NeighborhoodComparison neighborhoods={neighborhoods} />
+            {comparisonOpen && comparisonIds.length >= 2 && (
+              <NeighborhoodComparisonResult selectedIds={comparisonIds} />
+            )}
 
             {/* Choropleth metric selector + Map */}
             <div className="bg-white rounded-lg shadow-sm border border-gray-100">
@@ -176,6 +230,7 @@ export default function DashboardPage() {
               serviceSummary={serviceSummary}
               neighborhoods={neighborhoods}
               loading={loadingDashboard}
+              onFilterChange={handleFilterChange}
             />
           </div>
         </main>

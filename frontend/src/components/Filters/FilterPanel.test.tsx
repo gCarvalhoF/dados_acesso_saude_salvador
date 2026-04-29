@@ -35,7 +35,21 @@ const defaultFilterOptions: FilterOptions = {
   ],
 };
 
-function renderPanel(overrides: Partial<Filters> = {}, onChange = vi.fn(), onClose = vi.fn()) {
+function renderPanel(
+  overrides: Partial<Filters> = {},
+  onChange = vi.fn(),
+  onClose = vi.fn(),
+  extras: {
+    filtersExpanded?: boolean;
+    onFiltersToggle?: () => void;
+    collapsed?: boolean;
+    onCollapseToggle?: () => void;
+    comparisonOpen?: boolean;
+    comparisonIds?: number[];
+    onComparisonIdsChange?: (ids: number[]) => void;
+    onComparisonToggle?: () => void;
+  } = {}
+) {
   return render(
     <FilterPanel
       filters={{ ...defaultFilters, ...overrides }}
@@ -46,6 +60,14 @@ function renderPanel(overrides: Partial<Filters> = {}, onChange = vi.fn(), onClo
       loading={false}
       isOpen={true}
       onClose={onClose}
+      collapsed={extras.collapsed ?? false}
+      onCollapseToggle={extras.onCollapseToggle ?? vi.fn()}
+      filtersExpanded={extras.filtersExpanded ?? true}
+      onFiltersToggle={extras.onFiltersToggle ?? vi.fn()}
+      comparisonOpen={extras.comparisonOpen ?? false}
+      comparisonIds={extras.comparisonIds ?? []}
+      onComparisonIdsChange={extras.onComparisonIdsChange ?? vi.fn()}
+      onComparisonToggle={extras.onComparisonToggle ?? vi.fn()}
     />
   );
 }
@@ -73,6 +95,14 @@ describe("FilterPanel", () => {
           loading={true}
           isOpen={true}
           onClose={vi.fn()}
+          collapsed={false}
+          onCollapseToggle={vi.fn()}
+          filtersExpanded={true}
+          onFiltersToggle={vi.fn()}
+          comparisonOpen={false}
+          comparisonIds={[]}
+          onComparisonIdsChange={vi.fn()}
+          onComparisonToggle={vi.fn()}
         />
       );
       expect(screen.getByText("Carregando...")).toBeInTheDocument();
@@ -119,6 +149,154 @@ describe("FilterPanel", () => {
     it("renderiza o botão 'Redefinir Filtros'", () => {
       renderPanel();
       expect(screen.getByRole("button", { name: /redefinir filtros/i })).toBeInTheDocument();
+    });
+
+    it("renderiza o botão de toggle 'Filtros' no topo", () => {
+      renderPanel();
+      const toggle = screen.getByRole("button", { name: "Filtros" });
+      expect(toggle).toBeInTheDocument();
+      expect(toggle).toHaveAttribute("aria-expanded", "true");
+    });
+
+    it("renderiza o botão CTA 'Comparar Bairros' no topo", () => {
+      renderPanel();
+      expect(screen.getByRole("button", { name: /comparar bairros/i })).toBeInTheDocument();
+    });
+  });
+
+  describe("collapse de filtros", () => {
+    it("oculta os inputs de filtro quando filtersExpanded=false", () => {
+      renderPanel({}, vi.fn(), vi.fn(), { filtersExpanded: false });
+      expect(screen.queryByLabelText(/tipo de estabelecimento/i)).not.toBeInTheDocument();
+      expect(screen.queryByText("42 estabelecimentos")).not.toBeInTheDocument();
+      expect(screen.queryByRole("button", { name: /redefinir filtros/i })).not.toBeInTheDocument();
+    });
+
+    it("o botão 'Filtros' reflete aria-expanded=false quando recolhido", () => {
+      renderPanel({}, vi.fn(), vi.fn(), { filtersExpanded: false });
+      expect(screen.getByRole("button", { name: "Filtros" })).toHaveAttribute("aria-expanded", "false");
+    });
+
+    it("chama onFiltersToggle ao clicar no botão 'Filtros'", async () => {
+      const user = userEvent.setup();
+      const onFiltersToggle = vi.fn();
+      renderPanel({}, vi.fn(), vi.fn(), { onFiltersToggle });
+      await user.click(screen.getByRole("button", { name: "Filtros" }));
+      expect(onFiltersToggle).toHaveBeenCalledTimes(1);
+    });
+
+    it("o botão 'Comparar Bairros' continua visível quando filtros estão recolhidos", () => {
+      renderPanel({}, vi.fn(), vi.fn(), { filtersExpanded: false });
+      expect(screen.getByRole("button", { name: /comparar bairros/i })).toBeInTheDocument();
+    });
+
+    it("os filtros aparecem entre os botões 'Filtros' e 'Comparar Bairros' (empurram comparar para baixo)", () => {
+      renderPanel({}, vi.fn(), vi.fn(), { filtersExpanded: true });
+      const filtrosBtn = screen.getByRole("button", { name: "Filtros" });
+      const compararBtn = screen.getByRole("button", { name: /comparar bairros/i });
+      const filtersSection = document.getElementById("filters-section");
+
+      expect(filtersSection).not.toBeNull();
+      // DOCUMENT_POSITION_FOLLOWING = 4 → second arg comes after first
+      expect(filtrosBtn.compareDocumentPosition(filtersSection!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+      expect(filtersSection!.compareDocumentPosition(compararBtn) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    });
+  });
+
+  describe("sidebar collapse (rail mode)", () => {
+    it("aplica largura reduzida quando collapsed=true", () => {
+      renderPanel({}, vi.fn(), vi.fn(), { collapsed: true });
+      const sidebar = screen.getByTestId("sidebar");
+      expect(sidebar.className).toMatch(/w-14\b/);
+      expect(sidebar.className).not.toMatch(/w-72\b/);
+    });
+
+    it("aplica largura completa quando collapsed=false", () => {
+      renderPanel({}, vi.fn(), vi.fn(), { collapsed: false });
+      const sidebar = screen.getByTestId("sidebar");
+      expect(sidebar.className).toMatch(/w-72\b/);
+    });
+
+    it("oculta o texto 'Filtros' quando collapsed (mantém ícone via aria-label)", () => {
+      renderPanel({}, vi.fn(), vi.fn(), { collapsed: true });
+      // Texto visível some
+      expect(screen.queryByText("Filtros")).not.toBeInTheDocument();
+      // Botão continua acessível pelo aria-label
+      expect(screen.getByRole("button", { name: "Filtros" })).toBeInTheDocument();
+    });
+
+    it("oculta o texto 'Comparar Bairros' quando collapsed", () => {
+      renderPanel({}, vi.fn(), vi.fn(), { collapsed: true });
+      expect(screen.queryByText("Comparar Bairros")).not.toBeInTheDocument();
+      expect(screen.getByRole("button", { name: "Comparar Bairros" })).toBeInTheDocument();
+    });
+
+    it("oculta os inputs de filtro mesmo com filtersExpanded=true quando collapsed", () => {
+      renderPanel({}, vi.fn(), vi.fn(), { collapsed: true, filtersExpanded: true });
+      expect(screen.queryByLabelText(/tipo de estabelecimento/i)).not.toBeInTheDocument();
+      expect(screen.queryByText(/estabelecimentos$/)).not.toBeInTheDocument();
+    });
+
+    it("oculta o badge de selecionados quando collapsed", () => {
+      renderPanel({}, vi.fn(), vi.fn(), { collapsed: true, comparisonIds: [1, 2, 3] });
+      expect(screen.queryByText(/selecionados/i)).not.toBeInTheDocument();
+    });
+
+    it("renderiza o botão de toggle do collapse com aria-pressed", () => {
+      const onCollapseToggle = vi.fn();
+      renderPanel({}, vi.fn(), vi.fn(), { collapsed: false, onCollapseToggle });
+      const toggle = screen.getByRole("button", { name: /recolher painel/i });
+      expect(toggle).toHaveAttribute("aria-pressed", "false");
+    });
+
+    it("o aria-label do toggle do collapse muda conforme o estado", () => {
+      renderPanel({}, vi.fn(), vi.fn(), { collapsed: true });
+      expect(screen.getByRole("button", { name: /expandir painel/i })).toBeInTheDocument();
+    });
+
+    it("chama onCollapseToggle ao clicar no botão de toggle do collapse", async () => {
+      const user = userEvent.setup();
+      const onCollapseToggle = vi.fn();
+      renderPanel({}, vi.fn(), vi.fn(), { onCollapseToggle });
+      await user.click(screen.getByRole("button", { name: /recolher painel/i }));
+      expect(onCollapseToggle).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe("input de comparação na sidebar", () => {
+    it("não renderiza o input quando comparisonOpen=false", () => {
+      renderPanel({}, vi.fn(), vi.fn(), { comparisonOpen: false });
+      expect(screen.queryByLabelText(/selecione bairros para comparar/i)).not.toBeInTheDocument();
+    });
+
+    it("renderiza o input abaixo do botão de comparar quando comparisonOpen=true", () => {
+      renderPanel({}, vi.fn(), vi.fn(), { comparisonOpen: true });
+      const compararBtn = screen.getByRole("button", { name: /comparar bairros/i });
+      const input = screen.getByLabelText(/selecione bairros para comparar/i);
+
+      expect(input).toBeInTheDocument();
+      expect(
+        compararBtn.compareDocumentPosition(input) & Node.DOCUMENT_POSITION_FOLLOWING
+      ).toBeTruthy();
+    });
+
+    it("não renderiza o input quando collapsed mesmo se comparisonOpen=true", () => {
+      renderPanel({}, vi.fn(), vi.fn(), { comparisonOpen: true, collapsed: true });
+      expect(screen.queryByLabelText(/selecione bairros para comparar/i)).not.toBeInTheDocument();
+    });
+
+    it("propaga seleções do input via onComparisonIdsChange", async () => {
+      const user = userEvent.setup();
+      const onComparisonIdsChange = vi.fn();
+      renderPanel({}, vi.fn(), vi.fn(), {
+        comparisonOpen: true,
+        onComparisonIdsChange,
+      });
+
+      await user.click(screen.getByLabelText(/selecione bairros para comparar/i));
+      await user.click(screen.getByRole("checkbox", { name: "Pituba" }));
+
+      expect(onComparisonIdsChange).toHaveBeenCalled();
     });
   });
 

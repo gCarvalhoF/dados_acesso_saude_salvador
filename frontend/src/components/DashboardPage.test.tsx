@@ -12,6 +12,7 @@ import {
 } from "../test/fixtures";
 
 vi.mock("react-leaflet", () => import("../test/mocks/react-leaflet"));
+vi.mock("react-leaflet-cluster", () => import("../test/mocks/react-leaflet-cluster"));
 vi.mock("leaflet", () => import("../test/mocks/leaflet"));
 vi.mock("leaflet/dist/leaflet.css", () => ({}));
 
@@ -26,28 +27,33 @@ vi.mock("recharts", async () => {
   };
 });
 
-const dashboardOverviewResponse = mockDashboardOverview;
-const equipmentByNeighborhoodResponse = { data: mockEquipmentByNeighborhood };
-const serviceSummaryResponse = { data: mockServiceSummary };
-
-function mockFetchSequence(responses: object[]) {
-  let callIndex = 0;
-  vi.mocked(fetch).mockImplementation(() => {
-    const data = responses[callIndex] ?? responses[responses.length - 1];
-    callIndex++;
+function mockFetchByUrl() {
+  vi.mocked(fetch).mockImplementation((url: RequestInfo | URL) => {
+    const urlStr = String(url);
+    let data: object;
+    if (urlStr.includes("/api/v1/neighborhoods") && !urlStr.includes("compare")) {
+      data = mockNeighborhoods;
+    } else if (urlStr.includes("/api/v1/health_establishments") && !urlStr.includes("/api/v1/health_establishments/")) {
+      data = mockEstablishments;
+    } else if (urlStr.includes("/api/v1/filter_options")) {
+      data = mockFilterOptions;
+    } else if (urlStr.includes("/api/v1/dashboard/overview")) {
+      data = mockDashboardOverview;
+    } else if (urlStr.includes("/api/v1/dashboard/equipment_by_neighborhood")) {
+      data = { data: mockEquipmentByNeighborhood };
+    } else if (urlStr.includes("/api/v1/dashboard/service_summary")) {
+      data = { data: mockServiceSummary };
+    } else {
+      data = {};
+    }
     return Promise.resolve(new Response(JSON.stringify(data), { status: 200 }));
   });
 }
 
-// Standard responses: neighborhoods, establishments, filterOptions, overview, equipByNeighborhood, serviceSummary
-const standardResponses = [
-  mockNeighborhoods,
-  mockEstablishments,
-  mockFilterOptions,
-  dashboardOverviewResponse,
-  equipmentByNeighborhoodResponse,
-  serviceSummaryResponse,
-];
+async function expandFilters(user: ReturnType<typeof userEvent.setup>) {
+  await user.click(screen.getByRole("button", { name: "Expandir painel lateral" }));
+  await user.click(screen.getByRole("button", { name: "Filtros" }));
+}
 
 describe("DashboardPage", () => {
   beforeEach(() => {
@@ -59,23 +65,33 @@ describe("DashboardPage", () => {
   });
 
   it("renderiza o título do dashboard", async () => {
-    mockFetchSequence(standardResponses);
+    mockFetchByUrl();
 
     render(<DashboardPage />);
 
     expect(screen.getByText("Saúde em Salvador")).toBeInTheDocument();
   });
 
-  it("renderiza o painel de filtros", async () => {
-    mockFetchSequence(standardResponses);
+  it("renderiza o ícone do site (bandeira de Salvador) no header", async () => {
+    mockFetchByUrl();
 
     render(<DashboardPage />);
 
-    expect(screen.getByText("Filtros")).toBeInTheDocument();
+    const icon = screen.getByAltText(/bandeira de salvador/i);
+    expect(icon).toBeInTheDocument();
+    expect(icon.tagName).toBe("IMG");
+  });
+
+  it("renderiza o painel de filtros", async () => {
+    mockFetchByUrl();
+
+    render(<DashboardPage />);
+
+    expect(screen.getByRole("button", { name: "Filtros" })).toBeInTheDocument();
   });
 
   it("renderiza o container do mapa", async () => {
-    mockFetchSequence(standardResponses);
+    mockFetchByUrl();
 
     render(<DashboardPage />);
 
@@ -83,7 +99,7 @@ describe("DashboardPage", () => {
   });
 
   it("renderiza o seletor de métrica do coroplético", async () => {
-    mockFetchSequence(standardResponses);
+    mockFetchByUrl();
 
     render(<DashboardPage />);
 
@@ -99,9 +115,12 @@ describe("DashboardPage", () => {
   });
 
   it("exibe a contagem de estabelecimentos no painel de filtros após carregar", async () => {
-    mockFetchSequence(standardResponses);
+    const user = userEvent.setup();
+    mockFetchByUrl();
 
     render(<DashboardPage />);
+
+    await expandFilters(user);
 
     await waitFor(() =>
       expect(screen.getByText("2 estabelecimentos")).toBeInTheDocument()
@@ -109,7 +128,7 @@ describe("DashboardPage", () => {
   });
 
   it("renderiza os cards de métricas após carregar", async () => {
-    mockFetchSequence(standardResponses);
+    mockFetchByUrl();
 
     render(<DashboardPage />);
 
@@ -122,11 +141,12 @@ describe("DashboardPage", () => {
 
   it("exibe os bairros no dropdown após carregar", async () => {
     const user = userEvent.setup();
-    mockFetchSequence(standardResponses);
+    mockFetchByUrl();
 
     render(<DashboardPage />);
 
-    // Wait for data to load, then open the neighborhood multiselect
+    await expandFilters(user);
+
     await waitFor(() => screen.getByLabelText(/bairro/i));
     await user.click(screen.getByLabelText(/bairro/i));
 
@@ -135,7 +155,7 @@ describe("DashboardPage", () => {
   });
 
   it("renderiza o botão de abrir filtros (mobile)", async () => {
-    mockFetchSequence(standardResponses);
+    mockFetchByUrl();
 
     render(<DashboardPage />);
 
@@ -143,20 +163,21 @@ describe("DashboardPage", () => {
   });
 
   it("renderiza o botão 'Comparar Bairros'", async () => {
-    mockFetchSequence(standardResponses);
+    mockFetchByUrl();
 
     render(<DashboardPage />);
 
-    expect(screen.getByText("Comparar Bairros")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Comparar Bairros" })).toBeInTheDocument();
   });
 
   describe("sincronização bidirecional de bairro", () => {
     it("exibe badge de bairro no header ao selecionar pelo dropdown", async () => {
       const user = userEvent.setup();
-      mockFetchSequence([...standardResponses, mockEstablishments]);
+      mockFetchByUrl();
 
       render(<DashboardPage />);
 
+      await expandFilters(user);
       await waitFor(() => screen.getByLabelText(/bairro/i));
 
       // Open neighborhood multiselect and select Pituba
@@ -171,14 +192,11 @@ describe("DashboardPage", () => {
 
     it("remove o badge e limpa o filtro ao clicar no botão ×", async () => {
       const user = userEvent.setup();
-      mockFetchSequence([
-        ...standardResponses,
-        mockEstablishments,
-        mockEstablishments,
-      ]);
+      mockFetchByUrl();
 
       render(<DashboardPage />);
 
+      await expandFilters(user);
       await waitFor(() => screen.getByLabelText(/bairro/i));
 
       // Open neighborhood multiselect and select Pituba
@@ -196,10 +214,11 @@ describe("DashboardPage", () => {
 
     it("refaz o fetch de estabelecimentos ao mudar o filtro de tipo", async () => {
       const user = userEvent.setup();
-      mockFetchSequence([...standardResponses, mockEstablishments]);
+      mockFetchByUrl();
 
       render(<DashboardPage />);
 
+      await expandFilters(user);
       await waitFor(() => screen.getByLabelText(/tipo de estabelecimento/i));
 
       const callsBefore = vi.mocked(fetch).mock.calls.length;
@@ -212,9 +231,34 @@ describe("DashboardPage", () => {
         expect(vi.mocked(fetch).mock.calls.length).toBeGreaterThan(callsBefore)
       );
 
-      const calls = vi.mocked(fetch).mock.calls;
-      const lastCall = calls[calls.length - 1][0] as string;
-      expect(lastCall).toContain("type=");
+      const allUrls = vi.mocked(fetch).mock.calls.map((c) => String(c[0]));
+      expect(allUrls.some((url) => url.includes("type="))).toBe(true);
+    });
+
+    it("filtra o dashboard ao mudar o filtro de bairro via seleção no mapa", async () => {
+      mockFetchByUrl();
+
+      render(<DashboardPage />);
+
+      const user = userEvent.setup();
+      await expandFilters(user);
+      await waitFor(() => screen.getByLabelText(/bairro/i));
+
+      const callsBefore = vi.mocked(fetch).mock.calls.length;
+
+      // Simulate neighborhood filter change (as if from filter panel)
+      await user.click(screen.getByLabelText(/bairro/i));
+      await user.click(screen.getByRole("checkbox", { name: "Pituba" }));
+
+      await waitFor(() =>
+        expect(vi.mocked(fetch).mock.calls.length).toBeGreaterThan(callsBefore)
+      );
+
+      const newUrls = vi.mocked(fetch).mock.calls
+        .slice(callsBefore)
+        .map((c) => String(c[0]));
+      // Both establishments and dashboard endpoints should be re-fetched with neighborhood_id
+      expect(newUrls.some((url) => url.includes("neighborhood_id="))).toBe(true);
     });
   });
 });

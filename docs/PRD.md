@@ -8,6 +8,166 @@ Dashboard com mapa interativo para visualizacao e analise da distribuicao de equ
 
 ---
 
+## Diagramas
+
+### Casos de Uso
+
+```mermaid
+flowchart LR
+    U((Usuário))
+
+    subgraph Mapa Interativo
+        A[Visualizar bairros no mapa]
+        B[Visualizar estabelecimentos de saúde]
+        C[Ver detalhes de um estabelecimento]
+        D[Alternar métrica coroplética]
+    end
+
+    subgraph Filtros
+        E[Filtrar por tipo de estabelecimento]
+        F[Filtrar por natureza jurídica]
+        G[Filtrar por disponibilidade SUS]
+        H[Filtrar por tipo de gestão]
+        I[Filtrar por equipamento específico]
+        J[Filtrar por serviço especializado]
+        K[Filtrar por bairro]
+        L[Filtrar por categoria de referência]
+    end
+
+    subgraph Dashboard
+        M[Consultar métricas resumo]
+        N[Analisar gráficos de distribuição]
+        O[Clicar em gráfico para filtrar]
+    end
+
+    subgraph Comparação
+        P[Comparar bairros lado a lado]
+    end
+
+    U --> A & B & C & D
+    U --> E & F & G & H & I & J & K & L
+    U --> M & N & O
+    U --> P
+```
+
+### Modelo de Dados (ER)
+
+```mermaid
+erDiagram
+    Neighborhood ||--o{ HealthEstablishment : "contém"
+    HealthEstablishment ||--o{ EstablishmentEquipment : "possui"
+    HealthEstablishment ||--o{ EstablishmentService : "oferece"
+    HealthEstablishment ||--o{ HospitalBed : "possui"
+    EquipmentType ||--o{ EquipmentItem : "categoriza"
+    EquipmentItem ||--o{ EstablishmentEquipment : "vinculado a"
+    SpecializedService ||--o{ EstablishmentService : "vinculado a"
+
+    Neighborhood {
+        string name
+        geometry geometry
+        integer population_total
+        float demographic_density
+        integer income_0_2_wages
+    }
+
+    HealthEstablishment {
+        string cnes_code UK
+        string name
+        string establishment_type_code
+        string legal_nature_code
+        string management_type
+        geometry coordinates
+        boolean is_sus
+        boolean is_active
+        boolean is_teaching_hospital
+    }
+
+    EquipmentType {
+        string code UK
+        string name
+    }
+
+    EquipmentItem {
+        string code UK
+        string name
+    }
+
+    EstablishmentEquipment {
+        integer quantity_existing
+        integer quantity_in_use
+        boolean available_sus
+    }
+
+    SpecializedService {
+        string code UK
+        string name
+    }
+
+    EstablishmentService {
+        string classification_code
+        string service_characteristic
+        boolean ambulatorial_sus
+        boolean hospitalar_sus
+    }
+
+    HospitalBed {
+        string bed_code
+        string bed_type_code
+        integer quantity_existing
+        integer quantity_sus
+    }
+```
+
+### Arquitetura do Sistema
+
+```mermaid
+flowchart TB
+    subgraph Docker Compose
+        subgraph db ["PostgreSQL 16 + PostGIS 3.5 (:5433)"]
+            PG[(Banco de Dados)]
+        end
+
+        subgraph web ["Rails 8 API (:3001)"]
+            Controllers["Controllers API v1"]
+            Concern["EstablishmentFiltering\n(Concern)"]
+            Models["Models + Scopes"]
+            Importers["Data Import Services\n(CNES / Census / Neighborhoods)"]
+
+            Controllers --> Concern
+            Controllers --> Models
+            Importers --> Models
+        end
+
+        subgraph frontend ["React 18 + Vite (:5173)"]
+            direction TB
+            DashboardPage["DashboardPage\n(estado global + filtros)"]
+            Hooks["Hooks\n(useEstablishments, useNeighborhoods,\nuseDashboard, useFilterOptions,\nuseNeighborhoodComparison)"]
+            MapLayer["Map\n(Leaflet + coroplético)"]
+            FiltersUI["FilterPanel\n(drawer mobile)"]
+            Dashboard["Dashboard\n(MetricCards + ChartsPanel)"]
+            Comparison["Comparison\n(tabela lado a lado)"]
+
+            DashboardPage --> Hooks
+            DashboardPage --> MapLayer
+            DashboardPage --> FiltersUI
+            DashboardPage --> Dashboard
+            DashboardPage --> Comparison
+        end
+    end
+
+    subgraph Dados Externos
+        CNES["CNES DataSUS\n(15+ CSVs)"]
+        IBGE["IBGE Censo 2022\n(GeoJSON)"]
+        Prefeitura["Prefeitura Salvador\n(GeoJSON bairros)"]
+    end
+
+    CNES & IBGE & Prefeitura --> Importers
+    Models --> PG
+    Hooks -- "/api/v1/*" --> Controllers
+```
+
+---
+
 ## 2. Objetivos
 
 1. Mapear a distribuicao geografica de equipamentos de saude (mamografos, tomografos, etc.) por estabelecimento e bairro
@@ -197,7 +357,16 @@ GET /api/v1/equipments/summary
   Contagens agregadas para graficos
 
 GET /api/v1/dashboard/overview
-  Cards resumo: total estabelecimentos, equipamentos, leitos SUS, etc.
+  ?type=&legal_nature=&management=&sus_only=&neighborhood_id=&equipment=&service=&reference_category=
+  Cards resumo: total estabelecimentos, equipamentos, leitos SUS, etc. (filtrados)
+
+GET /api/v1/dashboard/equipment_by_neighborhood
+  ?type=&legal_nature=&management=&sus_only=&neighborhood_id=&equipment=&service=&reference_category=
+  Equipamentos por bairro (top 10, filtrados)
+
+GET /api/v1/dashboard/service_summary
+  ?type=&legal_nature=&management=&sus_only=&neighborhood_id=&equipment=&service=&reference_category=
+  Servicos especializados mais oferecidos (top 20, filtrados)
 ```
 
 ### 5.3 Frontend (React + Vite standalone)
@@ -220,7 +389,7 @@ frontend/src/
     useNeighborhoods.ts         # Busca bairros da API
     useEstablishments.ts        # Busca estabelecimentos com filtros
     useFilterOptions.ts         # Busca opcoes de filtro da API (com fallback hardcoded)
-    useDashboard.ts             # Busca dados agregados (overview, equip. por bairro, servicos)
+    useDashboard.ts             # Busca dados agregados com filtros (overview, equip. por bairro, servicos)
   components/
     DashboardPage.tsx           # Layout principal + estado global
     Map/
@@ -388,6 +557,12 @@ SEMPRE USANDO TESTES PROGRAMÁTICOS
 - [x] Comparativo entre bairros (selecao de ate 5 bairros, tabela lado a lado com metricas e indicadores derivados)
 - [ ] Exportacao de dados filtrados (CSV) — adiado
 - [x] Responsividade mobile (FilterPanel como drawer, layout adaptativo para telas < 768px)
+
+### Fase 5 - Filtros Globais e Interatividade
+- [x] Filtros aplicados em toda a pagina: cards de metricas e graficos respondem aos filtros (backend + frontend)
+- [x] Concern `EstablishmentFiltering` extrai logica de filtros para reutilizacao entre controllers
+- [x] Comparacao de bairros sincronizada com filtro global `neighborhood_id` (selecionar bairros na comparacao filtra o dashboard inteiro)
+- [x] Click nos graficos para filtrar: tipo de estabelecimento (pie), bairros (barras de equipamentos), servico especializado (barras de servicos)
 
 ### Fase 6 - IBGE como fonte unica de bairros e censo
 - [x] Migracao do schema: removidas colunas de renda (income_*) e faixas etarias antigas; adicionados codigos IBGE (regiao/UF/municipio/distrito/subdistrito/bairro), area_km2, faixas etarias finas (0-4, 5-9, 10-14, ..., 70+) e cor/raca x sexo

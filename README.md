@@ -4,6 +4,166 @@ Dashboard com mapa interativo para visualização e análise da distribuição d
 
 ---
 
+## Diagramas
+
+### Casos de Uso
+
+```mermaid
+flowchart LR
+    U((Usuário))
+
+    subgraph Mapa Interativo
+        A[Visualizar bairros no mapa]
+        B[Visualizar estabelecimentos de saúde]
+        C[Ver detalhes de um estabelecimento]
+        D[Alternar métrica coroplética]
+    end
+
+    subgraph Filtros
+        E[Filtrar por tipo de estabelecimento]
+        F[Filtrar por natureza jurídica]
+        G[Filtrar por disponibilidade SUS]
+        H[Filtrar por tipo de gestão]
+        I[Filtrar por equipamento específico]
+        J[Filtrar por serviço especializado]
+        K[Filtrar por bairro]
+        L[Filtrar por categoria de referência]
+    end
+
+    subgraph Dashboard
+        M[Consultar métricas resumo]
+        N[Analisar gráficos de distribuição]
+        O[Clicar em gráfico para filtrar]
+    end
+
+    subgraph Comparação
+        P[Comparar bairros lado a lado]
+    end
+
+    U --> A & B & C & D
+    U --> E & F & G & H & I & J & K & L
+    U --> M & N & O
+    U --> P
+```
+
+### Modelo de Dados (ER)
+
+```mermaid
+erDiagram
+    Neighborhood ||--o{ HealthEstablishment : "contém"
+    HealthEstablishment ||--o{ EstablishmentEquipment : "possui"
+    HealthEstablishment ||--o{ EstablishmentService : "oferece"
+    HealthEstablishment ||--o{ HospitalBed : "possui"
+    EquipmentType ||--o{ EquipmentItem : "categoriza"
+    EquipmentItem ||--o{ EstablishmentEquipment : "vinculado a"
+    SpecializedService ||--o{ EstablishmentService : "vinculado a"
+
+    Neighborhood {
+        string name
+        geometry geometry
+        integer population_total
+        float demographic_density
+        integer income_0_2_wages
+    }
+
+    HealthEstablishment {
+        string cnes_code
+        string name
+        string establishment_type_code
+        string legal_nature_code
+        string management_type
+        geometry coordinates
+        boolean is_sus
+        boolean is_active
+        boolean is_teaching_hospital
+    }
+
+    EquipmentType {
+        string code
+        string name
+    }
+
+    EquipmentItem {
+        string code
+        string name
+    }
+
+    EstablishmentEquipment {
+        integer quantity_existing
+        integer quantity_in_use
+        boolean available_sus
+    }
+
+    SpecializedService {
+        string code
+        string name
+    }
+
+    EstablishmentService {
+        string classification_code
+        string service_characteristic
+        boolean ambulatorial_sus
+        boolean hospitalar_sus
+    }
+
+    HospitalBed {
+        string bed_code
+        string bed_type_code
+        integer quantity_existing
+        integer quantity_sus
+    }
+```
+
+### Arquitetura do Sistema
+
+```mermaid
+flowchart TB
+    subgraph Docker Compose
+        subgraph db ["PostgreSQL 16 + PostGIS 3.5 (:5433)"]
+            PG[(Banco de Dados)]
+        end
+
+        subgraph web ["Rails 8 API (:3001)"]
+            Controllers["Controllers API v1"]
+            Concern["EstablishmentFiltering\n(Concern)"]
+            Models["Models + Scopes"]
+            Importers["Data Import Services\n(CNES / Census / Neighborhoods)"]
+
+            Controllers --> Concern
+            Controllers --> Models
+            Importers --> Models
+        end
+
+        subgraph frontend ["React 18 + Vite (:5173)"]
+            direction TB
+            DashboardPage["DashboardPage\n(estado global + filtros)"]
+            Hooks["Hooks\n(useEstablishments, useNeighborhoods,\nuseDashboard, useFilterOptions,\nuseNeighborhoodComparison)"]
+            MapLayer["Map\n(Leaflet + coroplético)"]
+            FiltersUI["FilterPanel\n(drawer mobile)"]
+            Dashboard["Dashboard\n(MetricCards + ChartsPanel)"]
+            Comparison["Comparison\n(tabela lado a lado)"]
+
+            DashboardPage --> Hooks
+            DashboardPage --> MapLayer
+            DashboardPage --> FiltersUI
+            DashboardPage --> Dashboard
+            DashboardPage --> Comparison
+        end
+    end
+
+    subgraph Dados Externos
+        CNES["CNES DataSUS\n(15+ CSVs)"]
+        IBGE["IBGE Censo 2022\n(GeoJSON)"]
+        Prefeitura["Prefeitura Salvador\n(GeoJSON bairros)"]
+    end
+
+    CNES & IBGE & Prefeitura --> Importers
+    Models --> PG
+    Hooks -- "/api/v1/*" --> Controllers
+```
+
+---
+
 ## Stack
 
 | Camada | Tecnologia |
@@ -216,6 +376,7 @@ O workflow do GitHub Actions (`.github/workflows/ci.yml`) executa tudo via Docke
 - [docs/phase2-implementation.md](docs/phase2-implementation.md) — Frontend: React/Vite, mapa, filtros, componentes UI, CI, decisões de arquitetura
 - [docs/phase3-implementation.md](docs/phase3-implementation.md) — Dashboard completo: cards de métricas, gráficos (recharts), camada coroplética por métrica
 - [docs/phase4-implementation.md](docs/phase4-implementation.md) — Refinamentos: hospitais de referência, comparativo entre bairros, responsividade mobile
+- [docs/phase5-implementation.md](docs/phase5-implementation.md) — Filtros globais, interatividade nos gráficos, clustering, sidebar collapsível, comparação split
 - [docs/phase6-implementation.md](docs/phase6-implementation.md) — IBGE como fonte única: schema migration, NeighborhoodImporter rewrite, IbgeCensusImporter
 
 ---

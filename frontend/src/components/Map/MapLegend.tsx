@@ -34,16 +34,44 @@ function computeBinsForLegend(
   return unique;
 }
 
+type Shape = "circle" | "cross" | "triangle";
+
+function MarkerShape({ color, shape }: { color: string; shape: Shape }) {
+  if (shape === "cross") {
+    return (
+      <svg width="14" height="14" viewBox="0 0 14 14" className="flex-shrink-0">
+        <rect x="5.5" y="1.5" width="3" height="11" fill="white" rx="0.75" />
+        <rect x="1.5" y="5.5" width="11" height="3" fill="white" rx="0.75" />
+        <rect x="6" y="2" width="2" height="10" fill={color} rx="0.5" />
+        <rect x="2" y="6" width="10" height="2" fill={color} rx="0.5" />
+      </svg>
+    );
+  }
+  if (shape === "triangle") {
+    return (
+      <svg width="14" height="14" viewBox="0 0 14 14" className="flex-shrink-0">
+        <polygon points="7,1.5 12.5,12.5 1.5,12.5" fill={color} stroke="white" strokeWidth="1.5" />
+      </svg>
+    );
+  }
+  return (
+    <svg width="14" height="14" viewBox="0 0 14 14" className="flex-shrink-0">
+      <circle cx="7" cy="7" r="5.5" fill={color} stroke="white" strokeWidth="1.5" />
+    </svg>
+  );
+}
+
 export default function MapLegend({ metric, neighborhoods }: Props) {
-  const markerTypes = [
-    { color: markerColors.usf, label: "USF" },
-    { color: markerColors.ubs, label: "UBS / Centro de Saúde" },
-    { color: markerColors.hospitalGeral, label: "Hospital Geral" },
-    { color: markerColors.hospitalEspecializado, label: "Hospital Especializado" },
-    { color: markerColors.prontoSocorro, label: "Pronto Socorro" },
-    { color: markerColors.prontoAtendimento, label: "Pronto Atendimento" },
-    { color: markerColors.policlinica, label: "Policlínica" },
-    { color: markerColors.default, label: "Outros" },
+  const markerTypes: { color: string; label: string; shape: Shape }[] = [
+    { color: markerColors.usf,                   label: "USF",                    shape: "circle"   },
+    { color: markerColors.ubs,                   label: "UBS / Centro de Saúde",  shape: "circle"   },
+    { color: markerColors.hospitalGeral,         label: "Hospital Geral",         shape: "cross"    },
+    { color: markerColors.hospitalEspecializado, label: "Hospital Especializado", shape: "cross"    },
+    { color: markerColors.prontoSocorro,         label: "Pronto Socorro",         shape: "triangle" },
+    { color: markerColors.prontoAtendimento,     label: "Pronto Atendimento",     shape: "triangle" },
+    { color: markerColors.policlinica,           label: "Policlínica",            shape: "circle"   },
+    { color: markerColors.caps,                  label: "CAPS",                   shape: "circle"   },
+    { color: markerColors.default,               label: "Outros",                 shape: "circle"   },
   ];
 
   const bins = useMemo(
@@ -75,12 +103,9 @@ export default function MapLegend({ metric, neighborhoods }: Props) {
       <div className={`${collapsed ? "max-md:hidden" : "block"} p-3`}>
         <p className="font-bold text-gray-700 mb-2">Marcadores</p>
         <ul className="space-y-1 mb-3">
-          {markerTypes.map(({ color, label }) => (
+          {markerTypes.map(({ color, label, shape }) => (
             <li key={label} className="flex items-center gap-1.5">
-              <span
-                className="inline-block w-3 h-3 rounded-full flex-shrink-0"
-                style={{ backgroundColor: color }}
-              />
+              <MarkerShape color={color} shape={shape} />
               <span className="text-gray-600">{label}</span>
             </li>
           ))}
