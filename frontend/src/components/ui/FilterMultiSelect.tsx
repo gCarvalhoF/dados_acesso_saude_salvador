@@ -68,12 +68,23 @@ export default function FilterMultiSelect({ id, label, value, options, onChange 
 
   return (
     <div ref={containerRef} className="relative">
-      <label
-        htmlFor={id}
-        className="block text-xs font-semibold text-gray-600 mb-1 uppercase tracking-wide"
-      >
-        {label}
-      </label>
+      <div className="flex items-baseline justify-between mb-1">
+        <label
+          htmlFor={id}
+          className="text-xs font-semibold text-gray-600 uppercase tracking-wide"
+        >
+          {label}
+        </label>
+        {selected.length > 0 && (
+          <button
+            type="button"
+            onClick={clearAll}
+            className="text-xs text-blue-600 hover:text-blue-800 font-normal normal-case"
+          >
+            Limpar
+          </button>
+        )}
+      </div>
 
       {selected.length > 0 && (
         <div className="flex flex-wrap gap-1 mb-1">
@@ -109,24 +120,15 @@ export default function FilterMultiSelect({ id, label, value, options, onChange 
 
       {open && (
         <div className="absolute z-50 mt-1 w-full bg-white border border-gray-300 rounded shadow-lg max-h-60 overflow-y-auto">
-          <div className="p-2 border-b flex gap-2">
+          <div className="p-2 border-b">
             <input
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Buscar..."
-              className="flex-1 text-sm border border-gray-200 rounded px-2 py-1 focus:outline-none focus:ring-1 focus:ring-blue-400"
+              className="w-full text-sm border border-gray-200 rounded px-2 py-1 focus:outline-none focus:ring-1 focus:ring-blue-400"
               aria-label={`Buscar ${label.toLowerCase()}`}
             />
-            {selected.length > 0 && (
-              <button
-                type="button"
-                onClick={clearAll}
-                className="text-xs text-gray-500 hover:text-gray-700 whitespace-nowrap"
-              >
-                Limpar
-              </button>
-            )}
           </div>
           {filtered.map((option) => {
             const isSelected = selected.includes(option.value);

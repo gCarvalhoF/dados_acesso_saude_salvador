@@ -376,6 +376,7 @@ O workflow do GitHub Actions (`.github/workflows/ci.yml`) executa tudo via Docke
 - [docs/phase2-implementation.md](docs/phase2-implementation.md) — Frontend: React/Vite, mapa, filtros, componentes UI, CI, decisões de arquitetura
 - [docs/phase3-implementation.md](docs/phase3-implementation.md) — Dashboard completo: cards de métricas, gráficos (recharts), camada coroplética por métrica
 - [docs/phase4-implementation.md](docs/phase4-implementation.md) — Refinamentos: hospitais de referência, comparativo entre bairros, responsividade mobile
+- [docs/phase5-implementation.md](docs/phase5-implementation.md) — Filtros globais, interatividade nos gráficos, clustering, sidebar collapsível, comparação split
 - [docs/phase6-implementation.md](docs/phase6-implementation.md) — IBGE como fonte única: schema migration, NeighborhoodImporter rewrite, IbgeCensusImporter
 
 ---

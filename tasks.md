@@ -93,20 +93,22 @@ Automatizar scraping e importing de dados do CNES para manter os dados atualizad
 - [x] Adicionar o comportamento de clicar na legenda ou nos gráficos e automaticamente filtrar o mapa
 
 2. Tasks referentes ao backend
-Investigar performance
-Investigar os pontos que estão nos lugares errado do mapa (uns aparecem na cidade errada, outros no meio do mar)
+- [ ] Investigar performance
+- [x] Investigar os pontos que estão nos lugares errado do mapa (uns aparecem na cidade errada, outros no meio do mar) (( O problema é no banco de dados que armazena lat/long incorretas ))
 
 3. Mudanças de UI/UX
-Colocar o botão de comparar bairros na sidebar
-Mudar o gráfico de torta pra mostrar somente labels acima de 5%
-Revisitar estilo do loading (Talvez um spinner com mais contraste)
-Revisitar os textos de limpar os filtros, remover da barra de pesquisa e colocar do lado "de fora" do filtro
-Implementar clustering de pontos do leaflet
+- [x] Colocar o botão de comparar bairros na sidebar
+- [x] Mudar o gráfico de torta pra mostrar somente labels acima de 5%
+- [x] Revisitar estilo do loading (Talvez um spinner com mais contraste)
+- [x] Revisitar os textos de limpar os filtros, remover da barra de pesquisa e colocar do lado "de fora" do filtro
+- [x] Implementar clustering de pontos do leaflet
 
 4. Feedbacks sobre coisas internas ao mapa
-Diminuir ou adicionar a habilidade de ligar/desligar os pontos no mapa
-Padronizar os símbolos e cores do mapa
-Melhorar visualização dos tooltips internos do mapa
+- [x] Diminuir ou adicionar a habilidade de ligar/desligar os pontos no mapa
+- [x] Padronizar os símbolos e cores do mapa
+- [x] Melhorar visualização dos tooltips internos do mapa
+
+5. Refatorar a UI para ter o mapa no centro e todo o resto como adicionais toggleable
 
 # Material de leitura importante
 

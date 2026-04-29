@@ -13,13 +13,17 @@ const COLORS = [
 export default function EstablishmentTypeChart({ data, onTypeClick }: Props) {
   if (!data.length) return null;
 
+  const total = data.reduce((sum, d) => sum + d.count, 0);
   const sorted = [...data].sort((a, b) => b.count - a.count);
-  const top9 = sorted.slice(0, 9);
-  const rest = sorted.slice(9);
+  const above = sorted.filter((d) => total > 0 && d.count / total >= 0.05);
+  const below = sorted.filter((d) => total > 0 && d.count / total < 0.05);
+  const othersTotal = below.reduce((sum, d) => sum + d.count, 0);
   const chartData =
-    rest.length > 0
-      ? [...top9, { code: "outros", name: "Outros", count: rest.reduce((sum, d) => sum + d.count, 0) }]
-      : top9;
+    total > 0 && othersTotal / total >= 0.05
+      ? [...above, { code: "outros", name: "Outros", count: othersTotal }]
+      : above;
+
+  if (!chartData.length) return null;
 
   return (
     <div>

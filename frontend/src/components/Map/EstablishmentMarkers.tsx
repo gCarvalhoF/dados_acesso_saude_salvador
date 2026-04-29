@@ -1,5 +1,6 @@
 import { useCallback, useRef } from "react";
 import { Marker, Popup } from "react-leaflet";
+import MarkerClusterGroup from "react-leaflet-cluster";
 import type { EstablishmentCollection } from "../../types";
 import EstablishmentPopup from "./EstablishmentPopup";
 import { makeIcon } from "./icons/makeIcon";
@@ -80,7 +81,7 @@ function HoverMarker({ feature }: { feature: NonNullable<Props["data"]["features
         popupclose: handlePopupClose,
       }}
     >
-      <Popup autoPan={false} maxWidth={320} minWidth={200} className="establishment-popup">
+      <Popup autoPan={false} maxWidth={256} minWidth={160} className="establishment-popup">
         <EstablishmentPopup id={props.id} />
       </Popup>
     </Marker>
@@ -91,10 +92,15 @@ export default function EstablishmentMarkers({ data }: Props) {
   const validFeatures = data.features.filter((f) => f.geometry !== null);
 
   return (
-    <>
+    <MarkerClusterGroup
+      chunkedLoading
+      showCoverageOnHover={false}
+      spiderfyOnMaxZoom
+      maxClusterRadius={50}
+    >
       {validFeatures.map((feature) => (
         <HoverMarker key={feature.properties.id} feature={feature} />
       ))}
-    </>
+    </MarkerClusterGroup>
   );
 }

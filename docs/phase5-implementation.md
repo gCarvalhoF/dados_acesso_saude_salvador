@@ -1,8 +1,8 @@
-# Fase 5 - Filtros Globais e Interatividade nos Graficos: Decisoes de Implementacao
+# Fase 5 - Filtros Globais, Interatividade nos Graficos e Refinamentos de UX: Decisoes de Implementacao
 
 ## Visao Geral
 
-Fase 5 corrige tres lacunas de UX identificadas nos feedbacks: os filtros nao afetavam os cards de metricas nem os graficos, a comparacao de bairros era independente dos filtros globais, e os graficos eram apenas visualizacao sem possibilidade de interacao para filtrar.
+Fase 5 corrige lacunas de UX identificadas nos feedbacks: os filtros nao afetavam os cards de metricas nem os graficos, a comparacao de bairros era independente dos filtros globais, e os graficos eram apenas visualizacao sem possibilidade de interacao para filtrar. Numa segunda iteracao, a fase tambem entrega refinamentos visuais e de navegacao: clustering de marcadores no mapa, threshold de relevancia no grafico de pizza, sidebar collapsivel em modo rail, e separacao da UI de comparacao entre sidebar (seletor) e dashboard (tabela).
 
 ---
 
@@ -127,8 +127,164 @@ DashboardPage
 
 ---
 
-## Testes
+## Testes (iteracao 1)
 
 - **Backend**: 139 specs (0 falhas). Concern `EstablishmentFiltering` testado indiretamente pelos specs existentes de `health_establishments` e novos cenarios de filtro no `dashboard_spec`.
 - **Frontend**: 148 specs (0 falhas). Testes de `useDashboard` atualizados para passar `filters`; testes de `NeighborhoodComparison` atualizados para os novos props; testes de `DashboardPage` refatorados para mock de fetch por URL (mais robusto que mock sequencial).
 - **Linters**: RuboCop e ESLint sem erros.
+
+---
+
+## 4. Clustering de Marcadores no Mapa
+
+### Problema
+
+Com muitos estabelecimentos no mesmo bairro os marcadores se sobrepunham, tornando o mapa ilegivel em zoom baixo.
+
+### Solucao
+
+Adicionada dependencia `react-leaflet-cluster` (wrapper de `leaflet.markercluster`). Os marcadores em `EstablishmentMarkers` foram envolvidos em `<MarkerClusterGroup>`:
+
+```tsx
+<MarkerClusterGroup chunkedLoading showCoverageOnHover={false} spiderfyOnMaxZoom maxClusterRadius={50}>
+  {markers}
+</MarkerClusterGroup>
+```
+
+`InteractiveMap` importa os estilos CSS do markercluster (`MarkerCluster.css` e `MarkerCluster.Default.css`).
+
+Para os testes, criado mock em `frontend/src/test/mocks/react-leaflet-cluster.tsx` que renderiza um `<div data-testid="marker-cluster-group">` passando os filhos diretamente, evitando dependencia do DOM do Leaflet nos testes unitarios.
+
+---
+
+## 5. Grafico de Pizza com Threshold de 5%
+
+### Problema
+
+O grafico de pizza de tipos de estabelecimento exibia fatias muito pequenas com labels ilegíveis, poluindo a visualizacao com dados pouco relevantes.
+
+### Solucao
+
+Substituida a logica de "top 9 + outros" por um filtro baseado em percentual minimo:
+
+```tsx
+const total = data.reduce((sum, d) => sum + d.count, 0);
+const above = sorted.filter((d) => total > 0 && d.count / total >= 0.05);
+const below = sorted.filter((d) => total > 0 && d.count / total < 0.05);
+const othersTotal = below.reduce((sum, d) => sum + d.count, 0);
+const chartData =
+  total > 0 && othersTotal / total >= 0.05
+    ? [...above, { code: "outros", name: "Outros", count: othersTotal }]
+    : above;
+```
+
+Fatias que representam menos de 5% do total sao excluidas do grafico inteiramente (nao apenas dos labels). Se o agregado dos excluidos for >= 5%, eles aparecem como uma unica fatia "Outros"; caso contrario sao descartados. O componente retorna `null` se nao sobrar nenhuma fatia.
+
+---
+
+## 6. Sidebar Collapsivel em Modo Rail
+
+### Problema
+
+A sidebar ocupava espaco fixo mesmo quando o usuario nao precisava dos filtros, reduzindo a area util do mapa e dos graficos.
+
+### Solucao
+
+A sidebar agora opera em dois modos controlados por `sidebarCollapsed: boolean` em `DashboardPage`:
+
+| Estado | Largura | Conteudo |
+|--------|---------|---------|
+| Expandida | `w-72` (288 px) | Icone + label nos botoes, conteudo dos paineis |
+| Recolhida (rail) | `w-14` (56 px) | Somente icones, sem labels, sem conteudo aberto |
+
+O botao de colapso usa `aria-label="Expandir painel lateral"` / `"Recolher painel lateral"` e `aria-pressed` para acessibilidade. No modo rail os botoes internos recebem `aria-label` e `title` para leitores de tela.
+
+A funcao `handleFiltersToggle` em `DashboardPage` expande automaticamente a sidebar se ela estiver recolhida quando o usuario clicar em Filtros, evitando o estado incoerente de filtros abertos num rail estreito.
+
+**Estado default**: sidebar recolhida (`sidebarCollapsed = true`) e filtros fechados (`filtersExpanded = false`), priorizando a area de visualizacao ao carregar a pagina.
+
+---
+
+## 7. Dois Botoes de Navegacao na Sidebar
+
+### Problema
+
+A sidebar tinha apenas os filtros. O botao "Comparar Bairros" ficava no topo do dashboard, fora do padrão de navegacao.
+
+### Solucao
+
+Dois botoes toggle na sidebar, com icones SVG inline:
+
+- **Filtros** (`FilterIcon` — funil) — expande/recolhe o painel de filtros abaixo
+- **Comparar Bairros** (`CompareIcon` — setas) — abre/fecha a UI de comparacao
+
+Os filtros sao renderizados entre os dois botoes, empurrando "Comparar Bairros" para baixo quando expandidos, mantendo a hierarquia visual de acoes.
+
+O icone da bandeira de Salvador foi adicionado ao header, a esquerda do titulo "Saude em Salvador", como identidade visual da aplicacao.
+
+---
+
+## 8. Separacao da UI de Comparacao
+
+### Problema
+
+O componente `NeighborhoodComparison` combinava seletor de bairros e tabela de comparacao num unico bloco, ocupando espaco no dashboard mesmo quando o usuario nao estava comparando bairros.
+
+### Solucao
+
+O componente foi dividido em tres pecas com responsabilidades distintas:
+
+| Componente | Local | Responsabilidade |
+|-----------|-------|-----------------|
+| `NeighborhoodComparisonTrigger` | Sidebar | Botao toggle com badge de contagem |
+| `NeighborhoodComparisonInput` | Sidebar (abaixo do trigger quando aberto) | Multiselect de bairros + texto de ajuda |
+| `NeighborhoodComparisonResult` | Dashboard (area principal) | Cabecalho + loading + `ComparisonTable` |
+
+`NeighborhoodComparisonResult` retorna `null` quando menos de 2 bairros estao selecionados e oculta a tabela durante o loading mesmo que `data` ainda exista do estado anterior, evitando flash de dados desatualizados.
+
+O estado `comparisonOpen` em `DashboardPage` controla se o seletor aparece na sidebar; `comparisonIds` sincroniza com `filters.neighborhood_id` como antes (secao 2).
+
+Os componentes antigos `NeighborhoodComparison` e `NeighborhoodComparisonPanel` foram removidos.
+
+---
+
+## Arquitetura Atualizada
+
+```
+DashboardPage
+  ├── filters (state) ──────────────────────────────────────┐
+  ├── comparisonIds (state) ──────► neighborhood_id          │
+  ├── sidebarCollapsed (state, default: true)                │
+  ├── filtersExpanded  (state, default: false)               │
+  ├── comparisonOpen   (state)                               │
+  │                                                          │
+  ├── useEstablishments(filters) ──► /health_establishments?{params}
+  ├── useDashboard(filters) ──────► /dashboard/overview?{params}
+  │                                  /dashboard/equipment_by_neighborhood?{params}
+  │                                  /dashboard/service_summary?{params}
+  │
+  ├── FilterPanel (sidebar)
+  │     ├── [Filtros button] → filtersExpanded toggle
+  │     ├── {filtersExpanded} filtros + contagem + Redefinir
+  │     ├── NeighborhoodComparisonTrigger → comparisonOpen toggle
+  │     └── {comparisonOpen} NeighborhoodComparisonInput
+  │
+  └── main
+        ├── MetricCards
+        ├── {comparisonOpen && ids>=2} NeighborhoodComparisonResult
+        ├── InteractiveMap
+        │     └── EstablishmentMarkers → MarkerClusterGroup
+        └── ChartsPanel
+              └── EstablishmentTypeChart (fatias >= 5%)
+```
+
+---
+
+## Testes (iteracao 2)
+
+- **Frontend**: 181 specs (0 falhas).
+  - `NeighborhoodComparisonResult.test.tsx` — novo; cobre loading, tabela, demograficos, fallback `—`, e supressao da tabela durante re-fetch.
+  - `NeighborhoodComparisonInput.test.tsx` — novo; cobre renderizacao do multiselect, mensagem de minimo 2 bairros, nome da cidade nas opcoes, e propagacao de mudancas.
+  - `DashboardPage.test.tsx` — testes de painel de filtros e botao Comparar atualizados para usar `getByRole("button", { name: ... })` (aria-label) dado que a sidebar agora inicia recolhida; testes de interacao com filtros passaram a usar helper `expandFilters` que expande sidebar e filtros antes de interagir.
+  - `FilterPanel.test.tsx` — props `comparisonIds`, `onComparisonIdsChange`, `collapsed`, `onCollapseToggle`, `filtersExpanded`, `onFiltersToggle` adicionados ao helper `renderPanel`.
+- **Linters**: ESLint sem erros.

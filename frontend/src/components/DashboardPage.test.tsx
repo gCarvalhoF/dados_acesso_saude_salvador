@@ -12,6 +12,7 @@ import {
 } from "../test/fixtures";
 
 vi.mock("react-leaflet", () => import("../test/mocks/react-leaflet"));
+vi.mock("react-leaflet-cluster", () => import("../test/mocks/react-leaflet-cluster"));
 vi.mock("leaflet", () => import("../test/mocks/leaflet"));
 vi.mock("leaflet/dist/leaflet.css", () => ({}));
 
@@ -49,6 +50,11 @@ function mockFetchByUrl() {
   });
 }
 
+async function expandFilters(user: ReturnType<typeof userEvent.setup>) {
+  await user.click(screen.getByRole("button", { name: "Expandir painel lateral" }));
+  await user.click(screen.getByRole("button", { name: "Filtros" }));
+}
+
 describe("DashboardPage", () => {
   beforeEach(() => {
     vi.spyOn(global, "fetch");
@@ -66,12 +72,22 @@ describe("DashboardPage", () => {
     expect(screen.getByText("Saúde em Salvador")).toBeInTheDocument();
   });
 
+  it("renderiza o ícone do site (bandeira de Salvador) no header", async () => {
+    mockFetchByUrl();
+
+    render(<DashboardPage />);
+
+    const icon = screen.getByAltText(/bandeira de salvador/i);
+    expect(icon).toBeInTheDocument();
+    expect(icon.tagName).toBe("IMG");
+  });
+
   it("renderiza o painel de filtros", async () => {
     mockFetchByUrl();
 
     render(<DashboardPage />);
 
-    expect(screen.getByText("Filtros")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Filtros" })).toBeInTheDocument();
   });
 
   it("renderiza o container do mapa", async () => {
@@ -99,9 +115,12 @@ describe("DashboardPage", () => {
   });
 
   it("exibe a contagem de estabelecimentos no painel de filtros após carregar", async () => {
+    const user = userEvent.setup();
     mockFetchByUrl();
 
     render(<DashboardPage />);
+
+    await expandFilters(user);
 
     await waitFor(() =>
       expect(screen.getByText("2 estabelecimentos")).toBeInTheDocument()
@@ -126,7 +145,8 @@ describe("DashboardPage", () => {
 
     render(<DashboardPage />);
 
-    // Wait for data to load, then open the neighborhood multiselect
+    await expandFilters(user);
+
     await waitFor(() => screen.getByLabelText(/bairro/i));
     await user.click(screen.getByLabelText(/bairro/i));
 
@@ -147,7 +167,7 @@ describe("DashboardPage", () => {
 
     render(<DashboardPage />);
 
-    expect(screen.getByText("Comparar Bairros")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Comparar Bairros" })).toBeInTheDocument();
   });
 
   describe("sincronização bidirecional de bairro", () => {
@@ -157,6 +177,7 @@ describe("DashboardPage", () => {
 
       render(<DashboardPage />);
 
+      await expandFilters(user);
       await waitFor(() => screen.getByLabelText(/bairro/i));
 
       // Open neighborhood multiselect and select Pituba
@@ -175,6 +196,7 @@ describe("DashboardPage", () => {
 
       render(<DashboardPage />);
 
+      await expandFilters(user);
       await waitFor(() => screen.getByLabelText(/bairro/i));
 
       // Open neighborhood multiselect and select Pituba
@@ -196,6 +218,7 @@ describe("DashboardPage", () => {
 
       render(<DashboardPage />);
 
+      await expandFilters(user);
       await waitFor(() => screen.getByLabelText(/tipo de estabelecimento/i));
 
       const callsBefore = vi.mocked(fetch).mock.calls.length;
@@ -217,12 +240,13 @@ describe("DashboardPage", () => {
 
       render(<DashboardPage />);
 
+      const user = userEvent.setup();
+      await expandFilters(user);
       await waitFor(() => screen.getByLabelText(/bairro/i));
 
       const callsBefore = vi.mocked(fetch).mock.calls.length;
 
       // Simulate neighborhood filter change (as if from filter panel)
-      const user = userEvent.setup();
       await user.click(screen.getByLabelText(/bairro/i));
       await user.click(screen.getByRole("checkbox", { name: "Pituba" }));
 
