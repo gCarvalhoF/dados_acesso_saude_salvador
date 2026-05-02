@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { FilterOptions, Filters, NeighborhoodCollection } from "../../types";
 import FilterCheckbox from "../ui/FilterCheckbox";
 import FilterRadioGroup from "../ui/FilterRadioGroup";
@@ -23,7 +24,16 @@ interface Props {
   comparisonIds: number[];
   onComparisonIdsChange: (ids: number[]) => void;
   onComparisonToggle: () => void;
+  visibleCharts?: Set<string>;
+  onChartToggle?: (chartId: string) => void;
 }
+
+const CHART_DEFS = [
+  { id: "types", label: "Tipos de Estabelecimento" },
+  { id: "equipment_by_neighborhood", label: "Equipamentos por Bairro" },
+  { id: "equipment_per_10k", label: "Equipamentos por 10k Hab." },
+  { id: "services", label: "Serviços Especializados" },
+];
 
 function FilterIcon({ className = "w-5 h-5" }: { className?: string }) {
   return (
@@ -59,6 +69,19 @@ function ChevronIcon({ className = "w-4 h-4" }: { className?: string }) {
   );
 }
 
+function ChartBarIcon({ className = "w-5 h-5" }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+      />
+    </svg>
+  );
+}
+
 export default function FilterPanel({
   filters,
   filterOptions,
@@ -76,7 +99,20 @@ export default function FilterPanel({
   comparisonIds,
   onComparisonIdsChange,
   onComparisonToggle,
+  visibleCharts = new Set(),
+  onChartToggle,
 }: Props) {
+  const [chartsExpanded, setChartsExpanded] = useState(false);
+
+  function handleChartsToggle() {
+    if (collapsed) {
+      onCollapseToggle();
+      setChartsExpanded(true);
+    } else {
+      setChartsExpanded((e) => !e);
+    }
+  }
+
   const comparisonCount = comparisonIds.length;
   const neighborhoodOptions = [
     { value: "", label: "Todos os bairros" },
@@ -97,7 +133,7 @@ export default function FilterPanel({
       {/* Mobile backdrop */}
       {isOpen && (
         <div
-          className="fixed inset-0 z-30 bg-black/30 md:hidden"
+          className="absolute inset-0 z-30 bg-black/30 md:hidden"
           onClick={onClose}
           data-testid="filter-backdrop"
         />
@@ -107,14 +143,14 @@ export default function FilterPanel({
         data-testid="sidebar"
         data-collapsed={collapsed}
         className={`
-          fixed inset-y-0 left-0 z-40 bg-white border-r border-gray-200
+          absolute top-0 bottom-0 left-0 z-40 bg-white border-r border-gray-200
           transform transition-all duration-200 ease-in-out
-          ${isOpen ? "translate-x-0" : "-translate-x-full"}
-          md:static md:translate-x-0 md:z-auto
+          ${isOpen ? "translate-x-0" : "max-md:-translate-x-full"}
           flex-shrink-0 flex flex-col overflow-y-auto
           ${collapsed ? "w-14" : "w-72"}
         `}
       >
+        {/* Collapse toggle */}
         <div className="p-2 border-b border-gray-200 flex items-center justify-between">
           <button
             onClick={onCollapseToggle}
@@ -141,7 +177,8 @@ export default function FilterPanel({
           </button>
         </div>
 
-        <div className="p-2 space-y-2">
+        <div className="p-2 space-y-2 flex-1">
+          {/* Filters section */}
           <button
             onClick={onFiltersToggle}
             className={`w-full flex items-center gap-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded hover:bg-gray-50 transition-colors ${
@@ -258,6 +295,7 @@ export default function FilterPanel({
             </div>
           )}
 
+          {/* Comparison section */}
           <NeighborhoodComparisonTrigger
             open={comparisonOpen}
             selectedCount={comparisonCount}
@@ -273,6 +311,53 @@ export default function FilterPanel({
               onSelectedIdsChange={onComparisonIdsChange}
             />
           )}
+
+          {/* Charts section */}
+          <div className="border-t border-gray-100 pt-2 space-y-2">
+            <button
+              onClick={handleChartsToggle}
+              className={`w-full flex items-center gap-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded hover:bg-gray-50 transition-colors ${
+                collapsed ? "justify-center p-2" : "px-3 py-2"
+              }`}
+              aria-expanded={chartsExpanded && !collapsed}
+              aria-controls="charts-section"
+              aria-label={collapsed ? "Gráficos" : undefined}
+              title={collapsed ? "Gráficos" : undefined}
+            >
+              <ChartBarIcon />
+              {showLabels && (
+                <>
+                  <span className="flex-1 text-left">Gráficos</span>
+                  <ChevronIcon
+                    className={`w-4 h-4 transition-transform ${chartsExpanded ? "rotate-180" : ""}`}
+                  />
+                </>
+              )}
+            </button>
+
+            {showLabels && chartsExpanded && (
+              <div id="charts-section" className="px-1 space-y-1.5">
+                {CHART_DEFS.map((chart) => {
+                  const active = visibleCharts.has(chart.id);
+                  return (
+                    <button
+                      key={chart.id}
+                      onClick={() => onChartToggle?.(chart.id)}
+                      className={`w-full flex items-center gap-2 text-xs font-medium rounded transition-colors px-3 py-2 ${
+                        active
+                          ? "bg-blue-50 text-blue-700 border border-blue-200 hover:bg-blue-100"
+                          : "text-gray-600 bg-white border border-gray-200 hover:bg-gray-50"
+                      }`}
+                      aria-pressed={active}
+                    >
+                      <ChartBarIcon className="w-4 h-4 flex-shrink-0" />
+                      <span className="flex-1 text-left">{chart.label}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+          </div>
         </div>
       </aside>
     </>

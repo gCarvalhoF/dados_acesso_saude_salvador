@@ -109,6 +109,10 @@ Automatizar scraping e importing de dados do CNES para manter os dados atualizad
 - [x] Melhorar visualização dos tooltips internos do mapa
 
 5. Refatorar a UI para ter o mapa no centro e todo o resto como adicionais toggleable
+- [x] Deixar o mapa em evidência, tomando a página inteira, todos os outros componentes flutuam acima do mapa com round corners sutis
+- [x] Sidebar vem da direita
+- [x] Adicionar botões de gráficos na sidebar, animação para os gráficos aparecerem flutuando acima do mapa
+
 
 # Material de leitura importante
 

@@ -5,7 +5,7 @@
 NEVER JUMP STRAIGHT TO CODING! Always follow this sequence:
 
 1. **Research**: Explore the codebase, understand existing patterns
-2. **Plan**: Create a detailed implementation plan and verify it with me
+2. **Plan**: Create a detailed implementation plan and verify it with the user, NEVER START IMPLEMENTATION WITHOUT GETTING APPROVAL FOR THE PLAN FIRST
 3. **Implement**: Execute the plan with validation checkpoints, ALWAYS ADDING PROGRAMATIC TESTS WHENEVER POSSIBLE, AIM FOR 100% COVERAGE and write tests that will guarantee that things break whenever things face a major change
 4. **Test**: Execute all unit tests and linters, both back and front end, to make sure nothing is broken. Do this after each iteration is complete
 5. **Update documentation**: Update all documentations (PRD, README, files under docs/) according to the changes made. PREVIOUS DOCS FILES AREN'T TO BE UPDATED, THEY SHOULD BE IMMUTABLE. IF THERE'S NOT A NEW PHASE, CREATE A NEW FILE ITERATING THE NUMBERS, CHECK WITH USER WHAT THIS PHASE IS ABOUT.
