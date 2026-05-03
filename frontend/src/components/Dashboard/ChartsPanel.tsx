@@ -17,6 +17,8 @@ interface Props {
   neighborhoods: NeighborhoodCollection | null;
   loading: boolean;
   onFilterChange?: (partial: Partial<Filters>) => void;
+  /** When provided, only charts whose id is in this Set are rendered. Omit to show all. */
+  visibleCharts?: Set<string>;
 }
 
 function ChartCard({
@@ -34,6 +36,8 @@ function ChartCard({
   );
 }
 
+const ALL_CHART_IDS = ["types", "equipment_by_neighborhood", "equipment_per_10k", "services"];
+
 export default function ChartsPanel({
   overview,
   equipmentByNeighborhood,
@@ -41,13 +45,16 @@ export default function ChartsPanel({
   neighborhoods,
   loading,
   onFilterChange,
+  visibleCharts,
 }: Props) {
+  const shown = visibleCharts ?? new Set(ALL_CHART_IDS);
+
   if (loading) {
     return (
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        {Array.from({ length: 4 }).map((_, i) => (
+        {ALL_CHART_IDS.filter((id) => shown.has(id)).map((id) => (
           <div
-            key={i}
+            key={id}
             className="bg-white rounded-lg shadow-sm p-4 border border-gray-100 animate-pulse h-80"
           />
         ))}
@@ -75,34 +82,42 @@ export default function ChartsPanel({
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-      <ChartCard title="Tipos de Estabelecimento">
-        <EstablishmentTypeChart
-          data={overview?.establishments.by_type ?? []}
-          onTypeClick={onFilterChange ? handleTypeClick : undefined}
-        />
-      </ChartCard>
+      {shown.has("types") && (
+        <ChartCard title="Tipos de Estabelecimento">
+          <EstablishmentTypeChart
+            data={overview?.establishments.by_type ?? []}
+            onTypeClick={onFilterChange ? handleTypeClick : undefined}
+          />
+        </ChartCard>
+      )}
 
-      <ChartCard title="Equipamentos por Bairro (Top 10)">
-        <EquipmentByNeighborhoodChart
-          data={equipmentByNeighborhood}
-          onNeighborhoodClick={onFilterChange ? handleNeighborhoodClick : undefined}
-        />
-      </ChartCard>
+      {shown.has("equipment_by_neighborhood") && (
+        <ChartCard title="Equipamentos por Bairro (Top 10)">
+          <EquipmentByNeighborhoodChart
+            data={equipmentByNeighborhood}
+            onNeighborhoodClick={onFilterChange ? handleNeighborhoodClick : undefined}
+          />
+        </ChartCard>
+      )}
 
-      <ChartCard title="Equipamentos por 10 mil Habitantes (Top 10)">
-        <EquipmentPer10kChart
-          equipmentData={equipmentByNeighborhood}
-          neighborhoods={neighborhoods}
-          onNeighborhoodClick={onFilterChange ? handleNeighborhoodClick : undefined}
-        />
-      </ChartCard>
+      {shown.has("equipment_per_10k") && (
+        <ChartCard title="Equipamentos por 10 mil Habitantes (Top 10)">
+          <EquipmentPer10kChart
+            equipmentData={equipmentByNeighborhood}
+            neighborhoods={neighborhoods}
+            onNeighborhoodClick={onFilterChange ? handleNeighborhoodClick : undefined}
+          />
+        </ChartCard>
+      )}
 
-      <ChartCard title="Serviços Especializados Mais Oferecidos (Top 10)">
-        <ServiceSummaryChart
-          data={serviceSummary}
-          onServiceClick={onFilterChange ? handleServiceClick : undefined}
-        />
-      </ChartCard>
+      {shown.has("services") && (
+        <ChartCard title="Serviços Especializados Mais Oferecidos (Top 10)">
+          <ServiceSummaryChart
+            data={serviceSummary}
+            onServiceClick={onFilterChange ? handleServiceClick : undefined}
+          />
+        </ChartCard>
+      )}
     </div>
   );
 }

@@ -10,10 +10,8 @@ import type {
 } from "../../types";
 import NeighborhoodLayer from "./NeighborhoodLayer";
 import EstablishmentMarkers from "./EstablishmentMarkers";
-import MapLegend from "./MapLegend";
-
 // Centro de Salvador
-const SALVADOR_CENTER: [number, number] = [-12.97, -38.51];
+const SALVADOR_CENTER: [number, number] = [-12.88845, -38.43736];
 const INITIAL_ZOOM = 12;
 
 interface Props {
@@ -58,7 +56,6 @@ export default function InteractiveMap({
         {establishments && <EstablishmentMarkers data={establishments} />}
       </MapContainer>
 
-      <MapLegend metric={choroplethMetric} neighborhoods={neighborhoods} />
     </div>
   );
 }

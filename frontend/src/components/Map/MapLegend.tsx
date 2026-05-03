@@ -83,7 +83,7 @@ export default function MapLegend({ metric, neighborhoods }: Props) {
   const [collapsed, setCollapsed] = useState(true);
 
   return (
-    <div className="absolute bottom-2 right-2 z-[400] bg-white rounded-lg shadow-md text-xs max-w-[200px]">
+    <div className="bg-white rounded-lg shadow-md text-xs max-w-[200px]">
       <button
         type="button"
         className="md:hidden w-full flex items-center justify-between p-2 font-bold text-gray-700"
